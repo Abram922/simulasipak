@@ -15,6 +15,9 @@ class AuthPort
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if(auth()->user()->role==1){
+            return $next($request);
+        }
+        return redirect('home')->with('error', "you dont have access to admin");
     }
 }
