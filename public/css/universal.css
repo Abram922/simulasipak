@@ -4,11 +4,43 @@
     font-weight: normal;
     font-style: normal;
   }
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url('/font/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('/font/Roboto-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('/font/Roboto-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('/font/Roboto-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+  }
+  
   
 
   body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Roboto", sans-serif;
   }
+  
+
+
   
   
 
@@ -18,11 +50,19 @@
   }
   
   #cardprofil-img {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     border-radius: 50%;
   }
+
+  @media (max-width: 768px) {
+    
+  }
+  .navbar {
+      height: 100px;
+      line-height: 80px;
+    }
 
   
   

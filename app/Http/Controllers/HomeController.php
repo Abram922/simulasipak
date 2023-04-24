@@ -32,4 +32,8 @@ class HomeController extends Controller
     public function userhome(){
         return view('.user.home');
     }
+
+    public function boardpak(){
+        return view('.user.menuperhitungan');
+    }
 }
