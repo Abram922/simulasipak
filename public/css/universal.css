@@ -1,0 +1,28 @@
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('/font/Montserrat/static/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  
+
+  #cardprofil {
+    display: flex;
+    align-items: center;
+  }
+  
+  #cardprofil-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  
+  
