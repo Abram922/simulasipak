@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\KumController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -25,3 +27,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/user-home', [App\Http\Controllers\HomeController::class,'userhome'])->name('userhome');
 Route::get('/admin-home', [App\Http\Controllers\HomeController::class,'adminhome'])->name('adminhome');
 Route::get('/board-pak', [App\Http\Controllers\HomeController::class,'boardpak'])->name('boardpak');
+
+
+Route::resource('kum', App\Http\Controllers\KumController::class);

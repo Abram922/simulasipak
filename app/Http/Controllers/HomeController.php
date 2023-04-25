@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\jabatan;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -34,6 +35,10 @@ class HomeController extends Controller
     }
 
     public function boardpak(){
-        return view('.user.menuperhitungan');
+        $jabatanpref = jabatan::all();
+        $jabatanafter = jabatan::all();
+
+
+        return view('.user.menuperhitungan', compact('jabatanpref', 'jabatanafter'));
     }
 }

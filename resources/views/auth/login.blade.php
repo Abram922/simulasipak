@@ -43,8 +43,8 @@
                       
                     </div>
   
-                    <div class="text-center pt-1 mb-5 pb-1">
-                      <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
+                    <div class="text-center mb-5 pt-1  pb-1">
+                      <button class="btn btn-primary btn-block fa-lg  mb-3" type="submit">Log
                         in</button>
                     </div>
 

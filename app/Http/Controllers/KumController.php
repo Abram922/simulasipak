@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\kum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KumController extends Controller
 {
@@ -29,7 +30,20 @@ class KumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'judul' => 'required',
+            'id_jabatan_sekarang' => 'required',
+            'id_jabatan_dituju' => 'required'
+        ]);
+
+        $input['id_user'] = auth()->user()->id;
+
+        return $input;
+
+        //kum::create($input);
+        
+
+        // return redirect()->route('unsurdp.index');
     }
 
     /**

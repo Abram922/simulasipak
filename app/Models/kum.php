@@ -10,6 +10,7 @@ class kum extends Model
     use HasFactory;
 
     protected $fillable=[
+        'judul',
         'id_user',
         'id_jabatan_sekarang',
         'id_jabatan_dituju'

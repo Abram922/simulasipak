@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('kums', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('judul');
             $table->integer('id_user')->unsigned();
             $table->integer('id_jabatan_sekarang')->unsigned();
             $table->integer('id_jabatan_dituju')->unsigned()->nullable();
