@@ -69,8 +69,8 @@
 
                 <div class="form-group row ">
                     <div class="col-md-3 mb-4 mx-auto">
-                      <label for="judul" style="display: inline-block; width: 150px;">Score Dibutuhkan</label>
-                      <input readonly type="text" class="form-control" id="judul" name="judul" style="display: inline-block; width: 200px;">
+                      <label for="score" style="display: inline-block; width: 150px;">Score Dibutuhkan</label>
+                      <input readonly type="text" class="form-control" id="score" name="score" style="display: inline-block; width: 200px;">
                     </div>
                 </div>
 
@@ -106,7 +106,59 @@
     </div>
 </div>
 
+
+
 <div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            <h3>Kredit Kumulatif</h3>
+            <h3>Terakhir</h3>
+
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+              @foreach ($kum as $k)
+                <div class="col-md">
+                  <div class="card card-hover" style="width: 18rem;" id="card_check">
+                    <div class="position-relative">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img-top" alt="Sunset Over the Sea" />
+                      <div class="d-flex">
+                        <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info position-absolute top-50 start-50 translate-middle" id="btn_check">lengkapi</a>
+                        
+
+                      </div>
+                    </div>
+                    <div class="card-body d-flex">
+                      <p class="card-text">{{ $k->judul }}</p>
+                      <a href="" class="btn btn-danger">hapus</a>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+          
+          <style>
+            .card-hover:hover {
+              box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+            }
+          </style>
+          
+          <script>
+                const cards = document.querySelectorAll('.card-hover');
+                cards.forEach(card => {
+                const button = card.querySelector('#btn_check');
+                card.addEventListener('mouseenter', () => {
+                    button.style.display = 'block';
+                });
+                card.addEventListener('mouseleave', () => {
+                    button.style.display = 'none';
+                });
+                });
+          </script>
+    </div>
+          
+    
 
 
 </div>

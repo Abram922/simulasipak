@@ -38,20 +38,22 @@ class KumController extends Controller
 
         $input['id_user'] = auth()->user()->id;
 
-        return $input;
+        kum::create($input); 
 
-        //kum::create($input);
-        
 
-        // return redirect()->route('unsurdp.index');
+        return redirect()->route('userhome');
+         
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(kum $kum)
+    public function show($id)
     {
-        //
+        $kum = kum::find($id);
+
+        return view('.user.perhitungan',['data' =>$kum]);
     }
 
     /**
