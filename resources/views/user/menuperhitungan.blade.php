@@ -116,26 +116,49 @@
 
         </div>
         <div class="col-lg-8">
-            <div class="row">
-              @foreach ($kum as $k)
+
+          @foreach ($kum as $k)
+            <div class="container">
+              <div class="card card-hover border-0" style="max-width: 1100px;">
+                  <div class="row no-gutters">
+                      <div class="col-md-3  position-relative d-flex" >
+                          <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img" alt="..." width="350">
+                          <div class="d-flex">
+                            <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info position-absolute top-50 start-50 translate-middle" id="btn_check">lengkapi</a>
+                          </div>
+                      </div>
+                      <div class="col-md-5">
+                          <div class="card-body">
+                              <h4></h4>
+                              <p class="card-title"><b>{{ $k->judul }}</b></p>
+                              <p class="card-text"></p>
+                              <a >Baca Selengkapnya</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <br>              
+          @endforeach
+
+
+              {{-- @foreach ($kum as $k)
                 <div class="col-md">
                   <div class="card card-hover" style="width: 18rem;" id="card_check">
-                    <div class="position-relative">
+                    <div class="position-relative d-flex">
                       <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img-top" alt="Sunset Over the Sea" />
                       <div class="d-flex">
                         <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info position-absolute top-50 start-50 translate-middle" id="btn_check">lengkapi</a>
-                        
-
                       </div>
                     </div>
-                    <div class="card-body d-flex">
+                    <div class="card-body">
                       <p class="card-text">{{ $k->judul }}</p>
                       <a href="" class="btn btn-danger">hapus</a>
                     </div>
                   </div>
                 </div>
-              @endforeach
-            </div>
+              @endforeach --}}
+            
           </div>
           
           <style>
