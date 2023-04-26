@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\KumController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +29,4 @@ Route::get('/board-pak', [App\Http\Controllers\HomeController::class,'boardpak']
 
 
 Route::resource('kum', App\Http\Controllers\KumController::class);
+Route::resource('pendidikan', App\Http\Controllers\PendidikanController::class);

@@ -5,10 +5,8 @@
 <br>
 <br>
 
-  
-
 <div class="jumbotron d-flex" > 
-        <div class="text-center">
+        <div class="">
             <h3>Hi,{{ Auth::user()->name }}</h3>
             <p style="">Kelola Data Kamu Disini</p>
         </div>
@@ -26,7 +24,6 @@
     });
   </script>
 
-  <!-- INI NAVBAR -->
       <ul class="nav nav-underline flex justify-content-around mt-3" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="pendidikan-tab" data-bs-toggle="tab" data-bs-target="#pendidikan-tab-pane" type="button" role="tab" aria-controls="pendidikan-tab-pane" aria-selected="true">Pendidikan</button>
@@ -46,66 +43,74 @@
       </ul>
       <div class="tab-content mb-4" id="myTabContent">
         <div class="tab-pane fade show active" id="pendidikan-tab-pane" role="tabpanel" aria-labelledby="pendidikan-tab" tabindex="0">
-          <div class="col-md-12" style="margin-top: 30px">
-            <h3>Input Data Pelaksanaan Pendidikan</h3>
-            <br>
-        
-        
-        
-            <form method="POST" action="" enctype="multipart/form-data" >
-                @csrf
-        
-                <div class="form-group row">
-                    <div class="col-md">
-                        <label for="institusi">Institusi Pendidikan</label>
-                        <input type="text" class="form-control" id="institusi" name="institusi">
-                    </div>
+          <div class="col-lg-10" style="margin-top: 30px">
+            <h3><b>Input Data Pelaksanaan Pendidikan</b> </h3>     
+            
+            
+            <form method="POST" action="{{ route('pendidikan.store') }}" enctype="multipart/form-data"">
+              @csrf
+            
+              <div class="form-group row">
+                  <div class="col-md m-3">
+                      <label for="institusi">Institusi Pendidikan</label>
+                      <input type="text" class="form-control" id="institusi" name="institusi">
+                  </div>
+              </div>
+              <div class="form-group ">
+                <div class="col-md m-3">
+                  <label for="stratapendidikan">Strata Pendidikan</label>
+                  <select class="form-control" id="strata_id" name="strata_id">
+                      <option>Pilih Tingkat Strata Pendidikan</option>
+                      @foreach ($strata_pendidikan as $p)
+                          <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>
+                      @endforeach
+                  </select>
                 </div>
-        
-                
-        
-                <div class="form-group ">
-                    <label for="stratapendidikan">Strata Pendidikan</label>
-                    <select class="form-control" id="strata_id" name="strata_id">
-                        <option>Pilih Tingkat Strata Pendidikan</option>
-                        @foreach ($strata_pendidikan as $p)
-                            <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>
-                        @endforeach
-                    </select>
+
+              </div>
+      
+              <div class="form-group row">
+                  <div class="col-md m-3">
+                      <label for="tanggal">Tanggal Kelulusan</label>
+                      <input type="date" class="form-control" id="tanggal" name="tanggal">
+                  </div>
+      
+      
+                  <div class="col-md m-3">
+                      <label for="kum">Jumlah KUM</label>
+                      <input disabled type="text" class="form-control" id="kum" name="kum">
+                  </div>
+              </div>
+      
+              
+              <div class="form-group ">
+                <div class="col-md m-3">
+                  <label for="bukti">Bukti</label>
+                  <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
+                  @error('bukti')
+                      <div class="invalid-feedback">
+                          {{$message}}
+                      </div>
+                  @enderror
                 </div>
-        
-                <div class="form-group row">
-                    <div class="col-md">
-                        <label for="tanggal">Tanggal Kelulusan</label>
-                        <input type="date" class="form-control" id="tanggal" name="tanggal">
-                    </div>
-        
-        
-                    <div class="col-md">
-                        <label for="kum">Jumlah KUM</label>
-                        <input disabled type="text" class="form-control" id="kum" name="kum">
-                    </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col m-3">
+                  <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-        
-                
-                <div class="form-group ">
-                    <label for="bukti">Bukti</label>
-                    <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
-                    @error('bukti')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-        
-                <script>
-                var selectElem = document.getElementById('strata_id');
-                selectElem.addEventListener('change', function() {
-                var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
-                document.getElementById('kum').value = dataKum;
-                });
-                </script>
+              </div>
+
+
+      
+              <script>
+              var selectElem = document.getElementById('strata_id');
+              selectElem.addEventListener('change', function() {
+              var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
+              document.getElementById('kum').value = dataKum;
+              });
+              </script>
             </form>
         </div>
         </div>

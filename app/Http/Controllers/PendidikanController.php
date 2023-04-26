@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kum;
 use App\Models\pendidikan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PendidikanController extends Controller
 {
@@ -29,7 +31,29 @@ class PendidikanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'strata_id' => 'required|max:255',
+            'tanggal' => 'required|date_format:Y-m-d',
+            'institusi' => 'required|max:255',
+        ]);
+
+        $kum = kum::findOrFail(request()->route('id'));
+
+        $input['kum_id'] = $kum->id;
+
+
+
+        if ($image = $request->file('bukti')) {
+            $destinationPath = 'bukti_unsur_utama/pendidikan/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['bukti'] = "$profileImage";
+        }
+        pendidikan::create($input);
+
+        return view('.user.perhitungan', ['kum' => $kum]);     
+
+
     }
 
     /**

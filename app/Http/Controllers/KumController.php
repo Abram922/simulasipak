@@ -41,6 +41,7 @@ class KumController extends Controller
             'id_jabatan_dituju' => 'required'
         ]);
 
+
         $input['id_user'] = auth()->user()->id;
 
         kum::create($input); 
@@ -57,8 +58,8 @@ class KumController extends Controller
     public function show($id)
     {
         $kum = kum::find($id);
-
-        return redirect()->route('kum.index');
+        $strata_pendidikan = stratapendidikan::all();
+        return view('.user.perhitungan', ['kum' => $kum, 'strata_pendidikan' => $strata_pendidikan]);     
 
         
     }
