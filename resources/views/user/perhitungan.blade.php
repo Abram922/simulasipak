@@ -45,67 +45,76 @@
         </li>
       </ul>
       <div class="tab-content mb-4" id="myTabContent">
-        <div class="tab-pane fade show active" id="pendidikan-tab-pane" role="tabpanel" aria-labelledby="pendidikan-tab" tabindex="0">.Ini Pendidikan. <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
+        <div class="tab-pane fade show active" id="pendidikan-tab-pane" role="tabpanel" aria-labelledby="pendidikan-tab" tabindex="0">
+          <div class="col-md-12" style="margin-top: 30px">
+            <h3>Input Data Pelaksanaan Pendidikan</h3>
+            <br>
+        
+        
+        
+            <form method="POST" action="" enctype="multipart/form-data" >
+                @csrf
+        
+                <div class="form-group row">
+                    <div class="col-md">
+                        <label for="institusi">Institusi Pendidikan</label>
+                        <input type="text" class="form-control" id="institusi" name="institusi">
+                    </div>
+                </div>
+        
+                
+        
+                <div class="form-group ">
+                    <label for="stratapendidikan">Strata Pendidikan</label>
+                    <select class="form-control" id="strata_id" name="strata_id">
+                        <option>Pilih Tingkat Strata Pendidikan</option>
+                        @foreach ($strata_pendidikan as $p)
+                            <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>
+                        @endforeach
+                    </select>
+                </div>
+        
+                <div class="form-group row">
+                    <div class="col-md">
+                        <label for="tanggal">Tanggal Kelulusan</label>
+                        <input type="date" class="form-control" id="tanggal" name="tanggal">
+                    </div>
+        
+        
+                    <div class="col-md">
+                        <label for="kum">Jumlah KUM</label>
+                        <input disabled type="text" class="form-control" id="kum" name="kum">
+                    </div>
+                </div>
+        
+                
+                <div class="form-group ">
+                    <label for="bukti">Bukti</label>
+                    <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
+                    @error('bukti')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+        
+                <script>
+                var selectElem = document.getElementById('strata_id');
+                selectElem.addEventListener('change', function() {
+                var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
+                document.getElementById('kum').value = dataKum;
+                });
+                </script>
+            </form>
+        </div>
+        </div>
         <div class="tab-pane fade" id="pelaksanaanpendidikan-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpendidikan-tab" tabindex="0">..Ini Pelaksanaan.. <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
         <div class="tab-pane fade" id="pelaksanaanpenelitian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpenelitian-tab" tabindex="0">...Ini Penelitian... <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
         <div class="tab-pane fade" id="pelaksanaanpengabdian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpengabdian-tab" tabindex="0">....Ini Pengabdian.... <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
         <div class="tab-pane fade" id="unsur-tab-pane" role="tabpanel" aria-labelledby="unsur-tab" tabindex="0">.....Ini Unsur..... <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
       </div>
-<!-- INI NAVBAR -->
 
-<div class="row">
-    <div class="col">
-      <a class="btn btn-primary mb-3" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">Pendidikan</a>
-    </div>
-    <div class="col">
-      <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Pelaksanaan Pendidikan</button>
-    </div>
-    <div class="col">
-      <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Pelaksanaan Penelitian</button>
-    </div>
-    <div class="col">
-        <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">Pelaksanaan Pengabdian Masyarakat</button>
-      </div>
-      <div class="col">
-        <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">Unsur Penunjang</button>
-      </div>
-</div>
-
-    <div class="col">
-      <div class="collapse " id="collapse1">
-        <div class="card card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="collapse " id="collapse2">
-        <div class="card card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-        </div>
-      </div>
-    </div>
-    <div class="col">
-        <div class="collapse " id="collapse3">
-          <div class="card card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-          </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="collapse " id="collapse4">
-          <div class="card card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-          </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="collapse " id="collapse5">
-          <div class="card card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-          </div>
-        </div>
-    </div>
 
 
 

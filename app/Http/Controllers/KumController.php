@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\kum;
 use App\Http\Controllers\Controller;
+use App\Models\stratapendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,11 @@ class KumController extends Controller
      */
     public function index()
     {
-        //
+        $strata_pendidikan = stratapendidikan::all();
+
+
+        return view('.user.perhitungan', compact('strata_pendidikan'));
+        
     }
 
     /**
@@ -53,7 +58,9 @@ class KumController extends Controller
     {
         $kum = kum::find($id);
 
-        return view('.user.perhitungan',['data' =>$kum]);
+        return redirect()->route('kum.index');
+
+        
     }
 
     /**
