@@ -46,16 +46,15 @@ class PelaksanaanPendidikanController extends Controller
 
   
         if ($buktiunsurpdp = $request->file('bukti')) {
-            $destinationPath = 'bukti/';
+            $destinationPath = 'bukti_unsur_utama/pelaksanaan_pendidikan/';
             $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
             $buktiunsurpdp->move($destinationPath, $profileImage);
             $input['bukti'] = "$profileImage";
         }
-        return $input;
 
-        // pelaksanaan_pendidikan::create($input);
+        pelaksanaan_pendidikan::create($input);
 
-        // return redirect()->back()->with('message', 'Data berhasil disimpan');
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
