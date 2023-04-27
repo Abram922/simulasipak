@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\kum;
 use App\Http\Controllers\Controller;
+use App\Models\jenis_pelaksanan_pendidikan;
 use App\Models\pendidikan;
+use App\Models\semester;
 use App\Models\stratapendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,9 +57,11 @@ class KumController extends Controller
     {
         $kum = kum::find($id);
         $strata_pendidikan = stratapendidikan::all();
+        $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
+        $semester = semester::all();
         
         $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
-        return view('.user.perhitungan', ['kum' => $kum, 'strata_pendidikan' => $strata_pendidikan, 'pendidikan'=>$pendidikan]);     
+        return view('.user.perhitungan', ['kum' => $kum, 'strata_pendidikan' => $strata_pendidikan, 'pendidikan'=>$pendidikan, 'semester'=>$semester, 'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan]);     
 
         
     }

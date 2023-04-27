@@ -30,3 +30,4 @@ Route::get('/board-pak', [App\Http\Controllers\HomeController::class,'boardpak']
 
 Route::resource('kum', App\Http\Controllers\KumController::class);
 Route::resource('pendidikan', App\Http\Controllers\PendidikanController::class);
+Route::resource('pelaksanaanpendidikan', App\Http\Controllers\PelaksanaanPendidikanController::class);

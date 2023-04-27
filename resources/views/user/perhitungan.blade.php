@@ -43,47 +43,238 @@
       </ul>
       <div class="tab-content mb-4" id="myTabContent">
         <div class="tab-pane fade show active" id="pendidikan-tab-pane" role="tabpanel" aria-labelledby="pendidikan-tab" tabindex="0">
-          <div class="col-lg-10" style="margin-top: 30px">
-            <h3><b>Input Data Pelaksanaan Pendidikan</b> </h3>     
-            
-            
-            <form method="POST" action="{{ route('pendidikan.store') }}" enctype="multipart/form-data">
-              @csrf
-            
-              <div class="form-group row">
+            <div class="col-lg-10" style="margin-top: 30px">
+              <h3><b>Input Data Pendidikan</b> </h3>     
+              <form method="POST" action="{{ route('pendidikan.store') }}" enctype="multipart/form-data">
+                @csrf
+              
+                <div class="form-group row">
+                    <div class="col-md m-3">
+                        <label for="institusi">Institusi Pendidikan</label>
+                        <input type="text" class="form-control" id="institusi" name="institusi">
+                    </div>
+                </div>
+                <div class="form-group ">
                   <div class="col-md m-3">
-                      <label for="institusi">Institusi Pendidikan</label>
-                      <input type="text" class="form-control" id="institusi" name="institusi">
+                    <label for="stratapendidikan">Strata Pendidikan</label>
+                    <select class="form-control" id="strata_id" name="strata_id">
+                        <option>Pilih Tingkat Strata Pendidikan</option>
+                        @foreach ($strata_pendidikan as $p)
+                            <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>
+                        @endforeach
+                    </select>
                   </div>
-              </div>
-              <div class="form-group ">
-                <div class="col-md m-3">
-                  <label for="stratapendidikan">Strata Pendidikan</label>
-                  <select class="form-control" id="strata_id" name="strata_id">
-                      <option>Pilih Tingkat Strata Pendidikan</option>
-                      @foreach ($strata_pendidikan as $p)
-                          <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>
-                      @endforeach
-                  </select>
+
+                </div>
+        
+                <div class="form-group row">
+                    <div class="col-md m-3">
+                        <label for="tanggal">Tanggal Kelulusan</label>
+                        <input type="date" class="form-control" id="tanggal" name="tanggal">
+                    </div>
+        
+        
+                    <div class="col-md m-3">
+                        <label for="kum">Jumlah KUM</label>
+                        <input disabled type="text" class="form-control" id="kum" name="kum">
+                    </div>
+                </div>
+        
+                
+                <div class="form-group ">
+                  <div class="col-md m-3">
+                    <label for="bukti">Bukti</label>
+                    <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
+                    @error('bukti')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                  </div>
+
                 </div>
 
+                <div class="col-md m-3 text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+                <div>
+                  <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
+                </div>
+
+
+        
+                <script>
+                var selectElem = document.getElementById('strata_id');
+                selectElem.addEventListener('change', function() {
+                var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
+                document.getElementById('kum').value = dataKum;
+                });
+                </script>
+              </form>
+
+              <div class="col-md">
+                <table class="table">
+                  <thead>
+                      <th>No</th>
+                      <th>Institusi Pendidikan</th>
+                      <th>Strata Pendidikan</th>
+                      <th>File</th>
+                      <th>Aksi</th>
+                  </thead>
+        
+                  @foreach ($pendidikan as $p)
+                  <tbody>
+                          <td></td>
+                          <td>{{ $p->institusi }}</td>
+                          <td>{{ $p->strata->strata }}</td>
+                          <td><a href="/buktipendidikan/{{ $p->bukti }}" target="_blank" class="btn btn-warning">Lihat File</a></td>
+                          <td>{{ $p->jumlahAngkaKredit }}</td>                
+                          <td>
+        
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Pendidikan</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="{{ route('pendidikan.update', $p->id) }}" method="POST">
+                                      @csrf
+                                      @method('PUT')
+                                        <div class="form-group row">
+                                          <div class="col-md m-3">
+                                                <label for="institusi">Institusi Pendidikan</label>
+                                                <input type="text" class="form-control" id="institusi" name="institusi" placeholder="">
+                                            </div>
+                                          </div>
+                                          <div class="form-group ">
+                                            <div class="col-md m-3">
+                                              <label for="stratapendidikan">Strata Pendidikan</label>
+                                              <select class="form-control" id="strata_id" name="strata_id">
+                                                  <option>Pilih Tingkat Strata Pendidikan</option>
+                                                  @foreach ($strata_pendidikan as $p)
+                                                      <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>
+                                                  @endforeach
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <div class="col-md m-3">
+                                                  <label for="tanggal">Tanggal Kelulusan</label>
+                                                  <input type="date" class="form-control" id="tanggal" name="tanggal">
+                                              </div>
+                                              <div class="col-md m-3">
+                                                  <label for="kum">Jumlah KUM</label>
+                                                  <input disabled type="text" class="form-control" id="kum" name="kum">
+                                              </div>
+                                          </div>
+                                          <div class="form-group ">
+                                            <div class="col-md m-3">
+                                              <label for="bukti">Bukti</label>
+                                              <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
+                                              @error('bukti')
+                                                  <div class="invalid-feedback">
+                                                      {{$message}}
+                                                  </div>
+                                              @enderror
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                                          <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        </div>
+                                    </form>                                  
+                      
+                                </div>
+                              </div>
+                            </div>
+                              <a href="{{ route('pendidikan.edit', $p->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ubah</a>
+                              <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
+        
+                          </td>
+                  </tbody>
+                  @endforeach
+                  
+        
+                </table>
               </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pelaksanaanpendidikan-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpendidikan-tab" tabindex="0">
+          <div class="col-lg-10" style="margin-top: 30px">
+            <h3><b>Input Data Pelaksanaan Pendidikan</b> </h3>
+            <form method="POST" action="{{route('pelaksanaanpendidikan.store')}}" enctyp  e="multipart/form-data" >
+              @csrf
       
               <div class="form-group row">
                   <div class="col-md m-3">
-                      <label for="tanggal">Tanggal Kelulusan</label>
-                      <input type="date" class="form-control" id="tanggal" name="tanggal">
+                      <label for="namaKegiatan">Nama Kegiatan</label>
+                      <input type="text" class="form-control" id="namaKegiatan" name="namaKegiatan">
                   </div>
-      
-      
                   <div class="col-md m-3">
-                      <label for="kum">Jumlah KUM</label>
-                      <input disabled type="text" class="form-control" id="kum" name="kum">
+                      <label for="tempatInstansi">Tempat Instansi</label>
+                      <input type="text" class="form-control" id="tempatInstansi" name="tempatInstansi">
+                  </div>
+                  <div class="col-md m-3">
+                      <label for="semester">Semester</label>
+                      <select class="form-control" id="semester_id" name="semester_id">
+                          <option>Pilih Jenis Pelaksanaan</option>
+                          @foreach ($semester as $s)
+                              <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                          @endforeach
+                      </select>
+      
+      
                   </div>
               </div>
       
-              
-              <div class="form-group ">
+              <div class="form-group row ">
+                <div class="col-md m-3">
+                  <label for="jenispelaksanaan">Jenis Pelaksanaan</label>
+                  <select class="form-control" id="idjenispelaksanaan" name="idjenispelaksanaan">
+                      <option>Pilih Jenis Pelaksanaan</option>
+                      @foreach ($jenis_pelaksanaan_pendidikan as $p)
+                          <option @if($p->withsks == 0 ) id="is-sks" @endif class="" value="{{$p->id}}" title="{{$p->jenispelaksanaan}}">{{Str::limit($p->jenispelaksanaan,100)}}</option>
+                      @endforeach
+                  </select>                  
+                </div>
+              </div>
+
+              <div class="form-group row">
+                  <div class="col-md m-3">
+                      <label for="kelas">Kelas</label>
+                      <input readonly type="number" class="form-control x" id="jumlahkelas" name="jumlahkelas" onkeyup="sum()">
+                  </div>
+                  <div class="col-md m-3">
+                      <label for="volumeDosen">Volume Dosen</label>
+                      <input readonly type="number" class="form-control x" id="volumeDosen" name="volumeDosen" onkeyup="sum()" >
+                  </div>
+                  <div class="col-md m-3">
+                      <label for="sks">SKS</label>
+                      <input readonly type="number" class="form-control x" id="sks" name="sks" onkeyup="sum()">
+                  </div>
+                  <input  hidden type="number" class="form-control" id="kelasxvdosen" name="kelasxvdosen">
+                  <div class="col-md m-3">
+                      <label for="angkaKredit">Angka Kredit</label>
+                      <input readonly  type="number" class="form-control" id="jumlahAngkaKredit" name="jumlahAngkaKredit" onkeyup="sum()">
+                  </div>
+                  <input  hidden type="number" class="form-control" id="hasil3" name="hasil3">
+              </div>
+
+              <div>
+                <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
+              </div>
+
+              <div class="form-group row ">
+                <div class="col-md m-3">
+                  <label for="keterangan">Keterangan Kegiatan</label>
+                  <input  type="text" class="form-control" id="keterangan" name="keterangan"  placeholder="maksimal 100 kata">
+                </div>
+              </div>
+              <div class="form-group row">
                 <div class="col-md m-3">
                   <label for="bukti">Bukti</label>
                   <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
@@ -96,122 +287,61 @@
 
               </div>
 
-              <div class="row">
-                <div class="col m-3">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+              <div class="col-md m-3 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
               </div>
 
-              <div>
-                <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
-              </div>
-
-
-      
               <script>
-              var selectElem = document.getElementById('strata_id');
-              selectElem.addEventListener('change', function() {
-              var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
-              document.getElementById('kum').value = dataKum;
-              });
+                  const selectElement = document.getElementById('idjenispelaksanaan');
+                  const sks = document.getElementById('sks');
+                  const volumeDosen = document.getElementById('volumeDosen');
+                  const angkaKredit = document.getElementById('jumlahAngkaKredit');
+                  const jumlahkelas = document.getElementById('jumlahkelas');
+                  selectElement.onchange = function() {
+                     var options = selectElement.options[selectElement.selectedIndex];
+                     
+                     if(options.id == 'is-sks'){
+                          sks.removeAttribute('readonly');
+                          jumlahkelas.removeAttribute('readonly');
+                          volumeDosen.removeAttribute('readonly');
+                          angkaKredit.setAttribute('readonly','');
+                     }else{
+                          sks.setAttribute('readonly','');
+                          jumlahkelas.setAttribute('readonly','');
+                          volumeDosen.setAttribute('readonly','');
+                          angkaKredit.removeAttribute('readonly');
+                     }
+                     
+                  }
+                  function sum(){
+                      var ckelas = document.getElementById("jumlahkelas").value ;
+                      var cvolumeDosen = document.getElementById("volumeDosen").value ;
+                      var csks = document.getElementById("sks").value ;
+                      var ckelasxvdosen = document.getElementById("kelasxvdosen").value ;
+          
+                      
+                      var hasil1 = parseFloat(ckelas)*parseFloat(cvolumeDosen);
+          
+                      if(!isNaN(hasil1)){
+                          document.getElementById("kelasxvdosen").value = parseFloat(hasil1);
+                      }
+          
+                      var hasil2 = parseFloat(ckelasxvdosen) / parseFloat(csks);
+                      if(!isNaN(hasil2)){
+                          document.getElementById("jumlahAngkaKredit").value = parseFloat(hasil2);
+                      }
+                  }
               </script>
-            </form>
+          </form>
+
+
+          </div>
         </div>
-        </div>
-        <div class="tab-pane fade" id="pelaksanaanpendidikan-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpendidikan-tab" tabindex="0">..Ini Pelaksanaan.. <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
         <div class="tab-pane fade" id="pelaksanaanpenelitian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpenelitian-tab" tabindex="0">...Ini Penelitian... <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
         <div class="tab-pane fade" id="pelaksanaanpengabdian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpengabdian-tab" tabindex="0">....Ini Pengabdian.... <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
         <div class="tab-pane fade" id="unsur-tab-pane" role="tabpanel" aria-labelledby="unsur-tab" tabindex="0">.....Ini Unsur..... <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
       </div>
 
-      <div class="col-md">
-        <table class="table">
-          <thead>
-              <th>No</th>
-              <th>Institusi Pendidikan</th>
-              <th>Strata Pendidikan</th>
-              <th>File</th>
-              <th>Aksi</th>
-          </thead>
-
-          @foreach ($pendidikan as $p)
-          <tbody>
-                  <td></td>
-                  <td>{{ $p->institusi }}</td>
-                  <td>{{ $p->strata->strata }}</td>
-                  <td><a href="/buktipendidikan/{{ $p->bukti }}" target="_blank" class="btn btn-warning">Lihat File</a></td>
-                  <td>{{ $p->jumlahAngkaKredit }}</td>                
-                  <td>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Pendidikan</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <form action="{{ route('pendidikan.update', $p->id) }}" method="POST">
-                              @csrf
-                              @method('PUT')
-                                <div class="form-group row">
-                                  <div class="col-md m-3">
-                                        <label for="institusi">Institusi Pendidikan</label>
-                                        <input type="text" class="form-control" id="institusi" name="institusi" placeholder="">
-                                    </div>
-                                  </div>
-                                  <div class="form-group ">
-                                    <div class="col-md m-3">
-                                      <label for="stratapendidikan">Strata Pendidikan</label>
-                                      <select class="form-control" id="strata_id" name="strata_id">
-                                          <option>Pilih Tingkat Strata Pendidikan</option>
-                                          @foreach ($strata_pendidikan as $p)
-                                              <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>
-                                          @endforeach
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                      <div class="col-md m-3">
-                                          <label for="tanggal">Tanggal Kelulusan</label>
-                                          <input type="date" class="form-control" id="tanggal" name="tanggal">
-                                      </div>
-                                      <div class="col-md m-3">
-                                          <label for="kum">Jumlah KUM</label>
-                                          <input disabled type="text" class="form-control" id="kum" name="kum">
-                                      </div>
-                                  </div>
-                                  <div class="form-group ">
-                                    <div class="col-md m-3">
-                                      <label for="bukti">Bukti</label>
-                                      <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
-                                      @error('bukti')
-                                          <div class="invalid-feedback">
-                                              {{$message}}
-                                          </div>
-                                      @enderror
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                                  <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                </div>
-                            </form>                                  
-              
-                        </div>
-                      </div>
-                    </div>
-                      <a href="{{ route('pendidikan.edit', $p->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ubah</a>
-                      <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
-
-                  </td>
-          </tbody>
-          @endforeach
-          
-
-        </table>
-      </div>
 
 
       <div class="col" style="margin-top:110px">
