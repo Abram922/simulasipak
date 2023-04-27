@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\kum;
 use App\Http\Controllers\Controller;
+use App\Models\pendidikan;
 use App\Models\stratapendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -54,7 +55,9 @@ class KumController extends Controller
     {
         $kum = kum::find($id);
         $strata_pendidikan = stratapendidikan::all();
-        return view('.user.perhitungan', ['kum' => $kum, 'strata_pendidikan' => $strata_pendidikan]);     
+        
+        $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
+        return view('.user.perhitungan', ['kum' => $kum, 'strata_pendidikan' => $strata_pendidikan, 'pendidikan'=>$pendidikan]);     
 
         
     }
@@ -78,8 +81,11 @@ class KumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(kum $kum)
+    public function destroy($id)
     {
-        //
+        pendidikan::destroy($id);
+        
+        return redirect()->back()->with('message', 'Data Berhasi Dihapus');
+                
     }
 }

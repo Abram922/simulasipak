@@ -48,8 +48,10 @@ class PendidikanController extends Controller
 
 
         pendidikan::create($input);
-        
+
         return redirect()->back()->with('message', 'Data berhasil disimpan');
+
+        
 
 
 
@@ -68,22 +70,43 @@ class PendidikanController extends Controller
      */
     public function edit(pendidikan $pendidikan)
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, pendidikan $pendidikan)
+    public function update(Request $request,$id)
     {
-        //
+        $input = $request->validate([
+            'strata_id' => 'required|max:255',
+            'tanggal' => 'required|date_format:Y-m-d',
+            'institusi' => 'required|max:255'
+        ]);
+
+        if ($image = $request->file('bukti')) {
+            $destinationPath = 'bukti_unsur_utama/pendidikan/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['bukti'] = "$profileImage";
+        }else{
+            unset($input['bukti']);
+        }
+
+        $pendidikan = pendidikan::findOrFail($id);
+
+        $pendidikan->update($input);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pendidikan $pendidikan)
+    public function destroy($id)
     {
-        //
+        pendidikan::destroy($id);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 }
