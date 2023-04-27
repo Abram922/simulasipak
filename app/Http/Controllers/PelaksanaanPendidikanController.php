@@ -29,7 +29,33 @@ class PelaksanaanPendidikanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $input = $request->validate([
+            'kum_id' => '',
+            'idjenispelaksanaan' => 'required',
+            'semester_id' => 'required',
+            'nama_kegiatan' => 'required|max:255',
+            'tempat_instansi' => 'required|string',
+            'sks' => '',
+            'jumlah_kelas' => '', 
+            'jumlah_angka_kredit' => '',
+            'volume_dosen'=> '',
+  
+        ]);
+
+  
+        if ($buktiunsurpdp = $request->file('bukti')) {
+            $destinationPath = 'bukti/';
+            $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
+            $buktiunsurpdp->move($destinationPath, $profileImage);
+            $input['bukti'] = "$profileImage";
+        }
+        return $input;
+
+        // pelaksanaan_pendidikan::create($input);
+
+        // return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**

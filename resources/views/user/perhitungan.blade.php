@@ -211,17 +211,17 @@
       
               <div class="form-group row">
                   <div class="col-md m-3">
-                      <label for="namaKegiatan">Nama Kegiatan</label>
-                      <input type="text" class="form-control" id="namaKegiatan" name="namaKegiatan">
+                      <label for="nama_kegiatan">Nama Kegiatan</label>
+                      <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
                   </div>
                   <div class="col-md m-3">
-                      <label for="tempatInstansi">Tempat Instansi</label>
-                      <input type="text" class="form-control" id="tempatInstansi" name="tempatInstansi">
+                      <label for="tempat_instansi">Tempat Instansi</label>
+                      <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
                   </div>
                   <div class="col-md m-3">
                       <label for="semester">Semester</label>
                       <select class="form-control" id="semester_id" name="semester_id">
-                          <option>Pilih Jenis Pelaksanaan</option>
+                          <option>Pilih Semester</option>
                           @foreach ($semester as $s)
                               <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
                           @endforeach
@@ -245,12 +245,12 @@
 
               <div class="form-group row">
                   <div class="col-md m-3">
-                      <label for="kelas">Kelas</label>
-                      <input readonly type="number" class="form-control x" id="jumlahkelas" name="jumlahkelas" onkeyup="sum()">
+                      <label for="jumlah_kelas">Kelas</label>
+                      <input readonly type="number" class="form-control x" id="jumlah_kelas" name="jumlah_kelas" onkeyup="sum()">
                   </div>
                   <div class="col-md m-3">
-                      <label for="volumeDosen">Volume Dosen</label>
-                      <input readonly type="number" class="form-control x" id="volumeDosen" name="volumeDosen" onkeyup="sum()" >
+                      <label for="volume_dosen">Volume Dosen</label>
+                      <input readonly type="number" class="form-control x" id="volume_dosen" name="volume_dosen" onkeyup="sum()" >
                   </div>
                   <div class="col-md m-3">
                       <label for="sks">SKS</label>
@@ -258,8 +258,8 @@
                   </div>
                   <input  hidden type="number" class="form-control" id="kelasxvdosen" name="kelasxvdosen">
                   <div class="col-md m-3">
-                      <label for="angkaKredit">Angka Kredit</label>
-                      <input readonly  type="number" class="form-control" id="jumlahAngkaKredit" name="jumlahAngkaKredit" onkeyup="sum()">
+                      <label for="jumlah_angka_kredit">Angka Kredit</label>
+                      <input type="number" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit" onkeyup="sum()">
                   </div>
                   <input  hidden type="number" class="form-control" id="hasil3" name="hasil3">
               </div>
@@ -294,9 +294,9 @@
               <script>
                   const selectElement = document.getElementById('idjenispelaksanaan');
                   const sks = document.getElementById('sks');
-                  const volumeDosen = document.getElementById('volumeDosen');
-                  const angkaKredit = document.getElementById('jumlahAngkaKredit');
-                  const jumlahkelas = document.getElementById('jumlahkelas');
+                  const volumeDosen = document.getElementById('volume_dosen');
+                  const angkaKredit = document.getElementById('jumlah_angka_kredit');
+                  const jumlahkelas = document.getElementById('jumlah_kelas');
                   selectElement.onchange = function() {
                      var options = selectElement.options[selectElement.selectedIndex];
                      
@@ -314,8 +314,8 @@
                      
                   }
                   function sum(){
-                      var ckelas = document.getElementById("jumlahkelas").value ;
-                      var cvolumeDosen = document.getElementById("volumeDosen").value ;
+                      var ckelas = document.getElementById("jumlah_kelas").value ;
+                      var cvolumeDosen = document.getElementById("volume_dosen").value ;
                       var csks = document.getElementById("sks").value ;
                       var ckelasxvdosen = document.getElementById("kelasxvdosen").value ;
           
@@ -328,7 +328,7 @@
           
                       var hasil2 = parseFloat(ckelasxvdosen) / parseFloat(csks);
                       if(!isNaN(hasil2)){
-                          document.getElementById("jumlahAngkaKredit").value = parseFloat(hasil2);
+                          document.getElementById("jumlah_angka_kredit").value = parseFloat(hasil2);
                       }
                   }
               </script>
