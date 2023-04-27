@@ -96,11 +96,16 @@
 
               </div>
 
+              {{-- Kode untuk mendapatkan kum_id --}}
+              <input type="text" hidden id="kum_id" name="kum_id" value="{{ $kum->id }}">
+
+
               <div class="row">
                 <div class="col m-3">
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
               </div>
+
 
 
       

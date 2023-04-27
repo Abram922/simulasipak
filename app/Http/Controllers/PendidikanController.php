@@ -35,13 +35,8 @@ class PendidikanController extends Controller
             'strata_id' => 'required|max:255',
             'tanggal' => 'required|date_format:Y-m-d',
             'institusi' => 'required|max:255',
+            'kum_id'=> 'required'
         ]);
-
-        $kum = kum::findOrFail(request()->route('id'));
-
-        $input['kum_id'] = $kum->id;
-
-
 
         if ($image = $request->file('bukti')) {
             $destinationPath = 'bukti_unsur_utama/pendidikan/';
@@ -49,9 +44,13 @@ class PendidikanController extends Controller
             $image->move($destinationPath, $profileImage);
             $input['bukti'] = "$profileImage";
         }
-        pendidikan::create($input);
 
-        return view('.user.perhitungan', ['kum' => $kum]);     
+
+
+        pendidikan::create($input);
+        
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
+
 
 
     }

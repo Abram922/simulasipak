@@ -13,7 +13,7 @@ class pendidikan extends Model
         'institusi',
         'tanggal',
         'strata_id',
-        'userjabatan_id',
+        'kum_id',
         'bukti'
     ];
 

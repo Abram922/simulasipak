@@ -15,11 +15,6 @@ class KumController extends Controller
      */
     public function index()
     {
-        $strata_pendidikan = stratapendidikan::all();
-
-
-        return view('.user.perhitungan', compact('strata_pendidikan'));
-        
     }
 
     /**
@@ -38,16 +33,16 @@ class KumController extends Controller
         $input = $request->validate([
             'judul' => 'required',
             'id_jabatan_sekarang' => 'required',
-            'id_jabatan_dituju' => 'required'
+            'id_jabatan_dituju' => 'required',
+            
         ]);
 
 
         $input['id_user'] = auth()->user()->id;
 
         kum::create($input); 
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
 
-
-        return redirect()->route('userhome');
          
 
     }
