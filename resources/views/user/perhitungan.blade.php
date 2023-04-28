@@ -318,6 +318,8 @@
                           jumlahkelas.setAttribute('readonly','');
                           volumeDosen.setAttribute('readonly','');
                           angkaKredit.removeAttribute('readonly');
+
+                          angkaKredit.removeAttribute()
                      }
                      
                   }
@@ -537,31 +539,34 @@
                 @csrf
         
                 <div class="form-group row">
-                    <div class="col-md">
+                    <div class="col-md m-3">
                         <label for="judul">Judul</label>
                         <input type="text" class="form-control" id="judul" name="judul">
                     </div>
                 </div>
         
                 <div class="form-group row">
-                    <div class="col-md">
+                    <div class="col-md m-3">
                         <label for="jurnal">Jurnal</label>
                         <input type="text" class="form-control" id="jurnal" name="jurnal">
                     </div>
                 </div>
         
         
-                <div class="form-group ">
+                <div class="form-group row ">
+                  <div class="col-md m-3">
                     <label for="akreditasi">Akreditasi Karya Ilmiah</label>
                     <select class="form-control" id="akreditasi_id" name="akreditasi_id">
                         <option>Pilih Akreditasi</option>
                         @foreach ($akreditasi as $p)
-                            <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->akreditasi}}">{{Str::limit($p->akreditasi,100)}}</option>
+                            <option class="" value="{{$p->id}}" data-kum-akreditasi ="{{$p->nilai}}" title="{{$p->akreditasi}}">{{Str::limit($p->akreditasi,100)}}</option>
                         @endforeach
                     </select>
+                  </div>
                 </div>
         
-                <div class="form-group ">
+                <div class="form-group row">
+                  <div class="col-md m-3">
                     <label for="penulis">Jenis Penulis</label>
                     <select class="form-control" id="jenispenulis_id" name="jenispenulis_id">
                         <option>Pilih  Jenis Penulis</option>
@@ -569,56 +574,66 @@
                             <option  @if($p->id == 1 ) id="first-author" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
                         @endforeach
                     </select>
+                  </div>
                 </div>
         
                
         
         
                 <div class="form-group row">
-                    <div class="col-md">
+                    <div class="col-md m-3">
                         <label for="jumlah_penulis">Jumlah Penulis</label>
-                        <input disabled type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
+                        <input readonly type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
                     </div>
         
-                    <div class="col-md">
+                    <div class="col-md m-3">
                         <label for="kum">Jumlah KUM</label>
                         <input readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
                     </div>
-                </div>
+                </div> 
         
                 <div class="form-group row">
-                    <div class="col-md">
+                    <div class="col-md m-3">
                         <label for="tanggal">Tanggal Terbit</label>
                         <input type="date" class="form-control" id="tanggal" name="tanggal">
                     </div>
         
-                    <div class="col-md">
+                    <div class="col-md m-3">
                         <label for="link">Link</label>
                         <input type="text" class="form-control" id="link" name="link">
                     </div>
                 </div>
         
-                
-                <div class="form-group ">
-                    <label for="bukti">Bukti</label>
-                    <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
-                    @error('bukti')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
-                </div>
+
+
         
                 <p id="y"></p>
                 <p id="z"></p>
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <script>
+
+                  const jenispenulis = document.getElementById('jenispenulis_id')
+                  const x = document.getElementById('jumlah_penulis')
+      
+                  jenispenulis.onchange = function(){
+                      var options = jenispenulis.options[jenispenulis.selectedIndex];
+                      if(options.id == 'first-author'){
+                        x.setAttribute('readonly','');
+                        x.value = '';
+                      }else{
+                          x.removeAttribute('readonly');                        
+                          x.value = '';
+                      }
+                  }        
+              </script>
         
                 <script>
                     var selectElem = document.getElementById('akreditasi_id');
                     var selectElem2 = document.getElementById('jenispenulis_id');
+                    var jumlahpenulis = document.getElementById('jenispenulis_id');
                 
                     selectElem.addEventListener('change', function() {
-                        var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
+                        var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-akreditasi');
                         console.log(dataKum);
                 
                     selectElem2.addEventListener('change', function() {
@@ -633,6 +648,7 @@
                     });
                     });
                 </script>
+
                 <script>
                     var selectElem = document.getElementById('penulis');
                     selectElem.addEventListener('change', function() {
@@ -672,8 +688,21 @@
                             
                         } 
                     }
-        
                 </script>
+                {{-- <script>
+
+                  const selectElement = document.getElementById('jenispenulis_id');
+                  const jumlah_penulis = document.getElementById('jumlah_penulis');
+                  selectElement.onchange = function() {
+                    var options = selectElement.options[selectElement.selectedIndex];
+                    console.log(selectElement);
+                    if(options.id == 'first-author'){
+                          jumlah_penulis.removeAttribute('readonly');
+                    }else{
+                          jumlah_penulis.setAttribute('readonly','');
+                    }
+                  }
+                </script> --}}
             </form>
         </div>
         </div>

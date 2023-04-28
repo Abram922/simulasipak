@@ -13,7 +13,7 @@ class PelaksananPenelitianController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -29,7 +29,21 @@ class PelaksananPenelitianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+
+            'kum_id' => 'required|max:255',
+            'akreditasi_id'=> 'required|max:255',
+            'jenispenulis_id'=> 'required|max:255',
+            'judul'=> 'required|max:255',
+            'jurnal'=> 'required|max:255',
+            'link'=> 'required|max:255',
+            'jumlah_penulis'=> '',
+            'angkakredit'=> 'required|max:255',
+            'tanggal'=> 'required|max:255',
+        ]);
+        pelaksanan_penelitian::create($input);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
