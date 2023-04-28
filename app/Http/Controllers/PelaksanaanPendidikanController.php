@@ -29,8 +29,6 @@ class PelaksanaanPendidikanController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $input = $request->validate([
             'kum_id' => '',
             'idjenispelaksanaan' => 'required',

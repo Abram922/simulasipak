@@ -35,7 +35,7 @@
           <button class="nav-link" id="pelaksanaanpenelitian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpenelitian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpenelitian-tab-pane" aria-selected="false">Pelaksanaan Penelitian</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pelaksanaanpengabdian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpengabdian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpengabdian-tab-pane" aria-selected="false">Pelaksanaan Pengabdian Masyarakat</button>
+          <button class="nav-link" id="pelaksanaanpengabdian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpengabdian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpengabdian-tab-pane" aria-selected="false">Pengabdian Kepada Masyarakat</button>
         </li> 
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="unsur-tab" data-bs-toggle="tab" data-bs-target="#unsur-tab-pane" type="button" role="tab" aria-controls="unsur-tab-pane" aria-selected="false">Unsur Penunjang</button>
@@ -370,155 +370,7 @@
                         <td>{{ $pk->jumlah_angka_kredit }}</td>
                         <td><a href="" target="_blank" class="btn btn-warning">Lihat File</a></td>
               
-                        <td>
-      
-                          <div class="modal fade" id="pelaksanaan_pendidikan_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Pendidikan</h1>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                      <div class="modal-body">
-                                        <form method="POST" action="{{route('pelaksanaanpendidikan.update', $pk->id)}}" enctyp  e="multipart/form-data" >
-                                          @csrf
-                                          @method('PUT')
-                                  
-                                          <div class="form-group row">
-                                              <div class="col-md m-3">
-                                                  <label for="nama_kegiatan">Nama Kegiatan</label>
-                                                  <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
-                                              </div>
-                                              <div class="col-md m-3">
-                                                  <label for="tempat_instansi">Tempat Instansi</label>
-                                                  <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
-                                              </div>
-                                              <div class="col-md m-3">
-                                                  <label for="semester">Semester</label>
-                                                  <select class="form-control" id="semester_id" name="semester_id">
-                                                      <option>Pilih Semester</option>
-                                                      @foreach ($semester as $s)
-                                                          <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
-                                                      @endforeach
-                                                  </select>
-                                  
-                                  
-                                              </div>
-                                          </div>
-                                  
-                                          <div class="form-group row ">
-                                            <div class="col-md m-3">
-                                              <label for="jenispelaksanaan">Jenis Pelaksanaan</label>
-                                              <select class="form-control" id="idjenispelaksanaan" name="idjenispelaksanaan">
-                                                  <option>Pilih Jenis Pelaksanaan</option>
-                                                  @foreach ($jenis_pelaksanaan_pendidikan as $p)
-                                                      <option @if($p->withsks == 0 ) id="is-sks" @endif class="" value="{{$p->id}}" title="{{$p->jenispelaksanaan}}">{{Str::limit($p->jenispelaksanaan,100)}}</option>
-                                                  @endforeach
-                                              </select>                  
-                                            </div>
-                                          </div>
-                            
-                                          <div class="form-group row">
-                                              <div class="col-md m-3">
-                                                  <label for="jumlah_kelas">Kelas</label>
-                                                  <input readonly type="number" class="form-control x" id="jumlah_kelas" name="jumlah_kelas" onkeyup="sum()">
-                                              </div>
-                                              <div class="col-md m-3">
-                                                  <label for="volume_dosen">Volume Dosen</label>
-                                                  <input readonly type="number" class="form-control x" id="volume_dosen" name="volume_dosen" onkeyup="sum()" >
-                                              </div>
-                                              <div class="col-md m-3">
-                                                  <label for="sks">SKS</label>
-                                                  <input readonly type="number" class="form-control x" id="sks" name="sks" onkeyup="sum()">
-                                              </div>
-                                              <input  hidden type="number" class="form-control" id="kelasxvdosen" name="kelasxvdosen">
-                                              <div class="col-md m-3">
-                                                  <label for="jumlah_angka_kredit">Angka Kredit</label>
-                                                  <input type="number" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit" onkeyup="sum()">
-                                              </div>
-                                              <input  hidden type="number" class="form-control" id="hasil3" name="hasil3">
-                                          </div>
-                                          <div class="form-group row ">
-                                            <div class="col-md m-3">
-                                              <label for="keterangan">Keterangan Kegiatan</label>
-                                              <input  type="text" class="form-control" id="keterangan" name="keterangan"  placeholder="maksimal 100 kata">
-                                            </div>
-                                          </div>
-                                          <div class="form-group row">
-                                            <div class="col-md m-3">
-                                              <label for="bukti">Bukti</label>
-                                              <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
-                                              @error('bukti')
-                                                  <div class="invalid-feedback">
-                                                      {{$message}}
-                                                  </div>
-                                              @enderror
-                                            </div>
-                            
-                                          </div>
-                            
-                                          <script>
-                                              const selectElement = document.getElementById('idjenispelaksanaan');
-                                              const sks = document.getElementById('sks');
-                                              const volumeDosen = document.getElementById('volume_dosen');
-                                              const angkaKredit = document.getElementById('jumlah_angka_kredit');
-                                              const jumlahkelas = document.getElementById('jumlah_kelas');
-                                              selectElement.onchange = function() {
-                                                var options = selectElement.options[selectElement.selectedIndex];
-                                                
-                                                if(options.id == 'is-sks'){
-                                                      sks.removeAttribute('readonly');
-                                                      jumlahkelas.removeAttribute('readonly');
-                                                      volumeDosen.removeAttribute('readonly');
-                                                      angkaKredit.setAttribute('readonly','');
-                                                }else{
-                                                      sks.setAttribute('readonly','');
-                                                      jumlahkelas.setAttribute('readonly','');
-                                                      volumeDosen.setAttribute('readonly','');
-                                                      angkaKredit.removeAttribute('readonly');
-                                                }
-                                                
-                                              }
-                                              function sum(){
-                                                  var ckelas = document.getElementById("jumlah_kelas").value ;
-                                                  var cvolumeDosen = document.getElementById("volume_dosen").value ;
-                                                  var csks = document.getElementById("sks").value ;
-                                                  var ckelasxvdosen = document.getElementById("kelasxvdosen").value ;
-                                      
-                                                  
-                                                  var hasil1 = parseFloat(ckelas)*parseFloat(cvolumeDosen);
-                                      
-                                                  if(!isNaN(hasil1)){
-                                                      document.getElementById("kelasxvdosen").value = parseFloat(hasil1);
-                                                  }
-                                      
-                                                  var hasil2 = parseFloat(ckelasxvdosen) / parseFloat(csks);
-                                                  if(!isNaN(hasil2)){
-                                                      document.getElementById("jumlah_angka_kredit").value = parseFloat(hasil2);
-                                                  }
-                                              }
-                                          </script>
 
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                          </div>                                        
-                                        </form>
-                                      </div>
-
-                                  </form>                                  
-                    
-                              </div>
-                            </div>
-                          </div>
-                            <a href="{{ route('pelaksanaanpendidikan.edit', $pk->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_pendidikan_Modal">ubah</a>
-                            <form action="{{ route('pelaksanaanpendidikan.destroy', $pk->id) }}" method="POST">
-                              @csrf
-                              @method('DELETE')
-                              <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
-                          </form>
-      
-                        </td>
                 </tbody>
                 @endforeach
                 
@@ -529,7 +381,7 @@
         </div>
         {{-- 3. Unsur Pelaksanaan Penelitian  --}}
         <div class="tab-pane fade" id="pelaksanaanpenelitian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpenelitian-tab" tabindex="0">
-          <div class="col-md-12" style="margin-top: 30px">
+          <div class="col-lg-10" style="margin-top: 30px">
             <h3>Input Data Penelitian</h3>
             <br>
         
@@ -603,13 +455,22 @@
                         <input type="text" class="form-control" id="link" name="link">
                     </div>
                 </div>
+
+                <div>
+                  <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
+                </div>
         
 
 
         
                 <p id="y"></p>
                 <p id="z"></p>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div class="col-md m-3 text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+
                 <script>
 
                   const jenispenulis = document.getElementById('jenispenulis_id')
@@ -689,32 +550,342 @@
                         } 
                     }
                 </script>
-                {{-- <script>
-
-                  const selectElement = document.getElementById('jenispenulis_id');
-                  const jumlah_penulis = document.getElementById('jumlah_penulis');
-                  selectElement.onchange = function() {
-                    var options = selectElement.options[selectElement.selectedIndex];
-                    console.log(selectElement);
-                    if(options.id == 'first-author'){
-                          jumlah_penulis.removeAttribute('readonly');
-                    }else{
-                          jumlah_penulis.setAttribute('readonly','');
-                    }
-                  }
-                </script> --}}
             </form>
+
+            <div class="col-lg-10" style="margin-top: 30px">          
+              <table class="table">
+                  <thead>
+                      <th>No</th>
+                      <th>Judul</th>
+                      <th>Akreditasi</th>
+                      <th>Angka Kredit</th>
+                      <th>Aksi</th>
+                  </thead>
+          
+                  @foreach ($pelaksanan_penelitian as $p)
+                  <tbody>
+                          <td></td>
+                          <td>{{ $p->judul }}</td>
+                          <td>{{ $p->akreditasi_id }}</td>
+                          <td>{{ $p->angkakredit }}</td>              
+                          <td>
+      
+                            <div class="modal fade" id="pelaksanaan_penelitian_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Penelitian</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                        <div class="modal-body">
+
+                                          <form method="POST" action="{{route('pelaksanaanpenelitian.update', $p->id)}}" enctype="multipart/form-data" >
+                                                  @csrf
+                                                  @method('PUT')
+                                          
+                                                  <div class="form-group row">
+                                                      <div class="col-md m-3">
+                                                          <label for="judul">Judul</label>
+                                                          <input type="text" class="form-control" id="judul" name="judul">
+                                                      </div>
+                                                  </div>
+                                          
+                                                  <div class="form-group row">
+                                                      <div class="col-md m-3">
+                                                          <label for="jurnal">Jurnal</label>
+                                                          <input type="text" class="form-control" id="jurnal" name="jurnal">
+                                                      </div>
+                                                  </div>
+                                          
+                                          
+                                                  <div class="form-group row ">
+                                                    <div class="col-md m-3">
+                                                      <label for="akreditasi">Akreditasi Karya Ilmiah</label>
+                                                      <select class="form-control" id="akreditasi_id" name="akreditasi_id">
+                                                          <option>Pilih Akreditasi</option>
+                                                          @foreach ($akreditasi as $p)
+                                                              <option class="" value="{{$p->id}}" data-kum-akreditasi ="{{$p->nilai}}" title="{{$p->akreditasi}}">{{Str::limit($p->akreditasi,100)}}</option>
+                                                          @endforeach
+                                                      </select>
+                                                    </div>
+                                                  </div>
+                                          
+                                                  <div class="form-group row">
+                                                    <div class="col-md m-3">
+                                                      <label for="penulis">Jenis Penulis</label>
+                                                      <select class="form-control" id="jenispenulis_id" name="jenispenulis_id">
+                                                          <option>Pilih  Jenis Penulis</option>
+                                                          @foreach ($jenispenulis as $p)
+                                                              <option  @if($p->id == 1 ) id="first-author" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
+                                                          @endforeach
+                                                      </select>
+                                                    </div>
+                                                  </div>
+                                          
+                                                
+                                          
+                                          
+                                                  <div class="form-group row">
+                                                      <div class="col-md m-3">
+                                                          <label for="jumlah_penulis">Jumlah Penulis</label>
+                                                          <input readonly type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
+                                                      </div>
+                                          
+                                                      <div class="col-md m-3">
+                                                          <label for="kum">Jumlah KUM</label>
+                                                          <input readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
+                                                      </div>
+                                                  </div> 
+                                          
+                                                  <div class="form-group row">
+                                                      <div class="col-md m-3">
+                                                          <label for="tanggal">Tanggal Terbit</label>
+                                                          <input type="date" class="form-control" id="tanggal" name="tanggal">
+                                                      </div>
+                                          
+                                                      <div class="col-md m-3">
+                                                          <label for="link">Link</label>
+                                                          <input type="text" class="form-control" id="link" name="link">
+                                                      </div>
+                                                  </div>
+                                  
+                                          
+                                  
+                                  
+                                          
+                                                  <p id="y"></p>
+                                                  <p id="z"></p>
+                                  
+                                                  <script>
+                                  
+                                                    const jenispenulis = document.getElementById('jenispenulis_id')
+                                                    const x = document.getElementById('jumlah_penulis')
+                                        
+                                                    jenispenulis.onchange = function(){
+                                                        var options = jenispenulis.options[jenispenulis.selectedIndex];
+                                                        if(options.id == 'first-author'){
+                                                          x.setAttribute('readonly','');
+                                                          x.value = '';
+                                                        }else{
+                                                            x.removeAttribute('readonly');                        
+                                                            x.value = '';
+                                                        }
+                                                    }        
+                                                </script>
+                                                  <script>
+                                                      var selectElem = document.getElementById('akreditasi_id');
+                                                      var selectElem2 = document.getElementById('jenispenulis_id');
+                                                      var jumlahpenulis = document.getElementById('jenispenulis_id');
+                                                  
+                                                      selectElem.addEventListener('change', function() {
+                                                          var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-akreditasi');
+                                                          console.log(dataKum);
+                                                  
+                                                      selectElem2.addEventListener('change', function() {
+                                                          var datapersen = this.options[this.selectedIndex].getAttribute('data-percentage');
+                                                          console.log(datapersen);
+                                                          
+                                                  
+                                                      var hasil1 = parseFloat(dataKum) * (parseFloat(datapersen) / 100);
+                                                      console.log(hasil1);
+                                                  
+                                                      document.getElementById("angkakredit").value = hasil1;
+                                                      });
+                                                      });
+                                                  </script>                                 
+                                                  <script>
+                                                      var selectElem = document.getElementById('penulis');
+                                                      selectElem.addEventListener('change', function() {
+                                                      var dataKum = this.options[this.selectedIndex].getAttribute('data-percentage');
+                                                      document.getElementById('xz').value = dataKum;
+                                                      });
+                                                  </script>
+                                                  <script>
+                                                      jumlahPenulis.onkeyup = function(){
+                                                          sum();
+                                                      }
+                                          
+                                                      function sum(){
+                                                          var dataKum = document.getElementById('jumlah_penulis').value;
+                                                          var datapersen = document.getElementById('jumlah_penulis').value;
+                                                          var x = document.getElementById('jumlah_penulis').value;
+                                          
+                                                          console.log(dataKum);
+                                                          console.log(datapersen);
+                                                          console.log(x);
+                                          
+                                                          
+                                          
+                                                          if(x != null){
+                                                              var hasil1 = parseFloat(dataKum) * parseFloat(datapersen)
+                                                              var hasil2 = parseFloat(hasil1) / parseFloat(x)
+                                                              if(!isNaN(hasil2)){
+                                                                  document.getElementById("angkakredit").value = parseFloat(hasil2);
+                                                              }
+                                                          } 
+                                                          else(x == null){
+                                                              var hasil3 = (parseFloat(dataKum) * (parseFloat(datapersen) / 100));
+                                          
+                                                              if(!isNaN(hasil3)){
+                                                                  document.getElementById("angkakredit").value = parseFloat(hasil3);
+                                                              }
+                                                              
+                                                          } 
+                                                      }
+                                                  </script>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                                          <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        </div>
+                                    </form>                                  
+                      
+                                </div>
+                              </div>
+                            </div>
+                              <a href="{{ route('pelaksanaanpenelitian.edit', $pk->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_penelitian_Modal">ubah</a>
+                              <form action="{{ route('pelaksanaanpenelitian.destroy', $pk->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
+                            </form>
+        
+                          </td>
+                  </tbody>
+                  @endforeach  
+              </table>
+          
+              <table class="table">
+                </table>
+          
+          
+          </div>
         </div>
         </div>
         {{-- 4. Unsur Pelaksanaan Pengabdian Masyarakat  --}}
         <div class="tab-pane fade" id="pelaksanaanpengabdian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpengabdian-tab" tabindex="0">
+          <div class="col-lg-10" style="margin-top: 30px">
+            <h3>Input Data Pengabdian Kepada Masyarakat</h3>
+            <br>
+            <form method="POST" action="{{route('pelaksanaan_pm.store')}}" enctype="multipart/form-data" >
+              @csrf
+              <div class="form-group ">
+
+                <div class="col-md m-3">
+                  <label for="komponenpm_id">Kegiatan Pengabdian Pada Masyarakat</label>
+                  <select class="form-control" id="komponenpm_id" name="komponenpm_id">
+                      <option>Pilih Tingkat Kategori Pengabdian Masyarakat</option>
+                      @foreach ($komponenpm as $p)
+                          <option class="" value="{{ $p->id }}" data-kum ="{{ $p->angkakreditmax }}" title="{{$p->komponenkegiatan}}">{{Str::limit($p->komponenkegiatan,100)}}</option>
+                      @endforeach
+                  </select>
+                </div>
+              </div>
+      
+      
+              <div class="form-group row">
+                  <div class="col-md m-3">
+                      <label for="nama">Nama Kegiatan</label>
+                      <input type="text" class="form-control" id="nama" name="nama" placeholder="">
+                  </div>
+      
+                  <div class="col-md m-3">
+                      <label for="bentuk">Bentuk</label>
+                      <input type="text" class="form-control" id="bentuk" name="bentuk">
+                  </div>
+      
+              </div>    
+      
+              <div class="form-group row">
+                  <div class="col-md m-3">
+                      <label for="tempat_instansi">Tempat Instansi</label>
+                      <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
+                  </div>
+                  <div class="col-md m-3">
+                      <label for="semester">Semester</label>
+                      <input type="number" class="form-control" id="semester" name="semester">
+                  </div>
+                  <div class="col-md m-3">
+                      <label for="angkakredit">Angka Kredit</label>
+                      <input readonly type="number" class="form-control" id="angkakredit" name="angkakredit">
+                  </div>
+                  
+              </div>
+      
+              
+              <div class="form-group ">
+                <div class="col-md m-3">
+                  <label for="bukti">Bukti</label>
+                  <input class="form-control @error('buktifisik') is-invalid @enderror" type="file" id="buktifisik" name="buktifisik">
+                  @error('buktifisik')
+                      <div class="invalid-feedback">
+                          {{$message}}
+                      </div>
+                  @enderror
+                </div>
+
+                <div>
+                  <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
+                </div>
+
+              </div>
+              <div class="col-md m-3 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+
+              <script>
+                  var selectElem = document.getElementById('komponenpm_id');
+              
+                  selectElem.addEventListener('change', function() {
+                      var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
+                      console.log(dataKum);
+                  document.getElementById("angkakredit").value = dataKum;
+                  });
+              </script>
+          </form>
+
+          <table class="table">
+            <thead>
+                <th>No</th>
+                <th>Nama Kegiatan</th>
+                <th>Tempat Instansi</th>
+                <th>Angka Kredit</th>
+                <th>File</th>
+                <th>Aksi</th>
+            </thead>
+    
+            @foreach ($pelaksanaan_pm as $p)
+            <tbody>
+                    <td></td>
+                    <td>{{ $p->nama }}</td>
+                    <td>{{ $p->tempat_instansi }}</td>
+                    <td>{{ $p->angkakredit }}</td>
+                    <td><a href="/buktipm/{{ $p->buktifisik }}" target="_blank" class="btn btn-warning">Lihat File</a></td>
+              <!--tambahh download untuk mengunduh file -->            
+                    <td>
+                        <a href="{{ route('pelaksanaan_pm.edit', $p->id) }}" class="btn btn-warning">ubah</a>
+                        
+                        <form action="{{ route('pelaksanaan_pm.destroy', $p->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
+                    </form>
+                    </td>
+            </tbody>
+            @endforeach  
+        </table>
+    
+
+          
+
+
         </div>
         {{-- 5. Unsur Dokumen Penunjang  --}}
-        <div class="tab-pane fade" id="unsur-tab-pane" role="tabpanel" aria-labelledby="unsur-tab" tabindex="0">.....Ini Unsur..... <br>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
+        <div class="tab-pane fade" id="unsur-tab-pane" role="tabpanel" aria-labelledby="unsur-tab" tabindex="0">
+
+        </div>
       </div>
-
-
-
       <div class="col" style="margin-top:110px">
           <div class="row mx-auto">
               <div class="col">

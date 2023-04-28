@@ -28,11 +28,14 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('boardpak') }}">Perhitungan </a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">Lampiran </a>
+                </li>
               </ul>
               <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Link
+                    {{ auth()->user()->name }}
                   </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="#">Profil</a></li>

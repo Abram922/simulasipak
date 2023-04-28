@@ -20,4 +20,17 @@ class pelaksanan_penelitian extends Model
         'tanggal',
 
     ];
+    public function kum(){
+        return $this->belongsTo('App\Models\kum', 'kum_id', 'id');
+    }
+
+    public function akreditasi(){
+        return $this->belongsTo('App\Models\akreditasi_penelitian', 'akreditasi_id', 'id');
+    }
+
+    public function penulis(){
+        return $this->belongsTo('App\Models\penulis', 'jenispenulis_id', 'id');
+    }
+
+
 }

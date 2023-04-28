@@ -29,5 +29,22 @@ class kum extends Model
         return $this->belongsTo('App\Models\jabatan', 'id_jabatan_dituju', 'id');
     }
 
+    public function pelaksanaanpenelitian(){
+        return $this->hasMany(pelaksanan_penelitian::class);
+    }
+
+    public function pelaksanaanpm(){
+        return $this->hasMany(pelaksanaan_pm::class);
+    }
+
+    public function pendidikan(){
+        return $this->hasMany(pendidikan::class);
+    }
+    public function pelaksanaanpendidikan(){
+        return $this->hasMany(pelaksanaan_pendidikan::class);
+    }
+
+
+
 
 }

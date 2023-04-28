@@ -40,7 +40,7 @@ class PelaksananPenelitianController extends Controller
             'jumlah_penulis'=> '',
             'angkakredit'=> 'required|max:255',
             'tanggal'=> 'required|max:255',
-        ]);
+        ]);           
         pelaksanan_penelitian::create($input);
 
         return redirect()->back()->with('message', 'Data berhasil disimpan');
@@ -65,16 +65,33 @@ class PelaksananPenelitianController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, pelaksanan_penelitian $pelaksanan_penelitian)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'akreditasi_id'=> 'required|max:255',
+            'jenispenulis_id'=> 'required|max:255',
+            'judul'=> 'required|max:255',
+            'jurnal'=> 'required|max:255',
+            'link'=> 'required|max:255',
+            'jumlah_penulis'=> '',
+            'angkakredit'=> 'required|max:255',
+            'tanggal'=> 'required|max:255',
+        ]);   
+
+        $pelaksanan_penelitian = pelaksanan_penelitian::findOrFail($id);
+
+        $pelaksanan_penelitian->update($input);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pelaksanan_penelitian $pelaksanan_penelitian)
+    public function destroy($id)
     {
-        //
+        pelaksanan_penelitian::destroy($id);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 }

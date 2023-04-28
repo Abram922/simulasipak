@@ -16,6 +16,12 @@ class semester extends Model
         return $this->hasMany(pelaksanaan_pendidikan::class);
     }
 
+    public function pelaksanaanpm(){
+        return $this->hasMany(pelaksanaan_pm::class);
+    }
+
+
+
 
 
 }
