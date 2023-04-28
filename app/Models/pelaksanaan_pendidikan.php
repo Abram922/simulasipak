@@ -22,4 +22,16 @@ class pelaksanaan_pendidikan extends Model
         'volume_dosen'
     ];
 
+    public function semester(){
+        return $this->belongsTo('App\Models\semester', 'semester_id', 'id');
+    }
+    public function jenispelaksanaan(){
+        return $this->belongsTo('App\Models\jenis_pelaksanan_pendidikan', 'idjenispelaksanaan', 'id');
+    }
+    public function kum(){
+        return $this->belongsTo('App\Models\kum', 'kum_id', 'id');
+    }
+
+
+
 }

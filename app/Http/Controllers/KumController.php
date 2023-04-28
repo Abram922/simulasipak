@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\kum;
 use App\Http\Controllers\Controller;
 use App\Models\jenis_pelaksanan_pendidikan;
+use App\Models\pelaksanaan_pendidikan;
 use App\Models\pendidikan;
 use App\Models\semester;
 use App\Models\stratapendidikan;
@@ -61,7 +62,14 @@ class KumController extends Controller
         $semester = semester::all();
         
         $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
-        return view('.user.perhitungan', ['kum' => $kum, 'strata_pendidikan' => $strata_pendidikan, 'pendidikan'=>$pendidikan, 'semester'=>$semester, 'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan]);     
+        $pelaksanaan_pendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->get();
+        return view('.user.perhitungan', 
+                    ['kum' => $kum, 
+                    'strata_pendidikan' => $strata_pendidikan, 
+                    'pendidikan'=>$pendidikan, 
+                    'semester'=>$semester, 
+                    'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan,
+                    'pelaksanaan_pendidikan' =>$pelaksanaan_pendidikan]);     
 
         
     }

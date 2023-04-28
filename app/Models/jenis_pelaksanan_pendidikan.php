@@ -13,4 +13,8 @@ class jenis_pelaksanan_pendidikan extends Model
         'jenispelaksanaan',
         'withsks'
     ];
+
+    public function pelaksanaanpendidikan(){
+        return $this->hasMany(pelaksanaan_pendidikan::class);
+    }
 }

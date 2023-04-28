@@ -11,4 +11,11 @@ class semester extends Model
     protected $fillable =[
         'semester'
     ];
+
+    public function pelaksanaanpendidikan(){
+        return $this->hasMany(pelaksanaan_pendidikan::class);
+    }
+
+
+
 }

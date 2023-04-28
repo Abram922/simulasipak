@@ -41,7 +41,6 @@ class PelaksanaanPendidikanController extends Controller
             'jumlah_kelas' => '', 
             'jumlah_angka_kredit' => '',
             'volume_dosen'=> '',
-  
         ]);
 
   
@@ -76,16 +75,41 @@ class PelaksanaanPendidikanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, pelaksanaan_pendidikan $pelaksanaan_pendidikan)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'idjenispelaksanaan' => 'required',
+            'semester_id' => 'required',
+            'nama_kegiatan' => 'required|max:255',
+            'tempat_instansi' => 'required|string',
+            'sks' => '',
+            'jumlah_kelas' => '', 
+            'jumlah_angka_kredit' => '',
+            'volume_dosen'=> '',
+        ]);
+        if ($image = $request->file('bukti')) {
+            $destinationPath = 'bukti_unsur_utama/pendidikan/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['bukti'] = "$profileImage";
+        }else{
+            unset($input['bukti']);
+        }
+
+        $pelaksanaan_pendidikan = pelaksanaan_pendidikan::findOrFail($id);
+
+        $pelaksanaan_pendidikan->update($input);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pelaksanaan_pendidikan $pelaksanaan_pendidikan)
+    public function destroy($id)
     {
-        //
+        pelaksanaan_pendidikan::destroy($id);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 }
