@@ -234,8 +234,6 @@
                               <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
                           @endforeach
                       </select>
-      
-      
                   </div>
               </div>
       
@@ -777,7 +775,7 @@
                   <select class="form-control" id="komponenpm_id" name="komponenpm_id">
                       <option>Pilih Tingkat Kategori Pengabdian Masyarakat</option>
                       @foreach ($komponenpm as $p)
-                          <option class="" value="{{ $p->id }}" data-kum ="{{ $p->angkakreditmax }}" title="{{$p->komponenkegiatan}}">{{Str::limit($p->komponenkegiatan,100)}}</option>
+                          <option class="" value="{{ $p->id }}" data-kum-pm ="{{ $p->angkakredit }}" title="{{$p->komponenkegiatan}}">{{Str::limit($p->komponenkegiatan,100)}}</option>
                       @endforeach
                   </select>
                 </div>
@@ -803,9 +801,14 @@
                       <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
                   </div>
                   <div class="col-md m-3">
-                      <label for="semester">Semester</label>
-                      <input type="number" class="form-control" id="semester" name="semester">
-                  </div>
+                    <label for="semester">Semester</label>
+                    <select class="form-control" id="semester" name="semester">
+                        <option>Pilih Semester</option>
+                        @foreach ($semester as $s)
+                            <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                        @endforeach
+                    </select>
+                </div>
                   <div class="col-md m-3">
                       <label for="angkakredit">Angka Kredit</label>
                       <input readonly type="number" class="form-control" id="angkakredit" name="angkakredit">
@@ -834,15 +837,33 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
 
-              <script>
+        <script>
+
+                    // Ambil elemen select
+        var selectElem = document.getElementById('komponenpm_id');
+
+        // Ketika terjadi perubahan pada select, jalankan fungsi
+        selectElem.addEventListener('change', function() {
+        // Ambil nilai data-kum dari opsi yang dipilih
+        var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-pm');
+        
+        // Isi nilai data-kum pada input yang diinginkan
+        document.getElementById('angkakredit').value = dataKum;
+        });
+
+
+        </script>
+
+              {{-- <script>
                   var selectElem = document.getElementById('komponenpm_id');
               
                   selectElem.addEventListener('change', function() {
-                      var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
+                      var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-pm');
                       console.log(dataKum);
+
                   document.getElementById("angkakredit").value = dataKum;
                   });
-              </script>
+              </script> --}}
           </form>
 
           <table class="table">

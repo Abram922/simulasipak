@@ -39,7 +39,6 @@ class PelaksanaanPmController extends Controller
             'angkakredit' => '',
         ]);
 
-  
         if ($buktiunsurpdp = $request->file('bukti')) {
             $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
             $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
