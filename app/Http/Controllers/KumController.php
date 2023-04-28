@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\kum;
 use App\Http\Controllers\Controller;
+use App\Models\akreditasi_penelitian;
 use App\Models\jenis_pelaksanan_pendidikan;
 use App\Models\pelaksanaan_pendidikan;
 use App\Models\pendidikan;
+use App\Models\penulis;
 use App\Models\semester;
 use App\Models\stratapendidikan;
+use Database\Seeders\akreditasi_penulis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -60,6 +63,8 @@ class KumController extends Controller
         $strata_pendidikan = stratapendidikan::all();
         $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
         $semester = semester::all();
+        $jenispenulis = penulis::all();
+        $akreditasi = akreditasi_penelitian::all();
         
         $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
         $pelaksanaan_pendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->get();
@@ -69,7 +74,10 @@ class KumController extends Controller
                     'pendidikan'=>$pendidikan, 
                     'semester'=>$semester, 
                     'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan,
-                    'pelaksanaan_pendidikan' =>$pelaksanaan_pendidikan]);     
+                    'pelaksanaan_pendidikan' =>$pelaksanaan_pendidikan,
+                    'jenispenulis' => $jenispenulis,
+                    'akreditasi' => $akreditasi
+                ]);     
 
         
     }
