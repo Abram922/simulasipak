@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama')->nullable();
             $table->string('bentuk')->nullable();
             $table->string('tempat_instansi')->nullable();
-            $table->string('angkakredit')->nullable();
+            $table->string('angkakreditpm')->nullable();
             $table->string('buktifisik')->nullable();
             $table->timestamps();
             $table->foreign('kum_id')->references('id')->on('kums')->onDelete('cascade');

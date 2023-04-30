@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\kum;
 use App\Http\Controllers\Controller;
 use App\Models\akreditasi_penelitian;
+use App\Models\dokumenpenunjang;
 use App\Models\jenis_pelaksanan_pendidikan;
+use App\Models\komponendokumenpenunjang;
 use App\Models\komponenpm;
 use App\Models\pelaksanaan_pendidikan;
 use App\Models\pelaksanaan_pm;
@@ -69,12 +71,15 @@ class KumController extends Controller
         $jenispenulis = penulis::all();
         $akreditasi = akreditasi_penelitian::all();
         $komponenpm = komponenpm::all();
+        $komponendokumenpenunjang = komponendokumenpenunjang::all();
 
         
         $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
         $pelaksanaan_pendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->get();
         $pelaksanan_penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->get();
         $pelaksanaan_pm = pelaksanaan_pm::where('kum_id', $kum->id)->get();
+        $dokumenpenunjang = dokumenpenunjang::where('kum_id', $kum->id)->get();
+
         return view('.user.perhitungan', 
                     ['kum' => $kum, 
                     'strata_pendidikan' => $strata_pendidikan, 
@@ -86,7 +91,9 @@ class KumController extends Controller
                     'akreditasi' => $akreditasi,
                     'pelaksanan_penelitian' =>$pelaksanan_penelitian,
                     'pelaksanaan_pm' =>$pelaksanaan_pm,
-                    'komponenpm' =>$komponenpm
+                    'komponenpm' =>$komponenpm,
+                    'komponendokumenpenunjang' => $komponendokumenpenunjang,
+                    'dokumenpenunjang' => $dokumenpenunjang
                 ]);     
 
         

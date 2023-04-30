@@ -35,8 +35,8 @@ class PelaksanaanPmController extends Controller
             'nama' => 'required',
             'bentuk' => 'required|max:255',
             'tempat_instansi' => 'required|string',
-            'semester' => '',
-            'angkakredit' => '',
+            'semester_id' => '',
+            'angkakreditpm' => 'required',
         ]);
 
         if ($buktiunsurpdp = $request->file('bukti')) {
@@ -45,11 +45,10 @@ class PelaksanaanPmController extends Controller
             $buktiunsurpdp->move($destinationPath, $profileImage);
             $input['bukti'] = "$profileImage";
         }
-        return $input;
 
-        // pelaksanaan_pm::create($input);
+        pelaksanaan_pm::create($input);
 
-        // return redirect()->back()->with('message', 'Data berhasil disimpan');
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
@@ -71,16 +70,41 @@ class PelaksanaanPmController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, pelaksanaan_pm $pelaksanaan_pm)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'komponenpm_id' => 'required',
+            'nama' => 'required',
+            'bentuk' => 'required|max:255',
+            'tempat_instansi' => 'required|string',
+            'semester_id' => '',
+            'angkakreditpm' => '',
+        ]);
+
+        if ($buktiunsurpdp = $request->file('bukti')) {
+            $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
+            $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
+            $buktiunsurpdp->move($destinationPath, $profileImage);
+            $input['bukti'] = "$profileImage";
+        }else{
+            unset($input['bukti']);
+        }
+
+        $pelaksanaan_pm = pelaksanaan_pm::findOrFail($id);
+
+        $pelaksanaan_pm->update($input);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pelaksanaan_pm $pelaksanaan_pm)
+    public function destroy($id)
     {
-        //
+        pelaksanaan_pm::destroy($id);
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
+
+
     }
 }

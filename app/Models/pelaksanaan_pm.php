@@ -16,7 +16,7 @@ class pelaksanaan_pm extends Model
         'nama',
         'bentuk',
         'tempat_instansi',
-        'angkakredit',
+        'angkakreditpm',
         'buktifisik',
     ];
 

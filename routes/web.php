@@ -33,3 +33,5 @@ Route::resource('pendidikan', App\Http\Controllers\PendidikanController::class);
 Route::resource('pelaksanaanpendidikan', App\Http\Controllers\PelaksanaanPendidikanController::class);
 Route::resource('pelaksanaanpenelitian', App\Http\Controllers\PelaksananPenelitianController::class);
 Route::resource('pelaksanaan_pm', App\Http\Controllers\PelaksanaanPmController::class);
+Route::resource('unsurdp', App\Http\Controllers\DokumenpenunjangController::class);
+

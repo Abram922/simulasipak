@@ -764,197 +764,302 @@
         {{-- 4. Unsur Pelaksanaan Pengabdian Masyarakat  --}}
         <div class="tab-pane fade" id="pelaksanaanpengabdian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpengabdian-tab" tabindex="0">
           <div class="col-lg-10" style="margin-top: 30px">
-            <h3>Input Data Pengabdian Kepada Masyarakat</h3>
-            <br>
-            <form method="POST" action="{{route('pelaksanaan_pm.store')}}" enctype="multipart/form-data" >
-              @csrf
-              <div class="form-group ">
-
-                <div class="col-md m-3">
-                  <label for="komponenpm_id">Kegiatan Pengabdian Pada Masyarakat</label>
-                  <select class="form-control" id="komponenpm_id" name="komponenpm_id">
-                      <option>Pilih Tingkat Kategori Pengabdian Masyarakat</option>
-                      @foreach ($komponenpm as $p)
-                          <option class="" value="{{ $p->id }}" data-kum-pm ="{{ $p->angkakredit }}" title="{{$p->komponenkegiatan}}">{{Str::limit($p->komponenkegiatan,100)}}</option>
-                      @endforeach
-                  </select>
-                </div>
-              </div>
-      
-      
-              <div class="form-group row">
+              <h3>Input Data Pengabdian Kepada Masyarakat</h3>
+              <br>
+              <form method="POST" action="{{route('pelaksanaan_pm.store')}}" enctype="multipart/form-data" >
+                @csrf
+                <div class="form-group ">
                   <div class="col-md m-3">
-                      <label for="nama">Nama Kegiatan</label>
-                      <input type="text" class="form-control" id="nama" name="nama" placeholder="">
-                  </div>
-      
-                  <div class="col-md m-3">
-                      <label for="bentuk">Bentuk</label>
-                      <input type="text" class="form-control" id="bentuk" name="bentuk">
-                  </div>
-      
-              </div>    
-      
-              <div class="form-group row">
-                  <div class="col-md m-3">
-                      <label for="tempat_instansi">Tempat Instansi</label>
-                      <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
-                  </div>
-                  <div class="col-md m-3">
-                    <label for="semester">Semester</label>
-                    <select class="form-control" id="semester" name="semester">
-                        <option>Pilih Semester</option>
-                        @foreach ($semester as $s)
-                            <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                    <label for="komponenpm_id">Kegiatan Pengabdian Pada Masyarakat</label>
+                    <select class="form-control" id="komponenpm_id" name="komponenpm_id">
+                        <option>Pilih Tingkat Kategori Pengabdian Masyarakat</option>
+                        @foreach ($komponenpm as $pm)
+                            <option class="" value="{{ $pm->id }}" data-kum-pm ="{{ $pm->angkakredit }}" title="{{$pm->komponenkegiatan}}">{{Str::limit($pm->komponenkegiatan,100)}}</option>
                         @endforeach
                     </select>
-                </div>
-                  <div class="col-md m-3">
-                      <label for="angkakredit">Angka Kredit</label>
-                      <input readonly type="number" class="form-control" id="angkakredit" name="angkakredit">
                   </div>
-                  
-              </div>
+                </div>
+        
+        
+                <div class="form-group row">
+                    <div class="col-md m-3">
+                        <label for="nama">Nama Kegiatan</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="">
+                    </div>
+        
+                    <div class="col-md m-3">
+                        <label for="bentuk">Bentuk</label>
+                        <input type="text" class="form-control" id="bentuk" name="bentuk">
+                    </div>
+        
+                </div>    
+        
+                <div class="form-group row">
+                    <div class="col-md m-3">
+                        <label for="tempat_instansi">Tempat Instansi</label>
+                        <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
+                    </div>
+                    <div class="col-md m-3">
+                      <label for="semester">Semester</label>
+                      <select class="form-control" id="semester_id" name="semester_id">
+                          <option>Pilih Semester</option>
+                          @foreach ($semester as $s)
+                              <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                          @endforeach
+                      </select>
+                  </div>
+                  <div class="col-md m-3">
+                        <label for="angkakredit">Angka Kredit</label>
+                        <input readonly type="number" class="form-control" id="angkakreditpm" name="angkakreditpm">
+                  </div>
+                  </div>
+                  <script>
+                    var selectElem = document.getElementById('komponenpm_id');
+                    selectElem.addEventListener('change', function() {
+                    var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-pm');
+                    document.getElementById('angkakreditpm').value = dataKum;
+                    });
+                  </script>        
+        
+                
+                <div class="form-group ">
+                  <div class="col-md m-3">
+                    <label for="bukti">Bukti</label>
+                    <input class="form-control @error('buktifisik') is-invalid @enderror" type="file" id="buktifisik" name="buktifisik">
+                    @error('buktifisik')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                  </div>
+
+                  <div>
+                    <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
+                  </div>
+
+                </div>
+                <div class="col-md m-3 text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+
+
+
+              </form>
+
+            <table class="table">
+              <thead>
+                  <th>No</th>
+                  <th>Nama Kegiatan</th>
+                  <th>Tempat Instansi</th>
+                  <th>Angka Kredit</th>
+                  <th>File</th>
+                  <th>Aksi</th>
+              </thead>
       
-              
-              <div class="form-group ">
-                <div class="col-md m-3">
-                  <label for="bukti">Bukti</label>
-                  <input class="form-control @error('buktifisik') is-invalid @enderror" type="file" id="buktifisik" name="buktifisik">
-                  @error('buktifisik')
-                      <div class="invalid-feedback">
-                          {{$message}}
-                      </div>
-                  @enderror
+              @foreach ($pelaksanaan_pm as $p)
+              <tbody>
+                      <td></td>
+                      <td>{{ $p->nama }}</td>
+                      <td>{{ $p->tempat_instansi }}</td>
+                      <td>{{ $p->angkakreditpm }}</td>
+                      <td><a href="/buktipm/{{ $p->buktifisik }}" target="_blank" class="btn btn-warning">Lihat File</a></td>
+                      <td>
+        
+                        <div class="modal fade" id="pelaksanaan_pm_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Penelitian</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                                    <div class="modal-body">
+                                      <form method="POST" action="{{route('pelaksanaan_pm.update', $p->id)}}" enctype="multipart/form-data" >
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="form-group ">
+                                          <div class="col-md m-3">
+                                            <label for="komponenpm_id">Kegiatan Pengabdian Pada Masyarakat</label>
+                                            <select class="form-control" id="komponenpm_id" name="komponenpm_id">
+                                                <option>Pilih Tingkat Kategori Pengabdian Masyarakat</option>
+                                                @foreach ($komponenpm as $pm)
+                                                    <option class="" value="{{ $pm->id }}" data-kum-pm ="{{ $pm->angkakredit }}" title="{{$pm->komponenkegiatan}}">{{Str::limit($pm->komponenkegiatan,100)}}</option>
+                                                @endforeach
+                                            </select>
+                                          </div>
+                                        </div>
+                                
+                                
+                                        <div class="form-group row">
+                                            <div class="col-md m-3">
+                                                <label for="nama">Nama Kegiatan</label>
+                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="">
+                                            </div>
+                                
+                                            <div class="col-md m-3">
+                                                <label for="bentuk">Bentuk</label>
+                                                <input type="text" class="form-control" id="bentuk" name="bentuk">
+                                            </div>
+                                
+                                        </div>    
+                                
+                                        <div class="form-group row">
+                                            <div class="col-md m-3">
+                                                <label for="tempat_instansi">Tempat Instansi</label>
+                                                <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
+                                            </div>
+                                            <div class="col-md m-3">
+                                              <label for="semester">Semester</label>
+                                              <select class="form-control" id="semester_id" name="semester_id">
+                                                  <option>Pilih Semester</option>
+                                                  @foreach ($semester as $s)
+                                                      <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                                                  @endforeach
+                                              </select>
+                                          </div>
+                                          <div class="col-md m-3">
+                                                <label for="angkakredit">Angka Kredit</label>
+                                                <input readonly type="number" class="form-control" id="angkakreditpm" name="angkakreditpm">
+                                          </div>
+                                          </div>
+                                          <script>
+                                            var selectElem = document.getElementById('komponenpm_id');
+                                            selectElem.addEventListener('change', function() {
+                                            var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-pm');
+                                            document.getElementById('angkakreditpm').value = dataKum;
+                                            });
+                                          </script>        
+                                
+                                        
+                                        <div class="form-group ">
+                                          <div class="col-md m-3">
+                                            <label for="bukti">Bukti</label>
+                                            <input class="form-control @error('buktifisik') is-invalid @enderror" type="file" id="buktifisik" name="buktifisik">
+                                            @error('buktifisik')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
+                                          </div>
+                          
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                                          <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        </div>
+                                      </form>
+                                    </div>
+                            </div>
+                          </div>
+                        </div>
+                          <a href="{{ route('pelaksanaan_pm.edit', $p->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_pm_Modal">ubah</a>
+                          <form action="{{ route('pelaksanaan_pm.destroy', $p->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
+                        </form>
+    
+                      </td>
+              </tbody>
+              @endforeach  
+            </table>
+          </div>
+
+        </div>
+        {{-- 5. Unsur Dokumen Penunjang  --}}
+        <div class="tab-pane fade" id="unsur-tab-pane" role="tabpanel" aria-labelledby="unsur-tab" tabindex="0">
+          <div class="col-lg-10" style="margin-top: 30px">
+            <h3>Input Data Dokumen Penunjang</h3>
+            <br>        
+            <form method="POST" action="{{route('unsurdp.store')}}" enctype="multipart/form-data" >
+                @csrf
+        
+                <div class="form-group row">
+                    <div class="col-md m-3">
+                        <label for="namakegiatan_dp">Nama Kegiatan</label>
+                        <input type="text" class="form-control" id="namakegiatan_dp" name="namakegiatan_dp">
+                    </div>
+                </div>
+        
+                
+        
+                <div class="form-group ">
+                  <div class="col-md m-3">
+                    <label for="komponen">Komponen Penunjang</label>
+                    <select class="form-control" id="komponenpenunjang_id" name="komponenpenunjang_id">
+                        <option>Pilih Komponen Penunjang</option>
+                        @foreach ($komponendokumenpenunjang as $p)
+                            <option class="" value="{{$p->id}}" data-kum ="{{$p->angkakreditmax}}" title="{{$p->komponenkegiatan}}">{{Str::limit($p->komponenkegiatan,100)}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                </div>
+        
+                <div class="form-group row">
+                    <div class="col-md m-3">
+                        <label for="kedudukan_dp">Kedudukan</label>
+                        <input type="text" class="form-control" id="kedudukan_dp" name="kedudukan_dp">
+                    </div>
+        
+        
+                    <div class="col-md m-3">
+                        <label for="instansi_dp">Instansi</label>
+                        <input  type="text" class="form-control" id="instansi_dp" name="instansi_dp">
+                    </div>
+                </div>
+        
+        
+                <div class="form-group row">
+                    <div class="col-md m-3">
+                        <label for="tanggal_pelaksanaan_dp">Tanggal Pelaksanaan</label>
+                        <input type="date" class="form-control" id="tanggal_pelaksanaan_dp" name="tanggal_pelaksanaan_dp">
+                    </div>
+                    <div class="col-md m-3">
+                        <label for="angkakredit_dp">Angka Kredit</label>
+                        <input readonly type="integer" class="form-control" id="angkakredit_dp" name="angkakredit_dp">
+                    </div>
+                </div>
+        
+                
+                <div class="form-group ">
+                  <div class="com-md m-3">
+                    <label for="buktidp">Bukti</label>
+                    <input class="form-control @error('buktidp') is-invalid @enderror" type="file" id="buktidp" name="buktidp">
+                    @error('buktidp')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                  </div>
                 </div>
 
                 <div>
                   <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
                 </div>
-
-              </div>
-              <div class="col-md m-3 text-center">
+                
+                <div class="col-md m-3">
                 <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+                </div>
 
-        <script>
-
-                    // Ambil elemen select
-        var selectElem = document.getElementById('komponenpm_id');
-
-        // Ketika terjadi perubahan pada select, jalankan fungsi
-        selectElem.addEventListener('change', function() {
-        // Ambil nilai data-kum dari opsi yang dipilih
-        var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-pm');
+                <script>
+                var selectElem = document.getElementById('komponenpenunjang_id');
+                // Ketika terjadi perubahan pada select, jalankan fungsi
+                selectElem.addEventListener('change', function() {
+                // Ambil nilai data-kum dari opsi yang dipilih
+                var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
+                
+                // Isi nilai data-kum pada input yang diinginkan
+                document.getElementById('angkakredit_dp').value = dataKum;
         
-        // Isi nilai data-kum pada input yang diinginkan
-        document.getElementById('angkakredit').value = dataKum;
-        });
-
-
-        </script>
-
-              {{-- <script>
-                  var selectElem = document.getElementById('komponenpm_id');
-              
-                  selectElem.addEventListener('change', function() {
-                      var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-pm');
-                      console.log(dataKum);
-
-                  document.getElementById("angkakredit").value = dataKum;
-                  });
-              </script> --}}
-          </form>
-
-          <table class="table">
-            <thead>
-                <th>No</th>
-                <th>Nama Kegiatan</th>
-                <th>Tempat Instansi</th>
-                <th>Angka Kredit</th>
-                <th>File</th>
-                <th>Aksi</th>
-            </thead>
-    
-            @foreach ($pelaksanaan_pm as $p)
-            <tbody>
-                    <td></td>
-                    <td>{{ $p->nama }}</td>
-                    <td>{{ $p->tempat_instansi }}</td>
-                    <td>{{ $p->angkakredit }}</td>
-                    <td><a href="/buktipm/{{ $p->buktifisik }}" target="_blank" class="btn btn-warning">Lihat File</a></td>
-              <!--tambahh download untuk mengunduh file -->            
-                    <td>
-                        <a href="{{ route('pelaksanaan_pm.edit', $p->id) }}" class="btn btn-warning">ubah</a>
-                        
-                        <form action="{{ route('pelaksanaan_pm.destroy', $p->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
-                    </form>
-                    </td>
-            </tbody>
-            @endforeach  
-        </table>
-    
-
-          
-
-
-        </div>
-        {{-- 5. Unsur Dokumen Penunjang  --}}
-        <div class="tab-pane fade" id="unsur-tab-pane" role="tabpanel" aria-labelledby="unsur-tab" tabindex="0">
-
-        </div>
-      </div>
-      <div class="col" style="margin-top:110px">
-          <div class="row mx-auto">
-              <div class="col">
-                  <div class="card" style="width: 215px;border:none">
-                        </span>
-                      <img src="{{asset('aset_web/logopendidikan.png')}}" class="card-img-top img-responsive" alt="...">
-                      <div class="text-center">
-                          <a href="" class="btn btn-primary" style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">Pendidikan dan Pengajaran</a>
-                      </div>
-                    </div>
-              </div>
-              <div class="col">
-                  <div class="card" style="width: 215px;border:none" >
-                      <img src="{{asset('aset_web/logopengabdian.png')}}" class="card-img-top img-responsive" alt="...">
-                      <div class="text-center">
-                          <a href="" class="btn btn-primary" style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">Pengabdian</a>
-                      </div>
-                    </div>
-              </div>
-              <div class="col">
-                  <div class="card" style="width: 215px;border:none">
-                      <img src="{{asset('aset_web/logopenelitian.png')}}" class="card-img-top img-responsive" alt="...">
-                      <div class="text-center">
-                          <a href="" class="btn btn-primary" style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">Penelitian</a>
-                      </div>
-                    </div>
-              </div>
-              <div class="col">
-                  <div class="card" style="width: 215px;border:none">
-                      <img src="{{asset('aset_web/logodokumenpenunjang.png')}}" class="card-img-top img-responsive" alt="...">
-                      <div class="text-center">
-                          <a href="" class="btn btn-primary" style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">Dokumen Penunjang</a>
-                      </div>
-                        
-                    </div>
-              </div>
-              <div class="col">
-                  <div class="card" style="width: 215px;border:none">
-                      <img src="{{asset('aset_web/logolampiran.png')}}" class="card-img-top img-responsive" alt="...">
-                      <div class="text-center">
-                          <a href="" class="btn btn-primary" style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">Lampiran</a>
-                      </div>
-                    </div>
-              </div>
+                
+                });
+        
+        
+                </script>
+            </form>
           </div>
-          <br>
-          <br>
-      </div>
+        </div>
+
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
