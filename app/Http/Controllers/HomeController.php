@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\dokumenpenunjang;
 use App\Models\jabatan;
 use App\Models\kum;
+use App\Models\pelaksanaan_pendidikan;
+use App\Models\pelaksanaan_pm;
+use App\Models\pelaksanan_penelitian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

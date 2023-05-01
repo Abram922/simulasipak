@@ -29,16 +29,16 @@
           <button class="nav-link active" id="pendidikan-tab" data-bs-toggle="tab" data-bs-target="#pendidikan-tab-pane" type="button" role="tab" aria-controls="pendidikan-tab-pane" aria-selected="true">Pendidikan</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pelaksanaanpendidikan-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpendidikan-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpendidikan-tab-pane" aria-selected="false">Pelaksanaan Pendidikan</button>
+          <button class="nav-link" id="pelaksanaanpendidikan-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpendidikan-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpendidikan-tab-pane" aria-selected="false">Pelaksanaan Pendidikan || {{ $sumpelaksanaanpendidikan }}</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pelaksanaanpenelitian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpenelitian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpenelitian-tab-pane" aria-selected="false">Pelaksanaan Penelitian</button>
+          <button class="nav-link" id="pelaksanaanpenelitian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpenelitian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpenelitian-tab-pane" aria-selected="false">Pelaksanaan Penelitian || {{ $sumpelaksanaanpenelitian }}</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pelaksanaanpengabdian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpengabdian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpengabdian-tab-pane" aria-selected="false">Pengabdian Kepada Masyarakat</button>
+          <button class="nav-link" id="pelaksanaanpengabdian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpengabdian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpengabdian-tab-pane" aria-selected="false">Pengabdian Kepada Masyarakat || {{ $sumpelaksanaanpm }}</button>
         </li> 
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="unsur-tab" data-bs-toggle="tab" data-bs-target="#unsur-tab-pane" type="button" role="tab" aria-controls="unsur-tab-pane" aria-selected="false">Unsur Penunjang</button>
+          <button class="nav-link" id="unsur-tab" data-bs-toggle="tab" data-bs-target="#unsur-tab-pane" type="button" role="tab" aria-controls="unsur-tab-pane" aria-selected="false">Unsur Penunjang || {{ $sumdp }}</button>
         </li>
       </ul>
 
@@ -126,13 +126,13 @@
                       <th>Aksi</th>
                   </thead>
         
-                  @foreach ($pendidikan as $p)
+                  @foreach ($pendidikan as $pd)
                   <tbody>
                           <td></td>
-                          <td>{{ $p->institusi }}</td>
-                          <td>{{ $p->strata->strata }}</td>
-                          <td><a href="/buktipendidikan/{{ $p->bukti }}" target="_blank" class="btn btn-warning">Lihat File</a></td>
-                          <td>{{ $p->jumlahAngkaKredit }}</td>                
+                          <td>{{ $pd->institusi }}</td>
+                          <td>{{ $pd->strata->strata }}</td>
+                          <td><a href="/buktipendidikan/{{ $pd->bukti }}" target="_blank" class="btn btn-warning">Lihat File</a></td>
+                          <td>{{ $pd->jumlahAngkaKredit }}</td>                
                           <td>
         
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -143,7 +143,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    <form action="{{ route('pendidikan.update', $p->id) }}" method="POST">
+                                    <form action="{{ route('pendidikan.update', $pd->id) }}" method="POST">
                                       @csrf
                                       @method('PUT')
                                         <div class="form-group row">
@@ -194,8 +194,8 @@
                                 </div>
                               </div>
                             </div>
-                              <a href="{{ route('pendidikan.edit', $p->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ubah</a>
-                              <form action="{{ route('pendidikan.destroy', $p->id) }}" method="POST">
+                              <a href="{{ route('pendidikan.edit', $pd->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ubah</a>
+                              <form action="{{ route('pendidikan.destroy', $pd->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
@@ -367,6 +367,157 @@
                         <td>{{ $pk->jumlah_kelas }}</td>
                         <td>{{ $pk->jumlah_angka_kredit }}</td>
                         <td><a href="" target="_blank" class="btn btn-warning">Lihat File</a></td>
+                        <td>
+      
+                          <div class="modal fade" id="pelaksanaan_pendidikan_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                  <form method="POST" action="{{route('pelaksanaanpendidikan.update', $pk->id)}}" enctyp  e="multipart/form-data" >
+                                    @csrf
+                                    @method('PUT')
+                            
+                                    <div class="form-group row">
+                                        <div class="col-md m-3">
+                                            <label for="nama_kegiatan">Nama Kegiatan</label>
+                                            <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
+                                        </div>
+                                        <div class="col-md m-3">
+                                            <label for="tempat_instansi">Tempat Instansi</label>
+                                            <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
+                                        </div>
+                                        <div class="col-md m-3">
+                                            <label for="semester">Semester</label>
+                                            <select class="form-control" id="semester_id" name="semester_id">
+                                                <option>Pilih Semester</option>
+                                                @foreach ($semester as $s)
+                                                    <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="form-group row ">
+                                      <div class="col-md m-3">
+                                        <label for="jenispelaksanaan">Jenis Pelaksanaan</label>
+                                        <select class="form-control" id="idjenispelaksanaan" name="idjenispelaksanaan">
+                                            <option>Pilih Jenis Pelaksanaan</option>
+                                            @foreach ($jenis_pelaksanaan_pendidikan as $p)
+                                                <option @if($p->withsks == 0 ) id="is-sks" @endif class="" value="{{$p->id}}" title="{{$p->jenispelaksanaan}}">{{Str::limit($p->jenispelaksanaan,100)}}</option>
+                                            @endforeach
+                                        </select>                  
+                                      </div>
+                                    </div>
+                      
+                                    <div class="form-group row">
+                                        <div class="col-md m-3">
+                                            <label for="jumlah_kelas">Kelas</label>
+                                            <input readonly type="number" class="form-control x" id="jumlah_kelas" name="jumlah_kelas" onkeyup="sum()">
+                                        </div>
+                                        <div class="col-md m-3">
+                                            <label for="volume_dosen">Volume Dosen</label>
+                                            <input readonly type="number" class="form-control x" id="volume_dosen" name="volume_dosen" onkeyup="sum()" >
+                                        </div>
+                                        <div class="col-md m-3">
+                                            <label for="sks">SKS</label>
+                                            <input readonly type="number" class="form-control x" id="sks" name="sks" onkeyup="sum()">
+                                        </div>
+                                        <input  hidden type="number" class="form-control" id="kelasxvdosen" name="kelasxvdosen">
+                                        <div class="col-md m-3">
+                                            <label for="jumlah_angka_kredit">Angka Kredit</label>
+                                            <input type="number" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit" onkeyup="sum()">
+                                        </div>
+                                        <input  hidden type="number" class="form-control" id="hasil3" name="hasil3">
+                                    </div>
+                      
+                                    <div class="form-group row ">
+                                      <div class="col-md m-3">
+                                        <label for="keterangan">Keterangan Kegiatan</label>
+                                        <input  type="text" class="form-control" id="keterangan" name="keterangan"  placeholder="maksimal 100 kata">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+                                      <div class="col-md m-3">
+                                        <label for="bukti">Bukti</label>
+                                        <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
+                                        @error('bukti')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                        @enderror
+                                      </div>
+                      
+                                    </div>
+                      
+                                    <script>
+                                        const selectElement = document.getElementById('idjenispelaksanaan');
+                                        const sks = document.getElementById('sks');
+                                        const volumeDosen = document.getElementById('volume_dosen');
+                                        const angkaKredit = document.getElementById('jumlah_angka_kredit');
+                                        const jumlahkelas = document.getElementById('jumlah_kelas');
+                                        selectElement.onchange = function() {
+                                           var options = selectElement.options[selectElement.selectedIndex];
+                                           
+                                           if(options.id == 'is-sks'){
+                                                sks.removeAttribute('readonly');
+                                                jumlahkelas.removeAttribute('readonly');
+                                                volumeDosen.removeAttribute('readonly');
+                                                angkaKredit.setAttribute('readonly','');
+                                           }else{
+                                                sks.setAttribute('readonly','');
+                                                jumlahkelas.setAttribute('readonly','');
+                                                volumeDosen.setAttribute('readonly','');
+                                                angkaKredit.removeAttribute('readonly');
+                      
+                                                angkaKredit.removeAttribute()
+                                           }
+                                           
+                                        }
+                                        function sum(){
+                                            var ckelas = document.getElementById("jumlah_kelas").value ;
+                                            var cvolumeDosen = document.getElementById("volume_dosen").value ;
+                                            var csks = document.getElementById("sks").value ;
+                                            var ckelasxvdosen = document.getElementById("kelasxvdosen").value ;
+                                
+                                            
+                                            var hasil1 = parseFloat(ckelas)*parseFloat(cvolumeDosen);
+                                
+                                            if(!isNaN(hasil1)){
+                                                document.getElementById("kelasxvdosen").value = parseFloat(hasil1);
+                                            }
+                                
+                                            var hasil2 = parseFloat(ckelasxvdosen) / parseFloat(csks);
+                                            if(!isNaN(hasil2)){
+                                                document.getElementById("jumlah_angka_kredit").value = parseFloat(hasil2);
+                                            }
+                                        }
+                                    </script>
+
+                                  </div>
+
+
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                      </div>
+                                </form>                                  
+                    
+                              </div>
+                            </div>
+                          </div>
+                            <a href="{{ route('pelaksanaanpendidikan.edit', $pk->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_pendidikan_Modal">ubah</a>
+                            <form action="{{ route('pelaksanaanpendidikan.destroy', $pk->id) }}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
+                          </form>
+      
+                        </td>
               
 
                 </tbody>
@@ -560,12 +711,12 @@
                       <th>Aksi</th>
                   </thead>
           
-                  @foreach ($pelaksanan_penelitian as $p)
+                  @foreach ($pelaksanan_penelitian as $pn)
                   <tbody>
                           <td></td>
-                          <td>{{ $p->judul }}</td>
-                          <td>{{ $p->akreditasi_id }}</td>
-                          <td>{{ $p->angkakredit }}</td>              
+                          <td>{{ $pn->judul }}</td>
+                          <td>{{ $pn->akreditasi_id }}</td>
+                          <td>{{ $pn->angkakredit }}</td>              
                           <td>
       
                             <div class="modal fade" id="pelaksanaan_penelitian_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -577,7 +728,7 @@
                                   </div>
                                         <div class="modal-body">
 
-                                          <form method="POST" action="{{route('pelaksanaanpenelitian.update', $p->id)}}" enctype="multipart/form-data" >
+                                          <form method="POST" action="{{route('pelaksanaanpenelitian.update', $pn->id)}}" enctype="multipart/form-data" >
                                                   @csrf
                                                   @method('PUT')
                                           
@@ -742,8 +893,8 @@
                                 </div>
                               </div>
                             </div>
-                              <a href="{{ route('pelaksanaanpenelitian.edit', $pk->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_penelitian_Modal">ubah</a>
-                              <form action="{{ route('pelaksanaanpenelitian.destroy', $pk->id) }}" method="POST">
+                              <a href="{{ route('pelaksanaanpenelitian.edit', $pn->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_penelitian_Modal">ubah</a>
+                              <form action="{{ route('pelaksanaanpenelitian.destroy', $pn->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
@@ -1045,8 +1196,6 @@
                 var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
                 document.getElementById('angkakredit_dp').value = dataKum;
                 });
-        
-        
                 </script>
             </form>
           </div>
@@ -1063,15 +1212,15 @@
                 <th>Aksi</th>
             </thead>
     
-            @foreach ($dokumenpenunjang as $p)
+            @foreach ($dokumenpenunjang as $dp)
               <tbody>
                       <td></td>
-                      <td>{{ $p->namakegiatan_dp }}</td>
-                      <td>{{ $p->tanggal_pelaksanaan_dp}}</td>
-                      <td>{{ $p->angkakredit_dp }}</td>
-                      <td>{{ $p->instansi_dp }}</td>
-                      <td>{{ $p->kedudukan_dp}}</td>
-                      <td><a href="/buktidp/{{ $p->buktidp }}" target="_blank" class="btn btn-warning">Lihat File</a></td>         
+                      <td>{{ $dp->namakegiatan_dp }}</td>
+                      <td>{{ $dp->tanggal_pelaksanaan_dp}}</td>
+                      <td>{{ $dp->angkakredit_dp }}</td>
+                      <td>{{ $dp->instansi_dp }}</td>
+                      <td>{{ $dp->kedudukan_dp}}</td>
+                      <td><a href="/buktidp/{{ $dp->buktidp }}" target="_blank" class="btn btn-warning">Lihat File</a></td>         
                       <td>
           
                         <div class="modal fade" id="pelaksanaan_dp_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1082,7 +1231,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                                     <div class="modal-body">
-                                      <form method="POST" action="{{route('unsurdp.update', $p->id)}}" enctype="multipart/form-data" >
+                                      <form method="POST" action="{{route('unsurdp.update', $dp->id)}}" enctype="multipart/form-data" >
                                         @csrf
                                         @method('PUT')
                                 
@@ -1098,8 +1247,8 @@
                                             <label for="komponen">Komponen Penunjang</label>
                                             <select class="form-control" id="komponenpenunjang_id" name="komponenpenunjang_id">
                                                 <option>Pilih Komponen Penunjang</option>
-                                                @foreach ($komponendokumenpenunjang as $p)
-                                                    <option class="" value="{{$p->id}}" data-kum ="{{$p->angkakreditmax}}" title="{{$p->komponenkegiatan}}">{{Str::limit($p->komponenkegiatan,100)}}</option>
+                                                @foreach ($komponendokumenpenunjang as $dp)
+                                                    <option class="" value="{{$dp->id}}" data-kum ="{{$dp->angkakreditmax}}" title="{{$dp->komponenkegiatan}}">{{Str::limit($dp->komponenkegiatan,100)}}</option>
                                                 @endforeach
                                             </select>
                                           </div>
@@ -1160,12 +1309,14 @@
                             </div>
                           </div>
                         </div>
-                          <a href="{{ route('unsurdp.edit', $p->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_dp_Modal">ubah</a>
-                          <form action="{{ route('unsurdp.destroy', $p->id) }}" method="POST">
+                          <a href="{{ route('unsurdp.edit', $dp->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_dp_Modal">ubah</a>
+                          <form action="{{ route('unsurdp.destroy', $dp->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
-                          </form>
+                        </form>
+    
+                      </td>
                       </td>
               </tbody>
             @endforeach  

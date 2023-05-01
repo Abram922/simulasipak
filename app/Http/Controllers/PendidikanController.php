@@ -106,7 +106,6 @@ class PendidikanController extends Controller
     public function destroy($id)
     {
         pendidikan::destroy($id);
-
-        return redirect()->back()->with('message', 'Data berhasil disimpan');
+        return redirect()->back()->with('message', 'Data berhasil dihapus');
     }
 }

@@ -102,7 +102,9 @@ class PelaksanaanPmController extends Controller
      */
     public function destroy($id)
     {
-        pelaksanaan_pm::destroy($id);
-        return redirect()->back()->with('message', 'Data berhasil disimpan');
+        $pelaksanaan_pm = pelaksanaan_pm::findOrFail($id);
+        $pelaksanaan_pm->delete();
+        return redirect()->back()->with('message', 'Data berhasil dihapus');
     }
+    
 }

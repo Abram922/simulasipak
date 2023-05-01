@@ -80,6 +80,14 @@ class KumController extends Controller
         $pelaksanaan_pm = pelaksanaan_pm::where('kum_id', $kum->id)->get();
         $dokumenpenunjang = dokumenpenunjang::where('kum_id', $kum->id)->get();
 
+        //sum
+        $sumpelaksanaanpendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->sum('jumlah_angka_kredit');
+        $sumpelaksanaanpenelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->sum('angkakredit');
+        $sumpelaksanaanpm = pelaksanaan_pm::where('kum_id', $kum->id)->sum('angkakreditpm');
+        $sumdp = dokumenpenunjang::where('kum_id', $kum->id)->sum('angkakredit_dp');
+
+
+
         return view('.user.perhitungan', 
                     ['kum' => $kum, 
                     'strata_pendidikan' => $strata_pendidikan, 
@@ -93,7 +101,11 @@ class KumController extends Controller
                     'pelaksanaan_pm' =>$pelaksanaan_pm,
                     'komponenpm' =>$komponenpm,
                     'komponendokumenpenunjang' => $komponendokumenpenunjang,
-                    'dokumenpenunjang' => $dokumenpenunjang
+                    'dokumenpenunjang' => $dokumenpenunjang,
+                    'sumpelaksanaanpendidikan' => $sumpelaksanaanpendidikan,
+                    'sumpelaksanaanpenelitian' => $sumpelaksanaanpenelitian,
+                    'sumpelaksanaanpm' => $sumpelaksanaanpm,
+                    'sumdp' =>$sumdp
                 ]);     
 
         

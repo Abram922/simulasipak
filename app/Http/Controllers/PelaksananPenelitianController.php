@@ -91,7 +91,6 @@ class PelaksananPenelitianController extends Controller
     public function destroy($id)
     {
         pelaksanan_penelitian::destroy($id);
-
         return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 }

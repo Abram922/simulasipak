@@ -104,9 +104,10 @@ class DokumenpenunjangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)                                    
+    public function destroy($id)
     {
-        dokumenpenunjang::destroy($id);
-        return redirect()->back()->with('message', 'Data  berhasil dihapus');
+        $dokumenpenunjang = dokumenpenunjang::findOrFail($id);
+        $dokumenpenunjang->delete();
+        return redirect()->back()->with('message', 'Data berhasil dihapus');
     }
 }
