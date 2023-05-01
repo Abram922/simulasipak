@@ -980,9 +980,7 @@
                         <input type="text" class="form-control" id="namakegiatan_dp" name="namakegiatan_dp">
                     </div>
                 </div>
-        
-                
-        
+
                 <div class="form-group ">
                   <div class="col-md m-3">
                     <label for="komponen">Komponen Penunjang</label>
@@ -1037,30 +1035,148 @@
                   <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
                 </div>
                 
-                <div class="col-md m-3">
+                <div class="col-md m-3 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
                 <script>
                 var selectElem = document.getElementById('komponenpenunjang_id');
-                // Ketika terjadi perubahan pada select, jalankan fungsi
                 selectElem.addEventListener('change', function() {
-                // Ambil nilai data-kum dari opsi yang dipilih
                 var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
-                
-                // Isi nilai data-kum pada input yang diinginkan
                 document.getElementById('angkakredit_dp').value = dataKum;
-        
-                
                 });
         
         
                 </script>
             </form>
           </div>
+
+          <table class="table">
+            <thead>
+                <th>No</th>
+                <th>Nama Kegiatan</th>
+                <th>Tanggal Pelaksanaan</th>
+                <th>Angka Kredit</th>
+                <th>Instansi</th>
+                <th>Kedudukan</th>
+                <th>Bukti</th>
+                <th>Aksi</th>
+            </thead>
+    
+            @foreach ($dokumenpenunjang as $p)
+              <tbody>
+                      <td></td>
+                      <td>{{ $p->namakegiatan_dp }}</td>
+                      <td>{{ $p->tanggal_pelaksanaan_dp}}</td>
+                      <td>{{ $p->angkakredit_dp }}</td>
+                      <td>{{ $p->instansi_dp }}</td>
+                      <td>{{ $p->kedudukan_dp}}</td>
+                      <td><a href="/buktidp/{{ $p->buktidp }}" target="_blank" class="btn btn-warning">Lihat File</a></td>         
+                      <td>
+          
+                        <div class="modal fade" id="pelaksanaan_dp_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Penelitian</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                                    <div class="modal-body">
+                                      <form method="POST" action="{{route('unsurdp.update', $p->id)}}" enctype="multipart/form-data" >
+                                        @csrf
+                                        @method('PUT')
+                                
+                                        <div class="form-group row">
+                                            <div class="col-md m-3">
+                                                <label for="namakegiatan_dp">Nama Kegiatan</label>
+                                                <input type="text" class="form-control" id="namakegiatan_dp" name="namakegiatan_dp">
+                                            </div>
+                                        </div>
+                        
+                                        <div class="form-group ">
+                                          <div class="col-md m-3">
+                                            <label for="komponen">Komponen Penunjang</label>
+                                            <select class="form-control" id="komponenpenunjang_id" name="komponenpenunjang_id">
+                                                <option>Pilih Komponen Penunjang</option>
+                                                @foreach ($komponendokumenpenunjang as $p)
+                                                    <option class="" value="{{$p->id}}" data-kum ="{{$p->angkakreditmax}}" title="{{$p->komponenkegiatan}}">{{Str::limit($p->komponenkegiatan,100)}}</option>
+                                                @endforeach
+                                            </select>
+                                          </div>
+                                        </div>
+                                
+                                        <div class="form-group row">
+                                            <div class="col-md m-3">
+                                                <label for="kedudukan_dp">Kedudukan</label>
+                                                <input type="text" class="form-control" id="kedudukan_dp" name="kedudukan_dp">
+                                            </div>
+                                
+                                
+                                            <div class="col-md m-3">
+                                                <label for="instansi_dp">Instansi</label>
+                                                <input  type="text" class="form-control" id="instansi_dp" name="instansi_dp">
+                                            </div>
+                                        </div>
+                                
+                                
+                                        <div class="form-group row">
+                                            <div class="col-md m-3">
+                                                <label for="tanggal_pelaksanaan_dp">Tanggal Pelaksanaan</label>
+                                                <input type="date" class="form-control" id="tanggal_pelaksanaan_dp" name="tanggal_pelaksanaan_dp">
+                                            </div>
+                                            <div class="col-md m-3">
+                                                <label for="angkakredit_dp">Angka Kredit</label>
+                                                <input readonly type="integer" class="form-control" id="angkakredit_dp" name="angkakredit_dp">
+                                            </div>
+                                        </div>
+                                
+                                        
+                                        <div class="form-group ">
+                                          <div class="com-md m-3">
+                                            <label for="buktidp">Bukti</label>
+                                            <input class="form-control @error('buktidp') is-invalid @enderror" type="file" id="buktidp" name="buktidp">
+                                            @error('buktidp')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
+                                          </div>
+                                        </div>
+                                        <div class="col-md m-3 text-center">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                        
+                                        <script>
+                                        var selectElem = document.getElementById('komponenpenunjang_id');
+                                        selectElem.addEventListener('change', function() {
+                                        var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
+                                        document.getElementById('angkakredit_dp').value = dataKum;
+                                        });
+                                
+                                
+                                        </script>
+                                      </form>
+                                    </div>
+                            </div>
+                          </div>
+                        </div>
+                          <a href="{{ route('unsurdp.edit', $p->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_dp_Modal">ubah</a>
+                          <form action="{{ route('unsurdp.destroy', $p->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
+                          </form>
+                      </td>
+              </tbody>
+            @endforeach  
+        </table>
         </div>
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 @endsection
+
+
+
+

@@ -104,7 +104,5 @@ class PelaksanaanPmController extends Controller
     {
         pelaksanaan_pm::destroy($id);
         return redirect()->back()->with('message', 'Data berhasil disimpan');
-
-
     }
 }

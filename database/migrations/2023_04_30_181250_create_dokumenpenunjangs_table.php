@@ -21,10 +21,8 @@ return new class extends Migration
             $table->integer('angkakredit_dp')->nullable();
             $table->string('kedudukan_dp');
             $table->string('buktidp');
-
             $table->foreign('kum_id')->references('id')->on('kums')->onDelete('cascade');
             $table->foreign('komponenpenunjang_id')->references('id')->on('komponendokumenpenunjangs')->onDelete('cascade');
-
             $table->timestamps();
         });
     }

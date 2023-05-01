@@ -17,5 +17,6 @@ class dokumenpenunjang extends Model
         'instansi_dp',
         'angkakredit_dp',
         'kedudukan_dp',
+        'buktidp'
     ];
 }

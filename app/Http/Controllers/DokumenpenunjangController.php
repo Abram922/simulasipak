@@ -74,16 +74,39 @@ class DokumenpenunjangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, dokumenpenunjang $dokumenpenunjang)
+    public function update(Request $request,$id)
     {
-        //
+        $input = $request->validate([
+            'komponenpenunjang_id' => 'required',
+            'namakegiatan_dp' => 'required',
+            'tanggal_pelaksanaan_dp' => '',
+            'instansi_dp' => '',
+            'angkakredit_dp' =>'',
+            'kedudukan_dp' =>'',
+        ]);
+
+        if ($buktiunsurpdp = $request->file('bukti')) {
+            $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
+            $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
+            $buktiunsurpdp->move($destinationPath, $profileImage);
+            $input['bukti'] = "$profileImage";
+        }else{
+            unset($input['bukti']);
+        }
+
+        $dokumenpenunjang = dokumenpenunjang::findOrFail($id);
+
+        $dokumenpenunjang->update($input);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(dokumenpenunjang $dokumenpenunjang)
+    public function destroy($id)                                    
     {
-        //
+        dokumenpenunjang::destroy($id);
+        return redirect()->back()->with('message', 'Data  berhasil dihapus');
     }
 }
