@@ -19,6 +19,22 @@
       </div>
     </div>
   </div>
+  
+
+  @php  
+  $kum1 = $kum->jabatanSekarang->jabatan;
+  $kum2 = $kum->jabatanDituju->jabatan;
+
+  $operasikum = $kum2 - $kum1;
+
+  echo $kum1;
+  echo $kum2;
+
+    
+
+      
+  @endphp
+
   <div class="col-md">
     <div class="card shadow mb-4">
       <div class="card-header py-3">

@@ -12,17 +12,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
 
         \App\Models\jabatan::create([
        
-            'jabatan' => 'Asisten Ahli',
-            'angkaKreditKumulatif' => 200 ,
+            'jabatan' => 'Asisten Ahli 100',
+            'angkaKreditKumulatif' => 100 ,
+            'pelaksanaanPendidikan' => 55 ,
+            'pelaksanaanPenelitian' => 25 ,
+            'pelaksanaanPengabdianMasyarakat' => 10 ,
+            'penunjang'=> 10 
+        ]);
+
+        \App\Models\jabatan::create([
+       
+            'jabatan' => 'Asisten Ahli 150',
+            'angkaKreditKumulatif' => 150 ,
             'pelaksanaanPendidikan' => 55 ,
             'pelaksanaanPenelitian' => 25 ,
             'pelaksanaanPengabdianMasyarakat' => 10 ,
@@ -31,7 +35,17 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\jabatan::create([
    
-            'jabatan' => 'Lektor',
+            'jabatan' => 'Lektor 200',
+            'angkaKreditKumulatif' => 200 ,
+            'pelaksanaanPendidikan' => 45 ,
+            'pelaksanaanPenelitian' => 35 ,
+            'pelaksanaanPengabdianMasyarakat' => 10 ,
+            'penunjang'=> 10 
+        ]);
+
+        \App\Models\jabatan::create([
+   
+            'jabatan' => 'Lektor 300',
             'angkaKreditKumulatif' => 300 ,
             'pelaksanaanPendidikan' => 45 ,
             'pelaksanaanPenelitian' => 35 ,
@@ -41,7 +55,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\jabatan::create([
          
-            'jabatan' => 'Lektor Kepala',
+            'jabatan' => 'Lektor Kepala 400',
             'angkaKreditKumulatif' => 400 ,
             'pelaksanaanPendidikan' => 40 ,
             'pelaksanaanPenelitian' => 40 ,
@@ -49,11 +63,40 @@ class DatabaseSeeder extends Seeder
             'penunjang'=> 10 
         ]);
 
+        \App\Models\jabatan::create([
+         
+            'jabatan' => 'Lektor Kepala 550',
+            'angkaKreditKumulatif' => 550 ,
+            'pelaksanaanPendidikan' => 40 ,
+            'pelaksanaanPenelitian' => 40 ,
+            'pelaksanaanPengabdianMasyarakat' => 10 ,
+            'penunjang'=> 10 
+        ]);
+
+        \App\Models\jabatan::create([
+         
+            'jabatan' => 'Lektor Kepala 700',
+            'angkaKreditKumulatif' => 700 ,
+            'pelaksanaanPendidikan' => 40 ,
+            'pelaksanaanPenelitian' => 40 ,
+            'pelaksanaanPengabdianMasyarakat' => 10 ,
+            'penunjang'=> 10 
+        ]);
 
         \App\Models\jabatan::create([
 
-            'jabatan' => 'Professor',
-            'angkaKreditKumulatif' => 700 ,
+            'jabatan' => 'Professor 850',
+            'angkaKreditKumulatif' => 850 ,
+            'pelaksanaanPendidikan' => 35 ,
+            'pelaksanaanPenelitian' => 45 ,
+            'pelaksanaanPengabdianMasyarakat' => 10 ,
+            'penunjang'=> 10 
+        ]);
+
+        \App\Models\jabatan::create([
+
+            'jabatan' => 'Professor 1050',
+            'angkaKreditKumulatif' => 1050 ,
             'pelaksanaanPendidikan' => 35 ,
             'pelaksanaanPenelitian' => 45 ,
             'pelaksanaanPengabdianMasyarakat' => 10 ,
