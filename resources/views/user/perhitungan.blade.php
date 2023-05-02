@@ -22,18 +22,108 @@
   
 
   @php  
-  $kum1 = $kum->jabatanSekarang->jabatan;
-  $kum2 = $kum->jabatanDituju->jabatan;
+  $kum1 = $kum->jabatanSekarang->angkaKreditKumulatif;
+  $kum2 = $kum->jabatanDituju->angkaKreditKumulatif;
 
-  $operasikum = $kum2 - $kum1;
+  $jabatandituju = $kum->jabatanDituju->jabatan;
 
-  echo $kum1;
-  echo $kum2;
+  echo "ini kum1 $kum1"; // 400
+  echo " ini kum2 $kum2"; // 200
+  
+  $operasikum = intval($kum2) - intval($kum1);
 
-    
+  echo "<br>";
+  echo "hasil $operasikum"; // 200
 
-      
-  @endphp
+  if($jabatandituju == 'Asisten Ahli 100' ){
+    $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+    $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+    echo $angkakreditpenunjangmax;
+  }elseif ($jabatandituju == 'Asisten Ahli 150') {
+    $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+    $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+    echo $angkakreditpenunjangmax;
+  }elseif ($jabatandituju == 'Lektor 200') {
+    $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+    $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+    echo $angkakreditpenunjangmax;
+  }elseif ($jabatandituju == 'Lektor 300') {
+    $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+    $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+    echo $angkakreditpenunjangmax;
+  }elseif ($jabatandituju == 'Lektor Kepala 400') {
+    $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+    $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+    echo $angkakreditpenunjangmax;
+  }elseif ($jabatandituju == 'Lektor Kepala 550') {
+    $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+    $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+    echo $angkakreditpenunjangmax;
+  }elseif ($jabatandituju == 'Lektor Kepala 700') {
+    $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+    $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+    echo $angkakreditpenunjangmax;
+  }elseif ($jabatandituju == 'Professor 850') {
+    $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+    $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+    echo $angkakreditpenunjangmax;
+  }elseif ($jabatandituju == 'Professor 1050') {
+    $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+    $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+    $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPendidikannmax;
+    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+    echo $angkakreditpenunjangmax;
+  }else{
+    echo "NaN";
+  }
+  
+  
+
+@endphp
+
 
   <div class="col-md">
     <div class="card shadow mb-4">
