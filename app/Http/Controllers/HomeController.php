@@ -41,13 +41,24 @@ class HomeController extends Controller
     }
 
     public function boardpak(){
-        
+
+        // $result = DB::table('kums')
+        // ->join('pelaksanaan_pendidikans', 'kums.id', '=', 'pelaksanaan_pendidikans.kum_id')
+        // ->select('kums.judul', 'pelaksanaan_pendidikans.jumlah_angka_kredit')
+        // ->get();
+
+        $result = DB::table('kums')
+        ->join('pelaksanaan_pendidikans', 'kums.id', '=', 'pelaksanaan_pendidikans.kum_id')
+        ->select('kums.judul', DB::raw('SUM(pelaksanaan_pendidikans.jumlah_angka_kredit) as total_ak'))
+        ->groupBy('kums.id', 'kums.judul')
+        ->get();
+
 
         $jabatanpref = jabatan::all();
         $jabatanafter = jabatan::all();
-        $kum = DB::table('kums')->where('id_user', auth()->user()->id)->get();
+        $kum = DB::table('kums')->where('id_user', auth()->user()->id)->get();  
 
-        return view('.user.menuperhitungan', compact('jabatanpref', 'jabatanafter', 'kum'));
+        return view('.user.menuperhitungan', compact('jabatanpref', 'jabatanafter', 'kum', 'result'));
     }
 
     
