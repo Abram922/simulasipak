@@ -88,21 +88,6 @@ class KumController extends Controller
         $sumpelaksanaanpm = pelaksanaan_pm::where('kum_id', $kum->id)->sum('angkakreditpm');
         $sumdp = dokumenpenunjang::where('kum_id', $kum->id)->sum('angkakredit_dp');
 
-        //
-        $kum_id = DB::table('kums')
-        ->where('id_user', auth()->user()->id)
-        ->first();
-
-
-        //
-        $result = DB::table('kums')
-        ->join('pelaksanaan_pendidikans', 'kums.id', '=', 'pelaksanaan_pendidikans.kum_id')
-        ->select('kums.id', DB::raw('SUM(pelaksanaan_pendidikans.jumlah_angka_kredit) as total_ak'))
-        ->groupBy('id', 'judul')
-        ->where( 'id_user', auth()->user()->id)
-        ->get();
-
-
 
         return view('.user.perhitungan', 
                     ['kum' => $kum, 
@@ -121,7 +106,7 @@ class KumController extends Controller
                     'sumpelaksanaanpendidikan' => $sumpelaksanaanpendidikan,
                     'sumpelaksanaanpenelitian' => $sumpelaksanaanpenelitian,
                     'sumpelaksanaanpm' => $sumpelaksanaanpm,
-                    'sumdp' =>$sumdp
+                    'sumdp' =>$sumdp,
                 ]);     
 
         

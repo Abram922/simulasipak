@@ -18,11 +18,8 @@ class jabatan extends Model
         'penunjang'
     ];
 
-    public function userjabatanrpref(){
+    public function kum(){
         return $this->hasMany(kum::class);
     }
 
-    public function userjabatannext(){
-        return $this->hasMany(kum::class);
-    }
 }

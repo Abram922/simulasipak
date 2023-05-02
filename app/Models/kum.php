@@ -20,14 +20,16 @@ class kum extends Model
     public function user(){
         return $this->belongsTo('App\Models\User', 'id_user', 'id');
     }
-
-    public function jabatanpref(){
+    public function jabatanSekarang()
+    {
         return $this->belongsTo('App\Models\jabatan', 'id_jabatan_sekarang', 'id');
     }
     
-    public function jabatannext(){
+    public function jabatanDituju()
+    {
         return $this->belongsTo('App\Models\jabatan', 'id_jabatan_dituju', 'id');
     }
+    
 
     public function pelaksanaanpenelitian(){
         return $this->hasMany(pelaksanan_penelitian::class);
