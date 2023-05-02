@@ -73,7 +73,9 @@ class KumController extends Controller
         $komponenpm = komponenpm::all();
         $komponendokumenpenunjang = komponendokumenpenunjang::all();
 
-        
+
+
+        //menampilkan data berdasarkan kum_id
         $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
         $pelaksanaan_pendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->get();
         $pelaksanan_penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->get();
@@ -85,6 +87,20 @@ class KumController extends Controller
         $sumpelaksanaanpenelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->sum('angkakredit');
         $sumpelaksanaanpm = pelaksanaan_pm::where('kum_id', $kum->id)->sum('angkakreditpm');
         $sumdp = dokumenpenunjang::where('kum_id', $kum->id)->sum('angkakredit_dp');
+
+        //
+        $kum_id = DB::table('kums')
+        ->where('id_user', auth()->user()->id)
+        ->first();
+
+
+        //
+        $result = DB::table('kums')
+        ->join('pelaksanaan_pendidikans', 'kums.id', '=', 'pelaksanaan_pendidikans.kum_id')
+        ->select('kums.id', DB::raw('SUM(pelaksanaan_pendidikans.jumlah_angka_kredit) as total_ak'))
+        ->groupBy('id', 'judul')
+        ->where( 'id_user', auth()->user()->id)
+        ->get();
 
 
 

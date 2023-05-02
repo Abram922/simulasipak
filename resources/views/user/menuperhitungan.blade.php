@@ -122,8 +122,10 @@
                           <div class="card-body">
                               <h4></h4>
                               <p class="card-title"><b>{{ $k->judul }}</b></p>
+
                               <p class="card-text">Jabatan yang dituju : {{ $k->id_jabatan_dituju }}</p>
                               <input type="text" value="{{ $result }}">
+                              <input type="text" id="id_kummm" value="{{ $k->id }}">
                           </div>
                       </div>
                   </div>

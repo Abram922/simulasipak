@@ -47,16 +47,20 @@ class HomeController extends Controller
         // ->select('kums.judul', 'pelaksanaan_pendidikans.jumlah_angka_kredit')
         // ->get();
 
+        $kum_x = DB::table('kums')->where('id_user', auth()->user()->id)->first(); 
+        $kum = DB::table('kums')->where('id_user', auth()->user()->id)->get();  
+
+
         $result = DB::table('kums')
         ->join('pelaksanaan_pendidikans', 'kums.id', '=', 'pelaksanaan_pendidikans.kum_id')
-        ->select('kums.judul', DB::raw('SUM(pelaksanaan_pendidikans.jumlah_angka_kredit) as total_ak'))
-        ->groupBy('kums.id', 'kums.judul')
+        ->select('kums.id', DB::raw('SUM(pelaksanaan_pendidikans.jumlah_angka_kredit) as total_ak'))
+        ->groupBy('id', 'judul')
+        ->where( 'id_user', auth()->user()->id)
         ->get();
 
 
         $jabatanpref = jabatan::all();
-        $jabatanafter = jabatan::all();
-        $kum = DB::table('kums')->where('id_user', auth()->user()->id)->get();  
+        $jabatanafter = jabatan::all(); 
 
         return view('.user.menuperhitungan', compact('jabatanpref', 'jabatanafter', 'kum', 'result'));
     }
