@@ -54,9 +54,6 @@ class KumController extends Controller
 
         kum::create($input); 
         return redirect()->back()->with('message', 'Data berhasil disimpan');
-
-         
-
     }
 
     /**
@@ -82,6 +79,16 @@ class KumController extends Controller
         $pelaksanaan_pm = pelaksanaan_pm::where('kum_id', $kum->id)->get();
         $dokumenpenunjang = dokumenpenunjang::where('kum_id', $kum->id)->get();
 
+
+
+        $poinpendidikan = DB::table('pendidikans')
+        ->join('stratapendidikans', 'pendidikans.strata_id', '=', 'stratapendidikans.id')
+        ->select('pendidikans.id', 'stratapendidikans.nilai')
+        ->groupBy('pendidikans.id', 'stratapendidikans.nilai')
+        ->where('kum_id', $kum->id)
+        ->orderBy('stratapendidikans.nilai', 'desc')        
+        ->max('stratapendidikans.nilai');
+    
         //sum
         $sumpelaksanaanpendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->sum('jumlah_angka_kredit');
         $sumpelaksanaanpenelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->sum('angkakredit');
@@ -107,6 +114,7 @@ class KumController extends Controller
                     'sumpelaksanaanpenelitian' => $sumpelaksanaanpenelitian,
                     'sumpelaksanaanpm' => $sumpelaksanaanpm,
                     'sumdp' =>$sumdp,
+                    'poinpendidikan' =>$poinpendidikan
                 ]);     
 
         

@@ -29,7 +29,7 @@
                   <a class="nav-link" href="{{ route('boardpak') }}">Perhitungan </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="">Lampiran </a>
+                  <a class="nav-link" href="{{ route('lampiran') }}">Lampiran </a>
                 </li>
               </ul>
               <ul class="navbar-nav ms-auto">

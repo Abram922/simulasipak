@@ -35,3 +35,9 @@ Route::resource('pelaksanaanpenelitian', App\Http\Controllers\PelaksananPeneliti
 Route::resource('pelaksanaan_pm', App\Http\Controllers\PelaksanaanPmController::class);
 Route::resource('unsurdp', App\Http\Controllers\DokumenpenunjangController::class);
 
+Route::get('/lampiran', [App\Http\Controllers\LampiranController::class,'index'])->name('lampiran');
+Route::get('/lampiran-datapenelitian', [App\Http\Controllers\LampiranController::class,'datapenelitian'])->name('datapenelitian');
+Route::get('/lampiran-datapenunjang', [App\Http\Controllers\LampiranController::class,'datapenunjang'])->name('datapenunjang');
+Route::get('/lampiran-datapendidikan', [App\Http\Controllers\LampiranController::class,'datapendidikan'])->name('lampirandatapendidikan');
+Route::get('/lampiran-datapm', [App\Http\Controllers\LampiranController::class,'datapm'])->name('datapm');
+

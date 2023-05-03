@@ -6,14 +6,11 @@
 <br>
 
 <div class="row">
-
   <div class="col-md">
     <div class="jumbotron d-flex" > 
       <div class="">
           <h3>Hi,{{ Auth::user()->name }}</h3>
           <p style="">Kelola Data Kamu Disini</p>
-          <p>{{ $kum->jabatanSekarang->jabatan}}</p>
-          <p>{{ $kum->jabatanDituju->jabatan}}</p>
       </div>
       <div class="ms-auto" style="background-image: url('{{ asset('aset_web/p1.png') }}')">
       </div>
@@ -24,6 +21,7 @@
   @php  
   $kum1 = $kum->jabatanSekarang->angkaKreditKumulatif;
   $kum2 = $kum->jabatanDituju->angkaKreditKumulatif;
+
   $jabatandituju = $kum->jabatanDituju->jabatan;
   $operasikum = intval($kum2) - intval($kum1);
   if($jabatandituju == 'Asisten Ahli 100' ){
@@ -87,6 +85,71 @@
   $persentasepm = (intval($sumpelaksanaanpm) / intval($angkakreditpelaksanaanPengabdianMasyarakatmax) * 100 ) ;
   $persentasedp = (intval($sumdp) / intval($angkakreditpenunjangmax) * 100 ) ;
 
+  //pendidikan//
+
+  if($jabatandituju == 'Asisten Ahli 100' ){
+    if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+    $poin = 0;
+    }else{
+    $poin = 100;
+    }
+  }elseif ($jabatandituju == 'Asisten Ahli 150') {
+    if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+    $poin = 0;
+    }else{
+    $poin = 100;
+    }
+  }elseif ($jabatandituju == 'Lektor 200') {
+    if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+    $poin = 0;
+    }else{
+    $poin = 100;
+    }
+  }elseif ($jabatandituju == 'Lektor 300') {
+    if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+    $poin = 0;
+    }else{
+    $poin = 100;
+    }
+
+  }elseif ($jabatandituju == 'Lektor Kepala 400') {
+    if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+    $poin = 0;
+    }else{
+    $poin = 100;
+    }
+
+  }elseif ($jabatandituju == 'Lektor Kepala 550') {
+    if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+    $poin = 0;
+    }else{
+    $poin = 100;
+    }
+    
+  }elseif ($jabatandituju == 'Lektor Kepala 700') {
+    if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+    $poin = 0;
+    }else{
+    $poin = 100;
+    }
+  }elseif ($jabatandituju == 'Professor 850') {
+    if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 200){
+    $poin = 0;
+    }else{
+    $poin = 100;
+    }
+  }elseif ($jabatandituju == 'Professor 1050') {
+    if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 200){
+    $poin = 0;
+    }else{
+    $poin = 100;
+    }
+  }else{
+  }
+
+
+
+
 @endphp
 
 
@@ -97,10 +160,10 @@
       </div>
       <div class="card-body">
           <h4 class="small font-weight-bold">Pendidikan<span
-                  class="float-right">20%</span></h4>
+                  class="float-right">{{ $poin }}%</span></h4>
           <div class="progress mb-4">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 12%"
-                  aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $poin }}%"
+                  aria-valuenow="{{ $poin }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <h4 class="small font-weight-bold">Pelaksanaan Pendidikan<span
                   class="float-right">{{ $persentasepelaksanaanpendidikan }}%</span></h4>
@@ -446,14 +509,10 @@
                       var cvolumeDosen = document.getElementById("volume_dosen").value ;
                       var csks = document.getElementById("sks").value ;
                       var ckelasxvdosen = document.getElementById("kelasxvdosen").value ;
-          
-                      
                       var hasil1 = parseFloat(ckelas)*parseFloat(cvolumeDosen);
-          
                       if(!isNaN(hasil1)){
                           document.getElementById("kelasxvdosen").value = parseFloat(hasil1);
                       }
-          
                       var hasil2 = parseFloat(ckelasxvdosen) / parseFloat(csks);
                       if(!isNaN(hasil2)){
                           document.getElementById("jumlah_angka_kredit").value = parseFloat(hasil2);
