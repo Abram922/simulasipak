@@ -24,103 +24,68 @@
   @php  
   $kum1 = $kum->jabatanSekarang->angkaKreditKumulatif;
   $kum2 = $kum->jabatanDituju->angkaKreditKumulatif;
-
   $jabatandituju = $kum->jabatanDituju->jabatan;
-
-  echo "ini kum1 $kum1"; // 400
-  echo " ini kum2 $kum2"; // 200
-  
   $operasikum = intval($kum2) - intval($kum1);
-
-  echo "<br>";
-  echo "hasil $operasikum"; // 200
-
   if($jabatandituju == 'Asisten Ahli 100' ){
     $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
     $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-    echo $angkakreditpenunjangmax;
+
   }elseif ($jabatandituju == 'Asisten Ahli 150') {
     $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
     $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-    echo $angkakreditpenunjangmax;
+
   }elseif ($jabatandituju == 'Lektor 200') {
     $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
     $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-    echo $angkakreditpenunjangmax;
+
   }elseif ($jabatandituju == 'Lektor 300') {
     $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
     $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-    echo $angkakreditpenunjangmax;
+
   }elseif ($jabatandituju == 'Lektor Kepala 400') {
     $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
     $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-    echo $angkakreditpenunjangmax;
+
   }elseif ($jabatandituju == 'Lektor Kepala 550') {
     $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
     $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-    echo $angkakreditpenunjangmax;
+    
   }elseif ($jabatandituju == 'Lektor Kepala 700') {
     $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
     $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPendidikannmax;
     echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-    echo $angkakreditpenunjangmax;
   }elseif ($jabatandituju == 'Professor 850') {
     $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
     $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-    echo $angkakreditpenunjangmax;
   }elseif ($jabatandituju == 'Professor 1050') {
     $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
     $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
     $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPendidikannmax;
-    echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-    echo $angkakreditpenunjangmax;
   }else{
     echo "NaN";
   }
-  
-  
+
+  $persentasepelaksanaanpendidikan = (intval($sumpelaksanaanpendidikan) / intval($angkakreditpelaksanaanPendidikannmax) * 100 ) ;
+  $persentasepelaksanaanpenelitian = (intval($sumpelaksanaanpenelitian) / intval($angkakreditpelaksanaanPenelitianmax) * 100 ) ;
+  $persentasepm = (intval($sumpelaksanaanpm) / intval($angkakreditpelaksanaanPengabdianMasyarakatmax) * 100 ) ;
+  $persentasedp = (intval($sumdp) / intval($angkakreditpenunjangmax) * 100 ) ;
 
 @endphp
 
@@ -138,28 +103,28 @@
                   aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <h4 class="small font-weight-bold">Pelaksanaan Pendidikan<span
-                  class="float-right">40%</span></h4>
+                  class="float-right">{{ $persentasepelaksanaanpendidikan }}%</span></h4>
           <div class="progress mb-4">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $persentasepelaksanaanpendidikan }}%"
+                  aria-valuenow="{{ $persentasepelaksanaanpendidikan }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <h4 class="small font-weight-bold">Pelaksanaan Penelitian<span
-                  class="float-right">60%</span></h4>
+                  class="float-right">{{ $persentasepelaksanaanpenelitian }}%</span></h4>
           <div class="progress mb-4">
-              <div class="progress-bar" role="progressbar" style="width: 60%"
-                  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar" role="progressbar" style="width: {{ $persentasepelaksanaanpenelitian }}%"
+                  aria-valuenow="{{ $persentasepelaksanaanpenelitian }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <h4 class="small font-weight-bold">Pengabdian Kepada Masyarakat<span
-                  class="float-right">80%</span></h4>
+                  class="float-right">{{ $persentasepm }}%</span></h4>
           <div class="progress mb-4">
-              <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                  aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-info" role="progressbar" style="width: {{ $persentasepm }}%"
+                  aria-valuenow="{{ $persentasepm }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <h4 class="small font-weight-bold">Dokumen Penunjang<span
-                  class="float-right"></span></h4>
+                  class="float-right">{{ $persentasedp }}</span></h4>
           <div class="progress">
-              <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasedp }}%"
+                  aria-valuenow="{{ $persentasedp }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
       </div>
   </div>
