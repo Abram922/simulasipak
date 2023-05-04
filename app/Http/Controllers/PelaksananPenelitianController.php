@@ -63,13 +63,7 @@ class PelaksananPenelitianController extends Controller
         $pelaksanan_penelitian->tanggal = $input['tanggal'];
         $pelaksanan_penelitian->save();
 
-        dd($pelaksanan_penelitian);
-
-
-
-        // pelaksanan_penelitian::create($input);
-
-        // return redirect()->back()->with('message', 'Data berhasil disimpan');
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
     
 
@@ -93,23 +87,66 @@ class PelaksananPenelitianController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        $input = $request->validate([
-            'akreditasi_id'=> 'required|max:255',
-            'jenispenulis_id'=> 'required|max:255',
-            'judul'=> 'required|max:255',
-            'jurnal'=> 'required|max:255',
-            'link'=> 'required|max:255',
-            'jumlah_penulis'=> '',
-            'angkakredit'=> 'required|max:255',
-            'tanggal'=> 'required|max:255',
-        ]);   
+    {       
 
-        $pelaksanan_penelitian = pelaksanan_penelitian::findOrFail($id);
+    $input = $request->validate([
+        'akreditasi_id'=> 'required|max:255',
+        'jenispenulis_id'=> 'required|max:255',
+        'judul'=> 'required|max:255',
+        'jurnal'=> 'required|max:255',
+        'link'=> 'required|max:255',
+        'jumlah_penulis'=> '',
+        'angkakredit'=> 'required|max:255',
+        'tanggal'=> 'required|max:255',
+    ]);
+    $jenispenulis = $input['jenispenulis_id'];
+    $angka_kredit = $input['angkakredit'];
+    $jumlah_penulis = $input['jumlah_penulis'];
 
-        $pelaksanan_penelitian->update($input);
+    if($jenispenulis == 4 || $jenispenulis == 5 ){
+        $hasil = $angka_kredit / $jumlah_penulis;
+    }else{
+        $hasil = $angka_kredit;
+    };
 
-        return redirect()->back()->with('message', 'Data berhasil disimpan');
+    $pelaksanan_penelitian = pelaksanan_penelitian::findOrFail($id);
+    $pelaksanan_penelitian->akreditasi_id = $input['akreditasi_id'];
+    $pelaksanan_penelitian->jenispenulis_id = $input['jenispenulis_id'];
+    $pelaksanan_penelitian->judul = $input['judul'];
+    $pelaksanan_penelitian->jurnal = $input['jurnal'];
+    $pelaksanan_penelitian->link = $input['link'];
+    $pelaksanan_penelitian->jumlah_penulis = $input['jumlah_penulis'];
+    $pelaksanan_penelitian->angkakredit = $hasil;
+    $pelaksanan_penelitian->tanggal = $input['tanggal'];
+
+
+
+
+
+    dd($pelaksanan_penelitian);
+
+    // $pelaksanan_penelitian->save();
+
+    // return redirect()->back()->with('message', 'Data berhasil disimpan');
+
+
+ 
+        // $input = $request->validate([
+        //     'akreditasi_id'=> 'required|max:255',
+        //     'jenispenulis_id'=> 'required|max:255',
+        //     'judul'=> 'required|max:255',
+        //     'jurnal'=> 'required|max:255',
+        //     'link'=> 'required|max:255',
+        //     'jumlah_penulis'=> '',
+        //     'angkakredit'=> 'required|max:255',
+        //     'tanggal'=> 'required|max:255',
+        // ]);   
+
+        // $pelaksanan_penelitian = pelaksanan_penelitian::findOrFail($id);
+
+        // $pelaksanan_penelitian->update($input);
+
+
     }
 
     /**

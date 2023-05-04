@@ -732,7 +732,6 @@
                     </div>
                 </div>
         
-        
                 <div class="form-group row ">
                   <div class="col-md m-3">
                     <label for="akreditasi">Akreditasi Karya Ilmiah</label>
@@ -751,26 +750,22 @@
                     <select class="form-control" id="jenispenulis_id" name="jenispenulis_id">
                         <option>Pilih  Jenis Penulis</option>
                         @foreach ($jenispenulis as $p)
-                            <option  @if($p->id == 1 ) id="first-author" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
+                            <option  @if($p->penulis_khusus == 1 ) id="penulis_khusus" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
                         @endforeach
                     </select>
                   </div>
                 </div>
-        
-               
-        
         
                 <div class="form-group row">
                     <div class="col-md m-3">
                         <label for="jumlah_penulis">Jumlah Penulis</label>
                         <input readonly type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
                     </div>
-        
-                    <div class="col-md m-3">
-                        <label for="kum">Jumlah KUM</label>
-                        <input readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
-                    </div>
                 </div> 
+
+                <div class="col-md m-3">
+                  <input hidden readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
+                </div>
         
                 <div class="form-group row">
                     <div class="col-md m-3">
@@ -787,112 +782,14 @@
                 <div>
                   <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
                 </div>
-        
-
-
-        
-                <p id="y"></p>
-                <p id="z"></p>
 
                 <div class="col-md m-3 text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
-                <script>
-                  // Fungsi untuk mengambil nilai dari elemen HTML yang diperlukan
-                  function getValues() {
-                    var selectElem = document.getElementById('akreditasi_id');
-                    var selectElem2 = document.getElementById('jenispenulis_id');
-                    var jumlahpenulis = document.getElementById('jumlahpenulis_id');
-                
-                    return {
-                      selectElem: selectElem,
-                      selectElem2: selectElem2,
-                      jumlahpenulis: jumlahpenulis,
-                    };
-                  }
-                
-                  // Fungsi untuk menghitung nilai hasil1
-                  function calculate() {
-                    var values = getValues();
-                    var dataKum = values.selectElem.options[values.selectElem.selectedIndex].getAttribute('data-kum-akreditasi');
-                    var datapersen = values.selectElem2.options[values.selectElem2.selectedIndex].getAttribute('data-percentage');
-                    var hasil1 = parseFloat(dataKum) * (parseFloat(datapersen) / 100);
-                
-                    document.getElementById("angkakredit").value = hasil1;
-                  }
-                
-                  // Tambahkan event listener pada setiap elemen HTML yang dibutuhkan
-                  getValues().selectElem.addEventListener('change', calculate);
-                  getValues().selectElem2.addEventListener('change', calculate);
-                
-                </script>
 
 
 
-        
-                <script>
-                    var selectElem = document.getElementById('akreditasi_id');
-                    var selectElem2 = document.getElementById('jenispenulis_id');
-                    var jumlahpenulis = document.getElementById('jenispenulis_id');
-                
-                    selectElem.addEventListener('change', function() {
-                        var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-akreditasi');
-                        console.log(dataKum);
-                
-                    selectElem2.addEventListener('change', function() {
-                        var datapersen = this.options[this.selectedIndex].getAttribute('data-percentage');
-                        console.log(datapersen);
-                        
-                
-                    var hasil1 = parseFloat(dataKum) * (parseFloat(datapersen) / 100);
-                    console.log(hasil1);
-                
-                    document.getElementById("angkakredit").value = hasil1;
-                    });
-                    });
-                </script>
-
-                <script>
-                    var selectElem = document.getElementById('penulis');
-                    selectElem.addEventListener('change', function() {
-                    var dataKum = this.options[this.selectedIndex].getAttribute('data-percentage');
-                    document.getElementById('xz').value = dataKum;
-                    });
-                </script>
-                <script>
-                    jumlahPenulis.onkeyup = function(){
-                        sum();
-                    }
-        
-                    function sum(){
-                        var dataKum = document.getElementById('jumlah_penulis').value;
-                        var datapersen = document.getElementById('jumlah_penulis').value;
-                        var x = document.getElementById('jumlah_penulis').value;
-        
-                        console.log(dataKum);
-                        console.log(datapersen);
-                        console.log(x);
-        
-                        
-        
-                        if(x != null){
-                            var hasil1 = parseFloat(dataKum) * parseFloat(datapersen)
-                            var hasil2 = parseFloat(hasil1) / parseFloat(x)
-                            if(!isNaN(hasil2)){
-                                document.getElementById("angkakredit").value = parseFloat(hasil2);
-                            }
-                        } 
-                        else(x == null){
-                            var hasil3 = (parseFloat(dataKum) * (parseFloat(datapersen) / 100));
-        
-                            if(!isNaN(hasil3)){
-                                document.getElementById("angkakredit").value = parseFloat(hasil3);
-                            }
-                            
-                        } 
-                    }
-                </script>
             </form>
 
             <div class="col-lg-10" style="margin-top: 30px">          
@@ -925,195 +822,73 @@
                                           <form method="POST" action="{{route('pelaksanaanpenelitian.update', $pn->id)}}" enctype="multipart/form-data" >
                                                   @csrf
                                                   @method('PUT')
-                                          
-                                                  <div class="form-group row">
-                                                      <div class="col-md m-3">
-                                                          <label for="judul">Judul</label>
-                                                          <input type="text" class="form-control" id="judul" name="judul">
-                                                      </div>
-                                                  </div>
-                                          
-                                                  <div class="form-group row">
-                                                      <div class="col-md m-3">
-                                                          <label for="jurnal">Jurnal</label>
-                                                          <input type="text" class="form-control" id="jurnal" name="jurnal">
-                                                      </div>
-                                                  </div>
-                                          
-                                          
-                                                  <div class="form-group row ">
-                                                    <div class="col-md m-3">
-                                                      <label for="akreditasi">Akreditasi Karya Ilmiah</label>
-                                                      <select class="form-control" id="akreditasi_id" name="akreditasi_id">
-                                                          <option>Pilih Akreditasi</option>
-                                                          @foreach ($akreditasi as $p)
-                                                              <option class="" value="{{$p->id}}" data-kum-akreditasi ="{{$p->nilai}}" title="{{$p->akreditasi}}">{{Str::limit($p->akreditasi,100)}}</option>
-                                                          @endforeach
-                                                      </select>
-                                                    </div>
-                                                  </div>
-                                          
                                                   <div class="form-group row">
                                                     <div class="col-md m-3">
-                                                      <label for="penulis">Jenis Penulis</label>
-                                                      <select class="form-control" id="jenispenulis_id" name="jenispenulis_id">
-                                                          <option>Pilih  Jenis Penulis</option>
-                                                          @foreach ($jenispenulis as $p)
-                                                              <option  @if($p->penulis_khusus == true ) id="penulis_khusus" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
-                                                          @endforeach
-                                                      </select>
+                                                        <label for="judul">Judul</label>
+                                                        <input type="text" class="form-control" id="judul" name="judul">
                                                     </div>
+                                                </div>
+                                        
+                                                <div class="form-group row">
+                                                    <div class="col-md m-3">
+                                                        <label for="jurnal">Jurnal</label>
+                                                        <input type="text" class="form-control" id="jurnal" name="jurnal">
+                                                    </div>
+                                                </div>
+                                        
+                                                <div class="form-group row ">
+                                                  <div class="col-md m-3">
+                                                    <label for="akreditasi">Akreditasi Karya Ilmiah</label>
+                                                    <select class="form-control" id="akreditasi_id" name="akreditasi_id">
+                                                        <option>Pilih Akreditasi</option>
+                                                        @foreach ($akreditasi as $p)
+                                                            <option class="" value="{{$p->id}}" data-kum-akreditasi ="{{$p->nilai}}" title="{{$p->akreditasi}}">{{Str::limit($p->akreditasi,100)}}</option>
+                                                        @endforeach
+                                                    </select>
                                                   </div>
-                                                  <div class="form-group row">
-                                                      <div class="col-md m-3">
-                                                          <label for="jumlah_penulis">Jumlah Penulis</label>
-                                                          <input type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
-                                                      </div>
-                                          
-                                                      <div class="col-md m-3">
-                                                          <label for="kum">Jumlah KUM</label>
-                                                          <input readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
-                                                      </div>
-                                                  </div> 
-                                          
-                                                  <div class="form-group row">
-                                                      <div class="col-md m-3">
-                                                          <label for="tanggal">Tanggal Terbit</label>
-                                                          <input type="date" class="form-control" id="tanggal" name="tanggal">
-                                                      </div>
-                                          
-                                                      <div class="col-md m-3">
-                                                          <label for="link">Link</label>
-                                                          <input type="text" class="form-control" id="link" name="link">
-                                                      </div>
+                                                </div>
+                                        
+                                                <div class="form-group row">
+                                                  <div class="col-md m-3">
+                                                    <label for="penulis">Jenis Penulis</label>
+                                                    <select class="form-control" id="jenispenulis_id" name="jenispenulis_id">
+                                                        <option>Pilih  Jenis Penulis</option>
+                                                        @foreach ($jenispenulis as $p)
+                                                            <option  @if($p->penulis_khusus == 1 ) id="penulis_khusus" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
+                                                        @endforeach
+                                                    </select>
                                                   </div>
-                                  
-                                          
-                                  
-                                  
-                                          
-                                                  <p id="y"></p>
-                                                  <p id="z"></p>
-
+                                                </div>
+                                        
+                                                <div class="form-group row">
+                                                    <div class="col-md m-3">
+                                                        <label for="jumlah_penulis">Jumlah Penulis</label>
+                                                        <input readonly type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
+                                                    </div>
+                                                </div> 
+                                
+                                                <div class="col-md m-3">
+                                                  <input hidden readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
+                                                </div>
+                                        
+                                                <div class="form-group row">
+                                                    <div class="col-md m-3">
+                                                        <label for="tanggal">Tanggal Terbit</label>
+                                                        <input type="date" class="form-control" id="tanggal" name="tanggal">
+                                                    </div>
+                                        
+                                                    <div class="col-md m-3">
+                                                        <label for="link">Link</label>
+                                                        <input type="text" class="form-control" id="link" name="link">
+                                                    </div>
+                                                </div>
+                                
+                                
+                       
+                                
                                                   
-                                  
-                                                  <script>
-                                                    var jenispenulis = document.getElementById('jenispenulis_id');
-                                                    var x = document.getElementById('jumlah_penulis');
-                                                    jenispenulis.onchange = function(){
-                                                        var options = jenispenulis.options[jenispenulis.selectedIndex];
-                                                        if(options.id == 'penulis_khusus'){
-                                                          x.setAttribute('readonly','');
-                                                          x.value = '';
-                                                        }else{
-                                                            x.removeAttribute('readonly');                        
-                                                            x.value = '';
-                                                        }
-                                                    }        
-                                                </script>
-
-                                                <script>
-                                                  // Fungsi untuk mengambil nilai dari elemen HTML yang diperlukan
-                                                  function getValues() {
-                                                    var selectElem = document.getElementById('akreditasi_id');
-                                                    var selectElem2 = document.getElementById('jenispenulis_id');   
-
-                                                    return {
-                                                      selectElem: selectElem,
-                                                      selectElem2: selectElem2,
-                                                    };
-                                                  }
-
-                                                  // Fungsi untuk menghitung nilai hasil1
-                                                  function calculate() {
-                                                    var values = getValues();
-                                                    var dataKum = values.selectElem.options[values.selectElem.selectedIndex].getAttribute('data-kum-akreditasi');
-                                                    var datapersen = values.selectElem2.options[values.selectElem2.selectedIndex].getAttribute('data-percentage');
-                                                    const inputElem = document.getElementById('input_id');
-
-                                                    inputElem.addEventListener('input', function() {
-                                                      const inputValue = inputElem.value;
-                                                      console.log("olae"+inputValue);
-                                                    });
-
-                                                    var hasil1 = parseFloat(dataKum) * (parseFloat(datapersen) / 100);
-
-
-                                                    if (values.selectElem2.value == 1) {
-                                                      document.getElementById("angkakredit").value = hasil2.toFixed(2);
-                                                    } else {
-                                                      var hasil2 = hasil1 / parseFloat(values.jumlahpenulis.value);
-                                                      document.getElementById("angkakredit").value = hasil1.toFixed(2);
-                                                    }
-                                                    }
-
-                                                    // Tambahkan event listener pada setiap elemen HTML yang dibutuhkan
-                                                    getValues().selectElem.addEventListener('change', calculate);
-                                                    getValues().selectElem2.addEventListener('change', calculate);
-                                                    getValues().jumlahpenulis.addEventListener('keyup', calculate);
-                                                </script>
-
-                                                  {{-- <script>
-                                                      var selectElem = document.getElementById('akreditasi_id');
-                                                      var selectElem2 = document.getElementById('jenispenulis_id');
-                                                      var jumlahpenulis = document.getElementById('jenispenulis_id');
-                                                  
-                                                      selectElem.addEventListener('change', function() {
-                                                          var dataKum = this.options[this.selectedIndex].getAttribute('data-kum-akreditasi');
-                                                          console.log(dataKum);
-                                                  
-                                                      selectElem2.addEventListener('change', function() {
-                                                          var datapersen = this.options[this.selectedIndex].getAttribute('data-percentage');
-                                                          console.log(datapersen);
-                                                          
-                                                  
-                                                      var hasil1 = parseFloat(dataKum) * (parseFloat(datapersen) / 100);
-                                                      console.log(hasil1);
-                                                  
-                                                      document.getElementById("angkakredit").value = hasil1;
-                                                      });
-                                                      });
-                                                  </script>                                 
-                                                  <script>
-                                                      var selectElem = document.getElementById('penulis');
-                                                      selectElem.addEventListener('change', function() {
-                                                      var dataKum = this.options[this.selectedIndex].getAttribute('data-percentage');
-                                                      document.getElementById('xz').value = dataKum;
-                                                      });
-                                                  </script>
-                                                  <script>
-                                                      jumlahPenulis.onkeyup = function(){
-                                                          sum();
-                                                      }
                                           
-                                                      function sum(){
-                                                          var dataKum = document.getElementById('jumlah_penulis').value;
-                                                          var datapersen = document.getElementById('jumlah_penulis').value;
-                                                          var x = document.getElementById('jumlah_penulis').value;
-                                          
-                                                          console.log(dataKum);
-                                                          console.log(datapersen);
-                                                          console.log(x);
-                                          
-                                                          
-                                          
-                                                          if(x != null){
-                                                              var hasil1 = parseFloat(dataKum) * parseFloat(datapersen)
-                                                              var hasil2 = parseFloat(hasil1) / parseFloat(x)
-                                                              if(!isNaN(hasil2)){
-                                                                  document.getElementById("angkakredit").value = parseFloat(hasil2);
-                                                              }
-                                                          } 
-                                                          else(x == null){
-                                                              var hasil3 = (parseFloat(dataKum) * (parseFloat(datapersen) / 100));
-                                          
-                                                              if(!isNaN(hasil3)){
-                                                                  document.getElementById("angkakredit").value = parseFloat(hasil3);
-                                                              }
-                                                              
-                                                          } 
-                                                      }
-                                                  </script> --}}
+              
                                         </div>
 
                                         <div class="modal-footer">
@@ -1557,6 +1332,53 @@
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+      {{-- js for Penelitian --}}
+               
+      <script>
+        var jenispenulis = document.getElementById('jenispenulis_id');
+        var x = document.getElementById('jumlah_penulis');
+      
+        jenispenulis.addEventListener('change', function() {
+          var options = jenispenulis.options[jenispenulis.selectedIndex];
+          if (options.id == 'penulis_khusus') {
+            x.setAttribute('readonly', '');
+          } else {
+            x.removeAttribute('readonly');
+          }
+        });
+      </script>
+      
+
+      <script>
+        // Fungsi untuk mengambil nilai dari elemen HTML yang diperlukan
+        function getValues() {
+          var selectElem = document.getElementById('akreditasi_id');
+          var selectElem2 = document.getElementById('jenispenulis_id');
+          var jumlahpenulis = document.getElementById('jumlahpenulis_id');
+      
+          return {
+            selectElem: selectElem,
+            selectElem2: selectElem2,
+            jumlahpenulis: jumlahpenulis,
+          };
+        }
+      
+        // Fungsi untuk menghitung nilai hasil1
+        function calculate() {
+          var values = getValues();
+          var dataKum = values.selectElem.options[values.selectElem.selectedIndex].getAttribute('data-kum-akreditasi');
+          var datapersen = values.selectElem2.options[values.selectElem2.selectedIndex].getAttribute('data-percentage');
+          var hasil1 = parseFloat(dataKum) * (parseFloat(datapersen) / 100);
+      
+          document.getElementById("angkakredit").value = hasil1;
+        }
+      
+        // Tambahkan event listener pada setiap elemen HTML yang dibutuhkan
+        getValues().selectElem.addEventListener('change', calculate);
+        getValues().selectElem2.addEventListener('change', calculate);
+      
+      </script>
 
 @endsection
 
