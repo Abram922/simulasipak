@@ -798,23 +798,38 @@
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
-
                 <script>
+                  // Fungsi untuk mengambil nilai dari elemen HTML yang diperlukan
+                  function getValues() {
+                    var selectElem = document.getElementById('akreditasi_id');
+                    var selectElem2 = document.getElementById('jenispenulis_id');
+                    var jumlahpenulis = document.getElementById('jumlahpenulis_id');
+                
+                    return {
+                      selectElem: selectElem,
+                      selectElem2: selectElem2,
+                      jumlahpenulis: jumlahpenulis,
+                    };
+                  }
+                
+                  // Fungsi untuk menghitung nilai hasil1
+                  function calculate() {
+                    var values = getValues();
+                    var dataKum = values.selectElem.options[values.selectElem.selectedIndex].getAttribute('data-kum-akreditasi');
+                    var datapersen = values.selectElem2.options[values.selectElem2.selectedIndex].getAttribute('data-percentage');
+                    var hasil1 = parseFloat(dataKum) * (parseFloat(datapersen) / 100);
+                
+                    document.getElementById("angkakredit").value = hasil1;
+                  }
+                
+                  // Tambahkan event listener pada setiap elemen HTML yang dibutuhkan
+                  getValues().selectElem.addEventListener('change', calculate);
+                  getValues().selectElem2.addEventListener('change', calculate);
+                
+                </script>
 
-                  const jenispenulis = document.getElementById('jenispenulis_id')
-                  const x = document.getElementById('jumlah_penulis')
-      
-                  jenispenulis.onchange = function(){
-                      var options = jenispenulis.options[jenispenulis.selectedIndex];
-                      if(options.id == 'first-author'){
-                        x.setAttribute('readonly','');
-                        x.value = '';
-                      }else{
-                          x.removeAttribute('readonly');                        
-                          x.value = '';
-                      }
-                  }        
-              </script>
+
+
         
                 <script>
                     var selectElem = document.getElementById('akreditasi_id');
@@ -944,19 +959,15 @@
                                                       <select class="form-control" id="jenispenulis_id" name="jenispenulis_id">
                                                           <option>Pilih  Jenis Penulis</option>
                                                           @foreach ($jenispenulis as $p)
-                                                              <option  @if($p->id == 1 ) id="first-author" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
+                                                              <option  @if($p->penulis_khusus == true ) id="penulis_khusus" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
                                                           @endforeach
                                                       </select>
                                                     </div>
                                                   </div>
-                                          
-                                                
-                                          
-                                          
                                                   <div class="form-group row">
                                                       <div class="col-md m-3">
                                                           <label for="jumlah_penulis">Jumlah Penulis</label>
-                                                          <input readonly type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
+                                                          <input type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
                                                       </div>
                                           
                                                       <div class="col-md m-3">
@@ -983,15 +994,15 @@
                                           
                                                   <p id="y"></p>
                                                   <p id="z"></p>
+
+                                                  
                                   
                                                   <script>
-                                  
-                                                    const jenispenulis = document.getElementById('jenispenulis_id')
-                                                    const x = document.getElementById('jumlah_penulis')
-                                        
+                                                    var jenispenulis = document.getElementById('jenispenulis_id');
+                                                    var x = document.getElementById('jumlah_penulis');
                                                     jenispenulis.onchange = function(){
                                                         var options = jenispenulis.options[jenispenulis.selectedIndex];
-                                                        if(options.id == 'first-author'){
+                                                        if(options.id == 'penulis_khusus'){
                                                           x.setAttribute('readonly','');
                                                           x.value = '';
                                                         }else{
@@ -1000,7 +1011,49 @@
                                                         }
                                                     }        
                                                 </script>
-                                                  <script>
+
+                                                <script>
+                                                  // Fungsi untuk mengambil nilai dari elemen HTML yang diperlukan
+                                                  function getValues() {
+                                                    var selectElem = document.getElementById('akreditasi_id');
+                                                    var selectElem2 = document.getElementById('jenispenulis_id');   
+
+                                                    return {
+                                                      selectElem: selectElem,
+                                                      selectElem2: selectElem2,
+                                                    };
+                                                  }
+
+                                                  // Fungsi untuk menghitung nilai hasil1
+                                                  function calculate() {
+                                                    var values = getValues();
+                                                    var dataKum = values.selectElem.options[values.selectElem.selectedIndex].getAttribute('data-kum-akreditasi');
+                                                    var datapersen = values.selectElem2.options[values.selectElem2.selectedIndex].getAttribute('data-percentage');
+                                                    const inputElem = document.getElementById('input_id');
+
+                                                    inputElem.addEventListener('input', function() {
+                                                      const inputValue = inputElem.value;
+                                                      console.log("olae"+inputValue);
+                                                    });
+
+                                                    var hasil1 = parseFloat(dataKum) * (parseFloat(datapersen) / 100);
+
+
+                                                    if (values.selectElem2.value == 1) {
+                                                      document.getElementById("angkakredit").value = hasil2.toFixed(2);
+                                                    } else {
+                                                      var hasil2 = hasil1 / parseFloat(values.jumlahpenulis.value);
+                                                      document.getElementById("angkakredit").value = hasil1.toFixed(2);
+                                                    }
+                                                    }
+
+                                                    // Tambahkan event listener pada setiap elemen HTML yang dibutuhkan
+                                                    getValues().selectElem.addEventListener('change', calculate);
+                                                    getValues().selectElem2.addEventListener('change', calculate);
+                                                    getValues().jumlahpenulis.addEventListener('keyup', calculate);
+                                                </script>
+
+                                                  {{-- <script>
                                                       var selectElem = document.getElementById('akreditasi_id');
                                                       var selectElem2 = document.getElementById('jenispenulis_id');
                                                       var jumlahpenulis = document.getElementById('jenispenulis_id');
@@ -1060,7 +1113,7 @@
                                                               
                                                           } 
                                                       }
-                                                  </script>
+                                                  </script> --}}
                                         </div>
 
                                         <div class="modal-footer">

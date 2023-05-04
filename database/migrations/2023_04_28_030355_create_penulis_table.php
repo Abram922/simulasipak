@@ -15,6 +15,8 @@ return new class extends Migration
             $table->increments('id');
             $table->string('jenispenulis');
             $table->integer('persentase_skor');
+            $table->boolean('penulis_khusus');
+            $table->string('note');
             $table->timestamps();
         });
     }

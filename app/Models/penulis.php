@@ -10,9 +10,9 @@ class penulis extends Model
     use HasFactory;
 
     protected $fillable=[
-        'id',
         'jenispenulis',
-        'persentase_skor'
+        'persentase_skor',
+        'note'
 
     ];
 

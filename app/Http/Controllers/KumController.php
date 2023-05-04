@@ -70,8 +70,6 @@ class KumController extends Controller
         $komponenpm = komponenpm::all();
         $komponendokumenpenunjang = komponendokumenpenunjang::all();
 
-
-
         //menampilkan data berdasarkan kum_id
         $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
         $pelaksanaan_pendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->get();

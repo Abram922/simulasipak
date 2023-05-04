@@ -15,12 +15,33 @@ class penulis extends Seeder
     {
         DB::table('penulis')->insert([
             [
-                'jenispenulis' => 'First Author',
-                'persentase_skor' => 60
+                'jenispenulis' => 'First Author dan Corresponding Author',
+                'persentase_skor' => 60,
+                'note' => '',
+                'penulis_khusus' => true
             ],
             [
-                'jenispenulis' => 'Author',
-                'persentase_skor' => 40
+                'jenispenulis' => 'First Author',
+                'persentase_skor' => 40,
+                'note' => '',
+                'penulis_khusus' => true
+            ],
+            [
+                'jenispenulis' => 'Corresponding Author',
+                'persentase_skor' => 40,
+                'note' => '',
+                'penulis_khusus' => true
+            ],
+            [
+                'jenispenulis' => 'Author A',
+                'persentase_skor' => 40,
+                'note' => '',
+                'penulis_khusus' => false
+            ],            [
+                'jenispenulis' => 'Author B',
+                'persentase_skor' => 20,
+                'note' => '',
+                'penulis_khusus' => false
             ],
         ]);
     }
