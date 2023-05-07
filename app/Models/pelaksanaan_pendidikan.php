@@ -19,7 +19,8 @@ class pelaksanaan_pendidikan extends Model
         'bukti',
         'jumlah_kelas',
         'jumlah_angka_kredit',
-        'volume_dosen'
+        'volume_dosen',
+        'kuota_kelas_dosen'
     ];
 
     public function semester(){

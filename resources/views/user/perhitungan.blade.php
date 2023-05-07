@@ -159,7 +159,7 @@
           <h6 class="m-0 font-weight-bold text-primary">Progres Pengerjaan KUM</h6>
       </div>
       <div class="card-body">
-          <h4 class="small font-weight-bold">Pendidikan<span
+          <h4 class="small font-weight-bold">Pendidikan   <span
                   class="float-right">{{ $poin }}%</span></h4>
           <div class="progress mb-4">
               <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $poin }}%"
@@ -171,21 +171,21 @@
               <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $persentasepelaksanaanpendidikan }}%"
                   aria-valuenow="{{ $persentasepelaksanaanpendidikan }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
-          <h4 class="small font-weight-bold">Pelaksanaan Penelitian<span
+          <h4 class="small font-weight-bold">Pelaksanaan Penelitian   <span
                   class="float-right">{{ $persentasepelaksanaanpenelitian }}%</span></h4>
           <div class="progress mb-4">
               <div class="progress-bar" role="progressbar" style="width: {{ $persentasepelaksanaanpenelitian }}%"
                   aria-valuenow="{{ $persentasepelaksanaanpenelitian }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
-          <h4 class="small font-weight-bold">Pengabdian Kepada Masyarakat<span
+          <h4 class="small font-weight-bold">Pengabdian Kepada Masyarakat   <span
                   class="float-right">{{ $persentasepm }}%</span></h4>
           <div class="progress mb-4">
               <div class="progress-bar bg-info" role="progressbar" style="width: {{ $persentasepm }}%"
                   aria-valuenow="{{ $persentasepm }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
-          <h4 class="small font-weight-bold">Dokumen Penunjang<span
+          <h4 class="small font-weight-bold">Dokumen Penunjang   <span
                   class="float-right">{{ $persentasedp }}</span></h4>
-          <div class="progress">
+          <div class="progress">  
               <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasedp }}%"
                   aria-valuenow="{{ $persentasedp }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
@@ -743,6 +743,31 @@
                     </select>
                   </div>
                 </div>
+
+                <div class="form-group row">
+                  <label for="jenis-penulis">Jenis Penulis:</label>
+                    @foreach ($jenispenulis as $p)
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="jenis_penulis" id="{{$p->id}}" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}">
+                      <label class="form-check-label" for="jenis-penulis-{{$p->id}}">{{ $p->jenispenulis }}</label>  
+                    </div>
+                    @endforeach
+                </div>
+
+<script>
+  const radioButtons = document.getElementsByName("jenis_penulis");
+  radioButtons.forEach(radio => {
+        radio.addEventListener('click', function() {
+            console.log(`ID yang dipilih: ${this.value}`);
+        });
+    });                  
+</script>
+                
+
+                
+                
+                
+
         
                 <div class="form-group row">
                   <div class="col-md m-3">
@@ -750,7 +775,7 @@
                     <select class="form-control" id="jenispenulis_id" name="jenispenulis_id">
                         <option>Pilih  Jenis Penulis</option>
                         @foreach ($jenispenulis as $p)
-                            <option  @if($p->penulis_khusus == 1 ) id="penulis_khusus" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
+                            <option  @if($p->penulis_khusus == 1 ) id="penulis_khusus" @endif class="" value="{{$p->id}}"  title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
                         @endforeach
                     </select>
                   </div>
@@ -764,7 +789,7 @@
                 </div> 
 
                 <div class="col-md m-3">
-                  <input hidden readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
+                  <input  readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
                 </div>
         
                 <div class="form-group row">
@@ -809,7 +834,6 @@
                           <td>{{ $pn->akreditasi_id }}</td>
                           <td>{{ $pn->angkakredit }}</td>              
                           <td>
-      
                             <div class="modal fade" id="pelaksanaan_penelitian_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
@@ -818,7 +842,6 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                         <div class="modal-body">
-
                                           <form method="POST" action="{{route('pelaksanaanpenelitian.update', $pn->id)}}" enctype="multipart/form-data" >
                                                   @csrf
                                                   @method('PUT')
@@ -868,7 +891,7 @@
                                                 </div> 
                                 
                                                 <div class="col-md m-3">
-                                                  <input hidden readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
+                                                  <input readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
                                                 </div>
                                         
                                                 <div class="form-group row">
@@ -882,23 +905,19 @@
                                                         <input type="text" class="form-control" id="link" name="link">
                                                     </div>
                                                 </div>
-                                
-                                
-                       
-                                
-                                                  
-                                          
-              
+
+                                                
                                         </div>
 
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                                          <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                        </div>
-                                    </form>                                  
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                                              <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                            </div>
+                                          </form>                                  
                       
                                 </div>
                               </div>
+                              
                             </div>
                               <a href="{{ route('pelaksanaanpenelitian.edit', $pn->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_penelitian_Modal">ubah</a>
                               <form action="{{ route('pelaksanaanpenelitian.destroy', $pn->id) }}" method="POST">
@@ -1379,6 +1398,30 @@
         getValues().selectElem2.addEventListener('change', calculate);
       
       </script>
+
+
+    <script>
+      $('#pelaksanaan_penelitian_Modal').on('shown.bs.modal', function () {
+        var jenispenulis = document.getElementById('jenispenulis_id');
+        var akreditasi = document.getElementById('akreditasi_id');
+        var jumlah_penulis = document.getElementById('jumlah_penulis');
+        var angkakredit = document.getElementById('angkakredit');
+      
+        jenispenulis.addEventListener('change', function() {
+          var options = jenispenulis.options[jenispenulis.selectedIndex];
+          if (options.id == 'penulis_khusus') {
+            jumlah_penulis.setAttribute('readonly', '');
+          } else {
+            jumlah_penulis.removeAttribute('readonly');
+          }
+        });
+        akreditasi.addEventListener('change', function() {
+          var options = akreditasi.options[akreditasi.selectedIndex];
+          var kum = options.getAttribute('data-kum-akreditasi');
+          angkakredit.value = kum;
+        });
+      })
+    </script>
 
 @endsection
 
