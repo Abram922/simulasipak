@@ -19,7 +19,13 @@ class user extends Seeder
                 'role' => 1,
                 'email' =>  'admin@gmail.com',
                 'password' => bcrypt('12345678')
-            ]
+            ],
+            [
+                'name' => 'Abram Wirayuda Pane',
+                'role' => 2,
+                'email' =>  'abram@gmail.com',
+                'password' => bcrypt('12345678')
+            ],
         ]);
     }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('jurnal');
             $table->string('link');
             $table->integer('jumlah_penulis')->nullable();
+            $table->integer('author_persentase')->nullable();
             $table->integer('angkakredit');
             $table->date('tanggal');
             $table->foreign('kum_id')->references('id')->on('kums')->onDelete('cascade');

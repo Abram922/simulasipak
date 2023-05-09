@@ -50,7 +50,6 @@ class PelaksananPenelitianController extends Controller
         }else{
             $hasil = $angka_kredit;
         };
-
         $pelaksanan_penelitian = new pelaksanan_penelitian;
         $pelaksanan_penelitian->kum_id = $input['kum_id'];
         $pelaksanan_penelitian->akreditasi_id = $input['akreditasi_id'];

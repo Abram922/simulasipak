@@ -438,19 +438,23 @@
                       <input readonly type="number" class="form-control x" id="jumlah_kelas" name="jumlah_kelas" onkeyup="sum()">
                   </div>
                   <div class="col-md m-3">
+                    <label for="kuota_kelas_dosen">Kuota Kelas Dosen</label>
+                    <input readonly type="number" class="form-control x" id="kuota_kelas_dosen" name="kuota_kelas_dosen" onkeyup="sum()" >
+                </div>                  
+                  <div class="col-md m-3">
                       <label for="volume_dosen">Volume Dosen</label>
                       <input readonly type="number" class="form-control x" id="volume_dosen" name="volume_dosen" onkeyup="sum()" >
                   </div>
+              </div>
+              <div class="form-group row">
                   <div class="col-md m-3">
                       <label for="sks">SKS</label>
                       <input readonly type="number" class="form-control x" id="sks" name="sks" onkeyup="sum()">
-                  </div>
-                  <input  hidden type="number" class="form-control" id="kelasxvdosen" name="kelasxvdosen">
+                  </div>                
                   <div class="col-md m-3">
                       <label for="jumlah_angka_kredit">Angka Kredit</label>
                       <input type="number" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit" onkeyup="sum()">
                   </div>
-                  <input  hidden type="number" class="form-control" id="hasil3" name="hasil3">
               </div>
 
               <div>
@@ -486,37 +490,31 @@
                   const volumeDosen = document.getElementById('volume_dosen');
                   const angkaKredit = document.getElementById('jumlah_angka_kredit');
                   const jumlahkelas = document.getElementById('jumlah_kelas');
+                  const kuota_kelas_dosen = document.getElementById('kuota_kelas_dosen');
                   selectElement.onchange = function() {
                      var options = selectElement.options[selectElement.selectedIndex];
-                     
                      if(options.id == 'is-sks'){
                           sks.removeAttribute('readonly');
                           jumlahkelas.removeAttribute('readonly');
                           volumeDosen.removeAttribute('readonly');
+                          kuota_kelas_dosen.removeAttribute('readonly');
                           angkaKredit.setAttribute('readonly','');
                      }else{
                           sks.setAttribute('readonly','');
                           jumlahkelas.setAttribute('readonly','');
                           volumeDosen.setAttribute('readonly','');
+                          kuota_kelas_dosen.removeAttribute('readonly','');
                           angkaKredit.removeAttribute('readonly');
-
-                          angkaKredit.removeAttribute()
                      }
-                     
                   }
                   function sum(){
-                      var ckelas = document.getElementById("jumlah_kelas").value ;
-                      var cvolumeDosen = document.getElementById("volume_dosen").value ;
+                    //(kelas / dosen) *sks
+                      var ckelas = document.getElementById("kuota_kelas_dosen").value ;
                       var csks = document.getElementById("sks").value ;
-                      var ckelasxvdosen = document.getElementById("kelasxvdosen").value ;
-                      var hasil1 = parseFloat(ckelas)*parseFloat(cvolumeDosen);
-                      if(!isNaN(hasil1)){
-                          document.getElementById("kelasxvdosen").value = parseFloat(hasil1);
-                      }
-                      var hasil2 = parseFloat(ckelasxvdosen) / parseFloat(csks);
-                      if(!isNaN(hasil2)){
-                          document.getElementById("jumlah_angka_kredit").value = parseFloat(hasil2);
-                      }
+                      var hasil1 = parseFloat(ckelas)*parseFloat(csks);
+                      console.log(hasil1);
+                      document.getElementById("jumlah_angka_kredit").value = parseFloat(hasil1);
+                          
                   }
               </script>
             </form>
@@ -712,9 +710,6 @@
           <div class="col-lg-10" style="margin-top: 30px">
             <h3>Input Data Penelitian</h3>
             <br>
-        
-        
-        
             <form method="POST" action="{{route('pelaksanaanpenelitian.store')}}" enctype="multipart/form-data" >
                 @csrf
         
@@ -731,7 +726,6 @@
                         <input type="text" class="form-control" id="jurnal" name="jurnal">
                     </div>
                 </div>
-        
                 <div class="form-group row ">
                   <div class="col-md m-3">
                     <label for="akreditasi">Akreditasi Karya Ilmiah</label>
@@ -743,49 +737,30 @@
                     </select>
                   </div>
                 </div>
-
                 <div class="form-group row">
-                  <label for="jenis-penulis">Jenis Penulis:</label>
+                  <label for="jenis_penulis">Jenis Penulis</label>
                     @foreach ($jenispenulis as $p)
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="jenis_penulis" id="{{$p->id}}" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}">
-                      <label class="form-check-label" for="jenis-penulis-{{$p->id}}">{{ $p->jenispenulis }}</label>  
+                    <div class="form-check form-check-inline m-3">
+                      <input class="form-check-input" @if($p->penulis_khusus == 1 ) id="penulis_khusus" data="penulis_khusus" @endif type="radio" name="jenis_penulis" id="{{$p->id}}" value="{{$p->persentase_skor}}" >
+                      <label class="form-check-label" for="jenis_penulis-{{$p->id}}">{{ $p->jenispenulis }}</label>  
                     </div>
                     @endforeach
                 </div>
 
-<script>
-  const radioButtons = document.getElementsByName("jenis_penulis");
-  radioButtons.forEach(radio => {
-        radio.addEventListener('click', function() {
-            console.log(`ID yang dipilih: ${this.value}`);
-        });
-    });                  
-</script>
                 
-
-                
-                
-                
-
-        
-                <div class="form-group row">
-                  <div class="col-md m-3">
-                    <label for="penulis">Jenis Penulis</label>
-                    <select class="form-control" id="jenispenulis_id" name="jenispenulis_id">
-                        <option>Pilih  Jenis Penulis</option>
-                        @foreach ($jenispenulis as $p)
-                            <option  @if($p->penulis_khusus == 1 ) id="penulis_khusus" @endif class="" value="{{$p->id}}"  title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
-                        @endforeach
-                    </select>
-                  </div>
-                </div>
-        
                 <div class="form-group row">
                     <div class="col-md m-3">
-                        <label for="jumlah_penulis">Jumlah Penulis</label>
-                        <input readonly type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
+                      <label for="persentasepenulis">Persentase Penulis</label>
+                      <input readonly type="number" class="form-control" id="persentasepenulis" name="persentasepenulis"  onkeyup="getValues()">
                     </div>
+                    <div class="col-md m-3">
+                        <label for="jumlah_penulis">Jumlah Penulis</label>
+                        <input readonly type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis"  onkeyup="getValues()">
+                    </div>
+                    <div class="col-md m-3">
+                      <label for="angka_kredit">Angka Kredit</label>
+                      <input readonly type="number" class="form-control" id="angka_kredit" name="angka_kredit" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="calculate()">
+                  </div>
                 </div> 
 
                 <div class="col-md m-3">
@@ -802,10 +777,9 @@
                         <label for="link">Link</label>
                         <input type="text" class="form-control" id="link" name="link">
                     </div>
-                </div>
-
                 <div>
                   <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
+                  <input hidden type="text" value="" id="persentasepenulis" name="persentasepenulis">
                 </div>
 
                 <div class="col-md m-3 text-center">
@@ -877,44 +851,36 @@
                                                     <select class="form-control" id="jenispenulis_id" name="jenispenulis_id">
                                                         <option>Pilih  Jenis Penulis</option>
                                                         @foreach ($jenispenulis as $p)
-                                                            <option  @if($p->penulis_khusus == 1 ) id="penulis_khusus" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
+                                                            <option  @if($p->penulis_khusus == 1 ) data="penulis_khusus" @endif class="" value="{{$p->id}}" data-percentage ="{{$p->persentase_skor}}" title="{{$p->jenispenulis}}">{{Str::limit($p->jenispenulis,100)}}</option>
                                                         @endforeach
                                                     </select>
                                                   </div>
                                                 </div>
-                                        
                                                 <div class="form-group row">
                                                     <div class="col-md m-3">
                                                         <label for="jumlah_penulis">Jumlah Penulis</label>
                                                         <input readonly type="number" class="form-control" id="jumlah_penulis" name="jumlah_penulis" placeholder="isi jumlah penulis dikurangi penulis pertama" onkeyup="sum()">
                                                     </div>
                                                 </div> 
-                                
                                                 <div class="col-md m-3">
                                                   <input readonly type="number" class="form-control" id="angkakredit" name="angkakredit" onkeyup="sum()">
                                                 </div>
-                                        
                                                 <div class="form-group row">
                                                     <div class="col-md m-3">
                                                         <label for="tanggal">Tanggal Terbit</label>
                                                         <input type="date" class="form-control" id="tanggal" name="tanggal">
                                                     </div>
-                                        
                                                     <div class="col-md m-3">
                                                         <label for="link">Link</label>
                                                         <input type="text" class="form-control" id="link" name="link">
                                                     </div>
                                                 </div>
-
-                                                
                                         </div>
-
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
                                               <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                             </div>
-                                          </form>                                  
-                      
+                                          </form>        
                                 </div>
                               </div>
                               
@@ -1347,6 +1313,7 @@
               </tbody>
             @endforeach  
         </table>
+
         </div>
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -1355,73 +1322,73 @@
       {{-- js for Penelitian --}}
                
       <script>
-        var jenispenulis = document.getElementById('jenispenulis_id');
+        var jenispenulis = document.getElementsByName('jenis_penulis');
         var x = document.getElementById('jumlah_penulis');
-      
-        jenispenulis.addEventListener('change', function() {
-          var options = jenispenulis.options[jenispenulis.selectedIndex];
-          if (options.id == 'penulis_khusus') {
-            x.setAttribute('readonly', '');
-          } else {
-            x.removeAttribute('readonly');
-          }
+        var y = document.getElementById('persentasepenulis');
+        
+        jenispenulis.forEach(radio => {
+            radio.addEventListener('click', function() {
+                if (this.id == 'penulis_khusus') {
+                    x.setAttribute('readonly', '');
+                    y.setAttribute('readonly', '');
+                } else {
+                  y.removeAttribute('readonly');                  
+                  x.removeAttribute('readonly');                  
+                  x.value(" ");
+                  y.value(" ");                  
+                }
+            });
         });
-      </script>
-      
-
-      <script>
-        // Fungsi untuk mengambil nilai dari elemen HTML yang diperlukan
-        function getValues() {
+    </script>
+    <script>
+          function getValues() {
+          var persentase_penulis = document.getElementById('persentasepenulis').value;
           var selectElem = document.getElementById('akreditasi_id');
-          var selectElem2 = document.getElementById('jenispenulis_id');
-          var jumlahpenulis = document.getElementById('jumlahpenulis_id');
-      
+          var jenis_penulis = document.getElementsByName("jenis_penulis");
+          var jumlah_penulis = document.getElementById('jumlah_penulis').value;
+          var dataKum = selectElem.options[selectElem.selectedIndex].getAttribute('data-kum-akreditasi');
           return {
             selectElem: selectElem,
-            selectElem2: selectElem2,
-            jumlahpenulis: jumlahpenulis,
+            jenis_penulis: jenis_penulis,
+            jumlah_penulis:jumlah_penulis,
+            persentase_penulis:persentase_penulis,
+            dataKum: dataKum
           };
         }
-      
-        // Fungsi untuk menghitung nilai hasil1
         function calculate() {
           var values = getValues();
-          var dataKum = values.selectElem.options[values.selectElem.selectedIndex].getAttribute('data-kum-akreditasi');
-          var datapersen = values.selectElem2.options[values.selectElem2.selectedIndex].getAttribute('data-percentage');
-          var hasil1 = parseFloat(dataKum) * (parseFloat(datapersen) / 100);
-      
-          document.getElementById("angkakredit").value = hasil1;
+          var jlh_penulis = values.jumlah_penulis;
+          var persentase = values.persentase_penulis;
+          var dataKum = values.dataKum;
+          values.jenis_penulis.forEach(radio => {
+            if (radio.checked) {
+              skor = parseFloat(radio.value);
+              if (radio.id == 'penulis_khusus') {
+                console.log('ini penulis_khusus');
+                hasil1 = ( dataKum * (skor/100));
+              } else {
+                console.log('ini tidak penulis_khusus');
+                var hasil1 = ((dataKum * (persentase/ 100))/ jlh_penulis);
+              }
+              console.log('ini hasil',hasil1);
+              document.getElementById("angkakredit").value = hasil1;
+            }
+          });    
         }
-      
+
         // Tambahkan event listener pada setiap elemen HTML yang dibutuhkan
         getValues().selectElem.addEventListener('change', calculate);
-        getValues().selectElem2.addEventListener('change', calculate);
-      
-      </script>
-
-
-    <script>
-      $('#pelaksanaan_penelitian_Modal').on('shown.bs.modal', function () {
-        var jenispenulis = document.getElementById('jenispenulis_id');
-        var akreditasi = document.getElementById('akreditasi_id');
-        var jumlah_penulis = document.getElementById('jumlah_penulis');
-        var angkakredit = document.getElementById('angkakredit');
-      
-        jenispenulis.addEventListener('change', function() {
-          var options = jenispenulis.options[jenispenulis.selectedIndex];
-          if (options.id == 'penulis_khusus') {
-            jumlah_penulis.setAttribute('readonly', '');
-          } else {
-            jumlah_penulis.removeAttribute('readonly');
-          }
+        getValues().jenis_penulis.forEach(radio => {
+          radio.addEventListener('click', calculate);
         });
-        akreditasi.addEventListener('change', function() {
-          var options = akreditasi.options[akreditasi.selectedIndex];
-          var kum = options.getAttribute('data-kum-akreditasi');
-          angkakredit.value = kum;
-        });
-      })
+        getValues().persentase_penulis.addEventListener('input', calculate);          
+        getValues().jumlah_penulis.addEventListener('input', calculate);  
+
     </script>
+
+
+
+
 
 @endsection
 
