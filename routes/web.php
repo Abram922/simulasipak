@@ -20,13 +20,22 @@ Route::get('/', function () {
     return view('auth/login');
 }); 
 
+// Route::get('/profil', function () {
+//     return view('user.profil');
+// }); 
+
+// Route::get('/profill', function () {
+//     return view('user.ubah_profil');
+// }); 
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/user-home', [App\Http\Controllers\HomeController::class,'userhome'])->name('userhome');
 Route::get('/admin-home', [App\Http\Controllers\HomeController::class,'adminhome'])->name('adminhome');
 Route::get('/board-pak', [App\Http\Controllers\HomeController::class,'boardpak'])->name('boardpak');
-
+Route::get('/profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('profil');
+Route::get('/ubahprofil', [App\Http\Controllers\ProfilController::class, 'ubahprofil'])->name('ubahprofil');
 
 Route::resource('kum', App\Http\Controllers\KumController::class);
 Route::resource('pendidikan', App\Http\Controllers\PendidikanController::class);

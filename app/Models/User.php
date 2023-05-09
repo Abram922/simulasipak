@@ -27,7 +27,12 @@ class User extends Authenticatable
         'tempat_lahir',
         'tanggal_lahir',
         'NIDN',
-        'foto'
+        'foto',
+        'ikatan_kerja',
+        'institusi',
+        'fakultas',
+        'jabatan_fungsional',
+        'pangkat'
     ];
 
     /**

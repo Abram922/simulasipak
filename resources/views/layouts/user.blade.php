@@ -38,7 +38,7 @@
                     {{ auth()->user()->name }}
                   </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Profil</a></li>
+                      <li><a class="dropdown-item" href="{{asset('/profil')}}">Profil</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li>
                         <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -19,6 +19,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('NIDN')->nullable();
+            $table->string('ikatan_kerja')->nullable();
+            $table->string('institusi')->nullable();
+            $table->string('fakultas')->nullable();
+            $table->string('jabatan_fungsional')->nullable();
+            $table->string('pangkat')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('foto')->nullable();
