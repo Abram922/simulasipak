@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('bukti')->nullable();
             $table->integer('jumlah_kelas')->nullable();
             $table->integer('jumlah_angka_kredit')->nullable();
+            $table->integer('kuota_kelas_dosen')->nullable();
             $table->integer('volume_dosen')->nullable();
             $table->timestamps();
-
             $table->foreign('kum_id')->references('id')->on('kums')->onDelete('cascade');
             $table->foreign('idjenispelaksanaan')->references('id')->on('jenis_pelaksanan_pendidikans')->onDelete('cascade');
             $table->foreign('semester_id')->references('id')->on('semesters')->onDelete('cascade');

@@ -39,6 +39,7 @@ class PelaksanaanPendidikanController extends Controller
             'jumlah_kelas' => '', 
             'jumlah_angka_kredit' => '',
             'volume_dosen'=> '',
+            'kuota_kelas_dosen'=> '',
         ]);
 
   
