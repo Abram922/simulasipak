@@ -50,3 +50,7 @@ Route::get('/lampiran-datapenunjang', [App\Http\Controllers\LampiranController::
 Route::get('/lampiran-datapendidikan', [App\Http\Controllers\LampiranController::class,'datapendidikan'])->name('lampirandatapendidikan');
 Route::get('/lampiran-datapm', [App\Http\Controllers\LampiranController::class,'datapm'])->name('datapm');
 
+Route::get('/pendidikan/{id}', [App\Http\Controllers\PendidikanController::class, 'show'])->name('pendidikan.show');
+Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendidikanController::class, 'show'])->name('pelaksanaanpendidikan.show');
+
+

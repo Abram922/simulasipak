@@ -40,27 +40,13 @@ class PelaksananPenelitianController extends Controller
             'jumlah_penulis'=> '',
             'angkakredit'=> 'required|max:255',
             'tanggal'=> 'required|max:255',
-        ]);
-        $jenispenulis = $input['jenispenulis_id'];
-        $angka_kredit = $input['angkakredit'];
-        $jumlah_penulis = $input['jumlah_penulis'];
+            'author_persentase' => '',
 
-        if($jenispenulis == 4 || $jenispenulis == 5 ){
-            $hasil = $angka_kredit / $jumlah_penulis;
-        }else{
-            $hasil = $angka_kredit;
-        };
-        $pelaksanan_penelitian = new pelaksanan_penelitian;
-        $pelaksanan_penelitian->kum_id = $input['kum_id'];
-        $pelaksanan_penelitian->akreditasi_id = $input['akreditasi_id'];
-        $pelaksanan_penelitian->jenispenulis_id = $input['jenispenulis_id'];
-        $pelaksanan_penelitian->judul = $input['judul'];
-        $pelaksanan_penelitian->jurnal = $input['jurnal'];
-        $pelaksanan_penelitian->link = $input['link'];
-        $pelaksanan_penelitian->jumlah_penulis = $input['jumlah_penulis'];
-        $pelaksanan_penelitian->angkakredit = $hasil;
-        $pelaksanan_penelitian->tanggal = $input['tanggal'];
-        $pelaksanan_penelitian->save();
+        ]);
+
+        // return $input;
+
+        pelaksanan_penelitian::create($input);
 
         return redirect()->back()->with('message', 'Data berhasil disimpan');
     }

@@ -76,9 +76,6 @@ class KumController extends Controller
         $pelaksanan_penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->get();
         $pelaksanaan_pm = pelaksanaan_pm::where('kum_id', $kum->id)->get();
         $dokumenpenunjang = dokumenpenunjang::where('kum_id', $kum->id)->get();
-
-
-
         $poinpendidikan = DB::table('pendidikans')
         ->join('stratapendidikans', 'pendidikans.strata_id', '=', 'stratapendidikans.id')
         ->select('pendidikans.id', 'stratapendidikans.nilai')

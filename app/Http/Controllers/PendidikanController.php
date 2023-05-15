@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\kum;
 use App\Models\pendidikan;
 use App\Http\Controllers\Controller;
+use App\Models\stratapendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +16,9 @@ class PendidikanController extends Controller
      */
     public function index()
     {
-        //
+
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -60,10 +62,29 @@ class PendidikanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(pendidikan $pendidikan)
+    public function show($id)
     {
-        //
+        $kum = kum::find($id);
+        $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
+        $strata_pendidikan = stratapendidikan::all();
+
+        return view('.user.board.boardpendidikan',[
+            'kum' =>$kum,
+            'pendidikan' => $pendidikan,
+            'strata_pendidikan' => $strata_pendidikan
+        ]);
     }
+
+    public function kumpulan_pendidikan($id){
+        $kum = kum::find($id);
+        $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
+
+        return view('.user.board.boardpengajaran',[
+            'kum' =>$kum,
+            'pendidikan' => $pendidikan
+        ]);
+    }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\jenis_pelaksanan_pendidikan;
+use App\Models\kum;
 use App\Models\pelaksanaan_pendidikan;
 use App\Http\Controllers\Controller;
+use App\Models\semester;
 use Illuminate\Http\Request;
 
 class PelaksanaanPendidikanController extends Controller
@@ -58,9 +61,18 @@ class PelaksanaanPendidikanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(pelaksanaan_pendidikan $pelaksanaan_pendidikan)
+    public function show($id)
     {
-        //
+        $kum = kum::find($id);
+        $pelaksanaan_pendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->get();
+        $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
+        $semester = semester::all();
+        return view('.user.board.boardpengajaran',[
+            'kum' =>$kum,
+            'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan,
+            'pelaksanaan_pendidikan' => $pelaksanaan_pendidikan,
+            'semester' => $semester,
+        ]);
     }
 
     /**
