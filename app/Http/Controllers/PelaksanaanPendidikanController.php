@@ -33,20 +33,20 @@ class PelaksanaanPendidikanController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'kum_id.*' => '',
-            'idjenispelaksanaan.*' => 'required',
-            'semester_id.*' => 'required',
-            'nama_kegiatan.*' => 'required|max:255',
-            'tempat_instansi.*' => 'required|string',
-            'sks.*' => '',
-            'jumlah_kelas.*' => '', 
-            'jumlah_angka_kredit.*' => '',
-            'volume_dosen.*' => '',
-            'kuota_kelas_dosen.*' => '',
+            'kum_id' => '',
+            'idjenispelaksanaan' => 'required',
+            'semester_id' => 'required',
+            'nama_kegiatan' => 'required|max:255',
+            'tempat_instansi' => 'required|string',
+            'sks' => '',
+            'jumlah_kelas' => '', 
+            'jumlah_angka_kredit' => '',
+            'volume_dosen' => '',
+            'kuota_kelas_dosen' => '',
         ]);
 
   
-        if ($buktiunsurpdp = $request->file('bukti.*')) {
+        if ($buktiunsurpdp = $request->file('bukti')) {
             $destinationPath = 'bukti_unsur_utama/pelaksanaan_pendidikan/';
             $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
             $buktiunsurpdp->move($destinationPath, $profileImage);

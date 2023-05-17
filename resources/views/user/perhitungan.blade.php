@@ -395,98 +395,83 @@
         <div class="tab-pane fade" id="pelaksanaanpendidikan-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpendidikan-tab" tabindex="0">
           <div class="col-lg-10" style="margin-top: 30px">
             <form id="myForm">
-                <div id="inputFields">
+
+
+                <div id="inputFields" >
                     <div class="input-group ">
-                    <div class="col-lg-10 ">
-                      <div class="d-flex">
-                        <div class="flex-grow-1">
-                          <h3><b>Input Data Pelaksanaan Pendidikan</b></h3>
-                        </div>
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-secondary remove-field" type="button">&times;</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <div class="col-md m-3">
-                          <label for="nama_kegiatan">Nama Kegiatan</label>
-                          <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
-                      </div>
-                      <div class="col-md m-3">
-                          <label for="tempat_instansi">Tempat Instansi</label>
-                          <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
-                      </div>
-                      <div class="col-md m-3">
-                          <label for="semester">Semester</label>
-                          <select class="form-control" id="semester_id" name="semester_id">
-                              <option>Pilih Semester</option>
-                              @foreach ($semester as $s)
-                                  <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                    </div>
-
-
-                      <div class="form-group row ">
-                        <div class="col-md m-3">
-                          <label for="jenispelaksanaan">Jenis Pelaksanaan</label>
-                          <select class="form-control" id="idjenispelaksanaan" name="idjenispelaksanaan[]">
-                              <option>Pilih Jenis Pelaksanaan</option>
-                              @foreach ($jenis_pelaksanaan_pendidikan as $p)
-                                  <option @if($p->withsks == 0 ) id="is-sks" @endif class="" value="{{$p->id}}" title="{{$p->jenispelaksanaan}}">{{Str::limit($p->jenispelaksanaan,100)}}</option>
-                              @endforeach
-                          </select>                  
-                        </div>
-                      </div>
-            
-                      <div class="form-group row">
-                          <div class="col-md m-3">
-                              <label for="jumlah_kelas">Kelas</label>
-                              <input readonly type="number" class="form-control x" id="jumlah_kelas" name="jumlah_kelas[]" onkeyup="sum()">
+                      <div class="col-lg-10 ">
+                        <div class="d-flex">
+                          <div class="flex-grow-1">
+                            <h3><b>Input Data Pelaksanaan Pendidikan</b></h3>
                           </div>
-                          <div class="col-md m-3">
-                            <label for="kuota_kelas_dosen">Kuota Kelas Dosen</label>
-                            <input readonly type="number" class="form-control x" id="kuota_kelas_dosen" name="kuota_kelas_dosen[]" onkeyup="sum()" >
-                        </div>                  
-                          <div class="col-md m-3">
-                              <label for="volume_dosen">Volume Dosen</label>
-                              <input readonly type="number" class="form-control x" id="volume_dosen" name="volume_dosen[]" onkeyup="sum()" >
-                          </div>
-                      </div>
-                      <div class="form-group row">
-                          <div class="col-md m-3">
-                              <label for="sks">SKS</label>
-                              <input readonly type="number" class="form-control x" id="sks" name="sks[]" onkeyup="sum()">
-                          </div>                
-                          <div class="col-md m-3">
-                              <label for="jumlah_angka_kredit">Angka Kredit</label>
-                              <input type="number" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit[]" onkeyup="sum()">
-                          </div>
-                      </div>
-            
-                      <div>
-                        <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id[]">
-                      </div>
-            
-                      <div class="form-group row ">
-                        <div class="col-md m-3">
-                          <label for="keterangan">Keterangan Kegiatan</label>
-                          <input  type="text" class="form-control" id="keterangan" name="keterangan[]"  placeholder="maksimal 100 kata">
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <div class="col-md m-3">
-                          <label for="bukti">Bukti</label>
-                          <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti[]">
-                          @error('bukti')
-                              <div class="invalid-feedback">
-                                  {{$message}}
+                      <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-group row">
+                              <div class="col-md m-3">
+                                  <label for="instansi">Instansi</label>
+                                  <input type="text" class="form-control" id="instansi" name="inputs[0]['instansi']">
+                              </div>       
+                              
+                              <div class="col-md m-3">
+                                <label for="semester">Semester</label>
+                                <select class="form-control" id="id_semester" name="inputs[0]['id_semester']">
+                                    <option>Pilih Semester</option>
+                                    @foreach ($semester as $s)
+                                        <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-md m-3">
+                                  <label for="kode_matakuliah">kode_matakuliah</label>
+                                  <input type="text" class="form-control" id="kode_matakuliah" name="inputs[0]['kode_matakuliah']">
                               </div>
-                          @enderror
+
+                              <div class="col-md m-3">
+                                <label for="matakuliah">Nama Mata Kuliah</label>
+                                <input type="text" class="form-control" id="matakuliah" name="inputs[0]['matakuliah']">
+                              </div>
+                            </div>
+                  
+                            <div class="form-group row">
+                                <div class="col-md m-3">
+                                  <label for="nama_kelas_pengajaran">Nama Kelas</label>
+                                  <input type="text" class="form-control" id="nama_kelas_pengajaran" name="inputs[0]['nama_kelas_pengajaran']">
+                                </div>
+
+                                <div class="col-md m-3">
+                                    <label for="volume_dosen_pengajar">Volume Dosen</label>
+                                    <input  type="number" class="form-control x" id="volume_dosen_pengajar" name="inputs[0]['volume_dosen_pengajar']" onkeyup="sum1()" >
+                                </div>
+
+                                <div class="col-md m-3">
+                                        <label for="sks_pengajaran">sks pengajaran</label>
+                                        <input  type="number" class="form-control x" id="sks_pengajaran" name="inputs[0]['sks']" onkeyup="perkalian()">
+                                </div>     
+                                
+                                <div class="col-md m-3">
+                                  <label for="jumlah_angka_kredit">jumlah angka kredit</label>
+                                  <input  type="number" class="form-control x" id="jumlah_angka_kredit" name="inputs[0]['jumlah_angka_kredit']" onkeyup="perkalian()">
+                                </div>      
+                                
+                                
+                            </div>
+                            <div>
+                              <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="">
+                            </div>
+
+                            <hr>
+                            Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan
                         </div>
-                      </div>
+                      </div>                    
                     </div>
                 </div>
                 <button id="addButton" class="btn btn-primary" type="button">Add Field</button>
@@ -494,111 +479,107 @@
             </form>
     
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+            
+
+
             <script>
               $(document).ready(function() {
+
                   // Add new field
+                  var i;
                   $('#addButton').click(function() {
                       var fieldHTML =
-                          '<div class="input-group ">' +
-                            '<div class = "col-lg-10">'+
-                             '<div class="d-flex">'+
-                              '<div class="flex-grow-1">'+
-                                '<h3><b>Input Data Pelaksanaan Pendidikan</b></h3>'+
-                              '</div>'+
-                              '<div class="input-group-append">'+
-                                '<button class="btn btn-outline-secondary remove-field" type="button">&times;</button>'+
-                              '</div>'+
-                            '</div>'+                             
-                            '</div>'+
+                      '<div id="inputFields" >'+
+                        '<div class="input-group ">'+
 
-                            '<div class="form-group row">'+
-                              '<div class="col-md m-3">'+
-                                  '<label for="nama_kegiatan">Nama Kegiatan</label>'+
-                                  '<input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">'+
-                              '</div>'+
-                              '<div class="col-md m-3">'+
-                                  '<label for="tempat_instansi">Tempat Instansi</label>'+
-                                  '<input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">'+
-                              '</div>'+
-                              '<div class="col-md m-3">'+
-                                  '<label for="semester">Semester</label>'+
-                                  '<select class="form-control" id="semester_id" name="semester_id">'+
-                                      '<option>Pilih Semester</option>'+
-                                      '@foreach ($semester as $s)'+
-                                          '<option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>'+
-                                      '@endforeach'+
-                                  '</select>'+
-                              '</div>'+
-                            '</div>'+
-
-                            '<div class="form-group row ">'+
-                              '<div class="col-md m-3">'+
-                                '<label for="jenispelaksanaan">Jenis Pelaksanaan</label>'+
-                                '<select class="form-control" id="idjenispelaksanaan" name="idjenispelaksanaan[]">'+
-                                  ' <option>Pilih Jenis Pelaksanaan</option>'+
-                                    '@foreach ($jenis_pelaksanaan_pendidikan as $p)'+
-                                        '<option @if($p->withsks == 0 ) id="is-sks" @endif class="" value="{{$p->id}}" title="{{$p->jenispelaksanaan}}">{{Str::limit($p->jenispelaksanaan,100)}}</option>'+
-                                    '@endforeach'+
-                                '</select>'                 + 
-                              '</div>'+
-                              '</div>'+
-
-                              '<div class="form-group row">'+
-                                  '<div class="col-md m-3">'+
-                                      '<label for="jumlah_kelas">Kelas</label>'+
-                                      '<input readonly type="number" class="form-control x" id="jumlah_kelas" name="jumlah_kelas[]" onkeyup="sum()">'+
-                                  '</div>'+
-                                  '<div class="col-md m-3">'+
-                                    '<label for="kuota_kelas_dosen">Kuota Kelas Dosen</label>'+
-                                    '<input readonly type="number" class="form-control x" id="kuota_kelas_dosen" name="kuota_kelas_dosen[]" onkeyup="sum()" >'+
-                                '</div>  '                +
-                                  '<div class="col-md m-3">'+
-                                      '<label for="volume_dosen">Volume Dosen</label>'+
-                                      '<input readonly type="number" class="form-control x" id="volume_dosen" name="volume_dosen[]" onkeyup="sum()" >'+
-                                  '</div>'+
-                              '</div>'+
-                              '<div class="form-group row">'+
-                                  '<div class="col-md m-3">'+
-                                      '<label for="sks">SKS</label>'+
-                                      '<input readonly type="number" class="form-control x" id="sks" name="sks[]" onkeyup="sum()">'+
-                                  '</div>'                +
-                                  '<div class="col-md m-3">'+
-                                      '<label for="jumlah_angka_kredit">Angka Kredit</label>'+
-                                      '<input type="number" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit[]" onkeyup="sum()">'+
-                                  '</div>'+
-                              '</div>'+
-
-                              '<div>'+
-                                '<input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id[]">'+
-                              '</div>'+
-
-                              '<div class="form-group row ">'+
-                                '<div class="col-md m-3">'+
-                                  '<label for="keterangan">Keterangan Kegiatan</label>'+
-                                  '<input  type="text" class="form-control" id="keterangan" name="keterangan[]"  placeholder="maksimal 100 kata">'+
-                                '</div>'+
-                              '</div>'+
-                              '<div class="form-group row">'+
-                                '<div class="col-md m-3">'+
-                                  '<label for="bukti">Bukti</label>'+
-                                  '<input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti[]">'+
-                                  '@error('bukti')'+
-                                      '<div class="invalid-feedback">'+
-                                          '{{$message}}'+
+                          '<div class="card shadow mb-4">'+
+                                '<div class="card-header py-3">'+
+                                    '<div class="d-flex">'+
+                                      '<div class="card-header flex-grow-1 py-3 ">'+
+                                        '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>'+
                                       '</div>'+
-                                ' @enderror'+
+                                      '<div class="input-group-append">'+
+                                        '<button class="btn btn-outline-secondary remove-field" type="button">&times;</button>'+
+                                      '</div>'+
+                                    '</div>'+
                                 '</div>'+
-                              '</div>'+
-                              '</div>';
-          
-                      $('#inputFields').append(fieldHTML);
+                            '<div class="card-body">'+
+
+                              '<div class="form-group row">' +
+                                '<div class="col-md m-3">' +
+                                  ' <label for="instansi">Instansi</label>' +
+                                  '<input type="text" class="form-control" id="instansi" name="inputs['+i+'][instansi]">' +
+                                '</div>' +       
+                                
+                                '<div class="col-md m-3">' +
+                                  '<label for="semester">Semester</label>' +
+                                  ' <select class="form-control" id="id_semester" name="inputs['+i+'][id_semester]">' +
+                                      '<option>Pilih Semester</option>' +
+                                      '@foreach ($semester as $s)'+
+                                          '<option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>' +
+                                      '@endforeach'+
+                                  '</select>' +
+                                '</div>' +
+                              '</div>' +
+
+                              '<div class="form-group row">' +
+                                '<div class="col-md m-3">' +
+                                    '<label for="kode_matakuliah">kode_matakuliah</label>' +
+                                    '<input type="text" class="form-control" id="kode_matakuliah" name="inputs['+i+'][kode_matakuliah]">' +
+                                '</div>' +
+
+                                '<div class="col-md m-3">' +
+                                  '<label for="matakuliah">Nama Mata Kuliah</label>' +
+                                  '<input type="text" class="form-control" id="matakuliah" name="inputs['+i+'][matakuliah]">' +
+                                '</div>' +
+                              '</div>' +
+
+
+                              '<div class="form-group row">' +
+                                  '<div class="col-md m-3">' +
+                                    '<label for="nama_kelas_pengajaran">Nama Kelas</label>' +
+                                    '<input type="text" class="form-control" id="nama_kelas_pengajaran" name="inputs['+i+'][nama_kelas_pengajaran]">' +
+                                  '</div>' +
+
+                                  '<div class="col-md m-3">' +
+                                      '<label for="volume_dosen_pengajar">Volume Dosen</label>' +
+                                      '<input  type="number" class="form-control x" id="volume_dosen_pengajar" name="inputs['+i+'][volume_dosen_pengajar]" onkeyup="sum()" >' +
+                                  '</div>' +
+
+                                  '<div class="col-md m-3">' +
+                                          '<label for="sks">SKS</label>' +
+                                          '<input  type="number" class="form-control x" id="sks" name="inputs['+i+'][sks]" onkeyup="sum()">' +
+                                  '</div>' +       
+                                  
+                                  '<div class="col-md m-3">'+
+                                      '<label for="jumlah_angka_kredit">jumlah angka kredit</label>'+
+                                      '<input  type="number" class="form-control x" id="jumlah_angka_kredit" name="inputs[+i+][jumlah_angka_kredit]" onkeyup="perkalian()">'+
+                                  '</div>'+                                  
+                              '</div>' +
+
+                              '<div>' +
+                                '<input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="inputs['+i+'][kum_id]">' +
+                              '</div>' +
+
+
+                              '<hr>' +
+                              'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan'
+
+                            '</div>'+
+                          '</div>'+           
+                        '</div>'+
+                      '</div>'
+
+
+                    $('#inputFields').append(fieldHTML);
+                    i++; 
                   });
-          
                   // Remove field
                   $(document).on('click', '.remove-field', function() {
                       $(this).closest('.input-group').remove();
                   });
-          
                   // Submit form
                   $('#myForm').submit(function(e) {
                       e.preventDefault();
@@ -618,10 +599,18 @@
               });
             </script>
 
-  
-
-
-
+            <script>
+              function perkalian() {
+                var sksFields = document.getElementsByClassName('x');
+                var jumlahAngkaKreditFields = document.getElementsByName("inputs['+i+'][jumlah_angka_kredit']");
+                for (var i = 0; i < sksFields.length; i++) {
+                  var sks = parseFloat(sksFields[i].value);
+                  var volumeDosen = parseFloat(sksFields[i].parentNode.nextElementSibling.querySelector('.x').value);
+                  var result = (1 / volumeDosen) * sks;
+                  jumlahAngkaKreditFields[i].value = result;
+                }
+              }
+            </script>
             <h3><b>Input Data Pelaksanaan Pendidikan</b> </h3>
             <a href="{{ route('pelaksanaanpendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
             <form method="POST" action="{{route('pelaksanaanpendidikan.store')}}" enctyp  e="multipart/form-data" >

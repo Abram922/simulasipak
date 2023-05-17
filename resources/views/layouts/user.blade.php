@@ -60,7 +60,11 @@
 
         @yield('content1')
         <br>
+
+        <div class="container" style="background-color: #F9F9FE">
         @yield('content2')
+        </div>
+
         <br>
 
         <!-- Footer -->
