@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('matakuliah')->nullable();
             $table->string('instansi')->nullable();
             $table->string('sks_pengajaran')->nullable();
-            $table->integer('jumlah_angka_kredit')->nullable();
+            $table->double('jumlah_angka_kredit');
             $table->string('nama_kelas_pengajaran')->nullable();
             $table->integer('volume_dosen_pengajar')->nullable();
             $table->timestamps();

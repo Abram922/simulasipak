@@ -394,10 +394,9 @@
         {{-- . Unsur Pelaksanaan Pendidikan  --}}
         <div class="tab-pane fade" id="pelaksanaanpendidikan-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpendidikan-tab" tabindex="0">
           <div class="col-lg-10" style="margin-top: 30px">
-            <form id="myForm">
-
-
-                <div id="inputFields" >
+            <form action="{{ route('pengajaran.store') }}" method="POST"  enctype="multipart/form-data"id="myForm" >
+              @csrf
+                <div id="inputFields" class = "inputFields" >
                     <div class="input-group ">
                       <div class="col-lg-10 ">
                         <div class="d-flex">
@@ -415,12 +414,12 @@
                             <div class="form-group row">
                               <div class="col-md m-3">
                                   <label for="instansi">Instansi</label>
-                                  <input type="text" class="form-control" id="instansi" name="inputs[0]['instansi']">
+                                  <input type="text" class="form-control" id="instansi" name="inputs[0][instansi]">
                               </div>       
                               
                               <div class="col-md m-3">
                                 <label for="semester">Semester</label>
-                                <select class="form-control" id="id_semester" name="inputs[0]['id_semester']">
+                                <select class="form-control" id="id_semester" name="inputs[0][id_semester]">
                                     <option>Pilih Semester</option>
                                     @foreach ($semester as $s)
                                         <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
@@ -432,40 +431,34 @@
                             <div class="form-group row">
                               <div class="col-md m-3">
                                   <label for="kode_matakuliah">kode_matakuliah</label>
-                                  <input type="text" class="form-control" id="kode_matakuliah" name="inputs[0]['kode_matakuliah']">
+                                  <input type="text" class="form-control" id="kode_matakuliah" name="inputs[0][kode_matakuliah]">
                               </div>
 
                               <div class="col-md m-3">
                                 <label for="matakuliah">Nama Mata Kuliah</label>
-                                <input type="text" class="form-control" id="matakuliah" name="inputs[0]['matakuliah']">
+                                <input type="text" class="form-control" id="matakuliah" name="inputs[0][matakuliah]">
                               </div>
                             </div>
                   
                             <div class="form-group row">
                                 <div class="col-md m-3">
                                   <label for="nama_kelas_pengajaran">Nama Kelas</label>
-                                  <input type="text" class="form-control" id="nama_kelas_pengajaran" name="inputs[0]['nama_kelas_pengajaran']">
+                                  <input type="text" class="form-control" id="nama_kelas_pengajaran" name="inputs[0][nama_kelas_pengajaran]">
                                 </div>
 
                                 <div class="col-md m-3">
                                     <label for="volume_dosen_pengajar">Volume Dosen</label>
-                                    <input  type="number" class="form-control x" id="volume_dosen_pengajar" name="inputs[0]['volume_dosen_pengajar']" onkeyup="sum1()" >
+                                    <input  type="number" class="form-control x" id="volume_dosen_pengajar" name="inputs[0][volume_dosen_pengajar]" onkeyup="sum1()" >
                                 </div>
 
                                 <div class="col-md m-3">
                                         <label for="sks_pengajaran">sks pengajaran</label>
-                                        <input  type="number" class="form-control x" id="sks_pengajaran" name="inputs[0]['sks']" onkeyup="perkalian()">
+                                        <input  type="number" class="form-control x" id="sks_pengajaran" name="inputs[0][sks_pengajaran]" onkeyup="perkalian()">
                                 </div>     
-                                
-                                <div class="col-md m-3">
-                                  <label for="jumlah_angka_kredit">jumlah angka kredit</label>
-                                  <input  type="number" class="form-control x" id="jumlah_angka_kredit" name="inputs[0]['jumlah_angka_kredit']" onkeyup="perkalian()">
-                                </div>      
-                                
                                 
                             </div>
                             <div>
-                              <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="">
+                              <input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs[0][id_kum]">
                             </div>
 
                             <hr>
@@ -477,21 +470,17 @@
                 <button id="addButton" class="btn btn-primary" type="button">Add Field</button>
                 <button class="btn btn-success" type="submit">Submit</button>
             </form>
-    
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-            
-
-
             <script>
+                  var i = 0 ;              
               $(document).ready(function() {
+                ++i;
 
                   // Add new field
-                  var i;
+
                   $('#addButton').click(function() {
                       var fieldHTML =
-                      '<div id="inputFields" >'+
+                      '<div id="inputFields"  class = "inputFields">'+
                         '<div class="input-group ">'+
 
                           '<div class="card shadow mb-4">'+
@@ -550,17 +539,13 @@
 
                                   '<div class="col-md m-3">' +
                                           '<label for="sks">SKS</label>' +
-                                          '<input  type="number" class="form-control x" id="sks" name="inputs['+i+'][sks]" onkeyup="sum()">' +
+                                          '<input  type="number" class="form-control x" id="sks_pengajaran" name="inputs['+i+'][sks_pengajaran]" onkeyup="sum()">' +
                                   '</div>' +       
-                                  
-                                  '<div class="col-md m-3">'+
-                                      '<label for="jumlah_angka_kredit">jumlah angka kredit</label>'+
-                                      '<input  type="number" class="form-control x" id="jumlah_angka_kredit" name="inputs[+i+][jumlah_angka_kredit]" onkeyup="perkalian()">'+
-                                  '</div>'+                                  
+                                                              
                               '</div>' +
 
                               '<div>' +
-                                '<input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="inputs['+i+'][kum_id]">' +
+                                '<input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs['+i+'][id_kum]">' +
                               '</div>' +
 
 
@@ -574,27 +559,11 @@
 
 
                     $('#inputFields').append(fieldHTML);
-                    i++; 
+
                   });
                   // Remove field
                   $(document).on('click', '.remove-field', function() {
                       $(this).closest('.input-group').remove();
-                  });
-                  // Submit form
-                  $('#myForm').submit(function(e) {
-                      e.preventDefault();
-                      var formData = $(this).serialize();
-                      $.ajax({
-                          url: "", // Replace with your controller route
-                          type: "POST",
-                          data: formData,
-                          success: function(response) {
-                              console.log(response); // Optional: Handle the response from the controller
-                          },
-                          error: function(xhr, status, error) {
-                              console.log(xhr.responseText); // Optional: Handle the error
-                          }
-                      });
                   });
               });
             </script>

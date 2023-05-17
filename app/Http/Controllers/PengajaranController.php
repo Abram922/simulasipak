@@ -29,17 +29,31 @@ class PengajaranController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->validate([
-            'kum_id.*' => 'required',
-            'id_semester.*' => 'required',
-            'matakuliah.*' => 'required|max:255',
-            'instansi.*' => 'required|string',
-            'sks_pengajaran.*' => 'required',
-            'kode_matakuliah.*' => 'required', 
-            'jumlah_angka_kredit.*' => 'required',
-            'volume_dosen_pengajar.*' => 'required',
-            'nama_kelas_pengajaran.*' => '',
-        ]);
+        $inputs = $request->input('inputs');
+
+        foreach ($inputs as $input) {
+            $pengajaran = new Pengajaran();
+            $pengajaran->instansi = $input['instansi'];
+            $pengajaran->id_semester = $input['id_semester'];
+            $pengajaran->kode_matakuliah = $input['kode_matakuliah'];
+            $pengajaran->matakuliah = $input['matakuliah'];
+            $pengajaran->nama_kelas_pengajaran = $input['nama_kelas_pengajaran'];
+            $pengajaran->volume_dosen_pengajar = $input['volume_dosen_pengajar'];
+            $pengajaran->sks_pengajaran = $input['sks_pengajaran'];
+            $pengajaran->id_kum = $input['id_kum'];
+
+            //perhitungan 
+            $volumeDosen =floatval($input['volume_dosen_pengajar'])  ;
+            $sks = floatval($input['sks_pengajaran']) ;
+
+            $hasil = (1 / $volumeDosen) * $sks;
+
+            $pengajaran->jumlah_angka_kredit = floatval($hasil) ;                  
+            $pengajaran->save();
+        }
+
+
+        return back()->with('success', 'data berhasil disimpan');
     }
 
     /**
