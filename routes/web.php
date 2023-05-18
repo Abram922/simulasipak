@@ -45,6 +45,9 @@ Route::resource('pelaksanaan_pm', App\Http\Controllers\PelaksanaanPmController::
 Route::resource('unsurdp', App\Http\Controllers\DokumenpenunjangController::class);
 Route::resource('pengajaran', App\Http\Controllers\PengajaranController::class);
 
+Route::resource('unsurpelaksanaan', App\Http\Controllers\PelaksanaanPendidikanController::class);
+
+
 Route::get('/lampiran', [App\Http\Controllers\LampiranController::class,'index'])->name('lampiran');
 Route::get('/lampiran-datapenelitian', [App\Http\Controllers\LampiranController::class,'datapenelitian'])->name('datapenelitian');
 Route::get('/lampiran-datapenunjang', [App\Http\Controllers\LampiranController::class,'datapenunjang'])->name('datapenunjang');

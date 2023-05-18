@@ -8,6 +8,7 @@ use App\Models\pelaksanaan_pendidikan;
 use App\Http\Controllers\Controller;
 use App\Models\semester;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PelaksanaanPendidikanController extends Controller
 {
@@ -32,32 +33,40 @@ class PelaksanaanPendidikanController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->validate([
-            'kum_id' => '',
-            'idjenispelaksanaan' => 'required',
-            'semester_id' => 'required',
-            'nama_kegiatan' => 'required|max:255',
-            'tempat_instansi' => 'required|string',
-            'sks' => '',
-            'jumlah_kelas' => '', 
-            'jumlah_angka_kredit' => '',
-            'volume_dosen' => '',
-            'kuota_kelas_dosen' => '',
-        ]);
+        $inputs = $request->input('inputs');
+    
+        foreach ($inputs as $input) {
+            $validator = Validator::make($input, [
+                'tempat_instansi' => 'required',
+                'semester_id' => 'required',
+                'idjenispelaksanaan' => 'required',
+                'nama_kegiatan' => 'required',
+            ]);
+    
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+    
+            $idJenisPelaksanaan = $input['idjenispelaksanaan'];
 
-  
-        if ($buktiunsurpdp = $request->file('bukti')) {
-            $destinationPath = 'bukti_unsur_utama/pelaksanaan_pendidikan/';
-            $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
-            $buktiunsurpdp->move($destinationPath, $profileImage);
-            $input['bukti'] = "$profileImage";
+            $jenisPelaksanaan = jenis_pelaksanan_pendidikan::find($idJenisPelaksanaan);
+    
+            $pelaksanaanPendidikan = new pelaksanaan_pendidikan([
+                'kum_id' => $input['id_kum'],
+                'idjenispelaksanaan' => $input['idjenispelaksanaan'],
+                'semester_id' => $input['semester_id'],
+                'nama_kegiatan' => $input['nama_kegiatan'],
+                'tempat_instansi' => $input['tempat_instansi'],
+                'jumlah_angka_kredit' => $jenisPelaksanaan->angka_kredit,
+            ]);
+    
+            $pelaksanaanPendidikan->save();
         }
-
-        pelaksanaan_pendidikan::create($input);
-
-        return redirect()->back()->with('message', 'Data berhasil disimpan');
+    
+        return back()->with('success', 'Data berhasil disimpan');
     }
-
+    
+    
     /**
      * Display the specified resource.
      */

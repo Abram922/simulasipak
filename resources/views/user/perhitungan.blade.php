@@ -425,7 +425,7 @@
                                         <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                              </div>
 
                             </div>
                             <div class="form-group row">
@@ -568,140 +568,198 @@
               });
             </script>
 
-            <script>
-              function perkalian() {
-                var sksFields = document.getElementsByClassName('x');
-                var jumlahAngkaKreditFields = document.getElementsByName("inputs['+i+'][jumlah_angka_kredit']");
-                for (var i = 0; i < sksFields.length; i++) {
-                  var sks = parseFloat(sksFields[i].value);
-                  var volumeDosen = parseFloat(sksFields[i].parentNode.nextElementSibling.querySelector('.x').value);
-                  var result = (1 / volumeDosen) * sks;
-                  jumlahAngkaKreditFields[i].value = result;
-                }
-              }
-            </script>
-            <h3><b>Input Data Pelaksanaan Pendidikan</b> </h3>
-            <a href="{{ route('pelaksanaanpendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
-            <form method="POST" action="{{route('pelaksanaanpendidikan.store')}}" enctyp  e="multipart/form-data" >
+            <br>     
+            <br>
+
+
+            <form method="POST" action="{{route('unsurpelaksanaan.store')}}"  enctype="multipart/form-data">
               @csrf
-      
-              <div class="form-group row">
-                  <div class="col-md m-3">
-                      <label for="nama_kegiatan">Nama Kegiatan</label>
-                      <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
-                  </div>
-                  <div class="col-md m-3">
-                      <label for="tempat_instansi">Tempat Instansi</label>
-                      <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
-                  </div>
-                  <div class="col-md m-3">
-                      <label for="semester">Semester</label>
-                      <select class="form-control" id="semester_id" name="semester_id">
-                          <option>Pilih Semester</option>
-                          @foreach ($semester as $s)
-                              <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
-                          @endforeach
-                      </select>
-                  </div>
-              </div>
-      
-              <div class="form-group row ">
-                <div class="col-md m-3">
-                  <label for="jenispelaksanaan">Jenis Pelaksanaan</label>
-                  <select class="form-control" id="idjenispelaksanaan" name="idjenispelaksanaan">
-                      <option>Pilih Jenis Pelaksanaan</option>
-                      @foreach ($jenis_pelaksanaan_pendidikan as $p)
-                          <option @if($p->withsks == 0 ) id="is-sks" @endif class="" value="{{$p->id}}" title="{{$p->jenispelaksanaan}}">{{Str::limit($p->jenispelaksanaan,100)}}</option>
-                      @endforeach
-                  </select>                  
-                </div>
-              </div>
-
-              <div class="form-group row">
-                  <div class="col-md m-3">
-                      <label for="jumlah_kelas">Kelas</label>
-                      <input readonly type="number" class="form-control x" id="jumlah_kelas" name="jumlah_kelas" onkeyup="sum()">
-                  </div>
-                  <div class="col-md m-3">
-                    <label for="kuota_kelas_dosen">Kuota Kelas Dosen</label>
-                    <input readonly type="number" class="form-control x" id="kuota_kelas_dosen" name="kuota_kelas_dosen" onkeyup="sum()" >
-                </div>                  
-                  <div class="col-md m-3">
-                      <label for="volume_dosen">Volume Dosen</label>
-                      <input readonly type="number" class="form-control x" id="volume_dosen" name="volume_dosen" onkeyup="sum()" >
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <div class="col-md m-3">
-                      <label for="sks">SKS</label>
-                      <input readonly type="number" class="form-control x" id="sks" name="sks" onkeyup="sum()">
-                  </div>                
-                  <div class="col-md m-3">
-                      <label for="jumlah_angka_kredit">Angka Kredit</label>
-                      <input type="number" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit" onkeyup="sum()">
-                  </div>
-              </div>
-
-              <div>
-                <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
-              </div>
-
-              <div class="form-group row ">
-                <div class="col-md m-3">
-                  <label for="keterangan">Keterangan Kegiatan</label>
-                  <input  type="text" class="form-control" id="keterangan" name="keterangan"  placeholder="maksimal 100 kata">
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-md m-3">
-                  <label for="bukti">Bukti</label>
-                  <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
-                  @error('bukti')
-                      <div class="invalid-feedback">
-                          {{$message}}
+              <div id="inputFieldpelaksanaan" class = "inputFieldpelaksanaan" >
+                <div class="input-group ">
+                  <div class="col-lg-10 ">
+                    <div class="d-flex">
+                      <div class="flex-grow-1">
+                        <h3><b>Input Data Pelaksanaan Pendidikan</b></h3>
                       </div>
-                  @enderror
+                    </div>
+                  </div>
+                  <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                          <div class="col-md m-3">
+                              <label for="tempat_instansi">Instansi</label>
+                              <input type="text" class="form-control" id="tempat_instansi" name="inputs[0][tempat_instansi]">
+                          </div>       
+                          
+                          <div class="col-md m-3">
+                            <label for="semester">Semester</label>
+                            <select class="form-control" id="semester_id" name="inputs[0][semester_id]">
+                                <option>Pilih Semester</option>
+                                @foreach ($semester as $s)
+                                    <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                                @endforeach
+                            </select>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                          <div class="col-md m-3">
+                            <label for="semester">Jenis Pelaksanaan</label>
+                            <select class="form-control idjenispelaksanaan" id="idjenispelaksanaan" name="inputs[0][idjenispelaksanaan]">
+                                <option>Pilih Jenis Pelaksanaan</option>
+                                @foreach ($jenis_pelaksanaan_pendidikan as $j)
+                                    <option class="" value="{{$j->id}}" title="{{$j->jenispelaksanaan}}" angka-kredit = "{{ $j->angka_kredit }}">{{Str::limit($j->jenispelaksanaan,100)}}</option>
+                                @endforeach
+                            </select>
+                          </div>
+
+                        </div>
+                        
+              
+                        <div class="form-group row">
+                            <div class="col-md m-3">
+                              <label for="nama_kegiatan">Nama Kegiatan</label>
+                              <input type="text" class="form-control" id="nama_kegiatan" name="inputs[0][nama_kegiatan]">
+                            </div>
+
+                            <div class="col-md m-3">
+                                <label for="bukti">Bukti</label>
+                                <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="inputs[0][bukti]">
+                                @error('bukti')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
+              
+                            </div>
+
+                            
+                        </div>
+                        <div>
+                          <input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs[0][id_kum]">
+                        </div>
+
+                        <hr>
+                        Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan
+                    </div>
+                  </div>                    
                 </div>
-
               </div>
+              <button id="addButton-pelaksanaan" class="btn btn-primary" type="button">Add Field</button>
+              <button class="btn btn-success" type="submit">Submit</button>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-              <div class="col-md m-3 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+            <script>
+              var i = 0 ;    
+              var z = 0;      
+                $(document).ready(function() {
+                  ++i;
 
-              <script>
-                  const selectElement = document.getElementById('idjenispelaksanaan');
-                  const sks = document.getElementById('sks');
-                  const volumeDosen = document.getElementById('volume_dosen');
-                  const angkaKredit = document.getElementById('jumlah_angka_kredit');
-                  const jumlahkelas = document.getElementById('jumlah_kelas');
-                  const kuota_kelas_dosen = document.getElementById('kuota_kelas_dosen');
-                  selectElement.onchange = function() {
-                     var options = selectElement.options[selectElement.selectedIndex];
-                     if(options.id == 'is-sks'){
-                          sks.removeAttribute('readonly');
-                          jumlahkelas.removeAttribute('readonly');
-                          volumeDosen.removeAttribute('readonly');
-                          kuota_kelas_dosen.removeAttribute('readonly');
-                          angkaKredit.setAttribute('readonly','');
-                     }else{
-                          sks.setAttribute('readonly','');
-                          jumlahkelas.setAttribute('readonly','');
-                          volumeDosen.setAttribute('readonly','');
-                          kuota_kelas_dosen.removeAttribute('readonly','');
-                          angkaKredit.removeAttribute('readonly');
-                     }
-                  }
-                  function sum(){
-                    //(kelas / dosen) *sks
-                      var ckelas = document.getElementById("kuota_kelas_dosen").value ;
-                      var csks = document.getElementById("sks").value ;
-                      var hasil1 = parseFloat(ckelas)*parseFloat(csks);
-                      console.log(hasil1);
-                      document.getElementById("jumlah_angka_kredit").value = parseFloat(hasil1);   
-                  }
-              </script>
+
+                    // Add new field
+
+                    $('#addButton-pelaksanaan').click(function() {
+                        var fieldHTML =
+                        '<div id="inputFieldpelaksanaan"  class = "inputFieldpelaksanaan">'+
+                          '<div class="input-group-pelaksanaan ">'+
+
+                            '<div class="card shadow mb-4">'+
+                                  '<div class="card-header py-3">'+
+                                      '<div class="d-flex">'+
+                                        '<div class="card-header flex-grow-1 py-3 ">'+
+                                          '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>'+
+                                        '</div>'+
+                                        '<div class="input-group-append">'+
+                                          '<button class="btn btn-outline-secondary remove-field" type="button">&times;</button>'+
+                                        '</div>'+
+                                      '</div>'+
+                                  '</div>'+
+
+                                  '<div class="card-body">'+
+
+                                    '<div class="form-group row">'+
+                                      '<div class="col-md m-3">'+
+                                          '<label for="tempat_instansi">Instansi</label>'+
+                                          '<input type="text" class="form-control" id="tempat_instansi" name="inputs['+i+'][tempat_instansi]">'+
+                                      '</div>'+       
+                                      
+                                      '<div class="col-md m-3">'+
+                                        '<label for="semester">Semester</label>'+
+                                        '<select class="form-control" id="semester_id" name="inputs['+i+'][semester_id]">'+
+                                            '<option>Pilih Semester</option>'+
+                                            '@foreach ($semester as $s)'+
+                                                '<option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>'+
+                                            '@endforeach'+
+                                        '</select>'+
+                                      '</div>'+
+
+                                    '</div>'+
+
+                                    '<div class="form-group row">'+
+                                      '<div class="col-md m-3">'+
+                                        '<label for="semester">Jenis Pelaksanaan</label>'+
+                                        '<select class="form-control idjenispelaksanaan" id="idjenispelaksanaan" name="inputs['+i+'][idjenispelaksanaan]">'+
+                                            '<option>Pilih Jenis Pelaksanaan</option>'+
+                                            '@foreach ($jenis_pelaksanaan_pendidikan as $j)'+
+                                                '<option class="" value="{{$j->id}}" title="{{$j->jenispelaksanaan}}" angka-kredit = "{{ $j->angka_kredit }}">{{Str::limit($j->jenispelaksanaan,100)}}</option>'+
+                                            '@endforeach'+
+                                        '</select>'+
+                                      '</div>'+
+
+                                    '</div>'+
+
+
+                                    '<div class="form-group row">'+
+                                        '<div class="col-md m-3">'+
+                                          '<label for="nama_kegiatan">Nama Kegiatan</label>'+
+                                          '<input type="text" class="form-control" id="nama_kegiatan" name="inputs['+i+'][nama_kegiatan]">'+
+                                        '</div>'+
+
+                                        '<div class="col-md m-3">'+
+                                            '<label for="bukti">Bukti</label>'+
+                                            '<input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="inputs[+i+][bukti]">'+
+                                            '@error('bukti')'+
+                                                '<div class="invalid-feedback">'+
+                                                    '{{$message}}'+
+                                                '</div>'+
+                                            '@enderror' +
+                          
+                                        '</div>'+
+
+                                        
+                                    '</div>'+
+                                    '<div>'+
+                                      '<input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs['+i+'][id_kum]">'+
+                                    '</div>'+
+
+                                    '<hr>'+
+                                    'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan' +
+                                  '</div>'+
+
+
+
+                            '</div>'+           
+                          '</div>'+
+                        '</div>'
+
+
+                      $('#inputFieldpelaksanaan').append(fieldHTML);
+
+                    });
+                    // Remove field
+                    $(document).on('click', '.remove-field', function() {
+                        $(this).closest('.input-group-pelaksanaan').remove();
+                    });
+                });              
+            </script>
             </form>
+
+
             <div class="col-md">
               <table class="table">
                 <thead>
@@ -743,7 +801,7 @@
                                     @csrf
                                     @method('PUT')
                             
-                                    <div class="form-group row">
+                                    '<div class="form-group row">'
                                         <div class="col-md m-3">
                                             <label for="nama_kegiatan">Nama Kegiatan</label>
                                             <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">

@@ -14,75 +14,85 @@ class jenis_pelaksanaan_pendidikan extends Seeder
     public function run(): void
     {
         DB::table('jenis_pelaksanan_pendidikans')->insert([
-            [
-                        'jenispelaksanaan' => ' Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan',
-                        'withsks' => false
-                    ],
-                
+               
                     [
                         'jenispelaksanaan' => 'Membimbing seminar mahasiswa',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Membimbing Kuliah Kerja Nyata (KKN),Praktek Kerja Nyata (PKN),Praktek Kerja  Lapangan (PKL)',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Membimbing dan ikut Membimbing dalam menghasilkan laporan akhir tugas/skripsi/thesis/disertasi',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Bertugas sebagai penguji pada Ujian Akhir',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Bertugas sebagai penguji pada Ujian Akhir',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Membina kegiatan mahasiswa di Bidang akademi dan kemahasiswaan',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Mengembangkan program perkuliahan',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Mengembangkan bahan pengajaran',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Menyampaikan Orasi Ilmiah',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Menduduki jabatan pimpinan Perguruan Tinggi',
-                        'withsks' => true
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Membimbing Dosen yang lebih Rendah jabatan fungsionalnya',
-                        'withsks' => true
+                        'Lektor_Kepala' => true,
+                        'angka_kredit' => "2"
                     ],
+
                 
                     [
                         'jenispelaksanaan' => 'Melaksanakan kegiatan datasering Dan pencangkokan Dosen',
-                        'withsks' => true
+                        'Lektor_Kepala' => true,
+                        'angka_kredit' => "2"
                     ],
                 
                     [
                         'jenispelaksanaan' => 'Melaksanakan pengembangan diri untuk meningkatkan kompetensi',
-                        'withsks' => true
-                    ],
+                        'Lektor_Kepala' => false,
+                        'angka_kredit' => "2"
+                    ]
         ]);
 
 

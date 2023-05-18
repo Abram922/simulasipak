@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\pengajaran;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PengajaranController extends Controller
 {
@@ -27,34 +28,77 @@ class PengajaranController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     $inputs = $request->input('inputs');
+
+    //     foreach ($inputs as $input) {
+    //         $pengajaran = new Pengajaran();
+    //         $pengajaran->instansi = $input['instansi'];
+    //         $pengajaran->id_semester = $input['id_semester'];
+    //         $pengajaran->kode_matakuliah = $input['kode_matakuliah'];
+    //         $pengajaran->matakuliah = $input['matakuliah'];
+    //         $pengajaran->nama_kelas_pengajaran = $input['nama_kelas_pengajaran'];
+    //         $pengajaran->volume_dosen_pengajar = $input['volume_dosen_pengajar'];
+    //         $pengajaran->sks_pengajaran = $input['sks_pengajaran'];
+    //         $pengajaran->id_kum = $input['id_kum'];
+
+    //         //perhitungan 
+    //         $volumeDosen =floatval($input['volume_dosen_pengajar'])  ;
+    //         $sks = floatval($input['sks_pengajaran']) ;
+
+
+    //         $hasil = (1 / $volumeDosen) * $sks;
+
+    //         $pengajaran->jumlah_angka_kredit = floatval($hasil) ;                  
+    //         $pengajaran->save();
+    //     }
+
+
+    //     return back()->with('success', 'data berhasil disimpan');
+    // }
+
+
     public function store(Request $request)
-    {
-        $inputs = $request->input('inputs');
+{
+    $inputs = $request->input('inputs');
 
-        foreach ($inputs as $input) {
-            $pengajaran = new Pengajaran();
-            $pengajaran->instansi = $input['instansi'];
-            $pengajaran->id_semester = $input['id_semester'];
-            $pengajaran->kode_matakuliah = $input['kode_matakuliah'];
-            $pengajaran->matakuliah = $input['matakuliah'];
-            $pengajaran->nama_kelas_pengajaran = $input['nama_kelas_pengajaran'];
-            $pengajaran->volume_dosen_pengajar = $input['volume_dosen_pengajar'];
-            $pengajaran->sks_pengajaran = $input['sks_pengajaran'];
-            $pengajaran->id_kum = $input['id_kum'];
+    foreach ($inputs as $input) {
+        $validator = Validator::make($input, [
+            'instansi' => 'required',
+            'id_semester' => 'required',
+            'kode_matakuliah' => 'required',
+            'matakuliah' => 'required',
+            'nama_kelas_pengajaran' => 'required',
+            'volume_dosen_pengajar' => 'required|numeric',
+            'sks_pengajaran' => 'required|numeric',
+            'id_kum' => 'required',
+        ]);
 
-            //perhitungan 
-            $volumeDosen =floatval($input['volume_dosen_pengajar'])  ;
-            $sks = floatval($input['sks_pengajaran']) ;
-
-            $hasil = (1 / $volumeDosen) * $sks;
-
-            $pengajaran->jumlah_angka_kredit = floatval($hasil) ;                  
-            $pengajaran->save();
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
         }
 
+        $pengajaran = new Pengajaran();
+        $pengajaran->instansi = $input['instansi'];
+        $pengajaran->id_semester = $input['id_semester'];
+        $pengajaran->kode_matakuliah = $input['kode_matakuliah'];
+        $pengajaran->matakuliah = $input['matakuliah'];
+        $pengajaran->nama_kelas_pengajaran = $input['nama_kelas_pengajaran'];
+        $pengajaran->volume_dosen_pengajar = $input['volume_dosen_pengajar'];
+        $pengajaran->sks_pengajaran = $input['sks_pengajaran'];
+        $pengajaran->id_kum = $input['id_kum'];
+        $volumeDosen = floatval($input['volume_dosen_pengajar']);
+        $sks = floatval($input['sks_pengajaran']);
 
-        return back()->with('success', 'data berhasil disimpan');
+        $hasil = (1 / $volumeDosen) * $sks;
+
+        $pengajaran->jumlah_angka_kredit = floatval($hasil);
+        $pengajaran->save();
     }
+
+    return back()->with('success', 'Data berhasil disimpan');
+}
 
     /**
      * Display the specified resource.

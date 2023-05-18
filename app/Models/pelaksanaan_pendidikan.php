@@ -15,12 +15,8 @@ class pelaksanaan_pendidikan extends Model
         'semester_id',
         'nama_kegiatan',
         'tempat_instansi',
-        'sks',
-        'bukti',
-        'jumlah_kelas',
         'jumlah_angka_kredit',
-        'volume_dosen',
-        'kuota_kelas_dosen'
+        'bukti'
     ];
 
     public function semester(){
