@@ -34,13 +34,15 @@ class PelaksanaanPendidikanController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->input('inputs');
+        
     
-        foreach ($inputs as $input) {
+        foreach ($inputs as $i => $input) {
             $validator = Validator::make($input, [
                 'tempat_instansi' => 'required',
                 'semester_id' => 'required',
                 'idjenispelaksanaan' => 'required',
                 'nama_kegiatan' => 'required',
+                'bukti_pendidikan' => 'file' 
             ]);
     
             if ($validator->fails()) {
@@ -48,7 +50,7 @@ class PelaksanaanPendidikanController extends Controller
             }
     
             $idJenisPelaksanaan = $input['idjenispelaksanaan'];
-
+    
             $jenisPelaksanaan = jenis_pelaksanan_pendidikan::find($idJenisPelaksanaan);
     
             $pelaksanaanPendidikan = new pelaksanaan_pendidikan([
@@ -57,14 +59,27 @@ class PelaksanaanPendidikanController extends Controller
                 'semester_id' => $input['semester_id'],
                 'nama_kegiatan' => $input['nama_kegiatan'],
                 'tempat_instansi' => $input['tempat_instansi'],
-                'jumlah_angka_kredit' => $jenisPelaksanaan->angka_kredit,
+                'jumlah_angka_kredit' => $jenisPelaksanaan->angka_kredit
             ]);
+    
+            if ($image = $request->file('inputs.'.$i.'.bukti_pendidikan')) {
+                $destinationPath = 'pelaksanaanpendidikan/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $pelaksanaanPendidikan->bukti_pendidikan = $profileImage;
+            }
+            
+
     
             $pelaksanaanPendidikan->save();
         }
-    
+        
+       
+
         return back()->with('success', 'Data berhasil disimpan');
     }
+    
+    
     
     
     /**

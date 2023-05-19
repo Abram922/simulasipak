@@ -16,7 +16,7 @@ class pelaksanaan_pendidikan extends Model
         'nama_kegiatan',
         'tempat_instansi',
         'jumlah_angka_kredit',
-        'bukti'
+        'bukti_pendidikan'
     ];
 
     public function semester(){

@@ -227,74 +227,167 @@
         <div class="tab-pane fade show active" id="pendidikan-tab-pane" role="tabpanel" aria-labelledby="pendidikan-tab" tabindex="0">
           <div class="col-lg-10" style="margin-top: 30px">
               <h3><b>Input Data Pendidikan</b> </h3>
+
+
               <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
               <form method="POST" action="{{ route('pendidikan.store', $kum->id) }}" enctype="multipart/form-data">
                 @csrf
-              
-                <div class="form-group row">
-                    <div class="col-md m-3">
-                        <label for="institusi">Institusi Pendidikan</label>
-                        <input type="text" class="form-control" id="institusi" name="institusi">
-                    </div>
-                </div>
-                <div class="form-group ">
-                  <div class="col-md m-3">
-                    <label for="stratapendidikan">Strata Pendidikan</label>
-                    <select class="form-control" id="strata_id" name="strata_id">
-                        <option>Pilih Tingkat Strata Pendidikan</option>
-                        @foreach ($strata_pendidikan as $p)
-                            <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>
-                        @endforeach
-                    </select>
-                  </div>
-
-                </div>
-        
-                <div class="form-group row">
-                    <div class="col-md m-3">
-                        <label for="tanggal">Tanggal Kelulusan</label>
-                        <input type="date" class="form-control" id="tanggal" name="tanggal">
-                    </div>
-        
-        
-                    <div class="col-md m-3">
-                        <label for="kum">Jumlah KUM</label>
-                        <input disabled type="text" class="form-control" id="kum" name="kum">
-                    </div>
-                </div>
-        
-                
-                <div class="form-group ">
-                  <div class="col-md m-3">
-                    <label for="bukti">Bukti</label>
-                    <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
-                    @error('bukti')
-                        <div class="invalid-feedback">
-                            {{$message}}
+                <div id="inputFieldpendidikan" class = "inputFieldpendidikan" >
+                  <div class="input-group-pendidikan ">
+                    <div class="col-lg-10 ">
+                      <div class="d-flex">
+                        <div class="flex-grow-1">
+                          <h3><b>Input Data Pelaksanaan Pendidikan</b></h3>
                         </div>
-                    @enderror
-                  </div>
-
-                </div>
-
-                <div class="col-md m-3 text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-
-                <div>
-                  <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
-                </div>
-
-
+                      </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-md m-3">
+                                <label for="institusi">Institusi Pendidikan</label>
+                                <input type="text" class="form-control"  name="inputs[0][institusi]">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                          <div class="col-md m-3">
+                            <label for="stratapendidikan">Strata Pendidikan</label>
+                            <select class="form-control"  name="inputs[0][strata_id]">
+                                <option>Pilih Tingkat Strata Pendidikan</option>
+                                @foreach ($strata_pendidikan as $p)
+                                    <option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>
+                                @endforeach
+                            </select>
+                          </div>
         
-                <script>
-                var selectElem = document.getElementById('strata_id');
-                selectElem.addEventListener('change', function() {
-                var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
-                document.getElementById('kum').value = dataKum;
-                });
-                </script>
+                        </div>
+                        <div>
+                          <input hidden type="text" value="{{ $kum->id }}"  name="inputs[0][kum_id]">
+                        </div>
+                
+                        <div class="form-group row">
+                            <div class="col-md m-3">
+                                <label for="tanggal">Tanggal Kelulusan</label>
+                                <input type="date" class="form-control"  name="inputs[0][tanggal]">
+                            </div>
+                            <div class="col-md m-3">
+                              <label for="bukti">Bukti</label>
+                              <input class="form-control @error('bukti') is-invalid @enderror" type="file"  name="inputs[0][bukti]">
+                              @error('bukti')
+                                  <div class="invalid-feedback">
+                                      {{$message}}
+                                  </div>
+                              @enderror
+                            </div>
+                        </div>
+                
+                        
+                        
+                          <hr>
+                          Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan
+                      </div>
+                    </div>                    
+                  </div>
+                </div>
+                <button id="addButton-pendidikan" class="btn btn-primary" type="button">Add Field</button>
+                <button class="btn btn-success" type="submit">Submit</button>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+              <script>
+                var i = 0 ;    
+                var z = 0;      
+                  $(document).ready(function() {
+                    ++i;
+  
+  
+                      // Add new field
+  
+                      $('#addButton-pendidikan').click(function() {
+                          var fieldHTML =
+                          '<div id="inputFieldpendidikan"  class = "inputFieldpendidikan">'+
+                            '<div class="input-group-pendidikan ">'+
+                              '<div class="card shadow mb-4">'+
+                                    '<div class="card-header py-3">'+
+                                        '<div class="d-flex">'+
+                                          '<div class="card-header flex-grow-1 py-3 ">'+
+                                            '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>'+
+                                          '</div>'+
+                                          '<div class="input-group-append">'+
+                                            '<button class="btn btn-outline-secondary remove-field" type="button">&times;</button>'+
+                                          '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="card-body">'+
+                                      '<div class="form-group row">'+
+                                          '<div class="col-md m-3">'+
+                                              '<label for="institusi">Institusi Pendidikan</label>'+
+                                              '<input type="text" class="form-control" name="inputs['+i+'][institusi]">'+
+                                          '</div>'+
+                                      '</div>'+
+                                      '<div class="form-group ">'+
+                                        '<div class="col-md m-3">'+
+                                          '<label for="stratapendidikan">Strata Pendidikan</label>'+
+                                          '<select class="form-control"  name="inputs['+i+'][strata_id]">'+
+                                              '<option>Pilih Tingkat Strata Pendidikan</option>'+
+                                              '@foreach ($strata_pendidikan as $p)'+
+                                                  '<option class="" value="{{$p->id}}" data-kum ="{{$p->nilai}}" title="{{$p->strata}}">{{Str::limit($p->strata,100)}}</option>'+
+                                              '@endforeach'+
+                                          '</select>'+
+                                        '</div>'+
+                      
+                                      '</div>'+
+
+                                      '<div>'
+                                        '<input hidden type="text" value="{{ $kum->id }}"  name="inputs['+i+'][kum_id]">'
+                                      '</div>'
+                              
+                                      '<div class="form-group row">'+
+                                          '<div class="col-md m-3">'+
+                                              '<label for="tanggal">Tanggal Kelulusan</label>'+
+                                              '<input type="date" class="form-control"  name="inputs['+i+'][tanggal]">'+
+                                          '</div>'+
+                              
+                                          '<div class="col-md m-3">'+
+                                            '<label for="bukti">Bukti</label>'+
+                                            '<input class="form-control @error('bukti') is-invalid @enderror" type="file"  name="inputs['+i+'][bukti]">'+
+                                            '@error('bukti')'+
+                                                '<div class="invalid-feedback">'+
+                                                    '{{$message}}'+
+                                                '</div>'+
+                                            '@enderror'+
+                                          '</div>'+                              
+
+                                      '</div>'+
+                                        '<hr>'+
+                                        'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan'+
+                                    '</div>'+
+  
+
+                              '</div>'+           
+                            '</div>'+
+                          '</div>'
+  
+  
+                        $('#inputFieldpendidikan').append(fieldHTML);
+  
+                      });
+                      // Remove field
+                      $(document).on('click', '.remove-field', function() {
+                          $(this).closest('.input-group-pendidikan').remove();
+                      });
+                  });              
+              </script>
               </form>
+
+
+
+
+
+              <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
+
 
               <div class="col-md">
                 <table class="table">
@@ -458,7 +551,7 @@
                                 
                             </div>
                             <div>
-                              <input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs[0][id_kum]">
+                              <input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs[0   ][id_kum]">
                             </div>
 
                             <hr>
@@ -570,9 +663,11 @@
 
             <br>     
             <br>
+            
 
+            {{-- pengajaran --}}
 
-            <form method="POST" action="{{route('unsurpelaksanaan.store')}}"  enctype="multipart/form-data">
+            <form  action="{{ route('unsurpelaksanaan.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div id="inputFieldpelaksanaan" class = "inputFieldpelaksanaan" >
                 <div class="input-group ">
@@ -629,8 +724,8 @@
 
                             <div class="col-md m-3">
                                 <label for="bukti">Bukti</label>
-                                <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="inputs[0][bukti]">
-                                @error('bukti')
+                                <input class="form-control @error('bukti_pendidikan') is-invalid @enderror" type="file"  name="inputs[0][bukti_pendidikan]">
+                                @error('bukti_pendidikan')
                                     <div class="invalid-feedback">
                                         {{$message}}
                                     </div>
@@ -721,9 +816,9 @@
                                         '</div>'+
 
                                         '<div class="col-md m-3">'+
-                                            '<label for="bukti">Bukti</label>'+
-                                            '<input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="inputs[+i+][bukti]">'+
-                                            '@error('bukti')'+
+                                            '<label for="bukti_pendidikan"></label>'+
+                                            '<input class="form-control @error('bukti_pendidikan') is-invalid @enderror" type="file"  name="inputs['+i+'][bukti_pendidikan]">'+
+                                            '@error('bukti_pendidikan')'+
                                                 '<div class="invalid-feedback">'+
                                                     '{{$message}}'+
                                                 '</div>'+
@@ -740,9 +835,6 @@
                                     '<hr>'+
                                     'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan' +
                                   '</div>'+
-
-
-
                             '</div>'+           
                           '</div>'+
                         '</div>'
@@ -785,7 +877,7 @@
                         <td>{{ $pk->sks }}</td>
                         <td>{{ $pk->jumlah_kelas }}</td>
                         <td>{{ $pk->jumlah_angka_kredit }}</td>
-                        <td><a href="" target="_blank" class="btn btn-warning">Lihat File</a></td>
+                        <td><a href="/pelaksanaanpendidikan/{{ $pk->bukti_pendidikan }} " target="_blank" class="btn btn-warning">Lihat File</a></td>
                         <td>
       
                           <div class="modal fade" id="pelaksanaan_pendidikan_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

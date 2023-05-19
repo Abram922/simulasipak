@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('semester_id')->unsigned();
             $table->string('nama_kegiatan')->nullable();
             $table->string('tempat_instansi')->nullable();
-            $table->string('bukti')->nullable();
+            $table->string('bukti_pendidikan')->nullable();
             $table->integer('jumlah_angka_kredit')->nullable();
             $table->timestamps();
             $table->foreign('kum_id')->references('id')->on('kums')->onDelete('cascade');

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('id_kum')->unsigned();
             $table->integer('id_semester')->unsigned();
-            $table->string('kode_matakuliah')->nullable();            
+            $table->string('kode_matakuliah')->nullable();
             $table->string('matakuliah')->nullable();
             $table->string('instansi')->nullable();
             $table->string('sks_pengajaran')->nullable();
