@@ -44,11 +44,11 @@ class PelaksananPenelitianController extends Controller
 
         ]);
 
-        // return $input;
+         return $input;
 
-        pelaksanan_penelitian::create($input);
+        //pelaksanan_penelitian::create($input);
 
-        return redirect()->back()->with('message', 'Data berhasil disimpan');
+        //return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
     
 

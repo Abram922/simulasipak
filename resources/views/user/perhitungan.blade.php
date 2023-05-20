@@ -3,227 +3,227 @@
 
   <br>
 
-  <div class="row">
-    <div class="col-md">
-      <div class="jumbotron d-flex" > 
-        <div class="">
-            <h3>Hi,{{ Auth::user()->name }}</h3>
-            <p style="">Kelola Data Kamu Disini</p>
-        </div>
-        <div class="ms-auto" style="background-image: url('{{ asset('aset_web/p1.png') }}')">
-        </div>
-      </div>
-    </div>
-    
-
-    @php  
-        $kum1 = $kum->jabatanSekarang->angkaKreditKumulatif;
-        $kum2 = $kum->jabatanDituju->angkaKreditKumulatif;
-
-        $jabatandituju = $kum->jabatanDituju->jabatan;
-        $operasikum = intval($kum2) - intval($kum1);
-        if($jabatandituju == 'Asisten Ahli 100' ){
-          $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
-          $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-
-        }elseif ($jabatandituju == 'Asisten Ahli 150') {
-          $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
-          $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-
-        }elseif ($jabatandituju == 'Lektor 200') {
-          $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
-          $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-
-        }elseif ($jabatandituju == 'Lektor 300') {
-          $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
-          $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-
-        }elseif ($jabatandituju == 'Lektor Kepala 400') {
-          $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
-          $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-
-        }elseif ($jabatandituju == 'Lektor Kepala 550') {
-          $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
-          $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-          
-        }elseif ($jabatandituju == 'Lektor Kepala 700') {
-          $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
-          $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-          echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
-        }elseif ($jabatandituju == 'Professor 850') {
-          $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
-          $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-        }elseif ($jabatandituju == 'Professor 1050') {
-          $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
-          $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
-          $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
-        }else{
-          echo "NaN";
-        }
-
-        $persentasepelaksanaanpendidikan = (intval($sumpelaksanaanpendidikan) / intval($angkakreditpelaksanaanPendidikannmax) * 100 ) ;
-        $persentasepelaksanaanpenelitian = (intval($sumpelaksanaanpenelitian) / intval($angkakreditpelaksanaanPenelitianmax) * 100 ) ;
-        $persentasepm = (intval($sumpelaksanaanpm) / intval($angkakreditpelaksanaanPengabdianMasyarakatmax) * 100 ) ;
-        $persentasedp = (intval($sumdp) / intval($angkakreditpenunjangmax) * 100 ) ;
-
-        //pendidikan//
-
-        if($jabatandituju == 'Asisten Ahli 100' ){
-          if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
-          $poin = 0;
-          }else{
-          $poin = 100;
-          }
-        }elseif ($jabatandituju == 'Asisten Ahli 150') {
-          if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
-          $poin = 0;
-          }else{
-          $poin = 100;
-          }
-        }elseif ($jabatandituju == 'Lektor 200') {
-          if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
-          $poin = 0;
-          }else{
-          $poin = 100;
-          }
-        }elseif ($jabatandituju == 'Lektor 300') {
-          if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
-          $poin = 0;
-          }else{
-          $poin = 100;
-          }
-
-        }elseif ($jabatandituju == 'Lektor Kepala 400') {
-          if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
-          $poin = 0;
-          }else{
-          $poin = 100;
-          }
-
-        }elseif ($jabatandituju == 'Lektor Kepala 550') {
-          if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
-          $poin = 0;
-          }else{
-          $poin = 100;
-          }
-          
-        }elseif ($jabatandituju == 'Lektor Kepala 700') {
-          if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
-          $poin = 0;
-          }else{
-          $poin = 100;
-          }
-        }elseif ($jabatandituju == 'Professor 850') {
-          if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 200){
-          $poin = 0;
-          }else{
-          $poin = 100;
-          }
-        }elseif ($jabatandituju == 'Professor 1050') {
-          if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 200){
-          $poin = 0;
-          }else{
-          $poin = 100;
-          }
-        }else{
-        }
-    @endphp
-
-
-    <div class="col-md">
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Progres Pengerjaan KUM</h6>
-        </div>
-        <div class="card-body">
-            <h4 class="small font-weight-bold">Pendidikan   <span
-                    class="float-right">{{ $poin }}%</span></h4>
-            <div class="progress mb-4">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $poin }}%"
-                    aria-valuenow="{{ $poin }}" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Pelaksanaan Pendidikan<span
-                    class="float-right">{{ $persentasepelaksanaanpendidikan }}%</span></h4>
-            <div class="progress mb-4">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $persentasepelaksanaanpendidikan }}%"
-                    aria-valuenow="{{ $persentasepelaksanaanpendidikan }}" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Pelaksanaan Penelitian   <span
-                    class="float-right">{{ $persentasepelaksanaanpenelitian }}%</span></h4>
-            <div class="progress mb-4">
-                <div class="progress-bar" role="progressbar" style="width: {{ $persentasepelaksanaanpenelitian }}%"
-                    aria-valuenow="{{ $persentasepelaksanaanpenelitian }}" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Pengabdian Kepada Masyarakat   <span
-                    class="float-right">{{ $persentasepm }}%</span></h4>
-            <div class="progress mb-4">
-                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $persentasepm }}%"
-                    aria-valuenow="{{ $persentasepm }}" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Dokumen Penunjang   <span
-                    class="float-right">{{ $persentasedp }}</span></h4>
-            <div class="progress">  
-                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasedp }}%"
-                    aria-valuenow="{{ $persentasedp }}" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+  <div class="col-md-10 mx-auto">
+    <div class="row">
+      <div class="col-md">
+        <div class="jumbotron d-flex" > 
+          <div class="">
+              <h3>Hi,{{ Auth::user()->name }}</h3>
+              <p style="">Kelola Data Kamu Disini</p>
+          </div>
+          <div class="ms-auto" style="background-image: url('{{ asset('aset_web/p1.png') }}')">
+          </div>
         </div>
       </div>
+      
+
+      @php  
+          $kum1 = $kum->jabatanSekarang->angkaKreditKumulatif;
+          $kum2 = $kum->jabatanDituju->angkaKreditKumulatif;
+
+          $jabatandituju = $kum->jabatanDituju->jabatan;
+          $operasikum = intval($kum2) - intval($kum1);
+          if($jabatandituju == 'Asisten Ahli 100' ){
+            $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+            $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+
+          }elseif ($jabatandituju == 'Asisten Ahli 150') {
+            $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+            $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+
+          }elseif ($jabatandituju == 'Lektor 200') {
+            $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+            $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+
+          }elseif ($jabatandituju == 'Lektor 300') {
+            $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+            $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+
+          }elseif ($jabatandituju == 'Lektor Kepala 400') {
+            $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+            $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+
+          }elseif ($jabatandituju == 'Lektor Kepala 550') {
+            $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+            $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+            
+          }elseif ($jabatandituju == 'Lektor Kepala 700') {
+            $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+            $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+            echo $angkakreditpelaksanaanPengabdianMasyarakatmax;
+          }elseif ($jabatandituju == 'Professor 850') {
+            $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+            $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+          }elseif ($jabatandituju == 'Professor 1050') {
+            $angkakreditpelaksanaanPendidikannmax = (intval($kum->jabatanDituju->pelaksanaanPendidikan) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPenelitianmax = (intval($kum->jabatanDituju->pelaksanaanPenelitian) / 100) * intval($operasikum);
+            $angkakreditpelaksanaanPengabdianMasyarakatmax = (intval($kum->jabatanDituju->pelaksanaanPengabdianMasyarakat) / 100) * intval($operasikum);
+            $angkakreditpenunjangmax = (intval($kum->jabatanDituju->penunjang) / 100) * intval($operasikum);
+          }else{
+            echo "NaN";
+          }
+
+          $persentasepelaksanaanpendidikan = (intval($sumpelaksanaanpendidikan) / intval($angkakreditpelaksanaanPendidikannmax) * 100 ) ;
+          $persentasepelaksanaanpenelitian = (intval($sumpelaksanaanpenelitian) / intval($angkakreditpelaksanaanPenelitianmax) * 100 ) ;
+          $persentasepm = (intval($sumpelaksanaanpm) / intval($angkakreditpelaksanaanPengabdianMasyarakatmax) * 100 ) ;
+          $persentasedp = (intval($sumdp) / intval($angkakreditpenunjangmax) * 100 ) ;
+
+          //pendidikan//
+
+          if($jabatandituju == 'Asisten Ahli 100' ){
+            if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+            $poin = 0;
+            }else{
+            $poin = 100;
+            }
+          }elseif ($jabatandituju == 'Asisten Ahli 150') {
+            if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+            $poin = 0;
+            }else{
+            $poin = 100;
+            }
+          }elseif ($jabatandituju == 'Lektor 200') {
+            if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+            $poin = 0;
+            }else{
+            $poin = 100;
+            }
+          }elseif ($jabatandituju == 'Lektor 300') {
+            if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+            $poin = 0;
+            }else{
+            $poin = 100;
+            }
+
+          }elseif ($jabatandituju == 'Lektor Kepala 400') {
+            if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+            $poin = 0;
+            }else{
+            $poin = 100;
+            }
+
+          }elseif ($jabatandituju == 'Lektor Kepala 550') {
+            if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+            $poin = 0;
+            }else{
+            $poin = 100;
+            }
+            
+          }elseif ($jabatandituju == 'Lektor Kepala 700') {
+            if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 150){
+            $poin = 0;
+            }else{
+            $poin = 100;
+            }
+          }elseif ($jabatandituju == 'Professor 850') {
+            if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 200){
+            $poin = 0;
+            }else{
+            $poin = 100;
+            }
+          }elseif ($jabatandituju == 'Professor 1050') {
+            if($poinpendidikan == null || $poinpendidikan == 0 || $poinpendidikan < 200){
+            $poin = 0;
+            }else{
+            $poin = 100;
+            }
+          }else{
+          }
+      @endphp
+
+
+      <div class="col-md">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Progres Pengerjaan KUM</h6>
+          </div>
+          <div class="card-body">
+              <h4 class="small font-weight-bold">Pendidikan   <span
+                      class="float-right">{{ $poin }}%</span></h4>
+              <div class="progress mb-4">
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $poin }}%"
+                      aria-valuenow="{{ $poin }}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <h4 class="small font-weight-bold">Pelaksanaan Pendidikan<span
+                      class="float-right">{{ $persentasepelaksanaanpendidikan }}%</span></h4>
+              <div class="progress mb-4">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $persentasepelaksanaanpendidikan }}%"
+                      aria-valuenow="{{ $persentasepelaksanaanpendidikan }}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <h4 class="small font-weight-bold">Pelaksanaan Penelitian   <span
+                      class="float-right">{{ $persentasepelaksanaanpenelitian }}%</span></h4>
+              <div class="progress mb-4">
+                  <div class="progress-bar" role="progressbar" style="width: {{ $persentasepelaksanaanpenelitian }}%"
+                      aria-valuenow="{{ $persentasepelaksanaanpenelitian }}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <h4 class="small font-weight-bold">Pengabdian Kepada Masyarakat   <span
+                      class="float-right">{{ $persentasepm }}%</span></h4>
+              <div class="progress mb-4">
+                  <div class="progress-bar bg-info" role="progressbar" style="width: {{ $persentasepm }}%"
+                      aria-valuenow="{{ $persentasepm }}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <h4 class="small font-weight-bold">Dokumen Penunjang   <span
+                      class="float-right">{{ $persentasedp }}</span></h4>
+              <div class="progress">  
+                  <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasedp }}%"
+                      aria-valuenow="{{ $persentasedp }}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
+    <script>
+      $(document).ready(function(){
+        // saat tombol dengan class 'btn' di klik
+        $('.btn').click(function(){
+          // menutup semua collapse yang ada di dalam class 'collapse-container'
+          $('.collapse-container').find('.collapse').collapse('hide');
+        });
+      });
+    </script>
+
+    <ul class="nav nav-underline flex justify-content-around mt-3" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pendidikan-tab" data-bs-toggle="tab" data-bs-target="#pendidikan-tab-pane" type="button" role="tab" aria-controls="pendidikan-tab-pane" aria-selected="true">Pendidikan</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pelaksanaanpendidikan-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpendidikan-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpendidikan-tab-pane" aria-selected="false">Pelaksanaan Pendidikan || {{ $sumpelaksanaanpendidikan }}</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pelaksanaanpenelitian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpenelitian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpenelitian-tab-pane" aria-selected="false">Pelaksanaan Penelitian || {{ $sumpelaksanaanpenelitian }}</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pelaksanaanpengabdian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpengabdian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpengabdian-tab-pane" aria-selected="false">Pengabdian Kepada Masyarakat || {{ $sumpelaksanaanpm }}</button>
+          </li> 
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="unsur-tab" data-bs-toggle="tab" data-bs-target="#unsur-tab-pane" type="button" role="tab" aria-controls="unsur-tab-pane" aria-selected="false">Unsur Penunjang || {{ $sumdp }}</button>
+          </li>
+    </ul>
   </div>
 
-
-
-  <script>
-    $(document).ready(function(){
-      // saat tombol dengan class 'btn' di klik
-      $('.btn').click(function(){
-        // menutup semua collapse yang ada di dalam class 'collapse-container'
-        $('.collapse-container').find('.collapse').collapse('hide');
-      });
-    });
-  </script>
-
-      <ul class="nav nav-underline flex justify-content-around mt-3" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="pendidikan-tab" data-bs-toggle="tab" data-bs-target="#pendidikan-tab-pane" type="button" role="tab" aria-controls="pendidikan-tab-pane" aria-selected="true">Pendidikan</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pelaksanaanpendidikan-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpendidikan-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpendidikan-tab-pane" aria-selected="false">Pelaksanaan Pendidikan || {{ $sumpelaksanaanpendidikan }}</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pelaksanaanpenelitian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpenelitian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpenelitian-tab-pane" aria-selected="false">Pelaksanaan Penelitian || {{ $sumpelaksanaanpenelitian }}</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pelaksanaanpengabdian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpengabdian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpengabdian-tab-pane" aria-selected="false">Pengabdian Kepada Masyarakat || {{ $sumpelaksanaanpm }}</button>
-        </li> 
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="unsur-tab" data-bs-toggle="tab" data-bs-target="#unsur-tab-pane" type="button" role="tab" aria-controls="unsur-tab-pane" aria-selected="false">Unsur Penunjang || {{ $sumdp }}</button>
-        </li>
-      </ul>
-
-
       <div class="tab-content mb-4" id="myTabContent">
-        {{-- . Unsur Pendidikan  --}}        
+        {{-- . Unsur Pendidikan  --}}   
+             
         <div class="tab-pane fade show active" id="pendidikan-tab-pane" role="tabpanel" aria-labelledby="pendidikan-tab" tabindex="0">
-          <div class="col-lg-10" style="margin-top: 30px">
+          <div class="col-lg-10 mx-auto" style="margin-top: 30px">
               <h3><b>Input Data Pendidikan</b> </h3>
               <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
               <form method="POST" action="{{ route('pendidikan.store', $kum->id) }}" enctype="multipart/form-data">
@@ -382,7 +382,7 @@
         </div>
         {{-- . Unsur Pelaksanaan Pendidikan  --}}
         <div class="tab-pane fade" id="pelaksanaanpendidikan-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpendidikan-tab" tabindex="0">
-          <div class="col-lg-10" style="margin-top: 30px">
+          <div class="col-lg-10 mx-auto" style="margin-top: 30px">
             <form action="{{ route('pengajaran.store') }}" method="POST"  enctype="multipart/form-data"id="myForm" >
               @csrf
                 <div id="inputFields" class = "inputFields" >
@@ -561,388 +561,397 @@
             <br>
             
 
+
+
+          </div>
             {{-- pengajaran --}}
-            <div class="" style="background-color: #F9F9FE">
-            <form  action="{{ route('unsurpelaksanaan.store') }}" method="POST" enctype="multipart/form-data">
-              @csrf
-              <div id="inputFieldpelaksanaan" class = "inputFieldpelaksanaan" >
-                <div class="input-group ">
-                  <div class="col-lg-10 ">
-                    <div class="d-flex">
-                      <div class="flex-grow-1">
-                        <h3><b>Input Data Pelaksanaan Pendidikan</b></h3>
+
+            <div class="col-md-12" style="background-color: #F9F9FE">
+              <div class="col-lg-10 mx-auto" style="margin-top: 30px">
+                <div class="" >
+                  <form  action="{{ route('unsurpelaksanaan.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div id="inputFieldpelaksanaan" class = "inputFieldpelaksanaan" >
+                      <div class="input-group ">
+                        <div class="col-lg-10 ">
+                          <div class="d-flex">
+                            <div class="flex-grow-1">
+                              <h3><b>Input Data Pelaksanaan Pendidikan</b></h3>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card shadow mb-4">
+                          <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>
+                          </div>
+                          <div class="card-body">
+    
+                              <div class="form-group row">
+                                <div class="col-md m-3">
+                                    <label for="tempat_instansi">Instansi</label>
+                                    <input type="text" class="form-control" id="tempat_instansi" name="inputs[0][tempat_instansi]">
+                                </div>       
+                                
+                                <div class="col-md m-3">
+                                  <label for="semester">Semester</label>
+                                  <select class="form-control" id="semester_id" name="inputs[0][semester_id]">
+                                      <option>Pilih Semester</option>
+                                      @foreach ($semester as $s)
+                                          <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                                      @endforeach
+                                  </select>
+                                </div>
+    
+                              </div>
+    
+                              <div class="form-group row">
+                                <div class="col-md m-3">
+                                  <label for="semester">Jenis Pelaksanaan</label>
+                                  <select class="form-control idjenispelaksanaan" id="idjenispelaksanaan" name="inputs[0][idjenispelaksanaan]">
+                                      <option>Pilih Jenis Pelaksanaan</option>
+                                      @foreach ($jenis_pelaksanaan_pendidikan as $j)
+                                          <option class="" value="{{$j->id}}" title="{{$j->jenispelaksanaan}}" angka-kredit = "{{ $j->angka_kredit }}">{{Str::limit($j->jenispelaksanaan,100)}}</option>
+                                      @endforeach
+                                  </select>
+                                </div>
+    
+                              </div>
+                              
+                    
+                              <div class="form-group row">
+                                  <div class="col-md m-3">
+                                    <label for="nama_kegiatan">Nama Kegiatan</label>
+                                    <input type="text" class="form-control" id="nama_kegiatan" name="inputs[0][nama_kegiatan]">
+                                  </div>
+    
+                                  <div class="col-md m-3">
+                                      <label for="bukti">Bukti</label>
+                                      <input class="form-control @error('bukti_pendidikan') is-invalid @enderror" type="file"  name="inputs[0][bukti_pendidikan]">
+                                      @error('bukti_pendidikan')
+                                          <div class="invalid-feedback">
+                                              {{$message}}
+                                          </div>
+                                      @enderror
+                    
+                                  </div>
+    
+                                  
+                              </div>
+                              <div>
+                                <input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs[0][id_kum]">
+                              </div>
+    
+                              <hr>
+                              Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan
+                          </div>
+                        </div>                    
                       </div>
                     </div>
-                  </div>
-                  <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                      <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>
-                    </div>
-                    <div class="card-body">
-
-                        <div class="form-group row">
-                          <div class="col-md m-3">
-                              <label for="tempat_instansi">Instansi</label>
-                              <input type="text" class="form-control" id="tempat_instansi" name="inputs[0][tempat_instansi]">
-                          </div>       
-                          
-                          <div class="col-md m-3">
-                            <label for="semester">Semester</label>
-                            <select class="form-control" id="semester_id" name="inputs[0][semester_id]">
-                                <option>Pilih Semester</option>
-                                @foreach ($semester as $s)
-                                    <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
-                                @endforeach
-                            </select>
-                          </div>
-
-                        </div>
-
-                        <div class="form-group row">
-                          <div class="col-md m-3">
-                            <label for="semester">Jenis Pelaksanaan</label>
-                            <select class="form-control idjenispelaksanaan" id="idjenispelaksanaan" name="inputs[0][idjenispelaksanaan]">
-                                <option>Pilih Jenis Pelaksanaan</option>
-                                @foreach ($jenis_pelaksanaan_pendidikan as $j)
-                                    <option class="" value="{{$j->id}}" title="{{$j->jenispelaksanaan}}" angka-kredit = "{{ $j->angka_kredit }}">{{Str::limit($j->jenispelaksanaan,100)}}</option>
-                                @endforeach
-                            </select>
-                          </div>
-
-                        </div>
-                        
-              
-                        <div class="form-group row">
-                            <div class="col-md m-3">
-                              <label for="nama_kegiatan">Nama Kegiatan</label>
-                              <input type="text" class="form-control" id="nama_kegiatan" name="inputs[0][nama_kegiatan]">
-                            </div>
-
-                            <div class="col-md m-3">
-                                <label for="bukti">Bukti</label>
-                                <input class="form-control @error('bukti_pendidikan') is-invalid @enderror" type="file"  name="inputs[0][bukti_pendidikan]">
-                                @error('bukti_pendidikan')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
-                                    </div>
-                                @enderror
-              
-                            </div>
-
-                            
-                        </div>
-                        <div>
-                          <input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs[0][id_kum]">
-                        </div>
-
-                        <hr>
-                        Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan
-                    </div>
-                  </div>                    
-                </div>
-              </div>
-              <button id="addButton-pelaksanaan" class="btn btn-primary" type="button">Add Field</button>
-              <button class="btn btn-success" type="submit">Submit</button>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-            <script>
-              var i = 0 ;    
-              var z = 0;      
-                $(document).ready(function() {
-                  ++i;
-
-
-                    // Add new field
-
-                    $('#addButton-pelaksanaan').click(function() {
-                        var fieldHTML =
-                        '<div id="inputFieldpelaksanaan"  class = "inputFieldpelaksanaan">'+
-                          '<div class="input-group-pelaksanaan ">'+
-
-                            '<div class="card shadow mb-4">'+
-                                  '<div class="card-header py-3">'+
-                                      '<div class="d-flex">'+
-                                        '<div class="card-header flex-grow-1 py-3 ">'+
-                                          '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>'+
-                                        '</div>'+
-                                        '<div class="input-group-append">'+
-                                          '<button class="btn btn-outline-secondary remove-field" type="button">&times;</button>'+
-                                        '</div>'+
-                                      '</div>'+
-                                  '</div>'+
-
-                                  '<div class="card-body">'+
-
-                                    '<div class="form-group row">'+
-                                      '<div class="col-md m-3">'+
-                                          '<label for="tempat_instansi">Instansi</label>'+
-                                          '<input type="text" class="form-control" id="tempat_instansi" name="inputs['+i+'][tempat_instansi]">'+
-                                      '</div>'+       
-                                      
-                                      '<div class="col-md m-3">'+
-                                        '<label for="semester">Semester</label>'+
-                                        '<select class="form-control" id="semester_id" name="inputs['+i+'][semester_id]">'+
-                                            '<option>Pilih Semester</option>'+
-                                            '@foreach ($semester as $s)'+
-                                                '<option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>'+
-                                            '@endforeach'+
-                                        '</select>'+
-                                      '</div>'+
-
-                                    '</div>'+
-
-                                    '<div class="form-group row">'+
-                                      '<div class="col-md m-3">'+
-                                        '<label for="semester">Jenis Pelaksanaan</label>'+
-                                        '<select class="form-control idjenispelaksanaan" id="idjenispelaksanaan" name="inputs['+i+'][idjenispelaksanaan]">'+
-                                            '<option>Pilih Jenis Pelaksanaan</option>'+
-                                            '@foreach ($jenis_pelaksanaan_pendidikan as $j)'+
-                                                '<option class="" value="{{$j->id}}" title="{{$j->jenispelaksanaan}}" angka-kredit = "{{ $j->angka_kredit }}">{{Str::limit($j->jenispelaksanaan,100)}}</option>'+
-                                            '@endforeach'+
-                                        '</select>'+
-                                      '</div>'+
-
-                                    '</div>'+
-
-
-                                    '<div class="form-group row">'+
-                                        '<div class="col-md m-3">'+
-                                          '<label for="nama_kegiatan">Nama Kegiatan</label>'+
-                                          '<input type="text" class="form-control" id="nama_kegiatan" name="inputs['+i+'][nama_kegiatan]">'+
-                                        '</div>'+
-
-                                        '<div class="col-md m-3">'+
-                                            '<label for="bukti_pendidikan"></label>'+
-                                            '<input class="form-control @error('bukti_pendidikan') is-invalid @enderror" type="file"  name="inputs['+i+'][bukti_pendidikan]">'+
-                                            '@error('bukti_pendidikan')'+
-                                                '<div class="invalid-feedback">'+
-                                                    '{{$message}}'+
+                    <button id="addButton-pelaksanaan" class="btn btn-primary" type="button">Add Field</button>
+                    <button class="btn btn-success" type="submit">Submit</button>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      
+                    <script>
+                      var i = 0 ;    
+                      var z = 0;      
+                        $(document).ready(function() {
+                          ++i;
+      
+      
+                            // Add new field
+      
+                            $('#addButton-pelaksanaan').click(function() {
+                                var fieldHTML =
+                                '<div id="inputFieldpelaksanaan"  class = "inputFieldpelaksanaan">'+
+                                  '<div class="input-group-pelaksanaan ">'+
+      
+                                    '<div class="card shadow mb-4">'+
+                                          '<div class="card-header py-3">'+
+                                              '<div class="d-flex">'+
+                                                '<div class="card-header flex-grow-1 py-3 ">'+
+                                                  '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>'+
                                                 '</div>'+
-                                            '@enderror' +
-                          
-                                        '</div>'+
-
-                                        
-                                    '</div>'+
-                                    '<div>'+
-                                      '<input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs['+i+'][id_kum]">'+
-                                    '</div>'+
-
-                                    '<hr>'+
-                                    'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan' +
+                                                '<div class="input-group-append">'+
+                                                  '<button class="btn btn-outline-secondary remove-field" type="button">&times;</button>'+
+                                                '</div>'+
+                                              '</div>'+
+                                          '</div>'+
+      
+                                          '<div class="card-body">'+
+      
+                                            '<div class="form-group row">'+
+                                              '<div class="col-md m-3">'+
+                                                  '<label for="tempat_instansi">Instansi</label>'+
+                                                  '<input type="text" class="form-control" id="tempat_instansi" name="inputs['+i+'][tempat_instansi]">'+
+                                              '</div>'+       
+                                              
+                                              '<div class="col-md m-3">'+
+                                                '<label for="semester">Semester</label>'+
+                                                '<select class="form-control" id="semester_id" name="inputs['+i+'][semester_id]">'+
+                                                    '<option>Pilih Semester</option>'+
+                                                    '@foreach ($semester as $s)'+
+                                                        '<option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>'+
+                                                    '@endforeach'+
+                                                '</select>'+
+                                              '</div>'+
+      
+                                            '</div>'+
+      
+                                            '<div class="form-group row">'+
+                                              '<div class="col-md m-3">'+
+                                                '<label for="semester">Jenis Pelaksanaan</label>'+
+                                                '<select class="form-control idjenispelaksanaan" id="idjenispelaksanaan" name="inputs['+i+'][idjenispelaksanaan]">'+
+                                                    '<option>Pilih Jenis Pelaksanaan</option>'+
+                                                    '@foreach ($jenis_pelaksanaan_pendidikan as $j)'+
+                                                        '<option class="" value="{{$j->id}}" title="{{$j->jenispelaksanaan}}" angka-kredit = "{{ $j->angka_kredit }}">{{Str::limit($j->jenispelaksanaan,100)}}</option>'+
+                                                    '@endforeach'+
+                                                '</select>'+
+                                              '</div>'+
+      
+                                            '</div>'+
+      
+      
+                                            '<div class="form-group row">'+
+                                                '<div class="col-md m-3">'+
+                                                  '<label for="nama_kegiatan">Nama Kegiatan</label>'+
+                                                  '<input type="text" class="form-control" id="nama_kegiatan" name="inputs['+i+'][nama_kegiatan]">'+
+                                                '</div>'+
+      
+                                                '<div class="col-md m-3">'+
+                                                    '<label for="bukti_pendidikan"></label>'+
+                                                    '<input class="form-control @error('bukti_pendidikan') is-invalid @enderror" type="file"  name="inputs['+i+'][bukti_pendidikan]">'+
+                                                    '@error('bukti_pendidikan')'+
+                                                        '<div class="invalid-feedback">'+
+                                                            '{{$message}}'+
+                                                        '</div>'+
+                                                    '@enderror' +
+                                  
+                                                '</div>'+
+      
+                                                
+                                            '</div>'+
+                                            '<div>'+
+                                              '<input hidden type="text" value="{{ $kum->id }}" id="id_kum" name="inputs['+i+'][id_kum]">'+
+                                            '</div>'+
+      
+                                            '<hr>'+
+                                            'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan' +
+                                          '</div>'+
+                                    '</div>'+           
                                   '</div>'+
-                            '</div>'+           
-                          '</div>'+
-                        '</div>'
-
-
-                      $('#inputFieldpelaksanaan').append(fieldHTML);
-
-                    });
-                    // Remove field
-                    $(document).on('click', '.remove-field', function() {
-                        $(this).closest('.input-group-pelaksanaan').remove();
-                    });
-                });              
-            </script>
-            </form>
-
-            </div>
-
-
-
-            <div class="col-md">
-              <table class="table">
-                <thead>
-                    <th>No</th>
-                    <th>Jenis Pelaksanaan</th>
-                    <th>Semester</th>
-                    <th>Kegiatan Pendidikan dan Pengajaran</th>
-                    <th>Tempat/Instansi</th>
-                    <th>SKS</th>
-                    <th>Jumlah Kelas</th>
-                    <th>Angka Kredit</th>
-                    <th>File</th>
-                    <th>Aksi</th>
-                </thead>
+                                '</div>'
       
-                @foreach ($pelaksanaan_pendidikan as $pk)
-                <tbody>
-                        <td></td>
-                        <td>{{ $pk->jenispelaksanaan->jenispelaksanaan }}</td>
-                        <td>{{ $pk->semester->semester}}</td>
-                        <td>{{ $pk->nama_kegiatan }}</td>
-                        <td>{{ $pk->tempat_instansi }}</td>
-                        <td>{{ $pk->sks }}</td>
-                        <td>{{ $pk->jumlah_kelas }}</td>
-                        <td>{{ $pk->jumlah_angka_kredit }}</td>
-                        <td><a href="/pelaksanaanpendidikan/{{ $pk->bukti_pendidikan }} " target="_blank" class="btn btn-warning">Lihat File</a></td>
-                        <td>
       
-                          <div class="modal fade" id="pelaksanaan_pendidikan_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-
-                                <div class="modal-body">
-                                  <form method="POST" action="{{route('pelaksanaanpendidikan.update', $pk->id)}}" enctyp  e="multipart/form-data" >
-                                    @csrf
-                                    @method('PUT')
-                            
-                                    '<div class="form-group row">'
-                                        <div class="col-md m-3">
-                                            <label for="nama_kegiatan">Nama Kegiatan</label>
-                                            <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
-                                        </div>
-                                        <div class="col-md m-3">
-                                            <label for="tempat_instansi">Tempat Instansi</label>
-                                            <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
-                                        </div>
-                                        <div class="col-md m-3">
-                                            <label for="semester">Semester</label>
-                                            <select class="form-control" id="semester_id" name="semester_id">
-                                                <option>Pilih Semester</option>
-                                                @foreach ($semester as $s)
-                                                    <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                              $('#inputFieldpelaksanaan').append(fieldHTML);
+      
+                            });
+                            // Remove field
+                            $(document).on('click', '.remove-field', function() {
+                                $(this).closest('.input-group-pelaksanaan').remove();
+                            });
+                        });              
+                    </script>
+                  </form>
+                </div>
+    
+    
+    
+                <div class="col-md">
+                  <table class="table">
+                    <thead>
+                        <th>No</th>
+                        <th>Jenis Pelaksanaan</th>
+                        <th>Semester</th>
+                        <th>Kegiatan Pendidikan dan Pengajaran</th>
+                        <th>Tempat/Instansi</th>
+                        <th>SKS</th>
+                        <th>Jumlah Kelas</th>
+                        <th>Angka Kredit</th>
+                        <th>File</th>
+                        <th>Aksi</th>
+                    </thead>
+          
+                    @foreach ($pelaksanaan_pendidikan as $pk)
+                    <tbody>
+                            <td></td>
+                            <td>{{ $pk->jenispelaksanaan->jenispelaksanaan }}</td>
+                            <td>{{ $pk->semester->semester}}</td>
+                            <td>{{ $pk->nama_kegiatan }}</td>
+                            <td>{{ $pk->tempat_instansi }}</td>
+                            <td>{{ $pk->sks }}</td>
+                            <td>{{ $pk->jumlah_kelas }}</td>
+                            <td>{{ $pk->jumlah_angka_kredit }}</td>
+                            <td><a href="/pelaksanaanpendidikan/{{ $pk->bukti_pendidikan }} " target="_blank" class="btn btn-warning">Lihat File</a></td>
+                            <td>
+          
+                              <div class="modal fade" id="pelaksanaan_pendidikan_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                            
-                                    <div class="form-group row ">
-                                      <div class="col-md m-3">
-                                        <label for="jenispelaksanaan">Jenis Pelaksanaan</label>
-                                        <select class="form-control" id="idjenispelaksanaan" name="idjenispelaksanaan">
-                                            <option>Pilih Jenis Pelaksanaan</option>
-                                            @foreach ($jenis_pelaksanaan_pendidikan as $p)
-                                                <option @if($p->withsks == 0 ) id="is-sks" @endif class="" value="{{$p->id}}" title="{{$p->jenispelaksanaan}}">{{Str::limit($p->jenispelaksanaan,100)}}</option>
-                                            @endforeach
-                                        </select>                  
-                                      </div>
-                                    </div>
-                      
-                                    <div class="form-group row">
-                                        <div class="col-md m-3">
-                                            <label for="jumlah_kelas">Kelas</label>
-                                            <input readonly type="number" class="form-control x" id="jumlah_kelas" name="jumlah_kelas" onkeyup="sum()">
-                                        </div>
-                                        <div class="col-md m-3">
-                                            <label for="volume_dosen">Volume Dosen</label>
-                                            <input readonly type="number" class="form-control x" id="volume_dosen" name="volume_dosen" onkeyup="sum()" >
-                                        </div>
-                                        <div class="col-md m-3">
-                                            <label for="sks">SKS</label>
-                                            <input readonly type="number" class="form-control x" id="sks" name="sks" onkeyup="sum()">
-                                        </div>
-                                        <input  hidden type="number" class="form-control" id="kelasxvdosen" name="kelasxvdosen">
-                                        <div class="col-md m-3">
-                                            <label for="jumlah_angka_kredit">Angka Kredit</label>
-                                            <input type="number" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit" onkeyup="sum()">
-                                        </div>
-                                        <input  hidden type="number" class="form-control" id="hasil3" name="hasil3">
-                                    </div>
-                      
-                                    <div class="form-group row ">
-                                      <div class="col-md m-3">
-                                        <label for="keterangan">Keterangan Kegiatan</label>
-                                        <input  type="text" class="form-control" id="keterangan" name="keterangan"  placeholder="maksimal 100 kata">
-                                      </div>
-                                    </div>
-                                    <div class="form-group row">
-                                      <div class="col-md m-3">
-                                        <label for="bukti">Bukti</label>
-                                        <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
-                                        @error('bukti')
-                                            <div class="invalid-feedback">
-                                                {{$message}}
+    
+                                    <div class="modal-body">
+                                      <form method="POST" action="{{route('pelaksanaanpendidikan.update', $pk->id)}}" enctyp  e="multipart/form-data" >
+                                        @csrf
+                                        @method('PUT')
+                                
+                                        '<div class="form-group row">'
+                                            <div class="col-md m-3">
+                                                <label for="nama_kegiatan">Nama Kegiatan</label>
+                                                <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
                                             </div>
-                                        @enderror
+                                            <div class="col-md m-3">
+                                                <label for="tempat_instansi">Tempat Instansi</label>
+                                                <input type="text" class="form-control" id="tempat_instansi" name="tempat_instansi">
+                                            </div>
+                                            <div class="col-md m-3">
+                                                <label for="semester">Semester</label>
+                                                <select class="form-control" id="semester_id" name="semester_id">
+                                                    <option>Pilih Semester</option>
+                                                    @foreach ($semester as $s)
+                                                        <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                
+                                        <div class="form-group row ">
+                                          <div class="col-md m-3">
+                                            <label for="jenispelaksanaan">Jenis Pelaksanaan</label>
+                                            <select class="form-control" id="idjenispelaksanaan" name="idjenispelaksanaan">
+                                                <option>Pilih Jenis Pelaksanaan</option>
+                                                @foreach ($jenis_pelaksanaan_pendidikan as $p)
+                                                    <option @if($p->withsks == 0 ) id="is-sks" @endif class="" value="{{$p->id}}" title="{{$p->jenispelaksanaan}}">{{Str::limit($p->jenispelaksanaan,100)}}</option>
+                                                @endforeach
+                                            </select>                  
+                                          </div>
+                                        </div>
+                          
+                                        <div class="form-group row">
+                                            <div class="col-md m-3">
+                                                <label for="jumlah_kelas">Kelas</label>
+                                                <input readonly type="number" class="form-control x" id="jumlah_kelas" name="jumlah_kelas" onkeyup="sum()">
+                                            </div>
+                                            <div class="col-md m-3">
+                                                <label for="volume_dosen">Volume Dosen</label>
+                                                <input readonly type="number" class="form-control x" id="volume_dosen" name="volume_dosen" onkeyup="sum()" >
+                                            </div>
+                                            <div class="col-md m-3">
+                                                <label for="sks">SKS</label>
+                                                <input readonly type="number" class="form-control x" id="sks" name="sks" onkeyup="sum()">
+                                            </div>
+                                            <input  hidden type="number" class="form-control" id="kelasxvdosen" name="kelasxvdosen">
+                                            <div class="col-md m-3">
+                                                <label for="jumlah_angka_kredit">Angka Kredit</label>
+                                                <input type="number" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit" onkeyup="sum()">
+                                            </div>
+                                            <input  hidden type="number" class="form-control" id="hasil3" name="hasil3">
+                                        </div>
+                          
+                                        <div class="form-group row ">
+                                          <div class="col-md m-3">
+                                            <label for="keterangan">Keterangan Kegiatan</label>
+                                            <input  type="text" class="form-control" id="keterangan" name="keterangan"  placeholder="maksimal 100 kata">
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                          <div class="col-md m-3">
+                                            <label for="bukti">Bukti</label>
+                                            <input class="form-control @error('bukti') is-invalid @enderror" type="file" id="bukti" name="bukti">
+                                            @error('bukti')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
+                                          </div>
+                          
+                                        </div>
+                          
+                                        <script>
+                                            const selectElement = document.getElementById('idjenispelaksanaan');
+                                            const sks = document.getElementById('sks');
+                                            const volumeDosen = document.getElementById('volume_dosen');
+                                            const angkaKredit = document.getElementById('jumlah_angka_kredit');
+                                            const jumlahkelas = document.getElementById('jumlah_kelas');
+                                            selectElement.onchange = function() {
+                                               var options = selectElement.options[selectElement.selectedIndex];
+                                               
+                                               if(options.id == 'is-sks'){
+                                                    sks.removeAttribute('readonly');
+                                                    jumlahkelas.removeAttribute('readonly');
+                                                    volumeDosen.removeAttribute('readonly');
+                                                    angkaKredit.setAttribute('readonly','');
+                                               }else{
+                                                    sks.setAttribute('readonly','');
+                                                    jumlahkelas.setAttribute('readonly','');
+                                                    volumeDosen.setAttribute('readonly','');
+                                                    angkaKredit.removeAttribute('readonly');
+                          
+                                                    angkaKredit.removeAttribute()
+                                               }
+                                               
+                                            }
+                                            function sum(){
+                                                var ckelas = document.getElementById("jumlah_kelas").value ;
+                                                var cvolumeDosen = document.getElementById("volume_dosen").value ;
+                                                var csks = document.getElementById("sks").value ;
+                                                var ckelasxvdosen = document.getElementById("kelasxvdosen").value ;
+                                    
+                                                
+                                                var hasil1 = parseFloat(ckelas)*parseFloat(cvolumeDosen);
+                                    
+                                                if(!isNaN(hasil1)){
+                                                    document.getElementById("kelasxvdosen").value = parseFloat(hasil1);
+                                                }
+                                    
+                                                var hasil2 = parseFloat(ckelasxvdosen) / parseFloat(csks);
+                                                if(!isNaN(hasil2)){
+                                                    document.getElementById("jumlah_angka_kredit").value = parseFloat(hasil2);
+                                                }
+                                            }
+                                        </script>
+    
                                       </div>
-                      
-                                    </div>
-                      
-                                    <script>
-                                        const selectElement = document.getElementById('idjenispelaksanaan');
-                                        const sks = document.getElementById('sks');
-                                        const volumeDosen = document.getElementById('volume_dosen');
-                                        const angkaKredit = document.getElementById('jumlah_angka_kredit');
-                                        const jumlahkelas = document.getElementById('jumlah_kelas');
-                                        selectElement.onchange = function() {
-                                           var options = selectElement.options[selectElement.selectedIndex];
-                                           
-                                           if(options.id == 'is-sks'){
-                                                sks.removeAttribute('readonly');
-                                                jumlahkelas.removeAttribute('readonly');
-                                                volumeDosen.removeAttribute('readonly');
-                                                angkaKredit.setAttribute('readonly','');
-                                           }else{
-                                                sks.setAttribute('readonly','');
-                                                jumlahkelas.setAttribute('readonly','');
-                                                volumeDosen.setAttribute('readonly','');
-                                                angkaKredit.removeAttribute('readonly');
-                      
-                                                angkaKredit.removeAttribute()
-                                           }
-                                           
-                                        }
-                                        function sum(){
-                                            var ckelas = document.getElementById("jumlah_kelas").value ;
-                                            var cvolumeDosen = document.getElementById("volume_dosen").value ;
-                                            var csks = document.getElementById("sks").value ;
-                                            var ckelasxvdosen = document.getElementById("kelasxvdosen").value ;
-                                
-                                            
-                                            var hasil1 = parseFloat(ckelas)*parseFloat(cvolumeDosen);
-                                
-                                            if(!isNaN(hasil1)){
-                                                document.getElementById("kelasxvdosen").value = parseFloat(hasil1);
-                                            }
-                                
-                                            var hasil2 = parseFloat(ckelasxvdosen) / parseFloat(csks);
-                                            if(!isNaN(hasil2)){
-                                                document.getElementById("jumlah_angka_kredit").value = parseFloat(hasil2);
-                                            }
-                                        }
-                                    </script>
-
+    
+    
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                          </div>
+                                    </form>                                  
+                        
                                   </div>
-
-
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                      </div>
-                                </form>                                  
-                    
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                            <a href="{{ route('pelaksanaanpendidikan.edit', $pk->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_pendidikan_Modal">ubah</a>
-                            <form action="{{ route('pelaksanaanpendidikan.destroy', $pk->id) }}" method="POST">
-                              @csrf
-                              @method('DELETE')
-                              <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
-                          </form>
-      
-                        </td>
-              
+                                <a href="{{ route('pelaksanaanpendidikan.edit', $pk->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_pendidikan_Modal">ubah</a>
+                                <form action="{{ route('pelaksanaanpendidikan.destroy', $pk->id) }}" method="POST">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
+                              </form>
+          
+                            </td>
+                  
+    
+                    </tbody>
+                    @endforeach
+                    
+          
+                  </table>
+                </div>
 
-                </tbody>
-                @endforeach
-                
-      
-              </table>
+              </div>
+
             </div>
-          </div>
+
         </div>
 
         {{-- . Unsur Pelaksanaan Pengabdian Masyarakat  --}}
         <div class="tab-pane fade" id="pelaksanaanpengabdian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpengabdian-tab" tabindex="0">
           
-          <div class="col-lg-10" style="margin-top: 30px">
+          <div class="col-lg-10 mx-auto" style="margin-top: 30px">
  
             <form method="POST" action="{{ route('pelaksanaan_pm.store', $kum->id) }}" enctype="multipart/form-data">
               @csrf
@@ -1139,7 +1148,7 @@
         {{-- . Unsur Dokumen Penunjang  --}}
         <div class="tab-pane fade" id="unsur-tab-pane" role="tabpanel" aria-labelledby="unsur-tab" tabindex="0">
 
-          <div class="col-lg-10" style="margin-top: 30px">
+          <div class="col-lg-10 mx-auto" style="margin-top: 30px">
  
             <form method="POST" action="{{ route('unsurdp.store', $kum->id) }}" enctype="multipart/form-data">
               @csrf
@@ -1446,7 +1455,7 @@
         </div>
         {{-- . Unsur Pelaksanaan Penelitian  --}}
         <div class="tab-pane fade" id="pelaksanaanpenelitian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpenelitian-tab" tabindex="0">
-          <div class="col-lg-10" style="margin-top: 30px">
+          <div class="col-lg-10 mx-auto" style="margin-top: 30px">
             <h3>Input Data Penelitian</h3>
             <br>
             <form method="POST" action="{{route('pelaksanaanpenelitian.store')}}" enctype="multipart/form-data" >

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kum;
 use App\Models\pelaksanaan_pm;
 use App\Http\Controllers\Controller;
 use App\Models\komponenpm;
@@ -80,9 +81,17 @@ class PelaksanaanPmController extends Controller
      }
 
 
-    public function show(pelaksanaan_pm $pelaksanaan_pm)
+    public function show($id)
     {
-        //
+        $kum = kum::find($id);
+        $pelaksanaan_pm = pelaksanaan_pm::where('kum_id', $kum->id)->get();
+        $komponenpm = komponenpm::all();
+
+        return view('.user.board.boardpm',[
+            'kum' =>$kum,
+            'pelaksanaan_pm' => $pelaksanaan_pm,
+            'komponenpm' => $komponenpm
+        ]);
     }
 
     /**
