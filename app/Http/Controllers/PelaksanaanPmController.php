@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\pelaksanaan_pm;
 use App\Http\Controllers\Controller;
+use App\Models\komponenpm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PelaksanaanPmController extends Controller
 {
@@ -27,33 +29,57 @@ class PelaksanaanPmController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $input = $request->validate([
-            'kum_id' => '',
-            'komponenpm_id' => 'required',
-            'nama' => 'required',
-            'bentuk' => 'required|max:255',
-            'tempat_instansi' => 'required|string',
-            'semester_id' => '',
-            'angkakreditpm' => 'required',
-        ]);
 
-        if ($buktiunsurpdp = $request->file('bukti')) {
-            $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
-            $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
-            $buktiunsurpdp->move($destinationPath, $profileImage);
-            $input['bukti'] = "$profileImage";
-        }
+     public function store(Request $request)
+     {
+         $inputs = $request->input('inputs');
+         
+     
+         foreach ($inputs as $i => $input) {
+             $validator = Validator::make($input, [
+                'kum_id' => 'required',
+                'komponenpm_id' => 'required',
+                'nama' => 'required',
+                'bentuk' => 'required|max:255',
+                'tempat_instansi' => 'required|string',
+                'semester_id' => 'required',
+                'buktifisik' => 'file'
+             ]);
+     
+             if ($validator->fails()) {
+                 return back()->withErrors($validator)->withInput();
+             }
+     
+             $komponenpm_id = $input['komponenpm_id'];
+     
+             $jenisPelaksanaan = komponenpm::find($komponenpm_id);
+     
+             $pelaksanaanpm = new pelaksanaan_pm([
+                'kum_id' => $input['kum_id'],
+                'komponenpm_id' => $input['komponenpm_id'],
+                'bentuk' => $input['bentuk'],
+                'nama' => $input['nama'],
+                'tempat_instansi' => $input['tempat_instansi'],
+                'semester_id' => $input['semester_id'],                
+                'angkakreditpm' => $jenisPelaksanaan->angkakredit
 
-        pelaksanaan_pm::create($input);
+             ]);
+     
+             if ($image = $request->file('inputs.'.$i.'.buktifisik')) {
+                 $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
+                 $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                 $image->move($destinationPath, $profileImage);
+                 $pelaksanaanpm->buktifisik = $profileImage;
+             }
+             $pelaksanaanpm->save();
+         }
+         
+        
+ 
+         return back()->with('success', 'Data berhasil disimpan');
+     }
 
-        return redirect()->back()->with('message', 'Data berhasil disimpan');
-    }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(pelaksanaan_pm $pelaksanaan_pm)
     {
         //
