@@ -29,7 +29,7 @@ class pelaksanaan_pm extends Model
     }
 
     public function komponen(){
-        return $this->belongsTo('App\Models\komponen_pm', 'komponenpm_id', 'id');
+        return $this->belongsTo('App\Models\komponenpm', 'komponenpm_id', 'id');
     }
 
 }

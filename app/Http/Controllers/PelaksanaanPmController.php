@@ -6,6 +6,7 @@ use App\Models\kum;
 use App\Models\pelaksanaan_pm;
 use App\Http\Controllers\Controller;
 use App\Models\komponenpm;
+use App\Models\semester;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -86,11 +87,13 @@ class PelaksanaanPmController extends Controller
         $kum = kum::find($id);
         $pelaksanaan_pm = pelaksanaan_pm::where('kum_id', $kum->id)->get();
         $komponenpm = komponenpm::all();
+        $semester = semester::all();
 
         return view('.user.board.boardpm',[
             'kum' =>$kum,
             'pelaksanaan_pm' => $pelaksanaan_pm,
-            'komponenpm' => $komponenpm
+            'komponenpm' => $komponenpm,
+            'semester' => $semester
         ]);
     }
 
@@ -112,17 +115,25 @@ class PelaksanaanPmController extends Controller
             'nama' => 'required',
             'bentuk' => 'required|max:255',
             'tempat_instansi' => 'required|string',
-            'semester_id' => '',
-            'angkakreditpm' => '',
+            'semester_id' => 'required',
         ]);
 
-        if ($buktiunsurpdp = $request->file('bukti')) {
+        $komponenpm_id = $input['komponenpm_id'];
+    
+        $komponen = komponenpm::find($komponenpm_id);
+
+        $input['angkakreditpm'] = $komponen->angkakredit;
+
+
+
+        if ($request->hasFile('buktifisik')) {
+            $buktiunsurpdp = $request->file('buktifisik');
             $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
             $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
             $buktiunsurpdp->move($destinationPath, $profileImage);
-            $input['bukti'] = "$profileImage";
-        }else{
-            unset($input['bukti']);
+            $input['buktifisik'] = $profileImage;
+        } else {
+            unset($input['buktifisik']);
         }
 
         $pelaksanaan_pm = pelaksanaan_pm::findOrFail($id);

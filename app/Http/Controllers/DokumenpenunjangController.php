@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\dokumenpenunjang;
 use App\Http\Controllers\Controller;
 use App\Models\komponendokumenpenunjang;
+use App\Models\kum;
 use Database\Seeders\komponenpenunjang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -112,9 +113,16 @@ class DokumenpenunjangController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(dokumenpenunjang $dokumenpenunjang)
+    public function show($id)
     {
-        //
+        $kum = kum::find($id);
+        $dokumenpenunjang = dokumenpenunjang::where('kum_id', $kum->id)->get();
+        $komponendokumenpenunjang = komponendokumenpenunjang::all();
+        return view('.user.board.boardunsurpenunjang',[
+            'kum' =>$kum,
+            'dokumenpenunjang' => $dokumenpenunjang,
+            'komponendokumenpenunjang' => $komponendokumenpenunjang,
+        ]);
     }
 
     /**
