@@ -1,7 +1,7 @@
 @extends('.layouts.user')
 
 @section('content1')
-    <div class="card rounded-3 text-black border-0 ">
+    <div class="card rounded-3 text-black border-0 col-lg-10 mx-auto">
         <div class="row g-0">
             <div class="col-lg-7">
                 <div class="card-body p-md-8 mx-md-4">
@@ -94,7 +94,7 @@
 
 
 
-    <div class="col-lg-10">
+    <div class="col-lg-10 mx-auto">
         <table class="table table-striped table-bordered data" >
             <thead style="background: #1C82AD">
                 <tr>

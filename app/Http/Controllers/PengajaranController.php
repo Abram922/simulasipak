@@ -62,6 +62,7 @@ class PengajaranController extends Controller
         $hasil = (1 / $volumeDosen) * $sks;
 
         $pengajaran->jumlah_angka_kredit = floatval($hasil);
+
         $pengajaran->save();
     }
 
@@ -87,16 +88,40 @@ class PengajaranController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, pengajaran $pengajaran)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'instansi' => 'required',
+            'id_semester' => 'required',
+            'kode_matakuliah' => 'required|max:255',
+            'matakuliah' => 'required|string',
+            'nama_kelas_pengajaran' => 'required',
+            'volume_dosen_pengajar' => 'required',
+            'sks_pengajaran' => 'required',
+        ]);
+
+        $volumeDosen = floatval($input['volume_dosen_pengajar']);
+        $sks = floatval($input['sks_pengajaran']);
+
+        $hasil = (1 / $volumeDosen) * $sks;
+        $input['jumlah_angka_kredit'] = floatval($hasil);
+
+
+
+        $pengajaran = pengajaran::findOrFail($id);
+
+        $pengajaran->update($input);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pengajaran $pengajaran)
+    public function destroy($id)
     {
-        //
+        $pengajaran = pengajaran::findOrFail($id);
+        $pengajaran->delete();
+        return redirect()->back()->with('message', 'Data berhasil dihapus');
     }
 }

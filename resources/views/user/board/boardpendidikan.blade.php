@@ -2,7 +2,7 @@
 @section('content1')
 
 <div class="row">
-  <div class="col-md">
+  <div class="col-lg-10 mx-auto">
     <div class="jumbotron d-flex" > 
       <div class="">
           <h3>Hi,{{ Auth::user()->name }}</h3>
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="col-md">
+  <div class="col-lg-10 mx-auto">
     <table class="table">
       <thead>
           <th>No</th>

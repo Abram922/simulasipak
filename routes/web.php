@@ -58,3 +58,4 @@ Route::get('/pendidikan/{id}', [App\Http\Controllers\PendidikanController::class
 Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendidikanController::class, 'show'])->name('pelaksanaanpendidikan.show');
 
 
+Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kum;
 use App\Models\pelaksanan_penelitian;
 use App\Http\Controllers\Controller;
+use App\Models\akreditasi_penelitian;
+use App\Models\penulis;
+use Database\Seeders\akreditasi_penulis;
 use Illuminate\Http\Request;
 
 class PelaksananPenelitianController extends Controller
@@ -31,33 +35,41 @@ class PelaksananPenelitianController extends Controller
     {
         $input = $request->validate([
 
-            'kum_id' => 'required|max:255',
-            'akreditasi_id'=> 'required|max:255',
-            'jenispenulis_id'=> 'required|max:255',
-            'judul'=> 'required|max:255',
-            'jurnal'=> 'required|max:255',
-            'link'=> 'required|max:255',
-            'jumlah_penulis'=> '',
-            'angkakredit'=> 'required|max:255',
-            'tanggal'=> 'required|max:255',
+            'kum_id' => '',
+            'akreditasi_id'=> '',
+            'jenispenulis_id'=> '',
+            'judul'=> '',
+            'jurnal'=> '',
+            'link'=> '',
+            'angkakredit'=> '',
+            'tanggal'=> '',
             'author_persentase' => '',
+            'jumlah_penulis'=> '',
 
         ]);
 
-         return $input;
+        pelaksanan_penelitian::create($input);
 
-        //pelaksanan_penelitian::create($input);
-
-        //return redirect()->back()->with('message', 'Data berhasil disimpan');
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
     
 
     /**
      * Display the specified resource.
      */
-    public function show(pelaksanan_penelitian $pelaksanan_penelitian)
+    public function show($id)
     {
-        //
+        $kum = kum::find($id);
+        $penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->get();
+        $akreditasi = akreditasi_penelitian::all();
+        $jenispenulis = penulis::all();
+
+        return view('.user.board.boardpenelitian',[
+            'kum' =>$kum,
+            'penelitian' => $penelitian,
+            'akreditasi' => $akreditasi,
+            'jenispenulis' => $jenispenulis
+        ]);
     }
 
     /**

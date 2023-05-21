@@ -132,11 +132,4 @@
     </table>
   </div>
 </div>
-
-
-
-
-
-
-
 @endsection

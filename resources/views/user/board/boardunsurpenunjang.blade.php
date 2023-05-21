@@ -116,15 +116,7 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
                     
-                                    <script>
-                                    var selectElem = document.getElementById('komponenpenunjang_id');
-                                    selectElem.addEventListener('change', function() {
-                                    var dataKum = this.options[this.selectedIndex].getAttribute('data-kum');
-                                    document.getElementById('angkakredit_dp').value = dataKum;
-                                    });
-                            
-                            
-                                    </script>
+
                                   </form>
                                 </div>
                         </div>
@@ -137,7 +129,6 @@
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
                     </form>
 
-                  </td>
                   </td>
           </tbody>
         @endforeach  

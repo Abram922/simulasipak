@@ -21,8 +21,8 @@ class pengajaran extends Model
         'nama_kelas_pengajaran'
     ];
 
-    public function semester(){
-        return $this->belongsTo('App\Models\semester', 'semester_id', 'id');
+    public function xsemester(){
+        return $this->belongsTo('App\Models\semester', 'id_semester', 'id');
     }
 
     public function kum(){
