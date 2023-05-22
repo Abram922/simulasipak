@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\penelitian_hakidankarya;
 use App\Http\Controllers\Controller;
+use App\Models\KomponenPenelitian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PenelitianHakidankaryaController extends Controller
 {
@@ -29,7 +31,46 @@ class PenelitianHakidankaryaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->input('inputs');
+        
+    
+        foreach ($inputs as $i => $input) {
+            $validator = Validator::make($input, [
+            //    'kum_id' => 'required',
+            //    'id_semester' => 'required',
+            //    'id_jeniskarya' => 'required',
+            //    'bukti' => 'file'
+            ]);
+    
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+    
+            $id_jeniskarya = $input['id_jeniskarya'];
+    
+            $jenisPelaksanaan = KomponenPenelitian::find($id_jeniskarya);
+    
+            $karya = new penelitian_hakidankarya([
+               'id_kum' => $input['id_kum'],
+               'id_jeniskarya' => $input['id_jeniskarya'],
+               'id_semester' => $input['id_semester'],                
+               'jumlah_angka_kredit' => $jenisPelaksanaan->angkakredit
+
+            ]);
+    
+            if ($image = $request->file('inputs.'.$i.'.bukti')) {
+                $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $karya->bukti = $profileImage;
+            }
+            return $karya;
+            // $karya->save();
+        }
+        
+       
+
+        // return back()->with('success', 'Data berhasil disimpan');
     }
 
     /**

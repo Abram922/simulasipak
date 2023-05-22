@@ -15,9 +15,18 @@ class penelitian_hakidankarya extends Model
         'judul',
         'jumlah_angka_kredit',
         'bukti',
+        'id_jeniskarya'
     ];
 
     public function kum(){
         return $this->belongsTo('App\Models\kum', 'kum_id', 'id');
+    }
+
+    public function semester(){
+        return $this->belongsTo('App\Models\semester', 'id_semester', 'id');
+    }
+
+    public function karya(){
+        return $this->belongsTo('App\Models\KomponenPenelitian', 'id_jeniskarya', 'id');
     }
 }

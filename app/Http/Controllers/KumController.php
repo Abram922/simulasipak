@@ -9,6 +9,7 @@ use App\Models\dokumenpenunjang;
 use App\Models\jabatan;
 use App\Models\jenis_pelaksanan_pendidikan;
 use App\Models\komponendokumenpenunjang;
+use App\Models\KomponenPenelitian;
 use App\Models\komponenpm;
 use App\Models\pelaksanaan_pendidikan;
 use App\Models\pelaksanaan_pm;
@@ -86,6 +87,7 @@ class KumController extends Controller
         $akreditasi = akreditasi_penelitian::all();
         $komponenpm = komponenpm::all();
         $komponendokumenpenunjang = komponendokumenpenunjang::all();
+        $komponenpenelitian = KomponenPenelitian::all();
 
         //menampilkan data berdasarkan kum_id
         $pendidikan = pendidikan::where('kum_id', $kum->id)->get();
@@ -126,7 +128,8 @@ class KumController extends Controller
                     'sumpelaksanaanpenelitian' => $sumpelaksanaanpenelitian,
                     'sumpelaksanaanpm' => $sumpelaksanaanpm,
                     'sumdp' =>$sumdp,
-                    'poinpendidikan' =>$poinpendidikan
+                    'poinpendidikan' =>$poinpendidikan,
+                    'komponenpenelitian' => $komponenpenelitian
                 ]);     
 
         

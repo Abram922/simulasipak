@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('batas_maksimal_diakui');
             $table->boolean('jurnal');
             $table->timestamps();
+
+            
         });
     }
 

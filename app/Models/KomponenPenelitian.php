@@ -16,4 +16,8 @@ class KomponenPenelitian extends Model
         'jurnal'
     ];
 
+    public function penelitian_hakidankarya(){
+        return $this->hasMany(penelitian_hakidankarya::class);
+    }
+
 }

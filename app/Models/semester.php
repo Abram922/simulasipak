@@ -20,6 +20,10 @@ class semester extends Model
         return $this->hasMany(pelaksanaan_pm::class);
     }
 
+    public function penelitian_hakidankarya(){
+        return $this->hasMany(penelitian_hakidankarya::class);
+    }
+
 
 
 
