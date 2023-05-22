@@ -23,7 +23,6 @@
             <th>Kedudukan</th>
             <th>Tanggal Pelaksanaan</th>
             <th>Angka Kredit</th>
-
             <th>Bukti</th>
             <th>Aksi</th>
         </thead>
@@ -52,7 +51,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                                 <div class="modal-body">
-                                  <form method="POST" action="{{route('unsurdp.update', $dp->id)}}" enctype="multipart/form-data" >
+                                  <form method="POST" action="{{route('doumenpenunjang.update', $dp->id)}}" enctype="multipart/form-data" >
                                     @csrf
                                     @method('PUT')
                             
@@ -122,8 +121,8 @@
                         </div>
                       </div>
                     </div>
-                      <a href="{{ route('unsurdp.edit', $dp->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_dp_Modal">ubah</a>
-                      <form action="{{ route('unsurdp.destroy', $dp->id) }}" method="POST">
+                      <a href="{{ route('doumenpenunjang.edit', $dp->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_dp_Modal">ubah</a>
+                      <form action="{{ route('doumenpenunjang.destroy', $dp->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
@@ -135,6 +134,8 @@
       </table>
   </div>
 </div>
+
+
 
 
 

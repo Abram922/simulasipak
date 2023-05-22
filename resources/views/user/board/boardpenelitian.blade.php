@@ -78,14 +78,17 @@
                                                 </div>
                                                 @endforeach
                                         </div>
-                        
+
+                                        <input hidden id="jenispenulis_id" name="jenispenulis_id">      
+
                                         <script>
                                             function updateIdJenisPenulis(selectedRadioButton) {
                                                 var kunci = selectedRadioButton.getAttribute('kunci');
                                                 document.getElementById('jenispenulis_id').value = kunci;}
                                         </script>
                         
-                                        <input hidden id="jenispenulis_id" name="jenispenulis_id">
+
+
                                         <div class="form-group row">
                                                 <div class="col-md m-3">
                                                 <label for="author_persentase">Persentase Penulis</label>
@@ -143,6 +146,108 @@
   </div>
 
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+  var jenispenulis = document.getElementsByName('jenis_penulis');
+  var x = document.getElementById('jumlah_penulis');
+  var y = document.getElementById('author_persentase');
+  
+  jenispenulis.forEach(radio => {
+      radio.addEventListener('click', function() {
+          if (this.id == 'penulis_khusus') {
+              x.setAttribute('readonly', '');
+              y.setAttribute('readonly', '');
+              x.value = "";
+              y.value= "";
+              calculate();                       
+          } else {
+            y.removeAttribute('readonly');                  
+            x.removeAttribute('readonly');      
+            calculate();              
+         
+          }
+      });
+  });
+</script>
+<script>
+    function getValues() {
+    var persentase_penulis = document.getElementById('author_persentase').value;
+    var selectElem = document.getElementById('akreditasi_id');
+    var jenis_penulis = document.getElementsByName("jenis_penulis");
+    var jumlah_penulis = document.getElementById('jumlah_penulis').value;
+    var dataKum = selectElem.options[selectElem.selectedIndex].getAttribute('data-kum-akreditasi');
+    var x = 0;
+    var z = 0;
+
+    z = dataKum * persentase_penulis / 100;
+
+    jenis_penulis.forEach(radio => {
+
+    if (radio.checked) {
+      skor = parseFloat(radio.value);
+      var hasily = 0;
+      if (radio.id == 'penulis_khusus') {
+        console.log('ini penulis_khusus xxx');
+        hasily = ( dataKum * (skor/100));
+      } else {
+        console.log('ini tidak penulis_khusus xxx');
+        console.log('ini datakum', dataKum);
+        console.log("ini z",z);
+        hasily = z / jumlah_penulis;
+      }
+      console.log("ini hasil y",hasily);
+      document.getElementById("angkakredit").value = hasily;
+    }
+    });  
+
+    return {
+      selectElem: selectElem,
+      jenis_penulis: jenis_penulis,
+      jumlah_penulis:jumlah_penulis,
+      persentase_penulis:persentase_penulis,
+      dataKum: dataKum,
+      z:z
+    };
+  }
+  function calculate() {
+    var values = getValues();
+    var jlh_penulis = values.jumlah_penulis;
+    var persentase = values.persentase_penulis;
+    var dataKum = values.dataKum;
+    var z = values.z;
+    console.log("menguji",z);
+    
+    values.jenis_penulis.forEach(radio => {
+
+      if (radio.checked) {
+        skor = parseFloat(radio.value);
+        var hasil = 0;
+        if (radio.id == 'penulis_khusus') {
+          console.log('ini penulis_khusus');
+          hasil1 = ( dataKum * (skor/100));
+        } else {
+          console.log('ini tidak penulis_khusus');
+          hasilx = (dataKum * (persentase / 100));
+          console.log("hasilx",hasilx);
+          hasil1 = hasilx /jlh_penulis;
+        }
+      }
+    });    
+  }
+
+  // Tambahkan event listener pada setiap elemen HTML yang dibutuhkan
+  getValues().selectElem.addEventListener('change', calculate);
+  getValues().jenis_penulis.forEach(radio => {
+    radio.addEventListener('click', calculate);
+  });
+  getValues().persentase_penulis.addEventListener('input', calculate);          
+  getValues().jumlah_penulis.addEventListener('input', calculate);  
+
+</script>
 
 
 

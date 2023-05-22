@@ -116,10 +116,10 @@ class PelaksanaanPendidikanController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->validate([
-            'tempat_instansi' => 'required',
-            'semester_id' => 'required',
-            'idjenispelaksanaan' => 'required',
-            'nama_kegiatan' => 'required',
+            'tempat_instansi' => '',
+            'semester_id' => '',
+            'idjenispelaksanaan' => '',
+            'nama_kegiatan' => '',
         ]);
 
         $idjenispelaksanaan = $input['idjenispelaksanaan'];
@@ -139,9 +139,10 @@ class PelaksanaanPendidikanController extends Controller
             unset($input['bukti_pendidikan']);
         }
 
+
         $pelaksanaan_pendidikan = pelaksanaan_pendidikan::findOrFail($id);
         
-        $pelaksanaan_pendidikan->save();
+        $pelaksanaan_pendidikan->update($input);
 
         return redirect()->back()->with('message', 'Data berhasil disimpan');
     }

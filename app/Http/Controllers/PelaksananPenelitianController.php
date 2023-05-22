@@ -87,14 +87,15 @@ class PelaksananPenelitianController extends Controller
     {       
 
     $input = $request->validate([
-        'akreditasi_id'=> 'required|max:255',
-        'jenispenulis_id'=> 'required|max:255',
-        'judul'=> 'required|max:255',
-        'jurnal'=> 'required|max:255',
-        'link'=> 'required|max:255',
+        'akreditasi_id'=> '',
+        'jenispenulis_id'=> '',
+        'judul'=> '',
+        'jurnal'=> '',
+        'link'=> '',
         'jumlah_penulis'=> '',
-        'angkakredit'=> 'required|max:255',
-        'tanggal'=> 'required|max:255',
+        'angkakredit'=> '',
+        'tanggal'=> '',
+        'author_persentase' => '',
     ]);
     $jenispenulis = $input['jenispenulis_id'];
     $angka_kredit = $input['angkakredit'];
@@ -105,7 +106,6 @@ class PelaksananPenelitianController extends Controller
     }else{
         $hasil = $angka_kredit;
     };
-
     $pelaksanan_penelitian = pelaksanan_penelitian::findOrFail($id);
     $pelaksanan_penelitian->akreditasi_id = $input['akreditasi_id'];
     $pelaksanan_penelitian->jenispenulis_id = $input['jenispenulis_id'];
@@ -115,34 +115,11 @@ class PelaksananPenelitianController extends Controller
     $pelaksanan_penelitian->jumlah_penulis = $input['jumlah_penulis'];
     $pelaksanan_penelitian->angkakredit = $hasil;
     $pelaksanan_penelitian->tanggal = $input['tanggal'];
+    $pelaksanan_penelitian->author_persentase = $input['author_persentase'];
 
+    $pelaksanan_penelitian->save();
 
-
-
-
-    dd($pelaksanan_penelitian);
-
-    // $pelaksanan_penelitian->save();
-
-    // return redirect()->back()->with('message', 'Data berhasil disimpan');
-
-
- 
-        // $input = $request->validate([
-        //     'akreditasi_id'=> 'required|max:255',
-        //     'jenispenulis_id'=> 'required|max:255',
-        //     'judul'=> 'required|max:255',
-        //     'jurnal'=> 'required|max:255',
-        //     'link'=> 'required|max:255',
-        //     'jumlah_penulis'=> '',
-        //     'angkakredit'=> 'required|max:255',
-        //     'tanggal'=> 'required|max:255',
-        // ]);   
-
-        // $pelaksanan_penelitian = pelaksanan_penelitian::findOrFail($id);
-
-        // $pelaksanan_penelitian->update($input);
-
+    return redirect()->back()->with('message', 'Data berhasil disimpan');
 
     }
 

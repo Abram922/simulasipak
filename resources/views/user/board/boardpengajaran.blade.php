@@ -176,7 +176,7 @@
                       </div>
 
                       <div class="modal-body">
-                        <form method="POST" action="{{route('pelaksanaanpendidikan.update', $pk->id)}}" enctyp  e="multipart/form-data" >
+                        <form method="POST" action="{{route('unsurpelaksanaan.update', $pk->id)}}" enctype="multipart/form-data" >
                           @csrf
                           @method('PUT')
 

@@ -81,34 +81,6 @@ class DokumenpenunjangController extends Controller
      */
 
 
-    // public function store(Request $request)
-    // {
-    //     $input = $request->validate([
-            // 'komponenpenunjang_id' => 'required',
-            // 'kum_id'=> 'required',
-            // 'namakegiatan_dp' => 'required',
-            // 'tanggal_pelaksanaan_dp' => '',
-            // 'instansi_dp' => '',
-            // 'angkakredit_dp' =>'',
-            // 'kedudukan_dp' =>'',
-            // 'buktidp' => ''
-            
-    //     ]);
-
-    //     if ($image = $request->file('buktidp')) {
-    //         $destinationPath = 'bukti_unsur_penunjang/';
-    //         $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-    //         $image->move($destinationPath, $profileImage);
-    //         $input['buktidp'] = "$profileImage";
-    //     }
-
-
-    //     dokumenpenunjang::create($input);
-
-    //     return redirect()->back()->with('message', 'Data berhasil disimpan');
-
-        
-    // }
 
     /**
      * Display the specified resource.
@@ -138,6 +110,7 @@ class DokumenpenunjangController extends Controller
      */
     public function update(Request $request,$id)
     {
+
         $input = $request->validate([
             'komponenpenunjang_id' => 'required',
             'namakegiatan_dp' => 'required',
@@ -151,16 +124,21 @@ class DokumenpenunjangController extends Controller
             $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
             $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
             $buktiunsurpdp->move($destinationPath, $profileImage);
-            $input['bukti'] = "$profileImage";
-        }else{
-            unset($input['bukti']);
         }
 
         $dokumenpenunjang = dokumenpenunjang::findOrFail($id);
-
-        $dokumenpenunjang->update($input);
-
+        $dokumenpenunjang->komponenpenunjang_id = $input['komponenpenunjang_id'];
+        $dokumenpenunjang->namakegiatan_dp = $input['namakegiatan_dp'];
+        $dokumenpenunjang->tanggal_pelaksanaan_dp = $input['tanggal_pelaksanaan_dp'];
+        $dokumenpenunjang->angkakredit_dp = $input['angkakredit_dp'];
+        $dokumenpenunjang->kedudukan_dp = $input['kedudukan_dp'];
+        $dokumenpenunjang->bukti = $profileImage;
+        $dokumenpenunjang->save();
+    
         return redirect()->back()->with('message', 'Data berhasil disimpan');
+
+
+
     }
 
     /**
