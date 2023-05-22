@@ -226,7 +226,26 @@
         </div>
 
         <div class="tab-pane fade" id="pelaksanaanpenelitian-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpenelitian-tab" tabindex="0">
-            
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Komponen</th>
+                    <th scope="col">Keterangan</th>
+                    <th scope="col">Batas Maksimal di Akui</th>
+                    <th scope="col">Nilai</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach ($komponenpenelitian as $p)
+                        <tr>
+                            <td>{{ $p->komponenkegiatan }}</td>
+                            <td>{{ $p->bukti_kegiatan }}</td>
+                            <td>{{ $p->batas_maksimal_diakui }}</td>
+                            <td>{{ $p->angkakredit }}</td>
+                        </tr>                        
+                    @endforeach
+                </tbody>
+            </table>
         </div>
 
       </div>

@@ -6,6 +6,7 @@ use App\Models\dokumenpenunjang;
 use App\Models\jabatan;
 use App\Models\jenis_pelaksanan_pendidikan;
 use App\Models\komponendokumenpenunjang;
+use App\Models\KomponenPenelitian;
 use App\Models\komponenpm;
 use App\Models\kum;
 use App\Models\pelaksanaan_pendidikan;
@@ -39,12 +40,14 @@ class HomeController extends Controller
         $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
         $komponenpm = komponenpm::all();
         $komponendp = komponendokumenpenunjang::all();
+        $komponenpenelitian = KomponenPenelitian::all();
 
         return view('.user.home',[
             'strata_pendidikan' =>$strata_pendidikan,
             'jenis_pelaksanaan_pendidikan' =>$jenis_pelaksanaan_pendidikan,
             'komponenpm' =>$komponenpm,
             'komponendp' =>$komponendp,
+            'komponenpenelitian' =>$komponenpenelitian
         ]);
     }
 
@@ -56,13 +59,16 @@ class HomeController extends Controller
         $strata_pendidikan = stratapendidikan::all();
         $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
         $komponenpm = komponenpm::all();
-        $komponendp = komponendokumenpenunjang::all();
+        $komponendp = komponendokumenpenunjang::all();        
+        $komponenpenelitian = KomponenPenelitian::all();
+
 
         return view('.user.home',[
             'strata_pendidikan' =>$strata_pendidikan,
             'jenis_pelaksanaan_pendidikan' =>$jenis_pelaksanaan_pendidikan,
             'komponenpm' =>$komponenpm,
             'komponendp' =>$komponendp,
+            'komponenpenelitian' =>$komponenpenelitian
         ]);
     }
 

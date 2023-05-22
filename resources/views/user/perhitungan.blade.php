@@ -1147,7 +1147,7 @@
                   <div class="col-lg-10 ">
                     <div class="d-flex">
                       <div class="flex-grow-1">
-                        <h3><b>Input Data Pelaksanaan Peneltitian</b></h3>
+                        <h3><b>Input Data Pelaksanaan Penelitian</b></h3>
                         <br>
                         <a href="{{ route('pelaksanaanpenelitian.show',$kum->id) }}" class="btn btn-info">lihat</a>    
 
@@ -1248,6 +1248,158 @@
 
 
             </form>
+
+
+            <form method="POST" action="{{ route('pendidikan.store', $kum->id) }}" enctype="multipart/form-data">
+              @csrf
+              <div id="inputFieldkarya" class = "inputFieldkarya" >
+                <div class="input-group-karya ">
+                  <div class="col-lg-10 ">
+                    <div class="d-flex">
+                      <div class="flex-grow-1">
+                        <h3><b>Input Data Karya dan Rancangan</b></h3>
+                        <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
+                      </div>
+
+                    </div>
+                  </div>
+                  <br>
+                  <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group row">
+                          <div class="col-md m-3">
+                              <label for="judul">Judul Karya atau Rancangan</label>
+                              <input type="text" class="form-control"  name="inputs[0][judul]">
+                          </div>
+                      </div>
+    
+                      <div class="form-group row">
+                        <div class="col-md m-3">
+                          <label for="semester">Semester</label>
+                          <select class="form-control" name="inputs[0][id_semester]">
+                              <option>Pilih Semester</option>
+                              @foreach ($semester as $s)
+                                  <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                              @endforeach
+                          </select>
+                        </div>                    
+                      </div>
+              
+                      <div class="form-group row">
+                          <div class="col-md m-3">
+                              <label for="angka kredit"> Angka Kredit</label>
+                              <input type="text" class="form-control"  name="inputs[0][jumlah_angka_kredit]">
+                          </div>
+                          <div class="col-md m-3">
+                            <label for="bukti">Bukti</label>
+                            <input class="form-control @error('bukti') is-invalid @enderror" type="file"  name="inputs[0][bukti]">
+                            @error('bukti')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                          </div>
+
+                      <div>
+                        <input hidden type="text" value="{{ $kum->id }}"  name="inputs[0][kum_id]">
+                      </div>
+                        <hr>
+                        Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan
+                    </div>                 
+                </div>
+              </div>
+              <button id="addButton-karya" class="btn btn-primary" type="button">Add Field</button>
+              <button class="btn btn-success" type="submit">Submit</button>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+              <script>
+                var i = 0 ;    
+                var z = 0;      
+                  $(document).ready(function() {
+                    ++i;
+
+  
+  
+                      // Add new field
+  
+                      $('#addButton-karya').click(function() {
+                          var fieldHTML =
+                          '<div class="input-group-karya ">'+
+                            '<div class="col-lg-10 ">'+
+                              '<div class="d-flex">'+
+                                '<div class="flex-grow-1">'+
+                                  '<h3><b>Input Data Karya dan Rancangan</b></h3>'+
+                                '</div>'+
+
+                              '</div>'+
+                            '</div>'+
+                            '<br>'+
+                            '<div class="card shadow mb-4">'+
+                              '<div class="card-header py-3">'+
+                                '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>'+
+                              '</div>'+
+                              '<div class="card-body">'+
+                                '<div class="form-group row">'+
+                                    '<div class="col-md m-3">'+
+                                        '<label for="judul">Judul Karya atau Rancangan</label>'+
+                                        '<input type="text" class="form-control" id="judul" name="judul">'+
+                                    '</div>'+
+                                '</div>'+
+              
+                                '<div class="form-group row">'+
+                                  '<div class="col-md m-3">'+
+                                    '<label for="semester">Semester</label>'+
+                                    '<select class="form-control" id="id_semester" name="inputs[0][id_semester]">'+
+                                        '<option>Pilih Semester</option>'+
+                                        '@foreach ($semester as $s)'+
+                                            '<option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>'+
+                                        '@endforeach'+
+                                    '</select>'+
+                                  '</div>'+                    
+                                '</div>'+
+                        
+                                '<div class="form-group row">'+
+                                    '<div class="col-md m-3">'+
+                                        '<label for="angka kredit"> Angka Kredit</label>'+
+                                        '<input type="text" class="form-control" id="jumlah_angka_kredit" name="jumlah_angka_kredit">'+
+                                    '</div>'+
+                                    '<div class="col-md m-3">'+
+                                      '<label for="bukti">Bukti</label>'+
+                                      '<input class="form-control @error('bukti') is-invalid @enderror" type="file"  name="inputs[0][bukti]">'+
+                                      '@error('bukti')'+
+                                          '<div class="invalid-feedback">'+
+                                              '{{$message}}'+
+                                          '</div>'+
+                                      '@enderror'+
+                                    '</div>'+
+                                '</div>'+
+
+                                '<div>'+
+                                  '<input hidden type="text" value="{{ $kum->id }}"  name="inputs[0][kum_id]">'+
+                                '</div>'+
+                              '</div>'+
+                        '<hr>'+
+                        'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan'+
+                    '</div>'+                 
+                '</div>'
+
+  
+  
+                        $('#inputFieldkarya').append(fieldHTML);
+  
+                      });
+                      // Remove field
+                      $(document).on('click', '.remove-field', function() {
+                          $(this).closest('.input-group-karya').remove();
+                      });
+                  });              
+              </script>
+            </form>
+
+
 
 
           </div>

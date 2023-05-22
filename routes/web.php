@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth/login');
-}); 
+Route::get('/', function () { return view('auth/login');})->name('/login'); 
 
 // Route::get('/profil', function () {
 //     return view('user.profil');
@@ -60,3 +58,13 @@ Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendi
 
 
 Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['AuthPort:1']], function () {
+        Route::get('/pendidikan', [App\Http\Controllers\AdminPageController::class,'pendidikan'])->name('pendidikan');
+    });
+
+    Route::group(['middleware' => ['AuthPort:2']], function () {
+
+    });
+});
