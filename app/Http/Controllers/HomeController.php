@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\dokumenpenunjang;
 use App\Models\jabatan;
 use App\Models\jenis_pelaksanan_pendidikan;
+use App\Models\komponendokumenpenunjang;
 use App\Models\komponenpm;
 use App\Models\kum;
 use App\Models\pelaksanaan_pendidikan;
@@ -33,7 +34,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('.user.home');
+
+        $strata_pendidikan = stratapendidikan::all();
+        $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
+        $komponenpm = komponenpm::all();
+        $komponendp = komponendokumenpenunjang::all();
+
+        return view('.user.home',[
+            'strata_pendidikan' =>$strata_pendidikan,
+            'jenis_pelaksanaan_pendidikan' =>$jenis_pelaksanaan_pendidikan,
+            'komponenpm' =>$komponenpm,
+            'komponendp' =>$komponendp,
+        ]);
     }
 
     public function adminhome(){
@@ -44,11 +56,13 @@ class HomeController extends Controller
         $strata_pendidikan = stratapendidikan::all();
         $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
         $komponenpm = komponenpm::all();
+        $komponendp = komponendokumenpenunjang::all();
 
         return view('.user.home',[
             'strata_pendidikan' =>$strata_pendidikan,
             'jenis_pelaksanaan_pendidikan' =>$jenis_pelaksanaan_pendidikan,
             'komponenpm' =>$komponenpm,
+            'komponendp' =>$komponendp,
         ]);
     }
 

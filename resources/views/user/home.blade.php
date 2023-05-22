@@ -139,15 +139,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($strata_pendidikan as $p)
+                    @foreach ($strata_pendidikan as $x)
                         <tr>
-                            <td>{{ $p->strata }}</td>
-                            <td>{{ $p->keterangan }}</td>
-                            <td>{{ $p->batas_maksimal_diakui }}</td>
-                            <td>{{ $p->nilai }}</td>
+                            <td>{{ $x->strata }}</td>
+                            <td>{{ $x->keterangan }}</td>
+                            <td>{{ $x->batas_maksimal_diakui }}</td>
+                            <td>{{ $x->nilai }}</td>
                         </tr>                        
                     @endforeach
-
                 </tbody>
             </table>
 
@@ -202,6 +201,27 @@
         </div>
 
         <div class="tab-pane fade" id="unsur-tab-pane" role="tabpanel" aria-labelledby="unsur-tab" tabindex="0">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Komponen</th>
+                    <th scope="col">Bukti Kegiatan</th>
+                    <th scope="col">Batas Maksimal di Akui</th>
+                    <th scope="col">Nilai</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach ($komponendp as $p)
+                        <tr>
+                            <td>{{ $p->komponenkegiatan }}</td>
+                            <td>{{ $p->bukti_kegiatan }}</td>
+                            <td>{{ $p->batas_maksimal_diakui }}</td>
+                            <td>{{ $p->angkakreditmax }}</td>
+                        </tr>                        
+                    @endforeach
+
+                </tbody>
+            </table>
 
         </div>
 

@@ -12,6 +12,8 @@ class komponendokumenpenunjang extends Model
     protected $fillable =[
         'komponenkegiatan' ,
         'angkakreditmax',
+        'bukti_kegiatan',
+        'batas_maksimal_diakui'
 
     ];
 
