@@ -115,27 +115,32 @@
         <div class="col-lg-8">
 
           @foreach ($kum as $k)
-            <div class="container">
-              <div class="card card-hover border-0" style="max-width: 1100px;">
+              <div class="container">
+                <div class="card card-hover border-0" style="max-width: 1100px;">
                   <div class="row no-gutters">
-                      <div class="col-md-3  position-relative d-flex" >
-                          <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img" alt="..." width="350">
-                          <div class="d-flex">
-                            <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info position-absolute top-50 start-50 translate-middle" id="btn_check">lengkapi</a>
-                          </div>
+                    <div class="col-md-3 position-relative d-flex" >
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img" alt="..." width="350">
+                      <div class="d-flex">
+                        <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info position-absolute top-50 start-50 translate-middle" id="btn_check">lengkapi</a>
                       </div>
-                      <div class="col-md-5">
-                          <div class="card-body">
-                              <h4></h4>
-                              <p class="card-title"><b>{{ $k->judul }}</b></p>
-
+                    </div>
+                    <div class="col-md-5">                
+                      <div class="card-body">
+                        <h4></h4>
+                        <p class="card-title"><b>{{ $k->judul }}</b></p>
+                        <div class="d-flex justify-content-end">
+                          <div class="ml-auto">
+                            <a id="editx" href="" class="btn btn-warning ml-2">edit</a>
+                            <a id="hapusx" href="" class="btn btn-danger ml-2">hapus</a>
                           </div>
+                        </div>
                       </div>
+                    </div>
                   </div>
+                </div>
               </div>
-            </div>
-            <br>              
-          @endforeach
+              <br>              
+            @endforeach
           </div>
           
           <style>
@@ -156,7 +161,7 @@
                 });
                 });
           </script>
-    </div>
+        </div>
           
     
 

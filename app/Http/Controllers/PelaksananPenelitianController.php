@@ -98,10 +98,13 @@ class PelaksananPenelitianController extends Controller
         'author_persentase' => '',
     ]);
     $jenispenulis = $input['jenispenulis_id'];
+    $j_p = penulis::find($jenispenulis);
+    $penulis = $j_p->penulis_khusus;
+
     $angka_kredit = $input['angkakredit'];
     $jumlah_penulis = $input['jumlah_penulis'];
 
-    if($jenispenulis == 4 || $jenispenulis == 5 ){
+    if($penulis == 0){
         $hasil = $angka_kredit / $jumlah_penulis;
     }else{
         $hasil = $angka_kredit;
