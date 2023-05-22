@@ -31,11 +31,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/user-home', [App\Http\Controllers\HomeController::class,'userhome'])->name('userhome');
+Route::get('/user-home/{id}', [App\Http\Controllers\HomeController::class, 'userhomex'])->name('user.homex');
+Route::get('/user-home', [App\Http\Controllers\HomeController::class, 'userhome'])->name('userhome');
 Route::get('/admin-home', [App\Http\Controllers\HomeController::class,'adminhome'])->name('adminhome');
 Route::get('/board-pak', [App\Http\Controllers\HomeController::class,'boardpak'])->name('boardpak');
 Route::get('/profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('profil');
-Route::get('/ubahprofil', [App\Http\Controllers\ProfilController::class, 'ubahprofil'])->name('ubahprofil');
+Route::get('/ubahprofil/{id}', [App\Http\Controllers\ProfilController::class, 'edit'])->name('profill');
+Route::put('/ubahprofil/update/{id}', [App\Http\Controllers\ProfilController::class, 'update'])->name('profilll');
 
 Route::resource('kum', App\Http\Controllers\KumController::class);
 Route::resource('pendidikan', App\Http\Controllers\PendidikanController::class);

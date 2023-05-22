@@ -2,6 +2,7 @@
 @section('content1')
 
 
+@foreach($user as $s)
 <section id="hero" class="d-flex align-items-center" style="
     width: 100%;
     height: 31vh;
@@ -9,7 +10,7 @@
     background-size: cover;
     position: relative;
     padding: 0;">
-    <img src="{{asset('aset_web/p1.png')}}" alt="couple" width="200" class="rounded-circle img-thumbnail" style= "margin-top:50px; margin-left:50px;  margin-bottom: -250px;"/>
+    <img src="{{asset('profill')}}/{{ $s->foto }}" alt="profil" width="170"  class="rounded-circle img-thumbnail" style= "margin-top:50px; margin-left:50px;  margin-bottom: -250px;"/>
 </section>
 
 <div class="">
@@ -22,21 +23,21 @@
     <table class="table table-borderless">
     <tbody>
         <tr>
-        <td><p><b>{{ Auth::user()->name }}</b></p></td>
+        <td><p><b>{{ $s->name }}</b></p></td>
         </tr>
         <tr>
-        <td>{{ Auth::user()->email }}</td>
+        <td>{{ $s->email }}</td>
         </tr>
 
         <tr>
         <td>&nbsp;</td>
         </tr>
         <tr>
-        <td><p><b>{{ Auth::user()->jabatan_fungsional}}</b></p></td>
+        <td><p><b>{{ $s->jabatan_fungsional}}</b></p></td>
         </tr>
 
         <tr>
-        <td><a href="{{asset('/ubahprofil')}}" class="btn btn-primary">Ubah</a></td>
+        <td><a href="/ubahprofil/{{$s->id}}" class="btn btn-primary">Ubah</a></td>
         </tr>
 
 
@@ -54,28 +55,28 @@
     <tbody>
         <tr><td>Nama Lengkap</td>
         <tr>
-        <td><p><b>{{ Auth::user()->name }}</b></p></td>
+        <td><p><b>{{ $s->name }}</b></p></td>
         </tr>
 
         <tr>
         <td>Ikatan Kerja</td>
         </tr>
         <tr>
-        <td><p><b>{{ Auth::user()->ikatan_kerja }}</b></p></td>
+        <td><p><b>{{ $s->ikatan_kerja }}</b></p></td>
         </tr>
 
         <tr>
         <td>Tempat, Tanggal Lahir</td>
         </tr>
         <tr>
-        <td><p><b>{{ Auth::user()->tempat_lahir }}, {{ Auth::user()->tanggal_lahir }}</b></p></td>
+        <td><p><b>{{ $s->tempat_lahir }}, {{ $s->tanggal_lahir }}</b></p></td>
         </tr>
 
         <tr>
         <td>Pangkat/Golongan</td>
         </tr>
         <tr>
-        <td><p><b>{{ Auth::user()->pangkat }}</b></p></td>
+        <td><p><b>{{ $s->pangkat }}</b></p></td>
         </tr>
 
     </tbody>
@@ -91,29 +92,28 @@
         <td>NIP</td>
         </tr>
         <tr>
-        <td><p><b>{{ Auth::user()->NIDN }}</b></p></td>
+        <td><p><b>{{ $s->NIDN }}</b></p></td>
         </tr>
 
         <tr>
         <td>institusi</td>
         </tr>
         <tr>
-        <td><p><b>{{ Auth::user()->institusi }}</b></p></td>
+        <td><p><b>{{ $s->institusi }}</b></p></td>
         </tr>
 
         <tr>
         <td>Fakultas</td>
         </tr>
         <tr>
-        <td><p><b>{{ Auth::user()->fakultas }}</b></p></td>
+        <td><p><b>{{ $s->fakultas }}</b></p></td>
         </tr>
     </tbody>
     </table>
     <!-- Tutup Col 3 -->
-    
     </div>
   </div>
 </div>
-
+@endforeach
 
 @endsection
