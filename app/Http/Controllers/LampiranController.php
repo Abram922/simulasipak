@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\pendidikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LampiranController extends Controller
@@ -19,26 +20,115 @@ class LampiranController extends Controller
 
     public function datapendidikan(){
 
-        $join = DB::table('pendidikans')
-        ->join('kums', 'pendidikans.kum_id', '=', 'kums.id')
-        ->select('pendidikans.id', 'kums.id')
-        ->groupBy('pendidikans.id', 'kums.id') 
-        ->get();
 
-        dd($join);
+        $idUser = Auth::id();
 
-        // $pendidikan = pendidikan::where('userjabatan_id',$id_userjabatan)->get();
-        // return view('lampiran.pendidikan',[
-        //     'pendidikan' => $pendidikan
-        // ]);
+        $result = DB::table('users')
+            ->join('kums', 'users.id', '=', 'kums.id_user')
+            ->where('kums.id_user', $idUser)
+            ->pluck('kums.id')
+            ->toArray();
+
+        
+        $pendidikan = [];
+        
+        foreach ($result as $kumId) {
+            $pendidikanData = DB::table('pendidikans')
+                ->where('kum_id', $kumId)
+                ->select('bukti')
+                ->get();
+        
+            $pendidikan = array_merge($pendidikan, $pendidikanData->toArray());
+        }
+        
+    
+        return view('.lampiran.pendidikan', [
+             'pendidikan' => $pendidikan
+        ]);
+    
     }
 
     public function datapenelitian(){
+        $idUser = Auth::id();
+
+        $result = DB::table('users')
+            ->join('kums', 'users.id', '=', 'kums.id_user')
+            ->where('kums.id_user', $idUser)
+            ->pluck('kums.id')
+            ->toArray();
+
+        $pelaksanan_penelitians = [];
+        
+        foreach ($result as $kumId) {
+            $pelaksanan_penelitiansData = DB::table('pelaksanan_penelitians')
+                ->where('kum_id', $kumId)
+                ->select('link')
+                ->get();
+        
+            $pelaksanan_penelitians = array_merge($pelaksanan_penelitians, $pelaksanan_penelitiansData->toArray());
+        }
+
+    
+        return view('.lampiran.penelitian', [
+             'pelaksanan_penelitians' => $pelaksanan_penelitians
+        ]);
+
 
     }
 
     public function datapm(){
+
+        $idUser = Auth::id();
+
+        $result = DB::table('users')
+            ->join('kums', 'users.id', '=', 'kums.id_user')
+            ->where('kums.id_user', $idUser)
+            ->pluck('kums.id')
+            ->toArray();
+
+        $pelaksanan_pm = [];
+        
+        foreach ($result as $kumId) {
+            $pelaksanan_pmData = DB::table('pelaksanaan_pms')
+                ->where('kum_id', $kumId)
+                ->select('buktifisik')
+                ->get();
+        
+            $pelaksanan_pm = array_merge($pelaksanan_pm, $pelaksanan_pmData->toArray());
+        }
+
+    
+        return view('.lampiran.pm', [
+             'pelaksanan_pm' => $pelaksanan_pm
+        ]);
+
  
+    }
+
+    public function datapenunjang(){
+        $idUser = Auth::id();
+
+        $result = DB::table('users')
+            ->join('kums', 'users.id', '=', 'kums.id_user')
+            ->where('kums.id_user', $idUser)
+            ->pluck('kums.id')
+            ->toArray();
+
+        $dokumenpenunjangs = [];
+        
+        foreach ($result as $kumId) {
+            $dokumenpenunjangsData = DB::table('pelaksanaan_pms')
+                ->where('kum_id', $kumId)
+                ->select('buktifisik')
+                ->get();
+        
+            $dokumenpenunjangs = array_merge($dokumenpenunjangs, $dokumenpenunjangsData->toArray());
+        }
+
+    
+        return view('.lampiran.penunjang', [
+             'dokumenpenunjangs' => $dokumenpenunjangs
+        ]);
     }
 
 

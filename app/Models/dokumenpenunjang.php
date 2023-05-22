@@ -19,4 +19,10 @@ class dokumenpenunjang extends Model
         'kedudukan_dp',
         'buktidp'
     ];
+
+    public function komponendp(){
+        return $this->belongsTo('App\Models\komponendokumenpenunjang', 'komponenpenunjang_id', 'id');
+    }
+
+
 }

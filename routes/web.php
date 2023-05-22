@@ -45,6 +45,11 @@ Route::resource('pelaksanaanpendidikan', App\Http\Controllers\PelaksanaanPendidi
 Route::resource('pelaksanaanpenelitian', App\Http\Controllers\PelaksananPenelitianController::class);
 Route::resource('pelaksanaan_pm', App\Http\Controllers\PelaksanaanPmController::class);
 Route::resource('unsurdp', App\Http\Controllers\DokumenpenunjangController::class);
+Route::resource('doumenpenunjang', App\Http\Controllers\DokumenpenunjangController::class);
+Route::resource('pengajaran', App\Http\Controllers\PengajaranController::class);
+
+Route::resource('unsurpelaksanaan', App\Http\Controllers\PelaksanaanPendidikanController::class);
+
 
 Route::get('/lampiran', [App\Http\Controllers\LampiranController::class,'index'])->name('lampiran');
 Route::get('/lampiran-datapenelitian', [App\Http\Controllers\LampiranController::class,'datapenelitian'])->name('datapenelitian');
@@ -56,3 +61,4 @@ Route::get('/pendidikan/{id}', [App\Http\Controllers\PendidikanController::class
 Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendidikanController::class, 'show'])->name('pelaksanaanpendidikan.show');
 
 
+Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');

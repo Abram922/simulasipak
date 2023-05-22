@@ -6,6 +6,7 @@ use App\Models\kum;
 use App\Http\Controllers\Controller;
 use App\Models\akreditasi_penelitian;
 use App\Models\dokumenpenunjang;
+use App\Models\jabatan;
 use App\Models\jenis_pelaksanan_pendidikan;
 use App\Models\komponendokumenpenunjang;
 use App\Models\komponenpm;
@@ -13,6 +14,7 @@ use App\Models\pelaksanaan_pendidikan;
 use App\Models\pelaksanaan_pm;
 use App\Models\pelaksanan_penelitian;
 use App\Models\pendidikan;
+use App\Models\pengajaran;
 use App\Models\penulis;
 use App\Models\semester;
 use App\Models\stratapendidikan;
@@ -45,16 +47,31 @@ class KumController extends Controller
         $input = $request->validate([
             'judul' => 'required',
             'id_jabatan_sekarang' => 'required',
-            'id_jabatan_dituju' => 'required',
-            
+            'id_jabatan_dituju' => [
+                'required',
+                function ($attribute, $value, $fail) use ($request) {
+                    $njs = $request->input('id_jabatan_sekarang');
+                    $njd = $value;
+                    
+                    $nj1 = jabatan::find($njs);
+                    $nj2 = jabatan::find($njd);
+                    
+                    $h1 = $nj1->angkaKreditKumulatif;
+                    $h2 = $nj2->angkaKreditKumulatif;
+    
+                    if ($h2 <= $h1) {
+                        $fail('Nilai Angka Kredit Kumulatif Jabatan yang Dituju harus lebih besar dari Jabatan Saat Ini.');
+                    }
+                },
+            ],
         ]);
-
-
+    
         $input['id_user'] = auth()->user()->id;
-
-        kum::create($input); 
+    
+        kum::create($input);
         return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
+    
 
     /**
      * Display the specified resource.

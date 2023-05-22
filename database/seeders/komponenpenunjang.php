@@ -16,15 +16,24 @@ class komponenpenunjang extends Seeder
         DB::table('komponendokumenpenunjangs')->insert([
             [
                 'komponenkegiatan' => 'Menjadi anggota dalam suatu Panitia/Badan pada Perguruan Tinggi,(Sebagai Ketua/Wakil Ketua merangkap anggota, tiap tahun)',
-                'angkakreditmax' => 3
+                'angkakreditmax' => 3,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Menjadi anggota dalam suatu Panitia/Badan pada Perguruan Tinggi,(Sebagai anggota, tiap tahun)',
-                'angkakreditmax' => 2
+                'angkakreditmax' => 2,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Menjadi anggota panitia/badan pada lembaga pemerintah, Sebagai Ketua/Wakil Ketua Panitia Pusat',
-                'angkakreditmax' => 3
+                'angkakreditmax' => 3,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
         ]);
     }

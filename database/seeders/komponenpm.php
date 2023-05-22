@@ -16,63 +16,108 @@ class komponenpm extends Seeder
         DB::table('komponenpms')->insert([
             [
                 'komponenkegiatan' => 'Menduduki jabatan pimpinan pada lembaga pemerintahan/pejabat negara yang hanrs dibebaskan dari jabatan organiknya tiap semester',
-                'angkakredit' => 5
+                'angkakredit' => 5,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Melaksanakan pengembangan hasil pendidikan, dan penelitian yang dapat dimanfaatkan oleh masyarakat/industri setiap program',
-                'angkakredit' => 3
+                'angkakredit' => 3,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi latihan/penyuluhan/penataran/ceramah pada masyarakat terjadwal/terprogram Tingkat Internasional(Dalam satu semester atau lebih)',
-                'angkakredit' => 4
+                'angkakredit' => 4,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi latihan/penyuluhan/penataran/ceramah pada masyarakat terjadwal/terprogram Tingkat Nasional(Dalam satu semester atau lebih)',
-                'angkakredit' => 3
+                'angkakredit' => 3,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi latihan/penyuluhan/penataran/ceramah pada masyarakat terjadwal/terprogram Tingkat Lokal(Dalam satu semester atau lebih)',
-                'angkakredit' => 2
+                'angkakredit' => 2,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi latihan/penyuluhan/penataran/ceramah pada masyarakat terjadwal/terprogram Tingkat Internasional(Kurang dari satu semester dan minimal satu bulan)',
-                'angkakredit' => 3
+                'angkakredit' => 3,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi latihan/penyuluhan/penataran/ceramah pada masyarakat terjadwal/terprogram Tingkat Nasional(Kurang dari satu semester dan minimal satu bulan)',
-                'angkakredit' => 2
+                'angkakredit' => 2,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi latihan/penyuluhan/penataran/ceramah pada masyarakat terjadwal/terprogram Tingkat Lokal(Kurang dari satu semester dan minimal satu bulan)',
-                'angkakredit' => 1
+                'angkakredit' => 1,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi latihan/penyuluhan/penataran/ceramah pada masyarakat terjadwal/terprogram Tingkat Insidental(Kurang dari satu semester dan minimal satu bulan)',
-                'angkakredit' => 1
+                'angkakredit' => 1,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi pelayanan kepada masyarakat atau kegiatan lain yang menunjang pelaksanaan tugas pemerintahan dan pembangunan(Berdasarkan bidang keahlian, tiap program)',
-                'angkakredit' => 2
+                'angkakredit' => 2,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi pelayanan kepada masyarakat atau kegiatan lain yang menunjang pelaksanaan tugas pemerintahan dan pembangunan(Berdasarkan penugasan lembaga perguruan tinggi, tiap program)',
-                'angkakredit' => 1
+                'angkakredit' => 1,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Memberi pelayanan kepada masyarakat atau kegiatan lain yang menunjang pelaksanaan tugas pemerintahan dan pembangunan(Berdasarkan fungsi/jabatan tiap program)',
-                'angkakredit' => 1
+                'angkakredit' => 1,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Membuat/menulis karya pengabdian pada masyarakat yang tidak dipublikasikan, tiap karya',
-                'angkakredit' => 3
+                'angkakredit' => 3,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Hasil kegiatan pengabdian kepada masyarakat yang dipublikasikan di sebuah berkala/jurnal pengabdian kepada masyarakat atau teknologi tepat guna, merupakan diseminasi dari luaran program kegiatan pengabdian kepada masyarakat, tiap karya',
-                'angkakredit' => 5
+                'angkakredit' => 5,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
                 'komponenkegiatan' => 'Berperan serta aktif dalam pengelolaan jurnal ilmiah, Editor/dewan penyunting/dewan redaksi jurnal ilmiah internasional',
-                'angkakredit' => 1
+                'angkakredit' => 1,
+                        'bukti_kegiatan' => 'Pindai SK penugasan
+                        asli dan bukti kinerja',
+                        'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
         ]);
     }

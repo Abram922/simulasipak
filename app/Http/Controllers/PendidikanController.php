@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\kum;
+use App\Models\pelaksanaan_pendidikan;
 use App\Models\pendidikan;
 use App\Http\Controllers\Controller;
 use App\Models\stratapendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class PendidikanController extends Controller
 {
@@ -33,30 +35,37 @@ class PendidikanController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->validate([
-            'strata_id' => 'required|max:255',
-            'tanggal' => 'required|date_format:Y-m-d',
-            'institusi' => 'required|max:255',
-            'kum_id'=> 'required'
-        ]);
+        $inputs = $request->input('inputs');
 
-        if ($image = $request->file('bukti')) {
-            $destinationPath = 'bukti_unsur_utama/pendidikan/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['bukti'] = "$profileImage";
+        foreach ($inputs as $i => $input) {
+            $validator = Validator::make($input, [
+                'strata_id' => 'required|max:255',
+                'tanggal' => 'required|date_format:Y-m-d',
+                'institusi' => 'required|max:255',
+                'kum_id'=> 'required',
+                'bukti' => 'file'
+            ]);
+    
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }    
+            $pelaksanaanPendidikan = new pendidikan([
+                'strata_id' => $input['strata_id'],
+                'tanggal' => $input['tanggal'],
+                'institusi' => $input['institusi'],
+                'kum_id' => $input['kum_id'],
+            ]);
+    
+            if ($image = $request->file('inputs.'.$i.'.bukti')) {
+                $destinationPath = 'bukti_unsur_utama/pendidikan/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $pelaksanaanPendidikan->bukti = $profileImage;
+            }    
+            $pelaksanaanPendidikan->save();
         }
-
-
-
-        pendidikan::create($input);
-
-        return redirect()->back()->with('message', 'Data berhasil disimpan');
-
-        
-
-
-
+    
+        return back()->with('success', 'Data berhasil disimpan');   
     }
 
     /**

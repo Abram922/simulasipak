@@ -12,7 +12,10 @@ class komponenpm extends Model
 
     protected $fillable =[
         'komponenkegiatan',
-        'angkakredit'
+        'angkakredit',
+        'bukti_kegiatan',
+        'batas_maksimal_diakui'
+
     ];
 
 }

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->increments('id');
             $table->string('komponenkegiatan');
             $table->integer('angkakreditmax'); 
+            $table->string('bukti_kegiatan');
+            $table->string('batas_maksimal_diakui');
             $table->timestamps();
         });
     }

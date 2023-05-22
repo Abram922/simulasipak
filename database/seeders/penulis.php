@@ -33,13 +33,8 @@ class penulis extends Seeder
                 'penulis_khusus' => true
             ],
             [
-                'jenispenulis' => 'Author A',
-                'persentase_skor' => 40,
-                'note' => '',
-                'penulis_khusus' => false
-            ],            [
-                'jenispenulis' => 'Author B',
-                'persentase_skor' => 20,
+                'jenispenulis' => 'Author',
+                'persentase_skor' => 0,
                 'note' => '',
                 'penulis_khusus' => false
             ],

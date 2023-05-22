@@ -7,7 +7,7 @@
 
   
 
-<div class="jumbotron d-flex" > 
+<div class="jumbotron d-flex col-lg-10 mx-auto" > 
         <div class="text-center">
             <h3>Hi,{{ Auth::user()->name }}</h3>
             <p style="">Kelola Data Kamu Disini</p>
@@ -22,7 +22,7 @@
 <br>
 
 
-<div class="card shadow mb-4">
+<div class="card shadow mb-4 col-lg-10 mx-auto">
     <!-- Card Header - Dropdown -->
     <div
         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -40,6 +40,18 @@
                       <input type="text" class="form-control" id="judul" name="judul" style="display: inline-block; width: 200px;">
                     </div>
                 </div>
+
+                <div class="form-group row ">
+                  <div class="col-md-3 mb-4 mx-auto">
+                    <label for="komponen" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
+                    <select class="form-control" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;">
+                      <option>Pilih Jabatan</option>
+                      @foreach ($jabatanpref as $js)
+                      <option class="" value="{{$js->id}}" data-kum-pref ="{{$js->angkaKreditKumulatif}}" title="{{$js->jabatanpref}}">{{Str::limit($js->jabatan,100)}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
                   
                 <div class="form-group row ">
                     <div class="col-md-3 mb-4 mx-auto">
@@ -53,17 +65,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row ">
-                    <div class="col-md-3 mb-4 mx-auto">
-                      <label for="komponen" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
-                      <select class="form-control" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;">
-                        <option>Pilih Jabatan</option>
-                        @foreach ($jabatanpref as $js)
-                        <option class="" value="{{$js->id}}" data-kum-pref ="{{$js->angkaKreditKumulatif}}" title="{{$js->jabatanpref}}">{{Str::limit($js->jabatan,100)}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                </div>
+
                 
                 <div class="form-group row ">
                     <div class="col-md-3 mb-4 mx-auto">
@@ -77,21 +79,25 @@
                 </div>
 
                 <script>
+                  function calculateScore() {
                     var selectElem = document.getElementById('id_jabatan_dituju');
                     var selectElem2 = document.getElementById('id_jabatan_sekarang');
-                    selectElem.addEventListener('change', function() {
-                      var dataKumafter = this.options[this.selectedIndex].getAttribute('data-kum-after');                      
-
-                        selectElem2.addEventListener('change', function() {
-                        var dataKumpref = this.options[this.selectedIndex].getAttribute('data-kum-pref');                      
-                        var hasil = parseFloat(dataKumafter) - parseFloat(dataKumpref);
-                        document.getElementById('score').value = hasil;
-                        console.log(hasil);
-                      });
-
-                    });
+                    var scoreElem = document.getElementById('score');
+                
+                    var updateScore = function() {
+                      var dataKumafter = selectElem.options[selectElem.selectedIndex].getAttribute('data-kum-after');
+                      var dataKumpref = selectElem2.options[selectElem2.selectedIndex].getAttribute('data-kum-pref');
+                      var hasil = parseFloat(dataKumafter) - parseFloat(dataKumpref);
+                      scoreElem.value = hasil;
+                      console.log(hasil);
+                    };
+                
+                    selectElem.addEventListener('change', updateScore);
+                    selectElem2.addEventListener('change', updateScore);
+                  }
+                
+                  window.addEventListener('DOMContentLoaded', calculateScore);
                 </script>
-
             </div>
         </form>
     </div>
@@ -109,27 +115,32 @@
         <div class="col-lg-8">
 
           @foreach ($kum as $k)
-            <div class="container">
-              <div class="card card-hover border-0" style="max-width: 1100px;">
+              <div class="container">
+                <div class="card card-hover border-0" style="max-width: 1100px;">
                   <div class="row no-gutters">
-                      <div class="col-md-3  position-relative d-flex" >
-                          <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img" alt="..." width="350">
-                          <div class="d-flex">
-                            <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info position-absolute top-50 start-50 translate-middle" id="btn_check">lengkapi</a>
-                          </div>
+                    <div class="col-md-3 position-relative d-flex" >
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img" alt="..." width="350">
+                      <div class="d-flex">
+                        <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info position-absolute top-50 start-50 translate-middle" id="btn_check">lengkapi</a>
                       </div>
-                      <div class="col-md-5">
-                          <div class="card-body">
-                              <h4></h4>
-                              <p class="card-title"><b>{{ $k->judul }}</b></p>
-
+                    </div>
+                    <div class="col-md-5">                
+                      <div class="card-body">
+                        <h4></h4>
+                        <p class="card-title"><b>{{ $k->judul }}</b></p>
+                        <div class="d-flex justify-content-end">
+                          <div class="ml-auto">
+                            <a id="editx" href="" class="btn btn-warning ml-2">edit</a>
+                            <a id="hapusx" href="" class="btn btn-danger ml-2">hapus</a>
                           </div>
+                        </div>
                       </div>
+                    </div>
                   </div>
+                </div>
               </div>
-            </div>
-            <br>              
-          @endforeach
+              <br>              
+            @endforeach
           </div>
           
           <style>
@@ -150,7 +161,7 @@
                 });
                 });
           </script>
-    </div>
+        </div>
           
     
 

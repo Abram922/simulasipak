@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('jenis_pelaksanan_pendidikans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('jenispelaksanaan');
-            $table->boolean('withsks')->default(true);
+            $table->integer('angka_kredit');
+            $table->boolean('Lektor_Kepala')->default(false);
+            $table->string('bukti_kegiatan');
+            $table->string('batas_maksimal_diakui');
             $table->timestamps();
         });
     }

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kum;
 use App\Models\pelaksanan_penelitian;
 use App\Http\Controllers\Controller;
+use App\Models\akreditasi_penelitian;
+use App\Models\penulis;
+use Database\Seeders\akreditasi_penulis;
 use Illuminate\Http\Request;
 
 class PelaksananPenelitianController extends Controller
@@ -31,20 +35,18 @@ class PelaksananPenelitianController extends Controller
     {
         $input = $request->validate([
 
-            'kum_id' => 'required|max:255',
-            'akreditasi_id'=> 'required|max:255',
-            'jenispenulis_id'=> 'required|max:255',
-            'judul'=> 'required|max:255',
-            'jurnal'=> 'required|max:255',
-            'link'=> 'required|max:255',
-            'jumlah_penulis'=> '',
-            'angkakredit'=> 'required|max:255',
-            'tanggal'=> 'required|max:255',
+            'kum_id' => '',
+            'akreditasi_id'=> '',
+            'jenispenulis_id'=> '',
+            'judul'=> '',
+            'jurnal'=> '',
+            'link'=> '',
+            'angkakredit'=> '',
+            'tanggal'=> '',
             'author_persentase' => '',
+            'jumlah_penulis'=> '',
 
         ]);
-
-        // return $input;
 
         pelaksanan_penelitian::create($input);
 
@@ -55,9 +57,19 @@ class PelaksananPenelitianController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(pelaksanan_penelitian $pelaksanan_penelitian)
+    public function show($id)
     {
-        //
+        $kum = kum::find($id);
+        $penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->get();
+        $akreditasi = akreditasi_penelitian::all();
+        $jenispenulis = penulis::all();
+
+        return view('.user.board.boardpenelitian',[
+            'kum' =>$kum,
+            'penelitian' => $penelitian,
+            'akreditasi' => $akreditasi,
+            'jenispenulis' => $jenispenulis
+        ]);
     }
 
     /**
@@ -75,25 +87,28 @@ class PelaksananPenelitianController extends Controller
     {       
 
     $input = $request->validate([
-        'akreditasi_id'=> 'required|max:255',
-        'jenispenulis_id'=> 'required|max:255',
-        'judul'=> 'required|max:255',
-        'jurnal'=> 'required|max:255',
-        'link'=> 'required|max:255',
+        'akreditasi_id'=> '',
+        'jenispenulis_id'=> '',
+        'judul'=> '',
+        'jurnal'=> '',
+        'link'=> '',
         'jumlah_penulis'=> '',
-        'angkakredit'=> 'required|max:255',
-        'tanggal'=> 'required|max:255',
+        'angkakredit'=> '',
+        'tanggal'=> '',
+        'author_persentase' => '',
     ]);
     $jenispenulis = $input['jenispenulis_id'];
+    $j_p = penulis::find($jenispenulis);
+    $penulis = $j_p->penulis_khusus;
+
     $angka_kredit = $input['angkakredit'];
     $jumlah_penulis = $input['jumlah_penulis'];
 
-    if($jenispenulis == 4 || $jenispenulis == 5 ){
+    if($penulis == 0){
         $hasil = $angka_kredit / $jumlah_penulis;
     }else{
         $hasil = $angka_kredit;
     };
-
     $pelaksanan_penelitian = pelaksanan_penelitian::findOrFail($id);
     $pelaksanan_penelitian->akreditasi_id = $input['akreditasi_id'];
     $pelaksanan_penelitian->jenispenulis_id = $input['jenispenulis_id'];
@@ -103,34 +118,11 @@ class PelaksananPenelitianController extends Controller
     $pelaksanan_penelitian->jumlah_penulis = $input['jumlah_penulis'];
     $pelaksanan_penelitian->angkakredit = $hasil;
     $pelaksanan_penelitian->tanggal = $input['tanggal'];
+    $pelaksanan_penelitian->author_persentase = $input['author_persentase'];
 
+    $pelaksanan_penelitian->save();
 
-
-
-
-    dd($pelaksanan_penelitian);
-
-    // $pelaksanan_penelitian->save();
-
-    // return redirect()->back()->with('message', 'Data berhasil disimpan');
-
-
- 
-        // $input = $request->validate([
-        //     'akreditasi_id'=> 'required|max:255',
-        //     'jenispenulis_id'=> 'required|max:255',
-        //     'judul'=> 'required|max:255',
-        //     'jurnal'=> 'required|max:255',
-        //     'link'=> 'required|max:255',
-        //     'jumlah_penulis'=> '',
-        //     'angkakredit'=> 'required|max:255',
-        //     'tanggal'=> 'required|max:255',
-        // ]);   
-
-        // $pelaksanan_penelitian = pelaksanan_penelitian::findOrFail($id);
-
-        // $pelaksanan_penelitian->update($input);
-
+    return redirect()->back()->with('message', 'Data berhasil disimpan');
 
     }
 
