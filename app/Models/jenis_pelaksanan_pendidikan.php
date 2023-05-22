@@ -12,7 +12,10 @@ class jenis_pelaksanan_pendidikan extends Model
     protected $fillable =[
         'jenispelaksanaan',
         'Lektor_Kepala',
-        'angka_kredit'
+        'angka_kredit',
+        'keterangan',
+        'batas_maksimal_diakui'
+    
     ];
 
     public function pelaksanaanpendidikan(){

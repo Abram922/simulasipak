@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('jenispelaksanaan');
             $table->integer('angka_kredit');
             $table->boolean('Lektor_Kepala')->default(false);
+            $table->string('bukti_kegiatan');
+            $table->string('batas_maksimal_diakui');
             $table->timestamps();
         });
     }

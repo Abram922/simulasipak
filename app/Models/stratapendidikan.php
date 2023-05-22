@@ -10,7 +10,9 @@ class stratapendidikan extends Model
     use HasFactory;
     protected $fillable = [
         'strata',
-        'nilai'
+        'nilai',
+        'keterangan',
+        'batas_maksimal_diakui'
     ];
 
     

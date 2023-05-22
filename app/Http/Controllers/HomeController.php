@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\dokumenpenunjang;
 use App\Models\jabatan;
+use App\Models\jenis_pelaksanan_pendidikan;
+use App\Models\komponenpm;
 use App\Models\kum;
 use App\Models\pelaksanaan_pendidikan;
 use App\Models\pelaksanaan_pm;
 use App\Models\pelaksanan_penelitian;
+use App\Models\stratapendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +40,16 @@ class HomeController extends Controller
         return view('.admin.home');
     }
     public function userhome(){
-        return view('.user.home');
+
+        $strata_pendidikan = stratapendidikan::all();
+        $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
+        $komponenpm = komponenpm::all();
+
+        return view('.user.home',[
+            'strata_pendidikan' =>$strata_pendidikan,
+            'jenis_pelaksanaan_pendidikan' =>$jenis_pelaksanaan_pendidikan,
+            'komponenpm' =>$komponenpm,
+        ]);
     }
 
     public function boardpak(){

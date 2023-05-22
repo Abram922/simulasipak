@@ -15,6 +15,9 @@ return new class extends Migration
             $table->increments('id');
             $table->string('strata');
             $table->integer('nilai');
+            $table->string('keterangan');
+            $table->string('batas_maksimal_diakui');
+
             $table->timestamps();
         });
     }

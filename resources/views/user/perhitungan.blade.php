@@ -197,7 +197,7 @@
           // menutup semua collapse yang ada di dalam class 'collapse-container'
           $('.collapse-container').find('.collapse').collapse('hide');
         });
-      });
+      }); 
     </script>
 
     <ul class="nav nav-underline flex justify-content-around mt-3" id="myTab" role="tablist">
@@ -570,7 +570,6 @@
 
           </div>
             {{-- pengajaran --}}
-
             <div class="col-md-12" style="background-color: #F9F9FE">
               <div class="col-lg-10 mx-auto" style="margin-top: 30px">
                 <div class="" >
