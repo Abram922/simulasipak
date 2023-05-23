@@ -40,7 +40,7 @@
 
     <div class="mb-3">
         <label for="tanggallahir" class="form-label">Tanggal Lahir</label>
-        <input type="text" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{$user->tanggal_lahir}}">
+        <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{$user->tanggal_lahir}}">
         @error('tanggal_lahir')
         <div class="invalid-feedback">{{$message}}</div>
         @enderror
@@ -56,7 +56,7 @@
 
     <div class="mb-3">
         <label for="nidn" class="form-label">NIDN</label>
-        <input type="text" class="form-control @error('') is-invalid @enderror" name="NIDN" value="{{$user->NIDN}}">
+        <input type="number" class="form-control @error('') is-invalid @enderror" name="NIDN" value="{{$user->NIDN}}">
         @error('NIDN')
         <div class="invalid-feedback">{{$message}}</div>
         @enderror

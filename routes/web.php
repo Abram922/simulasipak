@@ -55,6 +55,7 @@ Route::get('/lampiran-datapenelitian', [App\Http\Controllers\LampiranController:
 Route::get('/lampiran-datapenunjang', [App\Http\Controllers\LampiranController::class,'datapenunjang'])->name('datapenunjang');
 Route::get('/lampiran-datapendidikan', [App\Http\Controllers\LampiranController::class,'datapendidikan'])->name('lampirandatapendidikan');
 Route::get('/lampiran-datapm', [App\Http\Controllers\LampiranController::class,'datapm'])->name('datapm');
+Route::get('/lampiran-pendidikan', [App\Http\Controllers\LampiranController::class,'pendidikan'])->name('lampiranpendidikan');
 
 Route::get('/pendidikan/{id}', [App\Http\Controllers\PendidikanController::class, 'show'])->name('pendidikan.show');
 Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendidikanController::class, 'show'])->name('pelaksanaanpendidikan.show');
@@ -64,10 +65,13 @@ Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->n
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['AuthPort:1']], function () {
+        Route::get('/admin-pendidikan', [App\Http\Controllers\HomeController::class,'adminpendidikan'])->name('admin-pendidikan');
         Route::get('/pendidikan', [App\Http\Controllers\AdminPageController::class,'pendidikan'])->name('pendidikan');
+
     });
 
     Route::group(['middleware' => ['AuthPort:2']], function () {
+
 
     });
 });

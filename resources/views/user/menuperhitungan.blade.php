@@ -22,7 +22,7 @@
 <br>
 
 
-<div class="card shadow mb-4 col-lg-10 mx-auto">
+<div class="card shadow mb-4 col-lg-6 mx-auto">
     <!-- Card Header - Dropdown -->
     <div
         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -35,14 +35,14 @@
             <div class="mx-auto">
 
                 <div class="form-group row ">
-                    <div class="col-md-3 mb-4 mx-auto">
+                    <div class="col-md-2 mb-4 mx-auto">
                       <label for="judul" style="display: inline-block; width: 150px;">Judul KUM:</label>
                       <input type="text" class="form-control" id="judul" name="judul" style="display: inline-block; width: 200px;">
                     </div>
                 </div>
 
                 <div class="form-group row ">
-                  <div class="col-md-3 mb-4 mx-auto">
+                  <div class="col-md-2 mb-4 mx-auto">
                     <label for="komponen" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
                     <select class="form-control" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;">
                       <option>Pilih Jabatan</option>
@@ -54,8 +54,8 @@
                 </div>
                   
                 <div class="form-group row ">
-                    <div class="col-md-3 mb-4 mx-auto">
-                      <label for="komponen" style="display: inline-block;width: 150px;">Jabatan yang dituju:</label>
+                    <div class="col-md-2 mb-4 mx-auto">
+                      <label for="komponen" style="display: inline-block;width: 150px;">Jabatan yang Usulan:</label>
                       <select class="form-control" id="id_jabatan_dituju" name="id_jabatan_dituju" style="display: inline-block; width: 200px;">
                         <option>Pilih Jabatan</option>
                         @foreach ($jabatanafter as $px)
@@ -68,15 +68,13 @@
 
                 
                 <div class="form-group row ">
-                    <div class="col-md-3 mb-4 mx-auto">
+                    <div class="col-md-2 mb-4 mx-auto">
                       <label for="score" style="display: inline-block; width: 150px;">Score Dibutuhkan</label>
                       <input readonly type="text" class="form-control" id="score" name="score" style="display: inline-block; width: 200px;">
                     </div>
                 </div>
 
-                <div class="text-center mb-5 pt-1  pb-1">
-                    <button class="btn btn-primary btn-block fa-lg  mb-3" type="submit">submit</button>
-                </div>
+                    <button class="btn btn-primary btn-block fa-lg " type="submit">submit</button>
 
                 <script>
                   function calculateScore() {
@@ -127,7 +125,9 @@
                     <div class="col-md-5">                
                       <div class="card-body">
                         <h4></h4>
-                        <p class="card-title"><b>{{ $k->judul }}</b></p>
+                        <h3 class="card-title"><b>{{ $k->judul }}</b></h3>
+                        <p>Jabatan Saat Ini : {{ $k->jabatanSekarang->jabatan}}</p>
+                        <p>Jabatan Saat Usulan :{{ $k->jabatanDituju->jabatan}}</p>
                         <div class="d-flex justify-content-end">
                           <div class="ml-auto">
                             <a id="editx" href="" class="btn btn-warning ml-2">edit</a>

@@ -27,7 +27,10 @@ class AuthPort
 
         $user = Auth::user();
 
-        if ($user->role == 2) {
+        if ($user->role == 1) {
+            return $next($request);
+        }
+        else if ($user->role == 2) {
             return $next($request);
         }
         return redirect('home')->with('error', "you dont have access to admin");

@@ -18,7 +18,7 @@ class LampiranController extends Controller
         return view('.lampiran.index');
     }
 
-    public function datapendidikan(){
+    public function pendidikan(){
 
 
         $idUser = Auth::id();
@@ -36,6 +36,38 @@ class LampiranController extends Controller
             $pendidikanData = DB::table('pendidikans')
                 ->where('kum_id', $kumId)
                 ->select('bukti')
+                ->get();
+        
+            $pendidikan = array_merge($pendidikan, $pendidikanData->toArray());
+        }
+        
+    
+        return view('.lampiran.pendidikan', [
+             'pendidikan' => $pendidikan
+        ]);
+    
+    }
+
+
+
+    public function datapendidikan(){
+
+
+        $idUser = Auth::id();
+
+        $result = DB::table('users')
+            ->join('kums', 'users.id', '=', 'kums.id_user')
+            ->where('kums.id_user', $idUser)
+            ->pluck('kums.id')
+            ->toArray();
+
+        
+        $pendidikan = [];
+        
+        foreach ($result as $kumId) {
+            $pendidikanData = DB::table('pelaksanaan_pendidikans')
+                ->where('kum_id', $kumId)
+                ->select('bukti_pendidikan')
                 ->get();
         
             $pendidikan = array_merge($pendidikan, $pendidikanData->toArray());

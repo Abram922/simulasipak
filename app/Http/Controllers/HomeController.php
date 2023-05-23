@@ -51,9 +51,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function adminhome(){
-        return view('.admin.home');
-    }
+
     public function userhome(){
 
         $strata_pendidikan = stratapendidikan::all();
@@ -80,7 +78,7 @@ class HomeController extends Controller
         // ->get();
 
         $kum_x = DB::table('kums')->where('id_user', auth()->user()->id)->first(); 
-        $kum = DB::table('kums')->where('id_user', auth()->user()->id)->get();  
+        $kum = kum::where('id_user', auth()->user()->id)->with('jabatanDituju','jabatanSekarang')->get();
 
 
         $result = DB::table('kums')
@@ -95,6 +93,17 @@ class HomeController extends Controller
         $jabatanafter = jabatan::all(); 
 
         return view('.user.menuperhitungan', compact('jabatanpref', 'jabatanafter', 'kum', 'result'));
+    }
+
+
+    /////////////////////////////////////////////////////////ADMIN/////////////////////////////////////////
+
+    public function adminhome(){
+        return view('.admin.home');
+    }
+
+    public function adminpendidikan(){
+        return view('/admin/komponen/pendidikan');
     }
 
     
