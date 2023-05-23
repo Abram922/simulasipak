@@ -9,12 +9,14 @@ use App\Models\komponendokumenpenunjang;
 use App\Models\KomponenPenelitian;
 use App\Models\komponenpm;
 use App\Models\kum;
+use App\Models\User;
 use App\Models\pelaksanaan_pendidikan;
 use App\Models\pelaksanaan_pm;
 use App\Models\pelaksanan_penelitian;
 use App\Models\stratapendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -35,6 +37,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = User::where('id', Auth::user()->id)->get();
 
         $strata_pendidikan = stratapendidikan::all();
         $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
@@ -47,13 +50,15 @@ class HomeController extends Controller
             'jenis_pelaksanaan_pendidikan' =>$jenis_pelaksanaan_pendidikan,
             'komponenpm' =>$komponenpm,
             'komponendp' =>$komponendp,
-            'komponenpenelitian' =>$komponenpenelitian
+            'komponenpenelitian' =>$komponenpenelitian,
+            'user' =>$user
         ]);
     }
 
 
     public function userhome(){
 
+        $user = User::where('id', Auth::user()->id)->get();
         $strata_pendidikan = stratapendidikan::all();
         $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
         $komponenpm = komponenpm::all();
@@ -66,7 +71,8 @@ class HomeController extends Controller
             'jenis_pelaksanaan_pendidikan' =>$jenis_pelaksanaan_pendidikan,
             'komponenpm' =>$komponenpm,
             'komponendp' =>$komponendp,
-            'komponenpenelitian' =>$komponenpenelitian
+            'komponenpenelitian' =>$komponenpenelitian,
+            'user' =>$user
         ]);
     }
 
