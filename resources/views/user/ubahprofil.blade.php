@@ -1,12 +1,14 @@
 @extends('.layouts.user')
 @section('content1')
+<div class="container">
 <!-- Card -->
 <div class="card">
   <div class="card-header">
-  <h5>Featured</h5>
+  <h5>Ubah Data</h5>
   </div>
   <div class="card-body">
     <!-- FORM -->
+    <br>
     <div class="card">
     <div class="card-body">
     <form method="POST" action="/ubahprofil/update/{{$user->id}}" enctype="multipart/form-data">
@@ -98,4 +100,6 @@
   </div>
 </div>
 <!-- Tutup Card -->
+</div>
+
 @endsection
