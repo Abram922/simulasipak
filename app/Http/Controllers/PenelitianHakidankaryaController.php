@@ -31,26 +31,28 @@ class PenelitianHakidankaryaController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
         $inputs = $request->input('inputs');
-        
-    
+
         foreach ($inputs as $i => $input) {
             $validator = Validator::make($input, [
-            //    'kum_id' => 'required',
-            //    'id_semester' => 'required',
-            //    'id_jeniskarya' => 'required',
-            //    'bukti' => 'file'
+               'id_kum' => 'required',
+               'id_semester' => 'required',
+               'id_jeniskarya' => 'required',
+               'judul' => 'required',
+               'bukti' => ''
             ]);
-    
+            $id_jeniskarya = $input['id_jeniskarya'];
+            $jenisPelaksanaan = KomponenPenelitian::find($id_jeniskarya);  
+
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
-    
-            $id_jeniskarya = $input['id_jeniskarya'];
-    
-            $jenisPelaksanaan = KomponenPenelitian::find($id_jeniskarya);
-    
+
             $karya = new penelitian_hakidankarya([
+               'judul' => $input['judul'],
                'id_kum' => $input['id_kum'],
                'id_jeniskarya' => $input['id_jeniskarya'],
                'id_semester' => $input['id_semester'],                
@@ -59,18 +61,15 @@ class PenelitianHakidankaryaController extends Controller
             ]);
     
             if ($image = $request->file('inputs.'.$i.'.bukti')) {
-                $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
+                $destinationPath = 'bukti_unsur_utama/pelaksanaan_penelitian/';
                 $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
                 $image->move($destinationPath, $profileImage);
                 $karya->bukti = $profileImage;
             }
-            return $karya;
-            // $karya->save();
+            $karya->save();
         }
-        
-       
 
-        // return back()->with('success', 'Data berhasil disimpan');
+        return back()->with('success', 'Data berhasil disimpan');
     }
 
     /**

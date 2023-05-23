@@ -45,6 +45,7 @@ Route::resource('pelaksanaan_pm', App\Http\Controllers\PelaksanaanPmController::
 Route::resource('unsurdp', App\Http\Controllers\DokumenpenunjangController::class);
 Route::resource('doumenpenunjang', App\Http\Controllers\DokumenpenunjangController::class);
 Route::resource('pengajaran', App\Http\Controllers\PengajaranController::class);
+Route::resource('karya', App\Http\Controllers\PenelitianHakidankaryaController::class);
 
 Route::resource('unsurpelaksanaan', App\Http\Controllers\PelaksanaanPendidikanController::class);
 

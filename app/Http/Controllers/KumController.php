@@ -104,7 +104,10 @@ class KumController extends Controller
         ->max('stratapendidikans.nilai');
     
         //sum
-        $sumpelaksanaanpendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->sum('jumlah_angka_kredit');
+        $sumpendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->sum('jumlah_angka_kredit');
+        $sumpengajaran = pengajaran::where('id_kum', $kum->id)->sum('jumlah_angka_kredit');   
+        $sumpelaksanaanpendidikan = $sumpendidikan + $sumpengajaran;
+
         $sumpelaksanaanpenelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->sum('angkakredit');
         $sumpelaksanaanpm = pelaksanaan_pm::where('kum_id', $kum->id)->sum('angkakreditpm');
         $sumdp = dokumenpenunjang::where('kum_id', $kum->id)->sum('angkakredit_dp');

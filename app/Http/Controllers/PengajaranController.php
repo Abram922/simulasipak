@@ -56,12 +56,15 @@ class PengajaranController extends Controller
         $pengajaran->volume_dosen_pengajar = $input['volume_dosen_pengajar'];
         $pengajaran->sks_pengajaran = $input['sks_pengajaran'];
         $pengajaran->id_kum = $input['id_kum'];
+
+
         $volumeDosen = floatval($input['volume_dosen_pengajar']);
         $sks = floatval($input['sks_pengajaran']);
 
-        $hasil = (1 / $volumeDosen) * $sks;
+        (1 / $volumeDosen) * $sks;
 
-        $pengajaran->jumlah_angka_kredit = floatval($hasil);
+        $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sks;
+
 
         $pengajaran->save();
     }

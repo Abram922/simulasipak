@@ -74,6 +74,7 @@ class PelaksanaanPmController extends Controller
                  $pelaksanaanpm->buktifisik = $profileImage;
              }
              $pelaksanaanpm->save();
+
          }
          
         
