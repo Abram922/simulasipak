@@ -10,30 +10,25 @@
     background-size: cover;
     position: relative;
     padding: 0;">
-    <img src="{{asset('profill')}}/{{ $s->foto }}" alt="profil" width="170"  class="rounded-circle img-thumbnail" style= "margin-top:50px; margin-left:50px;  margin-bottom: -250px;"/>
+    <div class="container">
+    <img src="{{asset('profill')}}/{{ $s->foto }}" alt="profil" width="170"  class="rounded-circle img-thumbnail" style= "margin-top:50px; margin-bottom: -200px;"/>
+    </div>
 </section>
 
-<div class="">
+<div class="container">
   <div class="row">
 
     <!-- Col 1 -->
     <div class="col">
-        <br><br><br><br><br><br>
+        <br><br><br><br><br>
     <!-- Tabel -->
     <table class="table table-borderless">
     <tbody>
-        <tr>
-        <td><p><b>{{ $s->name }}</b></p></td>
-        </tr>
-        <tr>
-        <td>{{ $s->email }}</td>
-        </tr>
+    <tr><td><p style="font-size:160%; margin-bottom: -20px;"><b>{{ $s->name}}</b></p></td></tr>
+    <tr><td>{{ $s->email}}</td></tr>
 
         <tr>
-        <td>&nbsp;</td>
-        </tr>
-        <tr>
-        <td><p><b>{{ $s->jabatan_fungsional}}</b></p></td>
+        <td><p style="font-size:160%; margin-top: 20px;"><b>{{ $s->jabatan_fungsional}}</b></p></td>
         </tr>
 
         <tr>
@@ -52,6 +47,7 @@
     <div class="col">
     <!-- Tabel -->
     <table class="table table-borderless">
+        <br><br>
     <tbody>
         <tr><td>Nama Lengkap</td>
         <tr>
@@ -86,6 +82,7 @@
 
     <!-- Col 3 -->
     <div class="col">
+    <br><br>
     <table class="table table-borderless">
     <tbody>
         <tr>
@@ -108,6 +105,15 @@
         <tr>
         <td><p><b>{{ $s->fakultas }}</b></p></td>
         </tr>
+
+        <tr>
+        <td>Email</td>
+        </tr>
+        <tr>
+        <td><p><b>{{ $s->email }}</b></p></td>
+        </tr>
+
+        <!--  margin-left:50px;  -->
     </tbody>
     </table>
     <!-- Tutup Col 3 -->
