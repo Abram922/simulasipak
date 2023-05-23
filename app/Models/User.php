@@ -57,4 +57,11 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsTo('App\Models\roles', 'role', 'id');
     }
+
+    public function jabatan_fungsional(){
+        return $this->belongsTo('App\Models\jabatan', 'jabatan_fungsional', 'id');
+    }
+    public function pangkat(){
+        return $this->belongsTo('App\Models\pangkat', 'pangkat', 'id');
+    }
 }

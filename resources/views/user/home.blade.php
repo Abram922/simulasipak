@@ -1,105 +1,108 @@
 @extends('.layouts.user')
-
 @section('content1')
-    <div class="card rounded-3 text-black border-0 col-lg-10 mx-auto">
-        <div class="row g-0">
-            <div class="col-lg-7">
-                <div class="card-body p-md-8 mx-md-4">
-                    <form >
-                        <div class="row my-2 no-gutters">
-                            <div class="col">
-                                <div class="card m-3" style="background-color: rgb(0, 51, 124, 0.3)">
-                                    <div class="card-body d-flex justify-content-between ">
-                                        <button type="button" class="btn " style="background-color:white" ></button>
-                                        <p class="card-text">Pendidikan dan Pengajaran</p>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col">
-                                <div class="card m-3" style="background-color: rgb(0, 51, 124, 0.3)">
-                                    <div class="card-body d-flex justify-content-between ">
-                                        <button type="button" class="btn " style="background-color:white"></button>
-                                        <p class="card-text">Penelitian</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!-- COBA -->
 
-                        <div class="row my-2 no-gutters">
-                            <div class="col">
-                                <div class="card m-3" style="background-color: rgb(0, 51, 124, 0.3)">
-                                    <div class="card-body d-flex justify-content-between ">
-                                        <button type="button" class="btn"style="background-color:white"></button>
-                                        <p class="card-text">Pengabdian Masyarakat</p>
-                                    </div>
-                                </div>
-                            </div>
+@foreach($user as $s)
+<div class="container">
 
-                            <div class="col">
-                                <div class="card m-3" style="background-color: rgb(0, 51, 124, 0.3)">
-                                    <div class="card-body d-flex justify-content-between ">
-                                        <button type="button" class="btn"style="background-color:white"></button>
-                                        <p class="card-text">Dokumen Penunjang</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            <img src="{{asset('profill')}}/{{ $s->foto }}" alt="..." class="img-thumbnail" width= "200">
+        </div>
+        <div class="col-sm-3">
+            <!-- Tabel -->
+            <table class="table table-borderless">
+            <tbody>
+            <tr><td><p style="font-size:110%; margin-bottom: -20px;">Nama</p></td></tr>
+            <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $s->name}}</b></p></td></tr>
 
-            </div>
+            <tr><td><p style="font-size:110%; margin-bottom: -20px;">Jabatan</p></td></tr>
+            <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $s->jabatan_fungsional}}</b></p></td></tr>
 
-            <div class="col-lg-4 "  >
-                <div class="card border-0 ">
-                    <div class="card-body d-flex flex-column" id="cardprofil">
-                    <img id="cardprofil-img" src="{{ asset('/aset_web/p1.png') }}" alt="Profile Picture" class="mr-3">
-                    <div class="d-flex"  >
-                        <table class="table table-responsive table-borderless">
-                            <tbody>
-                            <tr>
-                                <td>Nama</th>
-                                <td>:</th>
-                                <td>{{ Auth::user()->name }}</td>
-                            </tr>
-                            <tr>
-                                <td>NIDN</td>
-                                <td>:</td>
-                                <td>{{ Auth::user()->NIDN }}</td>
-                            </tr>
-                            <tr>
-                                <td>Pangkat</td>
-                                <td>:</td>
-                                <td>{{ Auth::user()->Pangkat }}</td>
-                            </tr>
-                            <tr>
-                                <td>Jabatan</td>
-                                <td>:</td>
-                                <td>{{ Auth::user()->name }}</td>
-                            </tr>
-                            <tr>
-                                <td>Fakultas/Jurusan</td>
-                                <td>:</td>
-                                <td>{{ Auth::user()->name }}</td>
-                            </tr>
-                            </tbody>
-                        </table>                   
+            <tr><td><p style="font-size:110%; margin-bottom: -20px;">Email</p></td></tr>
+            <tr><td><p style="font-size:110%;" ><b>{{ $s->email}}</b></p></td></tr>
+
+            </tbody>
+            </table>
+            <!-- Tutup Tabel -->          
+        </div>
+
+        <div class="col-sm-4">
+        
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                <td>Pendidikan</td>
+                <td>
+                    <div class="card" style="width: 4rem; height:2rem; ">
+                    <center>
+                    42
+                    </center>
                     </div>
-                    <br>
+                </td>
+                </tr>
+
+                <tr>
+                <td>Pelaksanaan Pendidikan</td>
+                <td>
+                    <div class="card" style="width: 4rem; height:2rem; ">
+                    <center>
+                    42
+                    </center>
                     </div>
-                </div>
-            </div>
+                </td>
+                </tr>
+
+                <tr>
+                <td>Penelitian</td>
+                <td>
+                    <div class="card" style="width: 4rem; height:2rem; ">
+                    <center>
+                    42
+                    </center>
+                    </div>
+                </td>
+                </tr>
+
+                <tr>
+                <td>Pengabdian Kepada Masyarakat</td>
+                <td>
+                    <div class="card" style="width: 4rem; height:2rem; ">
+                    <center>
+                    42
+                    </center>
+                    </div>
+                </td>
+                </tr>
+
+                <tr>
+                <td>Unsur Penunjang</td>
+                <td>
+                    <div class="card" style="width: 4rem; height:2rem; ">
+                    <center>
+                    42
+                    </center>
+                    </div>
+                </td>
+                </tr>
+
+            </tbody>
+        </table>
+
         </div>
     </div>
+    </div>
 
-    <h3><center>Komponen Penilaian Angka Kredit</center> </h3>
-    <br>
+</div>
+
+@endforeach
+<!-- Coba -->
 
 
 
-
-
-
+<br><br><br>
     <div class="col-lg-11 mx-auto">
         <ul class="nav nav-underline flex justify-content-around mt-3" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
