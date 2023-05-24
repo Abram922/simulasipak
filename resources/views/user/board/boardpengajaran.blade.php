@@ -36,8 +36,8 @@
                   <td>{{ $gose->volume_dosen_pengajar }}</td>
                   <td>{{ $gose->jumlah_angka_kredit }}</td>
                   <td>
-                    <a href="" target="_blank" class="btn btn-warning">Lihat File</a>
-                    <a href="" target="_blank" download class="btn btn-info">Download File</a>
+                    <a href="/pelaksanaanpendidikan/{{ $gose->bukti_pendidikan }}" target="_blank" class="btn btn-warning">Lihat File</a>
+                    <a href="/pelaksanaanpendidikan/{{ $gose->bukti_pendidikan }}" target="_blank" download class="btn btn-info">Download File</a>
                   </td>
                   <td>
 

@@ -74,7 +74,7 @@ class LampiranController extends Controller
         }
         
     
-        return view('.lampiran.pendidikan', [
+        return view('.lampiran.pelaksanaanpendidikan', [
              'pendidikan' => $pendidikan
         ]);
     
@@ -90,6 +90,16 @@ class LampiranController extends Controller
             ->toArray();
 
         $pelaksanan_penelitians = [];
+        $haki=[];
+
+                foreach ($result as $kumId) {
+            $hakidata = DB::table('penelitian_hakidankaryas')
+                ->where('id_kum', $kumId)
+                ->select('bukti')
+                ->get();
+        
+            $haki = array_merge($haki, $hakidata->toArray());
+        }
         
         foreach ($result as $kumId) {
             $pelaksanan_penelitiansData = DB::table('pelaksanan_penelitians')
@@ -102,7 +112,8 @@ class LampiranController extends Controller
 
     
         return view('.lampiran.penelitian', [
-             'pelaksanan_penelitians' => $pelaksanan_penelitians
+             'pelaksanan_penelitians' => $pelaksanan_penelitians,
+             'haki' => $haki
         ]);
 
 
