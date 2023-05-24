@@ -14,7 +14,7 @@
                                         </span>
                                         <img src="{{asset('aset_web/logopdf.png')}}" class="card-img-top" alt="...">
                                         <div class="text-center">
-                                                <a href="/bukti_unsur_utama/bukti_pendidikan/{{$p->bukti_pendidikan}}"  download="" style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">{{ $p->bukti }}</a>
+                                                <a href="/pelaksanaanpendidikan/{{$p->bukti_pendidikan}}"  download="" style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">{{ $p->bukti }}</a>
                                         </div>
                                     </div>
                             </div>

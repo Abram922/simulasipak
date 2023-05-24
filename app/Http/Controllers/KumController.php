@@ -161,7 +161,6 @@ class KumController extends Controller
     {
         pendidikan::destroy($id);
         
-        return redirect()->back()->with('message', 'Data Berhasi Dihapus');
-                
+        return redirect()->back()->with('message', 'Data Berhasi Dihapus');   
     }
 }

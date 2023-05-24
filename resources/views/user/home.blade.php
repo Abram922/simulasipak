@@ -18,11 +18,11 @@
             <tr><td><p style="font-size:110%; margin-bottom: -20px;">Nama</p></td></tr>
             <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $s->name}}</b></p></td></tr>
 
-            <tr><td><p style="font-size:110%; margin-bottom: -20px;">Jabatan</p></td></tr>
-            <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $s->jabatan_fungsional}}</b></p></td></tr>
+            <tr><td><p style="font-size:110%; margin-bottom: -20px;"> Jabatan  Sekarang</p></td></tr>
+            <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $kumterakhir->jabatanSekarang->jabatan}}</b></p></td></tr>
 
-            <tr><td><p style="font-size:110%; margin-bottom: -20px;">Email</p></td></tr>
-            <tr><td><p style="font-size:110%;" ><b>{{ $s->email}}</b></p></td></tr>
+            <tr><td><p style="font-size:110%; margin-bottom: -20px;">Jabatan  Usulan</p></td></tr>
+            <tr><td><p style="font-size:110%;" ><b>{{ $kumterakhir->jabatanDituju->jabatan}}</b></p></td></tr>
 
             </tbody>
             </table>
@@ -38,7 +38,7 @@
                 <td>
                     <div class="card" style="width: 4rem; height:2rem; ">
                     <center>
-                    42
+                    {{ $sumx }}
                     </center>
                     </div>
                 </td>
@@ -49,7 +49,7 @@
                 <td>
                     <div class="card" style="width: 4rem; height:2rem; ">
                     <center>
-                    42
+                        {{ $sumpelaksanaanpendidikan }}
                     </center>
                     </div>
                 </td>
@@ -60,7 +60,7 @@
                 <td>
                     <div class="card" style="width: 4rem; height:2rem; ">
                     <center>
-                    42
+                        {{ $sumpelaksanaanpenelitian }}
                     </center>
                     </div>
                 </td>
@@ -71,7 +71,7 @@
                 <td>
                     <div class="card" style="width: 4rem; height:2rem; ">
                     <center>
-                    42
+                        {{ $sumpelaksanaanpm }}
                     </center>
                     </div>
                 </td>
@@ -82,7 +82,7 @@
                 <td>
                     <div class="card" style="width: 4rem; height:2rem; ">
                     <center>
-                    42
+                        {{ $sumdp }}
                     </center>
                     </div>
                 </td>
