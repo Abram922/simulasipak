@@ -19,11 +19,35 @@
             <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $s->name}}</b></p></td></tr>
 
             <tr><td><p style="font-size:110%; margin-bottom: -20px;"> Jabatan  Sekarang</p></td></tr>
-            <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $kumterakhir->jabatanSekarang->jabatan}}</b></p></td></tr>
+            <tr>
+                <td>
+                    <p style="font-size:110%; margin-bottom: -5px;">
+                        <b>
+                            @if ($kumterakhir )
+                                {{ $kumterakhir->jabatanSekarang->jabatan }}
+                            @else
+                                -
+                            @endif
+                        </b>
+                    </p>
+                </td>
+            </tr>
 
-            <tr><td><p style="font-size:110%; margin-bottom: -20px;">Jabatan  Usulan</p></td></tr>
-            <tr><td><p style="font-size:110%;" ><b>{{ $kumterakhir->jabatanDituju->jabatan}}</b></p></td></tr>
-
+            <tr><td><p style="font-size:110%; margin-bottom: -20px;"> Jabatan  Usulan</p></td></tr>
+            <tr>
+                <td>
+                    <p style="font-size:110%; margin-bottom: -20px;">
+                        <b>
+                            @if ( $kumterakhir)
+                                {{ $kumterakhir->jabatanDituju->jabatan }}
+                            @else
+                                -
+                            @endif
+                        </b>  
+                    </p>
+                </td>
+            </tr>
+            
             </tbody>
             </table>
             <!-- Tutup Tabel -->          

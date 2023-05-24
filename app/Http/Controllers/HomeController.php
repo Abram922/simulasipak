@@ -48,8 +48,11 @@ class HomeController extends Controller
         $id = Auth::id();
         $kumterakhirId = kum::where('id_user', $id)->latest()->pluck('id')->first();
         $kumterakhir = kum::where('id_user', $id)->latest()->first();
+        
         $strata_id = pendidikan::where('kum_id', $kumterakhirId)->max('strata_id');
-        $sumx = stratapendidikan::where('id', $strata_id)->pluck('nilai');
+        $sumx = stratapendidikan::where('id', $strata_id)->pluck('nilai')->first();
+
+
         $sumpendidikan = pelaksanaan_pendidikan::where('kum_id', $kumterakhirId)->sum('jumlah_angka_kredit');
         $sumpengajaran = pengajaran::where('id_kum', $kumterakhirId)->sum('jumlah_angka_kredit');   
         $sumpelaksanaanpendidikan = $sumpendidikan + $sumpengajaran;
@@ -89,7 +92,8 @@ class HomeController extends Controller
 
         $strata_id = pendidikan::where('kum_id', $kumterakhirId)->max('strata_id');
 
-        $sumx = stratapendidikan::where('id', $strata_id)->pluck('nilai');
+        $sumx = stratapendidikan::where('id', $strata_id)->pluck('nilai')->first();
+
         $sumpendidikan = pelaksanaan_pendidikan::where('kum_id', $kumterakhirId)->sum('jumlah_angka_kredit');
         $sumpengajaran = pengajaran::where('id_kum', $kumterakhirId)->sum('jumlah_angka_kredit');   
         $sumpelaksanaanpendidikan = $sumpendidikan + $sumpengajaran;
@@ -138,7 +142,8 @@ class HomeController extends Controller
 
 
         $jabatanpref = jabatan::all();
-        $jabatanafter = jabatan::all(); 
+        $jabatanafter = jabatan::all();
+
 
         return view('.user.menuperhitungan', compact('jabatanpref', 'jabatanafter', 'kum', 'result'));
     }

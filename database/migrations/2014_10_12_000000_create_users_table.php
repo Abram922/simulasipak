@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('role')->unsigned()->default(2);
-            $table->integer('pangkat')->unsigned();
-            $table->integer('jabatan_fungsional')->unsigned();
+            $table->integer('pangkat')->unsigned()->nullable();
+            $table->integer('jabatan_fungsional')->unsigned()->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

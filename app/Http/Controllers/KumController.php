@@ -19,6 +19,7 @@ use App\Models\pengajaran;
 use App\Models\penulis;
 use App\Models\semester;
 use App\Models\stratapendidikan;
+use Carbon\Carbon;
 use Database\Seeders\akreditasi_penulis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -65,9 +66,16 @@ class KumController extends Controller
                     }
                 },
             ],
+            'tmt' => 'required'
         ]);
     
         $input['id_user'] = auth()->user()->id;
+        $input['id_user'] = auth()->user()->id;
+
+        $tmt = Carbon::createFromFormat('Y-m-d', $input['tmt']);
+        $tmt_available = $tmt->addYears(2);
+
+        $input['tmt_available'] = $tmt_available->format('Y-m-d');
     
         kum::create($input);
         return redirect()->back()->with('message', 'Data berhasil disimpan');
@@ -105,8 +113,56 @@ class KumController extends Controller
     
         //sum
         $sumpendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->sum('jumlah_angka_kredit');
-        $sumpengajaran = pengajaran::where('id_kum', $kum->id)->sum('jumlah_angka_kredit');   
-        $sumpelaksanaanpendidikan = $sumpendidikan + $sumpengajaran;
+        $sumpengajaran = pengajaran::select('id_semester',DB::raw('SUM(jumlah_angka_kredit) as total_angka_kredit'))
+        ->where('id_kum', $kum->id)
+        ->groupBy('id_semester')
+        ->get();
+
+        $jabatanbeban = pengajaran::join('kums', 'pengajarans.id_kum', '=', 'kums.id')
+        ->join('jabatans', 'kums.id_jabatan_sekarang', '=', 'jabatans.id')
+            ->select('pengajarans.id_kum','kums.id_jabatan_sekarang', 'jabatans.id','jabatans.angkaKreditKumulatif')
+            ->where('kums.id', $kum->id)
+            ->get();
+            $angkaKreditKumulatif = null;
+
+            if (count($jabatanbeban) > 0) {
+                $angkaKreditKumulatif = $jabatanbeban[0]->angkaKreditKumulatif;
+            }
+
+        // dd($angkaKreditKumulatif);
+    
+    $totalAngkaKreditArray = [];
+    
+    foreach ($sumpengajaran as $data) {
+        $idSemester = $data->id_semester;
+        $idkum = $data->id_kum;
+
+        $totalAngkaKredit = $data->total_angka_kredit;
+
+        if($angkaKreditKumulatif < 200){
+            if ($totalAngkaKredit <= 10) {
+                $x = $totalAngkaKredit * 0.5;
+            } elseif ($totalAngkaKredit > 10 && $totalAngkaKredit <= 12) {
+                $x = (10 * 0.5) + (($totalAngkaKredit - 10) * 0.25);
+            } else {
+                $x = (10 * 0.5) + (2 * 0.25) + (($totalAngkaKredit - 12) * 0);
+            }    
+
+        }else{
+            if ($totalAngkaKredit <= 10) {
+                $x = $totalAngkaKredit *1;
+            } elseif ($totalAngkaKredit > 10 && $totalAngkaKredit <= 12) {
+                $x = (10 *1) + (($totalAngkaKredit - 10) * 0.5);
+            } else {
+                $x = (10 *1) + (2 * 0.5) + (($totalAngkaKredit - 12) * 0);
+            }            
+        }
+
+        $totalAngkaKreditArray[] = $x;
+        $totalAngkaKredit = array_sum($totalAngkaKreditArray);
+    }
+
+        $sumpelaksanaanpendidikan = $sumpendidikan + $totalAngkaKredit;
 
         $sumpelaksanaanpenelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->sum('angkakredit');
         $sumpelaksanaanpm = pelaksanaan_pm::where('kum_id', $kum->id)->sum('angkakreditpm');

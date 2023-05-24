@@ -13,7 +13,9 @@ class kum extends Model
         'judul',
         'id_user',
         'id_jabatan_sekarang',
-        'id_jabatan_dituju'
+        'id_jabatan_dituju',
+        'tmt',
+        'tmt_available'
 
     ];
 

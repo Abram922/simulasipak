@@ -1,0 +1,4 @@
+laporan => penjelasan 5 stage 
+cover = judul, nomor kelompok, dan tanggal
+
+iterasi 2 -> evaluasi di akhir (penjelasan metode empatize dll)

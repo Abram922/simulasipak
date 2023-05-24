@@ -65,6 +65,13 @@
                     </div>
                 </div>
 
+                <div class="form-group row ">
+                  <div class="col-md-2 mb-4 mx-auto">
+                    <label for="judul" style="display: inline-block; width: 150px;">TMT:</label>
+                    <input type="date" class="form-control" id="tmt" name="tmt" style="display: inline-block; width: 200px;">
+                  </div>
+              </div>
+
 
                 
                 <div class="form-group row ">
