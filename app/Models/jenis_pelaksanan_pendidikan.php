@@ -13,7 +13,7 @@ class jenis_pelaksanan_pendidikan extends Model
         'jenispelaksanaan',
         'Lektor_Kepala',
         'angka_kredit',
-        'keterangan',
+        'bukti_kegiatan',
         'batas_maksimal_diakui'
     
     ];

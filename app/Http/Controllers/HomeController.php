@@ -109,7 +109,10 @@ class HomeController extends Controller
     }
 
     public function adminpendidikan(){
-        return view('/admin/komponen/pendidikan');
+        $komponenpendidikan = jenis_pelaksanan_pendidikan::all();
+        return view('/admin/komponen/pendidikan',[
+            'komponenpendidikan' => $komponenpendidikan
+        ]);
     }
 
     

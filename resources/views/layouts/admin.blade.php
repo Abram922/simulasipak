@@ -354,11 +354,15 @@
 
                 </nav>
 
-                @yield('content1')
+                <div class="container-fluid">
+                    @yield('content1')                    
+                </div>
+
+
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                {{-- <div class="container-fluid">
+                {{-- <div class="container-fluid">  
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">

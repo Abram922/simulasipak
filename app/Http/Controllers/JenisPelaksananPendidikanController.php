@@ -29,7 +29,17 @@ class JenisPelaksananPendidikanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+
+        'jenispelaksanaan' => '',
+        'Lektor_Kepala'=> '',
+        'angka_kredit'=> '',
+        'bukti_kegiatan'=> '',
+        'batas_maksimal_diakui'=> ''
+        ]);
+
+        jenis_pelaksanan_pendidikan::create($input);
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthPort
+class AuthPortUser
 {
     /**
      * Handle an incoming request.
@@ -16,18 +16,13 @@ class AuthPort
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if(auth()->user()->role==1){
-        //     return $next($request);
-        // }
-        // /////
-
         if (!Auth::check()) {
             return redirect(('/login'));
         }
 
         $user = Auth::user();
 
-        if ($user->role == 1) {
+        if ($user->role == 2) {
             return $next($request);
         }
         return back()->with('error', "you dont have access");
