@@ -30,13 +30,24 @@
         @enderror
     </div>
 
-    <div class="mb-3">
+    <div class=" mb-3  ">
+        <label for="komponen">Jabatan</label>
+            <select class="form-control" id="jabatan_fungsional" name="jabatan_fungsional">
+                <option>Pilih Jabatan</option>
+                @foreach ($jabatan as $js)
+                <option class="" value="{{$js->id}}" data-kum-pref ="{{$js->angkaKreditKumulatif}}" title="{{$js->jabatanpref}}">{{Str::limit($js->jabatan,100)}}</option>
+                @endforeach
+            </select>
+    </div>
+                  
+
+    <!-- <div class="mb-3">
         <label for="jabatanfungsional" class="form-label">Jabatan Fungsional</label>
-        <input type="text" class="form-control @error('') is-invalid @enderror" name="jabatan_fungsional" value="{{$user->jabatan_fungsional}}">
+        <input type="komponen" class="form-control @error('') is-invalid @enderror" name="jabatan_fungsional" value="{{$user->jabatan_fungsional}}">
         @error('jabatan_fungsional')
         <div class="invalid-feedback">{{$message}}</div>
         @enderror
-      </div>
+      </div> -->
 
     <div class="mb-3">
         <label for="tanggallahir" class="form-label">Tanggal Lahir</label>
@@ -44,6 +55,11 @@
         @error('tanggal_lahir')
         <div class="invalid-feedback">{{$message}}</div>
         @enderror
+    </div>
+
+    
+    <div class="mb-3">
+        <input hidden type="text"  name="password" id="password">
     </div>
 
     <div class="mb-3">

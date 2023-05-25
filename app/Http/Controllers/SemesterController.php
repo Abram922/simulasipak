@@ -13,7 +13,8 @@ class SemesterController extends Controller
      */
     public function index()
     {
-        //
+        $semester = semester::all();
+        return view('.admin.pendukung.semester',['semester' => $semester]);
     }
 
     /**

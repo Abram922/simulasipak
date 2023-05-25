@@ -13,7 +13,8 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        $jabatan = jabatan::all();
+        return view('.admin.pendukung.jabatan',['jabatan' => $jabatan]);
     }
 
     /**

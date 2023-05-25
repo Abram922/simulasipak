@@ -119,19 +119,19 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('semester.index')}}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Semester</span></a>
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('akreditasipenelitian.index')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Akreditasi Penulis</span></a>
+                    <span>Akreditasi Penelitian</span></a>
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('penulis.index')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Jenis Penulis</span></a>
             </li>

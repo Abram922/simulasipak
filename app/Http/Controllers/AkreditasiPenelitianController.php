@@ -13,7 +13,8 @@ class AkreditasiPenelitianController extends Controller
      */
     public function index()
     {
-        //
+        $akreditasi_penelitian = akreditasi_penelitian::all();
+        return view('.admin.pendukung.akreditasipenelitian',['akreditasi_penelitian' => $akreditasi_penelitian]);
     }
 
     /**

@@ -13,7 +13,9 @@ class PenulisController extends Controller
      */
     public function index()
     {
-        //
+        $penulis = penulis::all();
+        return view('.admin.pendukung.penulis',['penulis' => $penulis]);
+    
     }
 
     /**
