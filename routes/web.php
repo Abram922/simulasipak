@@ -28,8 +28,6 @@ Route::get('/', function () { return view('auth/login');})->name('/halaman_login
 
 Auth::routes();
 
-<<<<<<< Updated upstream
-=======
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/user-home/{id}', [App\Http\Controllers\HomeController::class, 'userhomex'])->name('user.homex');
 Route::get('/user-home', [App\Http\Controllers\HomeController::class, 'userhome'])->name('userhome');
@@ -67,7 +65,6 @@ Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendi
 
 
 Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');
->>>>>>> Stashed changes
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['AuthPort:1']], function () {
