@@ -108,71 +108,137 @@
     </div>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-2">
-            <h3>Kredit Kumulatif</h3>
-            <h3>Terakhir</h3>
-
-        </div>
-        <div class="col-lg-8">
-
+  <div class="row">
+      <div class="col-lg-2">
+          <h3>Kredit Kumulatif</h3>
+          <h3>Terakhir</h3>
+      </div>
+      <div class="col-lg-8">
           @foreach ($kum as $k)
-              <div class="container">
-                <div class="card card-hover border-0" style="max-width: 1100px;">
+          <div class="container">
+              <div class="card card-hover border-0" style="max-width: 1100px;">
                   <div class="row no-gutters">
-                    <div class="col-md-3 position-relative d-flex" >
-                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img" alt="..." width="350">
-                      <div class="d-flex">
-                        <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info position-absolute top-50 start-50 translate-middle" id="btn_check">lengkapi</a>
-                      </div>
-                    </div>
-                    <div class="col-md-5">                
-                      <div class="card-body">
-                        <h4></h4>
-                        <h3 class="card-title"><b>{{ $k->judul }}</b></h3>
-                        <p>Jabatan Saat Ini : {{ $k->jabatanSekarang->jabatan}}</p>
-                        <p>Jabatan Saat Usulan :{{ $k->jabatanDituju->jabatan}}</p>
-                        <div class="d-flex justify-content-end">
-                          <div class="ml-auto">
-                            <a id="editx" href="" class="btn btn-warning ml-2">edit</a>
-                            <a id="hapusx" href="" class="btn btn-danger ml-2">hapus</a>
+                      <div class="col-md-3 button-muncul position-relative d-flex">
+                          <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img" alt="..." width="350">
+                          <div class="d-flex">
+                              <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info position-absolute top-50 start-50 translate-middle" id="btn_check">lengkapi</a>
                           </div>
-                        </div>
                       </div>
-                    </div>
+                      <div class="col-md-5">
+                          <div class="card-body">
+                              <h4></h4>
+                              <h3 class="card-title"><b>{{ $k->judul }}</b></h3>
+                              <p>Jabatan Saat Ini: {{ $k->jabatanSekarang->jabatan}}</p>
+                              <p>Jabatan Saat Usulan: {{ $k->jabatanDituju->jabatan}}</p>
+                              <div class="d-flex justify-content-end">
+                                  <div class="ml-auto">
+                                      <a id="editx" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editkummodal_{{ $k->id }}">edit</a>
+                                      <a id="hapusx" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapuskummodal_{{ $k->id }}">hapus</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                   </div>
-                </div>
               </div>
-              <br>              
-            @endforeach
           </div>
-          
-          <style>
-            .card-hover:hover {
-              box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
-            }
-          </style>
-          
-          <script>
-                const cards = document.querySelectorAll('.card-hover');
-                cards.forEach(card => {
-                const button = card.querySelector('#btn_check');
-                card.addEventListener('mouseenter', () => {
-                    button.style.display = 'block';
-                });
-                card.addEventListener('mouseleave', () => {
-                    button.style.display = 'none';
-                });
-                });
-          </script>
+          <br>
+
+          <div class="modal fade" id="hapuskummodal_{{ $k->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin menghapus KUM ini?</h5>
+                          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">Peringatan: Data perhitungan anda akan hilang ketika menghapus KUM ini</div>
+                      <div class="modal-footer">
+                          <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
+                          <a class="btn btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('hapus-kum-{{ $k->id }}').submit();">hapus</a>
+                      </div>
+                      <form id="hapus-kum-{{ $k->id }}" action="{{ route('kum.destroy', $k->id) }}" method="POST" class="d-none">
+                          @csrf
+                          @method('DELETE')
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+          <div class="modal fade" id="editkummodal_{{ $k->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin menghapus KUM ini?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                              <form method="POST" action="{{ route('kum.update', $k->id) }}" >
+                                  @csrf
+                                  @method('PUT')
+                                  <div class="mx-auto">
+
+                                      <div class="form-group row ">
+                                          <div class="col-md text-center">
+                                            <label for="judul" style="display: inline-block; width: 150px;">Judul KUM:</label>
+                                            <input type="text" class="form-control" id="judul" name="judul" style="display: inline-block; width: 200px;" value="{{ $k->judul }}">
+                                          </div>
+                                      </div>
+
+                                      <div class="form-group row ">
+                                        <div class="col-md text-center">
+                                          <label for="komponen" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
+                                          <select class="form-control" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;">
+                                            <option>Pilih Jabatan</option>
+                                            @foreach ($jabatanpref as $js)
+                                            <option class="" value="{{$js->id}}" data-kum-pref ="{{$js->angkaKreditKumulatif}}" title="{{$js->jabatanpref}}">{{Str::limit($js->jabatan,100)}}</option>
+                                            @endforeach
+                                          </select>
+                                        </div>
+                                      </div>
+                                        
+                                      <div class="form-group row ">
+                                          <div class="col-md text-center">
+                                            <label for="komponen" style="display: inline-block;width: 150px;">Jabatan yang Usulan:</label>
+                                            <select class="form-control" id="id_jabatan_dituju" name="id_jabatan_dituju" style="display: inline-block; width: 200px;">
+                                              <option>Pilih Jabatan</option>
+                                              @foreach ($jabatanafter as $px)
+                                                  <option class="" value="{{$px->id}}" data-kum-after ="{{$px->angkaKreditKumulatif}}" title="{{$px->jabatanafter}}">{{Str::limit($px->jabatan,100)}}</option>
+                                              @endforeach
+                                            </select>
+                                          </div>
+                                      </div>
+
+                                      <div class="form-group row ">
+                                        <div class="col-md text-center">
+                                          <label for="judul" style="display: inline-block; width: 150px;">TMT:</label>
+                                          <input type="date" class="form-control" id="tmt" name="tmt" style="display: inline-block; width: 200px;" value="{{ $k->tmt }}">
+                                        </div>
+                                    </div>
+
+
+
+                                  </div>
+
+                                  <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
+                                    <button class="btn btn-primary" type="submit" data-dismiss="modal">submit</button>
+                                </div>  
+                              </form>                    
+                    </div>
+
+                </div>
+            </div>
         </div>
-          
-    
-
-
+          @endforeach
+      </div>
+  </div>
 </div>
+
 
 @endsection

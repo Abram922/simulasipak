@@ -132,6 +132,7 @@ class KumController extends Controller
         // dd($angkaKreditKumulatif);
     
     $totalAngkaKreditArray = [];
+    $totalAngkaKredit = 0;
     
     foreach ($sumpengajaran as $data) {
         $idSemester = $data->id_semester;
@@ -160,7 +161,10 @@ class KumController extends Controller
 
         $totalAngkaKreditArray[] = $x;
         $totalAngkaKredit = array_sum($totalAngkaKreditArray);
+
+
     }
+        // dd($totalAngkaKredit);
 
         $sumpelaksanaanpendidikan = $sumpendidikan + $totalAngkaKredit;
 
@@ -205,18 +209,58 @@ class KumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, kum $kum)
+    public function update(Request $request,$id)
     {
-        //
+        $input = $request->validate([
+            'judul' => 'required',
+            'id_jabatan_sekarang' => 'required',
+            'id_jabatan_dituju' => [
+                'required',
+                function ($attribute, $value, $fail) use ($request) {
+                    $njs = $request->input('id_jabatan_sekarang');
+                    $njd = $value;
+                    
+                    $nj1 = jabatan::find($njs);
+                    $nj2 = jabatan::find($njd);
+                    
+                    $h1 = $nj1->angkaKreditKumulatif;
+                    $h2 = $nj2->angkaKreditKumulatif;
+    
+                    if ($h2 <= $h1) {
+                        $fail('Nilai Angka Kredit Kumulatif Jabatan yang Dituju harus lebih besar dari Jabatan Saat Ini.');
+                    }
+                },
+            ],
+            'tmt' => 'required'
+        ]);
+    
+
+        $tmt = Carbon::createFromFormat('Y-m-d', $input['tmt']);
+        $tmt_available = $tmt->addYears(2);
+
+        $input['tmt_available'] = $tmt_available->format('Y-m-d');
+
+        $kums = kum::findOrFail($id);
+        $kums->update($input);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
+    // public function destroy($id)
+    // {
+    //     pendidikan::destroy($id);
+        
+    //     return redirect()->back()->with('message', 'Data Berhasi Dihapus');   
+    // }
+
     public function destroy($id)
     {
-        pendidikan::destroy($id);
-        
+        $kum = kum::findOrFail($id);
+        $kum->delete();
         return redirect()->back()->with('message', 'Data Berhasi Dihapus');   
     }
 }

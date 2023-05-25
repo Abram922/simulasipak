@@ -60,7 +60,7 @@ class PelaksananPenelitianController extends Controller
     public function show($id)
     {
         $kum = kum::find($id);
-        $penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->get();
+        $penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)                   ->groupBy('id_semester')->get();
         $akreditasi = akreditasi_penelitian::all();
         $jenispenulis = penulis::all();
 
