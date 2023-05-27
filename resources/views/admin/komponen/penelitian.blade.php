@@ -155,7 +155,7 @@
                                                     
                                                     <div class="modal-footer">
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
-                                                        <button class="btn btn-primary" type="submit" data-dismiss="modal">submit</button>
+                                                        <button class="btn btn-primary" type="submit" >submit</button>
                                                     </div>
                                                     
                                             </form>

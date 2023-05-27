@@ -73,9 +73,18 @@ class KomponenpmController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, komponenpm $komponenpm)
+    public function update(Request $request,$id)
     {
-        //
+        $input = $request->validate([
+            'komponenkegiatan' => 'required',
+            'angkakredit'=> 'required',
+            'bukti_kegiatan'=> 'required',
+            'batas_maksimal_diakui'=> 'required'
+        ]);
+    
+        $komponenpm = komponenpm::findOrFail($id);
+        $komponenpm->update($input);    
+        return redirect()->back()->with('message', 'Data berhasil di ubah');
     }
 
     /**

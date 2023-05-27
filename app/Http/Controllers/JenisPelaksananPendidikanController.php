@@ -83,10 +83,9 @@ class JenisPelaksananPendidikanController extends Controller
         $komponenpendidikan->angka_kredit = $angka_kredit;
         $komponenpendidikan->bukti_kegiatan = $bukti_kegiatan;
         $komponenpendidikan->batas_maksimal_diakui = $batas_maksimal_diakui;
-        return json_encode($komponenpendidikan) ;
-        //$komponenpendidikan->save();
+        $komponenpendidikan->save();
     
-        //return redirect()->back()->with('message', 'Data berhasil disimpan');
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
     
 

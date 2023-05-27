@@ -81,12 +81,7 @@ class StratapendidikanController extends Controller
         ]);
     
         $strata = stratapendidikan::findOrFail($id);
-        $strata->strata = $input['strata'];
-        $strata->nilai = $input['nilai'];
-        $strata->keterangan = $input['keterangan'];
-        $strata->batas_maksimal_diakui = $input['batas_maksimal_diakui'];
-        $strata->save();
-    
+        $strata->update($input);    
         return redirect()->back()->with('message', 'Data berhasil di ubah');
     }
 
