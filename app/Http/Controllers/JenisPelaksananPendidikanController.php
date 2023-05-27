@@ -61,16 +61,43 @@ class JenisPelaksananPendidikanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, jenis_pelaksanan_pendidikan $jenis_pelaksanan_pendidikan)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'jenispelaksanaan' => '',
+            'Lektor_Kepala' => '',
+            'angka_kredit' => '',
+            'bukti_kegiatan' => '',
+            'batas_maksimal_diakui' => ''
+        ]);
+    
+        $jenispelaksanaan = $request->input('jenispelaksanaan');
+        $Lektor_Kepala = $request->input('Lektor_Kepala');
+        $angka_kredit = $request->input('angka_kredit');
+        $bukti_kegiatan = $request->input('bukti_kegiatan');
+        $batas_maksimal_diakui = $request->input('batas_maksimal_diakui');
+    
+        $komponenpendidikan = jenis_pelaksanan_pendidikan::findOrFail($id);
+        $komponenpendidikan->jenispelaksanaan = $jenispelaksanaan;
+        $komponenpendidikan->Lektor_Kepala = $Lektor_Kepala;
+        $komponenpendidikan->angka_kredit = $angka_kredit;
+        $komponenpendidikan->bukti_kegiatan = $bukti_kegiatan;
+        $komponenpendidikan->batas_maksimal_diakui = $batas_maksimal_diakui;
+        return json_encode($komponenpendidikan) ;
+        //$komponenpendidikan->save();
+    
+        //return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(jenis_pelaksanan_pendidikan $jenis_pelaksanan_pendidikan)
+    public function destroy($id)
     {
-        //
+        $komponenpendidikan = jenis_pelaksanan_pendidikan::findOrFail($id);
+        $komponenpendidikan->delete();
+        return redirect()->back()->with('message', 'Data Berhasi Dihapus');
+        
     }
 }

@@ -14,7 +14,6 @@ class komponendokumenpenunjang extends Model
         'angkakreditmax',
         'bukti_kegiatan',
         'batas_maksimal_diakui'
-
     ];
 
     public function dokumenpenunjang(){

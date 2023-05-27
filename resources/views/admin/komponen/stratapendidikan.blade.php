@@ -1,7 +1,7 @@
 @extends('.layouts.admin')
 @section('content1')
     
-<h1>Penelitian</h1>
+<h1>Strata Pendidikan</h1>
 
 <div class="row">
 
@@ -9,7 +9,7 @@
     <div class="col-xl-5 col-lg-5">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Komponen Penelitian</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Komponen Strata Pendidikan</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -17,13 +17,13 @@
                     </a>
                 </div>
             </div>
-            <form action="{{ route('komponenpenelitian.store') }}" method="POST">
+            <form action="{{ route('stratapendidikan.store') }}" method="POST">
                 @csrf
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md m-3">
-                            <label for="institusi">Jenis Pelaksanaan</label>
-                            <input required type="text" class="form-control"  id="komponenkegiatan" name="komponenkegiatan">
+                            <label for="">Strata</label>
+                            <input required type="text" class="form-control"  id="strata" name="strata">
                         </div>
                     </div>
 
@@ -34,16 +34,14 @@
                         </div>
                         <div class="col-md m-3">
                             <label for="institusi">Keterangan Bukti Kegiatan</label>
-                            <input required type="text" class="form-control"  id="bukti_kegiatan" name="bukti_kegiatan">
+                            <input required type="text" class="form-control"  id="keterangan" name="keterangan">
                         </div>
-                    </div>
-
-                    <div class="form-group row">
                         <div class="col-md m-3">
                             <label for="institusi">Besaran Angka Kredit</label>
-                            <input required type="number" class="form-control"  id="angkakredit" name="angkakredit">
-                        </div>
+                            <input required type="number" class="form-control"  id="nilai" name="nilai">
+                        </div>                        
                     </div>
+
                     <div class="text-center">
                         <button class="btn btn-primary" type="submit">submit</button>
                     </div>
@@ -71,27 +69,27 @@
                 <table class="table">
                     <thead>
                         <th>No</th>
-                        <th>Jenis Pelaksanaan</th>
-                        <th>Keterangan Batas Pengakuan</th>
-                        <th>Keterangan Bukti Kegiatan</th>
+                        <th>Strata</th>
+                        <th>Keterangan</th>
+                        <th>Batas Maksimal diakui</th>
                         <th>Besaran Angka Kredit</th>
                         <th>Aksi</th>
                     </thead>
             
-                    @foreach ($komponenpenelitian as $pd)
+                    @foreach ($stratapendidikan as $pd)
                     <tbody>
                         <td></td>
-                        <td>{{ $pd->komponenkegiatan }}</td>
-                        <td>{{ $pd->batas_maksimal_diakui }}</td>   
-                        <td>{{ $pd->bukti_kegiatan }}</td>
-                        <td>{{ $pd->angkakredit }}</td>  
+                        <td>{{ $pd->strata }}</td>
+                        <td>{{ $pd->keterangan }}</td>   
+                        <td>{{ $pd->batas_maksimal_diakui }}</td>
+                        <td><center>{{ $pd->nilai }}</center> </td>      
                         <td>
-                            <a id="editpenelitian" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editpenelitian_{{ $pd->id }}">edit</a>
-                            <a id="hapuspenelitian" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapuspenelitian_{{ $pd->id }}">hapus</a>
+                            <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editpendidikan_{{ $pd->id }}">edit</a>
+                            <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapuspendidikan_{{ $pd->id }}">hapus</a>
                         </td>
 
                         
-                        <div class="modal fade" id="hapuspenelitian_{{ $pd->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="hapuspendidikan_{{ $pd->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -105,7 +103,7 @@
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
                                         <button onclick="event.preventDefault(); document.getElementById('hapus{{ $pd->id }}').submit();">hapus</button>
                                     </div>
-                                    <form id="hapus{{ $pd->id }}" action="{{ route('komponenpenelitian.destroy', $pd->id) }}" method="POST" class="d-none">
+                                    <form id="hapus{{ $pd->id }}" action="{{ route('stratapendidikan.destroy', $pd->id) }}" method="POST" class="d-none">
                                         @csrf
                                         @method('DELETE')
                                     </form>
@@ -114,7 +112,7 @@
                         </div>
                     
 
-                        <div class="modal fade" id="editpenelitian_{{ $pd->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="editpendidikan_{{ $pd->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -124,35 +122,40 @@
                                         </button>
                                     </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('komponenpenelitian.update', $pd->id) }}" method="POST">
+                                            <form action="{{ route('stratapendidikan.update', $pd->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
 
-                                                    <div class="form-group row">
-                                                        <div class="col-md m-3">
-                                                            <label for="institusi">Jenis Pelaksanaan</label>
-                                                            <input required type="text" class="form-control"  id="komponenkegiatan" name="komponenkegiatan">
-                                                        </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md m-3">
+                                                        <label for="">Strata</label>
+                                                        <input required type="text" class="form-control"  id="strata" name="strata">
                                                     </div>
-                                
-                                                    <div class="form-group row">
-                                                        <div class="col-md m-3">
-                                                            <label for="institusi">Keterangan Batas Pengakuan</label>
-                                                            <input required type="text" class="form-control"  id="batas_maksimal_diakui" name="batas_maksimal_diakui">
-                                                        </div>
-                                                        <div class="col-md m-3">
-                                                            <label for="institusi">Keterangan Bukti Kegiatan</label>
-                                                            <input required type="text" class="form-control"  id="bukti_kegiatan" name="bukti_kegiatan">
-                                                        </div>
+                                                </div>
+                            
+                                                <div class="form-group row">
+                                                    <div class="col-md m-3">
+                                                        <label for="institusi">Keterangan Batas Pengakuan</label>
+                                                        <input required type="text" class="form-control"  id="batas_maksimal_diakui" name="batas_maksimal_diakui">
                                                     </div>
-                                
-                                                    <div class="form-group row">
-                                                        <div class="col-md m-3">
-                                                            <label for="institusi">Besaran Angka Kredit</label>
-                                                            <input required type="number" class="form-control"  id="angkakredit" name="angkakredit">
-                                                        </div>
+
+                 
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-md m-3">
+                                                        <label for="institusi">Keterangan Bukti Kegiatan</label>
+                                                        <input required type="text" class="form-control"  id="keterangan" name="keterangan">
                                                     </div>
-                                                    
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-md m-3">
+                                                        <label for="institusi">Besaran Angka Kredit</label>
+                                                        <input required type="number" class="form-control"  id="nilai" name="nilai">
+                                                    </div>                                                           
+                                                </div>
+                                        </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
                                                         <button class="btn btn-primary" type="submit" data-dismiss="modal">submit</button>

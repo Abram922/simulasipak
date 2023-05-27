@@ -17,8 +17,7 @@ return new class extends Migration
             $table->integer('angkakredit')->nullable();
             $table->string('bukti_kegiatan');
             $table->string('batas_maksimal_diakui');
-            $table->boolean('jurnal');
-            $table->timestamps();
+            $table->timestamps(); 
 
             
         });

@@ -15,22 +15,22 @@ class strata_pendidikan extends Seeder
     {
         DB::table('stratapendidikans')->insert([
             [
-                'strata' => 'Mengikuti pendidikan formal dan memperoleh gelar/ sebutan/ ijazah',
+                'keterangan' => 'Mengikuti pendidikan formal dan memperoleh gelar/ sebutan/ ijazah',
                 'nilai' => 100,
-                'keterangan' => 'Strata 1'  ,
+                'strata' => 'Strata 1'  ,
                 'batas_maksimal_diakui' => '1/ periode penilaian'
 
             ],
             [
-                'strata' => 'Mengikuti pendidikan formal dan memperoleh gelar/ sebutan/ ijazah',
+                'keterangan' => 'Mengikuti pendidikan formal dan memperoleh gelar/ sebutan/ ijazah',
                 'nilai' => 150,
-                'keterangan' => 'Magister/Sederajat'  ,
+                'strata' => 'Magister/Sederajat'  ,
                 'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
             [
-                'strata' => 'Mengikuti pendidikan formal dan memperoleh gelar/ sebutan/ ijazah',
+                'keterangan' => 'Mengikuti pendidikan formal dan memperoleh gelar/ sebutan/ ijazah',
                 'nilai' => 200,
-                'keterangan' => 'Doktor/Sederajat'  ,
+                'strata' => 'Doktor/Sederajat'  ,
                 'batas_maksimal_diakui' => '1/ periode penilaian'
             ],
         ]);

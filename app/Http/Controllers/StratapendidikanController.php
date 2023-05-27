@@ -13,7 +13,10 @@ class StratapendidikanController extends Controller
      */
     public function index()
     {
-        //
+        $stratapendidikan = stratapendidikan::all();
+        return view('.admin.komponen.stratapendidikan',[
+            'stratapendidikan' => $stratapendidikan
+        ]);
     }
 
     /**
@@ -29,7 +32,24 @@ class StratapendidikanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'strata' => 'required',
+            'nilai'=> 'required',
+            'keterangan'=> 'required',
+            'batas_maksimal_diakui'=> 'required'
+        ]);
+
+        $penunjang = new stratapendidikan ([
+            'strata' => $input['strata'],
+                'nilai' => $input['nilai'],
+                'keterangan' => $input['keterangan'],
+                'batas_maksimal_diakui' => $input['batas_maksimal_diakui'],
+        ]);
+
+
+
+        $penunjang->save();
+        return redirect()->back()->with('message', 'Data berhasil direkam');
     }
 
     /**
@@ -45,22 +65,40 @@ class StratapendidikanController extends Controller
      */
     public function edit(stratapendidikan $stratapendidikan)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, stratapendidikan $stratapendidikan)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'strata' => 'required',
+            'nilai'=> 'required',
+            'keterangan'=> 'required',
+            'batas_maksimal_diakui'=> 'required'
+        ]);
+    
+        $strata = stratapendidikan::findOrFail($id);
+        $strata->strata = $input['strata'];
+        $strata->nilai = $input['nilai'];
+        $strata->keterangan = $input['keterangan'];
+        $strata->batas_maksimal_diakui = $input['batas_maksimal_diakui'];
+        $strata->save();
+    
+        return redirect()->back()->with('message', 'Data berhasil di ubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(stratapendidikan $stratapendidikan)
+    public function destroy($id)
     {
-        //
+        $stratapendidikan = stratapendidikan::findOrFail($id);
+        $stratapendidikan->delete();
+
+        return redirect()->back()->with('message', 'Data berhasil direkam');
+
     }
 }

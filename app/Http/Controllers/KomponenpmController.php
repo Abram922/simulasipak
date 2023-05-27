@@ -13,7 +13,10 @@ class KomponenpmController extends Controller
      */
     public function index()
     {
-        //
+        $komponenpm = komponenpm::all();
+        return view ('/admin/komponen/pengabdian',[
+            'komponenpm' => $komponenpm
+        ]);
     }
 
     /**
@@ -29,7 +32,26 @@ class KomponenpmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'komponenkegiatan' => 'required',
+            'angkakredit'=> 'required',
+            'bukti_kegiatan'=> 'required',
+            'batas_maksimal_diakui'=> 'required'
+        ]);
+
+        $pm = new komponenpm([
+            'komponenkegiatan' => $input['komponenkegiatan'],
+                'angkakredit' => $input['angkakredit'],
+                'bukti_kegiatan' => $input['bukti_kegiatan'],
+                'batas_maksimal_diakui' => $input['batas_maksimal_diakui'],
+        ]);
+
+
+
+        $pm->save();
+        return redirect()->back()->with('message', 'Data berhasil direkam');
+    
+
     }
 
     /**
@@ -59,8 +81,12 @@ class KomponenpmController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(komponenpm $komponenpm)
+    public function destroy($id)
     {
-        //
+        $pm = komponenpm::findOrFail($id);
+        $pm->delete();
+
+        return redirect()->back()->with('message', 'Data berhasil dihapus');
+    
     }
 }

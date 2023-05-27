@@ -16,7 +16,7 @@ class DokumenpenunjangController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -50,7 +50,7 @@ class DokumenpenunjangController extends Controller
     
             $komponenpenunjang_id = $input['komponenpenunjang_id'];
     
-            $jenisPelaksanaan = komponendokumenpenunjang::find($komponenpenunjang_id);
+            $jenisPelaksanaan = dokumenpenunjang::find($komponenpenunjang_id);
     
             $pelaksanaanpm = new dokumenpenunjang([
                'kum_id' => $input['kum_id'],

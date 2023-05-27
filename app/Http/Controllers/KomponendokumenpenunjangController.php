@@ -13,7 +13,10 @@ class KomponendokumenpenunjangController extends Controller
      */
     public function index()
     {
-        //
+        $komponenpenunjang = komponendokumenpenunjang::all();
+        return view('.admin.komponen.penunjang',[
+            'komponenpenunjang' => $komponenpenunjang
+        ]);
     }
 
     /**
@@ -29,7 +32,26 @@ class KomponendokumenpenunjangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'komponenkegiatan' => 'required',
+            'angkakreditmax'=> 'required',
+            'bukti_kegiatan'=> 'required',
+            'batas_maksimal_diakui'=> 'required'
+        ]);
+
+        $penunjang = new komponendokumenpenunjang([
+            'komponenkegiatan' => $input['komponenkegiatan'],
+                'angkakreditmax' => $input['angkakreditmax'],
+                'bukti_kegiatan' => $input['bukti_kegiatan'],
+                'batas_maksimal_diakui' => $input['batas_maksimal_diakui'],
+        ]);
+
+
+
+        $penunjang->save();
+        return redirect()->back()->with('message', 'Data berhasil direkam');
+    
+
     }
 
     /**
@@ -59,8 +81,11 @@ class KomponendokumenpenunjangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(komponendokumenpenunjang $komponendokumenpenunjang)
+    public function destroy($id)
     {
-        //
+        $id = komponendokumenpenunjang::findOrFail($id);
+        $id->delete();
+        return redirect()->back()->with('message', 'Data berhasil dihapuss');
+
     }
 }

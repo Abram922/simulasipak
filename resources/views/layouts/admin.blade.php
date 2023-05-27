@@ -65,47 +65,34 @@
             </div>
 
             <li class="nav-item ">
-                <a class="nav-link" href="{{ route('admin-pendidikan') }}">
+                <a class="nav-link" href="{{ route('strata-pendidikan') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span> Pendidikan</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsepelaksanaanpendidikans"
-                    aria-expanded="true" aria-controls="collapsepelaksanaanpendidikans">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span> Pelaksanaan Pendidikan</span>
-                </a>
-                <div id="collapsepelaksanaanpendidikans" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="buttons.html">Pengajaran</a>
-                        <a class="collapse-item" href="cards.html">Pelaksanaan Lainnya</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsepelaksanaanpenelitian"
-                    aria-expanded="true" aria-controls="collapsepelaksanaanpenelitian">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span> Pelaksanaan Pendidikan</span>
-                </a>
-                <div id="collapsepelaksanaanpenelitian" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="buttons.html">Jurnal</a>
-                        <a class="collapse-item" href="cards.html">Penelitian Lainnya</a>
-                    </div>
-                </div>
+                    <span>Pendidikan</span></a>
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('admin-pendidikan') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Pelaksanaan Pendidikan</span></a>
+            </li>
+
+
+
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ route('admin-penelitian') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span> Pelaksanaan Penelitian </span></a>
+            </li>
+
+
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ route('admin-pengabdian') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Pengabdian</span></a>
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('admin-penunjang') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Penunjang</span></a>
             </li>

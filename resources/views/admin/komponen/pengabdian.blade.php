@@ -1,7 +1,7 @@
 @extends('.layouts.admin')
 @section('content1')
     
-<h1>Penelitian</h1>
+<h1>Pengabdian Kepada masyarakat</h1>
 
 <div class="row">
 
@@ -9,7 +9,7 @@
     <div class="col-xl-5 col-lg-5">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Komponen Penelitian</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Komponen Pengabdian Kepada Masyarakat</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -17,7 +17,7 @@
                     </a>
                 </div>
             </div>
-            <form action="{{ route('komponenpenelitian.store') }}" method="POST">
+            <form action="{{ route('komponenpm.store') }}" method="POST">
                 @csrf
                 <div class="card-body">
                     <div class="form-group row">
@@ -78,7 +78,7 @@
                         <th>Aksi</th>
                     </thead>
             
-                    @foreach ($komponenpenelitian as $pd)
+                    @foreach ($komponenpm as $pd)
                     <tbody>
                         <td></td>
                         <td>{{ $pd->komponenkegiatan }}</td>
@@ -105,7 +105,7 @@
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
                                         <button onclick="event.preventDefault(); document.getElementById('hapus{{ $pd->id }}').submit();">hapus</button>
                                     </div>
-                                    <form id="hapus{{ $pd->id }}" action="{{ route('komponenpenelitian.destroy', $pd->id) }}" method="POST" class="d-none">
+                                    <form id="hapus{{ $pd->id }}" action="{{ route('komponenpm.destroy', $pd->id) }}" method="POST" class="d-none">
                                         @csrf
                                         @method('DELETE')
                                     </form>
@@ -124,7 +124,7 @@
                                         </button>
                                     </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('komponenpenelitian.update', $pd->id) }}" method="POST">
+                                            <form action="{{ route('komponenpm.update', $pd->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
 

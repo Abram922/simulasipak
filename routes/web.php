@@ -69,11 +69,19 @@ Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->n
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['AuthPort:1']], function () {
         Route::get('/admin-pendidikan', [App\Http\Controllers\HomeController::class,'adminpendidikan'])->name('admin-pendidikan');
+        Route::get('/admin-penelitian', [App\Http\Controllers\KomponenPenelitianController::class,'index'])->name('admin-penelitian');
+        Route::get('/admin-pengabdian', [App\Http\Controllers\KomponenpmController::class,'index'])->name('admin-pengabdian');
+        Route::get('/admin-penunjang', [App\Http\Controllers\KomponendokumenpenunjangController::class,'index'])->name('admin-penunjang');
         Route::get('/pendidikan-admin', [App\Http\Controllers\AdminPageController::class,'pendidikan'])->name('pendidikan');
-        Route::get('/admin-home', [App\Http\Controllers\HomeController::class,'adminhome'])->name('adminhome');
-        Route::resource('komponen-pendidikan', App\Http\Controllers\JenisPelaksananPendidikanController::class);
+        Route::get('/staratapendidikan-admin', [App\Http\Controllers\StratapendidikanController::class,'index'])->name('strata-pendidikan');
         
-
+        Route::get('/admin-home', [App\Http\Controllers\HomeController::class,'adminhome'])->name('adminhome');
+        Route::resource('komponenpendidikan', App\Http\Controllers\JenisPelaksananPendidikanController::class);
+        Route::resource('komponenpenelitian', App\Http\Controllers\KomponenPenelitianController::class);
+        Route::resource('komponenpm', App\Http\Controllers\KomponenpmController::class);
+        Route::resource('komponenpenunjang', App\Http\Controllers\KomponendokumenpenunjangController::class);
+        Route::resource('stratapendidikan', App\Http\Controllers\StratapendidikanController::class);
+        
 
     });
 
@@ -98,6 +106,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('karya', App\Http\Controllers\PenelitianHakidankaryaController::class);
 
         Route::resource('unsurpelaksanaan', App\Http\Controllers\PelaksanaanPendidikanController::class);
+        Route::resource('unsurpenelitian-admin', App\Http\Controllers\KomponenPenelitianController::class);
 
 
         Route::get('/lampiran', [App\Http\Controllers\LampiranController::class,'index'])->name('lampiran');
