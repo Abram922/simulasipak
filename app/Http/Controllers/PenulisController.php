@@ -31,7 +31,24 @@ class PenulisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'jenispenulis' => 'required',
+            'persentase_skor'=> 'required',
+            'penulis_khusus'=> '',
+            'note'=> 'required'
+        ]);
+
+        $penunjang = new penulis ([
+                'jenispenulis' => $input['jenispenulis'],
+                'persentase_skor' => $input['persentase_skor'],
+                'note' => $input['note'],
+        ]);
+
+
+
+        $penunjang->save();
+        return redirect()->back()->with('message', 'Data berhasil direkam');
+    
     }
 
     /**
@@ -53,16 +70,35 @@ class PenulisController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, penulis $penulis)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'jenispenulis' => 'required',
+            'persentase_skor'=> 'required',
+            'note'=> 'required',
+            'penulis_khusus'=> ''
+        ]);
+    
+        $penulis_khusus = $request->input('penulis_khusus');
+        $penulis = penulis::findOrFail($id);
+        $penulis->penulis_khusus = $penulis_khusus;
+        $penulis->save();
+
+        $penulis->update($input);    
+        return redirect()->back()->with('message', 'Data berhasil di ubah');
+    
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(penulis $penulis)
+    public function destroy($id)
     {
-        //
+        $penulis = penulis::findOrFail($id);
+        $penulis->delete();
+
+        return redirect()->back()->with('message', 'Data berhasil direkam');
+
+    
     }
 }

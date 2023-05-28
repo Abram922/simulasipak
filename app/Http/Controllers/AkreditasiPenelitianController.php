@@ -30,7 +30,19 @@ class AkreditasiPenelitianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'akreditasi' => 'required',
+            'nilai' => 'required'
+        ]);
+
+        $akreditasi = new akreditasi_penelitian ([
+            'akreditasi' => $input['akreditasi'],
+            'nilai' => $input['nilai'],
+        ]);
+
+        $akreditasi->save();
+        return redirect()->back()->with('message', 'Data berhasil direkam');
+    
     }
 
     /**
@@ -52,16 +64,29 @@ class AkreditasiPenelitianController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, akreditasi_penelitian $akreditasi_penelitian)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'akreditasi' => 'required',
+            'nilai' => 'required'
+        ]);
+    
+        $akreditasi = akreditasi_penelitian::findOrFail($id);
+        $akreditasi->update($input);    
+        return redirect()->back()->with('message', 'Data berhasil di ubah');
+    
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(akreditasi_penelitian $akreditasi_penelitian)
+    public function destroy($id)
     {
-        //
+        $semester = akreditasi_penelitian::findOrFail($id);
+        $semester->delete();
+
+        return redirect()->back()->with('message', 'Data berhasil direkam');
+
+    
     }
 }

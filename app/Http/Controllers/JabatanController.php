@@ -30,7 +30,27 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'jabatan' => 'required',
+            'angkaKreditKumulatif' => 'required',
+            'pelaksanaanPendidikan' => 'required',
+            'pelaksanaanPenelitian' => 'required',
+            'pelaksanaanPengabdianMasyarakat' => 'required',
+            'penunjang' => 'required'
+
+        ]);
+
+        $jabatan = new jabatan ([
+            'jabatan' => $input['jabatan'],
+            'angkaKreditKumulatif' => $input['angkaKreditKumulatif'],
+            'pelaksanaanPendidikan' => $input['pelaksanaanPendidikan'],
+            'pelaksanaanPenelitian' => $input['pelaksanaanPenelitian'],
+            'pelaksanaanPengabdianMasyarakat' => $input['pelaksanaanPengabdianMasyarakat'],
+            'penunjang' => $input['penunjang'],
+        ]);
+
+        $jabatan->save();
+        return redirect()->back()->with('message', 'Data berhasil direkam');
     }
 
     /**
@@ -52,16 +72,30 @@ class JabatanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, jabatan $jabatan)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'jabatan' => 'required',
+            'angkaKreditKumulatif' => 'required',
+            'pelaksanaanPendidikan' => 'required',
+            'pelaksanaanPenelitian' => 'required',
+            'pelaksanaanPengabdianMasyarakat' => 'required',
+            'penunjang' => 'required'
+        ]);
+    
+        $jabatan = jabatan::findOrFail($id);
+        $jabatan->update($input);    
+        return redirect()->back()->with('message', 'Data berhasil di ubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(jabatan $jabatan)
+    public function destroy($id)
     {
-        //
+        $jabatan = jabatan::findOrFail($id);
+        $jabatan->delete();
+
+        return redirect()->back()->with('message', 'Data berhasil direkam');
     }
 }

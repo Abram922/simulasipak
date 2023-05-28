@@ -30,7 +30,16 @@ class SemesterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'semester' => 'required'
+        ]);
+
+        $semester = new semester ([
+            'semester' => $input['semester'],
+        ]);
+
+        $semester->save();
+        return redirect()->back()->with('message', 'Data berhasil direkam');
     }
 
     /**
@@ -52,16 +61,27 @@ class SemesterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, semester $semester)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'semester' => 'required'
+        ]);
+    
+        $semester = semester::findOrFail($id);
+        $semester->update($input);    
+        return redirect()->back()->with('message', 'Data berhasil di ubah');
+    
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(semester $semester)
+    public function destroy($id)
     {
-        //
+        $semester = semester::findOrFail($id);
+        $semester->delete();
+
+        return redirect()->back()->with('message', 'Data berhasil direkam');
+
     }
 }
