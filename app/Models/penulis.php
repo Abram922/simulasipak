@@ -12,7 +12,8 @@ class penulis extends Model
     protected $fillable=[
         'jenispenulis',
         'persentase_skor',
-        'note'
+        'note',
+        'penulis_khusus'
 
     ];
 

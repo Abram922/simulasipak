@@ -32,16 +32,17 @@ class PenulisController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'jenispenulis' => 'required',
-            'persentase_skor'=> 'required',
+            'jenispenulis' => '',
+            'persentase_skor'=> '',
             'penulis_khusus'=> '',
-            'note'=> 'required'
+            'note'=> ''
         ]);
 
         $penunjang = new penulis ([
                 'jenispenulis' => $input['jenispenulis'],
                 'persentase_skor' => $input['persentase_skor'],
                 'note' => $input['note'],
+                'penulis_khusus' => $input['penulis_khusus'],
         ]);
 
 
