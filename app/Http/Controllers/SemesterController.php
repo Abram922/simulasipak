@@ -34,11 +34,20 @@ class SemesterController extends Controller
             'semester' => 'required'
         ]);
 
-        $semester = new semester ([
-            'semester' => $input['semester'],
-        ]);
+        $semesterinput = $input['semester'];
 
-        $semester->save();
+
+
+
+        $semesterganjil = new semester ();
+        $semestergenap = new semester ();
+
+            $semesterganjil->semester = "Semester Ganjil TA" . $semesterinput . "/" . $semesterinput+1 ;
+            $semestergenap->semester = "Semester Genap TA" . $semesterinput+1 . "/".     $semesterinput+2 ;
+
+        
+        $semesterganjil->save();
+        $semestergenap->save();
         return redirect()->back()->with('message', 'Data berhasil direkam');
     }
 

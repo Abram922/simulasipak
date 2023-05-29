@@ -41,10 +41,12 @@ class KomponenPenelitianController extends Controller
 
         $penelitian = new KomponenPenelitian([
             'komponenkegiatan' => $input['komponenkegiatan'],
-                'angkakredit' => $input['angkakredit'],
-                'bukti_kegiatan' => $input['bukti_kegiatan'],
-                'batas_maksimal_diakui' => $input['batas_maksimal_diakui'],
+            'angkakredit' => $input['angkakredit'],
+            'bukti_kegiatan' => $input['bukti_kegiatan'],
+            'batas_maksimal_diakui' => $input['batas_maksimal_diakui'],
         ]);
+
+        dd($penelitian);
 
 
 

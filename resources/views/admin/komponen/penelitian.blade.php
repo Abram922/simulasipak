@@ -80,7 +80,7 @@
             
                     @foreach ($komponenpenelitian as $pd)
                     <tbody>
-                        <td></td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $pd->komponenkegiatan }}</td>
                         <td>{{ $pd->batas_maksimal_diakui }}</td>   
                         <td>{{ $pd->bukti_kegiatan }}</td>

@@ -50,9 +50,10 @@ class DokumenpenunjangController extends Controller
     
             $komponenpenunjang_id = $input['komponenpenunjang_id'];
     
-            $jenisPelaksanaan = dokumenpenunjang::find($komponenpenunjang_id);
-    
-            $pelaksanaanpm = new dokumenpenunjang([
+            $jenisPelaksanaan = komponendokumenpenunjang::find($komponenpenunjang_id);
+
+     
+            $penunjang = new dokumenpenunjang([
                'kum_id' => $input['kum_id'],
                'komponenpenunjang_id' => $input['komponenpenunjang_id'],
                'namakegiatan_dp' => $input['namakegiatan_dp'],
@@ -60,16 +61,16 @@ class DokumenpenunjangController extends Controller
                'instansi_dp' => $input['instansi_dp'],
                'kedudukan_dp' => $input['kedudukan_dp'],                
                'angkakredit_dp' => $jenisPelaksanaan->angkakreditmax
-
             ]);
     
             if ($image = $request->file('inputs.'.$i.'.buktidp')) {
                 $destinationPath = 'bukti_unsur_penunjang/';
                 $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
                 $image->move($destinationPath, $profileImage);
-                $pelaksanaanpm->buktidp = $profileImage;
+                $penunjang->buktidp = $profileImage;
             }
-            $pelaksanaanpm->save();
+
+            $penunjang->save();
         }
         
        

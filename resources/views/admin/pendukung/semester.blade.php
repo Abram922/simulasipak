@@ -22,7 +22,7 @@
                     <div class="form-group row">
                         <div class="col-md m-3">
                             <label for="">Semester</label>
-                            <input required type="text" class="form-control"  id="semester" name="semester">
+                            <input required type="number" class="form-control"  id="semester" name="semester">
                         </div>
                     </div>
 
@@ -58,17 +58,18 @@
                     <th scope="col">Aksi</th>
                     </tr>
                 </thead>
-                <?php $i=0 ?>
             
                 @foreach ($semester as $gose)
                     <tr>
-                        <td>{{ ++$i  }}</td>
-                        <td>{{ $gose->semester}}</td>
+                    <tbody>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $gose->semester }}</td>
                         <td>
-                            <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editsemester_{{ $gose->id }}">edit</a>
-                            <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapussemester_{{ $gose->id }}">hapus</a>
+                            <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal"
+                                data-target="#editsemester_{{ $gose->id }}">edit</a>
+                            <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal"
+                                data-target="#hapussemester_{{ $gose->id }}">hapus</a>
                         </td>
-                <?php $i++ ?>
 
                         
                         <div class="modal fade" id="hapussemester_{{ $gose->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

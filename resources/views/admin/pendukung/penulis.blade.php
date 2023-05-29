@@ -79,10 +79,9 @@
                     </tr>
                 </thead>
                         
-                <?php $i=0 ?>
                     @foreach ($penulis as $gose)
                         <tr>
-                            <td>{{ ++$i  }}</td>
+                            <td>{{ $loop->iteration  }}</td>
                             <td>{{ $gose->jenispenulis}}</td>
                             <td>{{ $gose->persentase_skor}}</td>
                             <td>{{ $gose->note}}</td>
@@ -91,7 +90,6 @@
                             <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editpenulis_{{ $gose->id }}">edit</a>
                             <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapuspenulis_{{ $gose->id }}">hapus</a>
                         </td>
-                <?php $i++ ?>
 
                         
                         <div class="modal fade" id="hapuspenulis_{{ $gose->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

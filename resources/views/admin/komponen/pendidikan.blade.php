@@ -92,7 +92,7 @@
             
                     @foreach ($komponenpendidikan as $pd)
                     <tbody>
-                        <td></td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $pd->jenispelaksanaan }}</td>
                         <td>{{ $pd->batas_maksimal_diakui }}</td>   
                         <td>{{ $pd->bukti_kegiatan }}</td>

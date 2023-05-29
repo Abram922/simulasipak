@@ -43,6 +43,17 @@ class PengajaranController extends Controller
             'id_kum' => 'required',
         ]);
 
+        $idSemester = $input['id_semester'];
+        $idKum = $input['id_kum'];
+        $sksPengajaran = $input['sks_pengajaran'];
+
+        $totalSks = Pengajaran::where('id_semester', $idSemester)
+        ->where('id_kum', $idKum)
+        ->sum('sks_pengajaran');
+
+
+
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
@@ -56,15 +67,23 @@ class PengajaranController extends Controller
         $pengajaran->volume_dosen_pengajar = $input['volume_dosen_pengajar'];
         $pengajaran->sks_pengajaran = $input['sks_pengajaran'];
         $pengajaran->id_kum = $input['id_kum'];
-
-
         $volumeDosen = floatval($input['volume_dosen_pengajar']);
-        $sks = floatval($input['sks_pengajaran']);
 
-        (1 / $volumeDosen) * $sks;
+        if ($totalSks + $sksPengajaran > 12) {
+            $validator->errors()->add('sks_pengajaran', 'Total SKS melebihi batas maksimum (12) untuk id_semester dan id_kum yang sama.');
+            
+            ?>
+            <script>
+                $(document).ready(function() {
+                    $('#alertModal').modal('show');
+                });
+            </script>
+            <?php
 
-        $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sks;
-
+            continue;
+        }else{
+            $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sksPengajaran;            
+        }
 
         $pengajaran->save();
     }

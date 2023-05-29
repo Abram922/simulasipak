@@ -10,7 +10,6 @@ class pangkat extends Model
     use HasFactory;
 
     protected $fillable = [
-
         'pangkat'
     ];
 

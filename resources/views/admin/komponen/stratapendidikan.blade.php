@@ -78,7 +78,7 @@
             
                     @foreach ($stratapendidikan as $pd)
                     <tbody>
-                        <td></td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $pd->strata }}</td>
                         <td>{{ $pd->keterangan }}</td>   
                         <td>{{ $pd->batas_maksimal_diakui }}</td>

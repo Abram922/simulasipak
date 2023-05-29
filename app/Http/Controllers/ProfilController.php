@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\pangkat;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\jabatan;
 
@@ -52,148 +52,47 @@ class ProfilController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $jabatan = jabatan::all();
+        $pangkat = pangkat::all();
         //return $user;
-        return view('.user.ubahprofil', compact('user', 'jabatan'));
+        return view('.user.ubahprofil', compact('user', 'jabatan','pangkat'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     * 
-     * 
-     */
-
-     /*
-         {
-        $user = Auth::user();
-
-        $request->validate([
-            'name' => 'required',
-            'tanggal_lahir' => 'required',
-            'tempat_lahir' => 'required',
-            'NIDN' => 'required',
-            'ikatan_kerja' => 'required',
-            'jabatan_fungsional' => 'required',
-            'institusi' => 'required',
-            'fakultas' => 'required',
-            'pangkat' => 'required',
-            'password' => 'required',
-
-    
-        ]);
-                $user->name = $request->name;
-                $user->jabatan_fungsional = $request->jabatan_fungsional;
-                $user->tanggal_lahir = $request->tanggal_lahir;
-                $user->tempat_lahir = $request->tempat_lahir;
-                $user->NIDN = $request->NIDN;
-                $user->ikatan_kerja = $request->ikatan_kerja;
-                $user->fakultas = $request->fakultas;
-                $user->institusi = $request->institusi;
-                $user->pangkat = $request->pangkat;
-                $user->foto = $nama_file;
-            if ($request->filled('password')) {
-                $user->password = Hash::make($request->password);
-            }
-
-        $user->save();
-    
-
-
-        // if($request->hasFile('foto')) {
-
-        //     $file_path = public_path() . 'profill/' . $user->foto;
-    
-        //     if(file_exists($file_path)) {
-        //         unlink($file_path);
-        //     }
-    
-        //     $file = $request->file('foto');
-    
-        //     $nama_file = time()."_".$file->getClientOriginalName();
-    
-        //     $file->move('profill', $nama_file);
-        // }
-
-
-
-        if($updated) {
-            return redirect()->route('profil')->with('sukses', 'Data berhasil diubah');
-        }
-
-        return back()->with('sukses', 'Data gagal diubah');
-    }
-
-
-     */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'tanggal_lahir' => 'required',
-            'tempat_lahir' => 'required',
-            'NIDN' => 'required',
-            'ikatan_kerja' => 'required',
-            'jabatan_fungsional' => 'required',
-            'institusi' => 'required',
-            'fakultas' => 'required',
-            'pangkat' => 'required'
-    
+        $input = $request->validate([
+            'name' => '',
+            'tanggal_lahir' => '',
+            'tempat_lahir' => '',
+            'NIDN' => '',
+            'ikatan_kerja' => '',
+            'jabatan_fungsional' => '',
+            'institusi' => '',
+            'fakultas' => '',
+            'pangkat' => ''
         ]);
+    
         $user = User::find($id);
-
-        if (!$user) {
-            return back()->with('gagal', 'Data tidak ditemukan');
+        $user->name = $input['name'] ?? $user->name; // Menggunakan null coalescing operator untuk mengatasi ketika 'name' tidak ada dalam $input array
+        $user->tanggal_lahir = $input['tanggal_lahir'] ?? $user->tanggal_lahir;
+        $user->tempat_lahir = $input['tempat_lahir'] ?? $user->tempat_lahir;
+        $user->NIDN = $input['NIDN'] ?? $user->NIDN;
+        $user->ikatan_kerja = $input['ikatan_kerja'] ?? $user->ikatan_kerja;
+        $user->jabatan_fungsional = $input['jabatan_fungsional'] ?? $user->jabatan_fungsional;
+        $user->institusi = $input['institusi'] ?? $user->institusi;
+        $user->fakultas = $input['fakultas'] ?? $user->fakultas;
+        $user->pangkat = $input['pangkat'] ?? $user->pangkat;
+    
+        if ($foto = $request->file('foto')) {
+            $destinationPath = 'bukti_unsur_utama/pendidikan/';
+            $profileImage = date('YmdHis') . "." . $foto->getClientOriginalExtension();
+            $foto->move($destinationPath, $profileImage);
+            $user->foto = $profileImage;
         }
-
-        if($request->hasFile('foto')) {
-
-            $file_path = public_path() . 'profill/' . $user->foto;
-    
-            if(file_exists($file_path)) {
-                unlink($file_path);
-            }
-    
-            $file = $request->file('foto');
-    
-            $nama_file = time()."_".$file->getClientOriginalName();
-    
-            $file->move('profill', $nama_file);
-    
-            $user->update([
-                'name' => $request->name,
-                'jabatan_fungsional' => $request->jabatan_fungsional,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'tempat_lahir' => $request->tempat_lahir,
-                'NIDN' => $request->NIDN,
-                'ikatan_kerja' => $request->ikatan_kerja,
-                'fakultas' => $request->fakultas,
-                'institusi' => $request->institusi,
-                'pangkat' => $request->pangkat,
-                'foto' => $nama_file
-            ]);
-    
-            return redirect()->route('profil')->with('sukses', 'Data berhasil diubah');
-        }
-
-        $updated = $user->update([
-            'name' => $request->name,
-            'jabatan_fungsional' => $request->jabatan_fungsional,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'tempat_lahir' => $request->tempat_lahir,
-            'NIDN' => $request->NIDN,
-            "password" => $request->password,
-            'ikatan_kerja' => $request->ikatan_kerja,
-            'fakultas' => $request->fakultas,
-            'institusi' => $request->institusi,
-            'pangkat' => $request->pangkat
-        ]);
-        
-
-        if($updated) {
-            return redirect()->route('profil')->with('sukses', 'Data berhasil diubah');
-        }
-
-        return back()->with('sukses', 'Data gagal diubah');
+        dd($user);
+        $user->save();
+        return back()->with('sukses', 'Data berhasil diubah');
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -26,7 +26,7 @@
 
         @foreach ($penelitian as $pn)
         <tbody>
-                <td></td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $pn->judul }}</td>
                 <td>{{ $pn->akreditasi_id }}</td>
                 <td>{{ $pn->angkakredit }}</td>              

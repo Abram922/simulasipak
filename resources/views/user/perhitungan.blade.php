@@ -148,6 +148,24 @@
           }
       @endphp
 
+            <!-- Modal -->
+      <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="alertModalLabel">Pemberitahuan</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Total SKS melebihi batas maksimum (12) untuk id_semester dan id_kum yang sama.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 
       <div class="col-md">
         <div class="card shadow mb-4">
@@ -156,31 +174,31 @@
           </div>
           <div class="card-body">
               <h4 class="small font-weight">Pendidikan   <span
-                      class="float-right">{{ $poin }}%</span></h4>
+                      class="float-right"></span></h4>
               <div class="progress mb-4">
                   <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $poin }}%"
                       aria-valuenow="{{ $poin }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <h4 class="small font-weight">Pelaksanaan Pendidikan<span
-                      class="float-right">{{ $persentasepelaksanaanpendidikan }}%</span></h4>
+                      class="float-right">{{ $sumpelaksanaanpendidikan }} / {{ $angkakreditpelaksanaanPendidikannmax }}</span></h4>
               <div class="progress mb-4">
                   <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $persentasepelaksanaanpendidikan }}%"
                       aria-valuenow="{{ $persentasepelaksanaanpendidikan }} %" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <h4 class="small font-weight">Pelaksanaan Penelitian   <span
-                      class="float-right">{{ $persentasepelaksanaanpenelitian }}%</span></h4>
+                      class="float-right">{{ $sumpelaksanaanpenelitian }} / {{ $angkakreditpelaksanaanPenelitianmax }}</span></h4>
               <div class="progress mb-4">
                   <div class="progress-bar" role="progressbar" style="width: {{ $persentasepelaksanaanpenelitian }}%"
                       aria-valuenow="{{ $persentasepelaksanaanpenelitian }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <h4 class="small font-weight">Pengabdian Kepada Masyarakat   <span
-                      class="float-right">{{ $persentasepm }}%</span></h4>
+                      class="float-right">{{ $sumpelaksanaanpm }} / {{ $angkakreditpelaksanaanPengabdianMasyarakatmax }}</span></h4>
               <div class="progress mb-4">
                   <div class="progress-bar bg-info" role="progressbar" style="width: {{ $persentasepm }}%"
                       aria-valuenow="{{ $persentasepm }} %" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <h4 class="small font-weight">Dokumen Penunjang   <span
-                      class="float-right">{{ $persentasedp }}%</span></h4>
+                      class="float-right">{{ $sumdp }} / {{ $angkakreditpenunjangmax }}</span></h4>
               <div class="progress">  
                   <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasedp }}%"
                       aria-valuenow="{{ $persentasedp }} %" aria-valuemin="0" aria-valuemax="100"></div>

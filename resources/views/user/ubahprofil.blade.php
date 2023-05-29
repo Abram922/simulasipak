@@ -95,11 +95,13 @@
     </div>
 
     <div class="mb-3">
-        <label for="pangkat" class="form-label">Pangkat/Golongan</label>
-        <input type="text" class="form-control @error('') is-invalid @enderror" name="pangkat" value="{{$user->pangkat}}">
-        @error('pangkat')
-        <div class="invalid-feedback">{{$message}}</div>
-        @enderror
+        <label for="pangkat">Pangkat</label>
+            <select class="form-control" id="jabatan_fungsional" name="jabatan_fungsional">
+                <option>Pilih pangkat</option>
+                @foreach ($pangkat as $p)
+                <option  value="{{$p->id}}" title="{{$p->pangkat}}">{{Str::limit($p->pangkat,100)}}</option>
+                @endforeach
+            </select>
     </div>
 
     <div class="mb-3">

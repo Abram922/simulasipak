@@ -29,7 +29,7 @@
 
       @foreach ($pelaksanaan_pm as $pd)
       <tbody>
-              <td></td>
+              <td>{{ $loop->iteration }}</td>
               <td>{{ $pd->nama }}</td>
               <td>{{ $pd->bentuk }}</td>
               <td>{{ $pd->tempat_instansi }}</td>

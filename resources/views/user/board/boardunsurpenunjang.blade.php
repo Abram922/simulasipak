@@ -28,7 +28,7 @@
         </thead>
         @foreach ($dokumenpenunjang as $dp)
           <tbody>
-                  <td></td>
+                  <td>{{ $loop->iteration }}</td>
                   <td>{{ $dp->namakegiatan_dp }}</td>
                   <td>{{ $dp->instansi_dp }}</td>
                   <td>{{ $dp->komponendp->komponenkegiatan }}</td>

@@ -38,7 +38,7 @@
               @endif
   
                 <tbody>
-                        <td></td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $gose->xsemester->semester}}</td>
                         <td>{{ $gose->instansi }}</td>                  
                         <td>{{ $gose->kode_matakuliah }}</td>
@@ -181,7 +181,7 @@
 
       @foreach ($pelaksanaan_pendidikan as $pk)
       <tbody>
-              <td></td>
+              <td>{{ $loop->iteration }}</td>
               <td>{{ $pk->jenispelaksanaan->jenispelaksanaan }}</td>
               <td>{{ $pk->semester->semester}}</td>
               <td>{{ $pk->nama_kegiatan }}</td>

@@ -25,7 +25,7 @@
 
       @foreach ($pendidikan as $pd)
       <tbody>
-              <td></td>
+              <td>{{ $loop->iteration }}</td>
               <td>{{ $pd->institusi }}</td>
               <td>{{ $pd->strata->strata }}</td>
               <td>

@@ -37,7 +37,7 @@
                     <p style="font-size:110%; margin-bottom: -5px;">
                         <b>
                             @if ($kumterakhir )
-                                //{{ $kumterakhir->jabatanSekarang->jabatan }}
+                                {{ $kumterakhir->jabatanSekarang->jabatan }}
                             @else
                                 -
                             @endif

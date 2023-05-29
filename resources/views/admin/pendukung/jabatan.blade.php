@@ -97,11 +97,10 @@
                     <th scope="col">Aksi</th>
                     </tr>
                 </thead>
-                <?php $i=0 ?>
             
                 @foreach ($jabatan as $gose)
                     <tr>
-                        <td>{{ ++$i  }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $gose->jabatan}}</td>
                         <td>{{ $gose->angkaKreditKumulatif}}</td>
                         <td>{{ $gose->pelaksanaanPendidikan}}</td>
@@ -112,7 +111,6 @@
                             <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editjabatan_{{ $gose->id }}">edit</a>
                             <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapusjabatan_{{ $gose->id }}">hapus</a>
                         </td>
-                <?php $i++ ?>
 
                         
                         <div class="modal fade" id="hapusjabatan_{{ $gose->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

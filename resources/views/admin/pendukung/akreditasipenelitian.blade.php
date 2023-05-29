@@ -65,18 +65,16 @@
                     <th scope="col">Aksi</th>
                     </tr>
                 </thead>
-                <?php $i=0 ?>
             
                 @foreach ($akreditasi_penelitian as $gose)
                     <tr>
-                        <td>{{ ++$i  }}</td>
+                        <td>{{ $loop->iteration  }}</td>
                         <td>{{ $gose->akreditasi}}</td>
                         <td>{{ $gose->nilai}}</td>
                         <td>
                             <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editakreditasi_{{ $gose->id }}">edit</a>
                             <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapusakreditasi_{{ $gose->id }}">hapus</a>
                         </td>
-                <?php $i++ ?>
 
                         
                         <div class="modal fade" id="hapusakreditasi_{{ $gose->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
