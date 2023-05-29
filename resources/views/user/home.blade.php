@@ -19,7 +19,17 @@
             <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $s->name}}</b></p></td></tr>
 
             <tr><td><p style="font-size:110%; margin-bottom: -20px;">Judul KUM</p></td></tr>
-            <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $kumterakhir->judul}}</b></p></td></tr>
+            <tr><td><p style="font-size:110%; margin-bottom: -5px;">
+                        <b>
+                            @if ($kumterakhir )
+                                {{ $kumterakhir->judul }}
+                            @else
+                                -
+                            @endif
+                        </b>
+                    </p>
+                </td>
+            </tr>
 
             <tr><td><p style="font-size:110%; margin-bottom: -20px;"> Jabatan  Sekarang</p></td></tr>
             <tr>
@@ -27,7 +37,7 @@
                     <p style="font-size:110%; margin-bottom: -5px;">
                         <b>
                             @if ($kumterakhir )
-                                {{ $kumterakhir->jabatanSekarang->jabatan }}
+                                //{{ $kumterakhir->jabatanSekarang->jabatan }}
                             @else
                                 -
                             @endif
@@ -56,7 +66,22 @@
 
 
             <tr><td><p style="font-size:110%; margin-bottom: -20px;">TMT</p></td></tr>
-            <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $carbon::parse($kumterakhir->tmt)->locale('id_ID')->isoFormat('D MMMM Y') }} hingga {{ $carbon::parse($kumterakhir->tmt_available)->locale('id_ID')->isoFormat('D MMMM Y') }}</b></p></td></tr>
+            <tr>
+                <td>
+                    <p style="font-size:110%; margin-bottom: -5px;">
+                        <b>
+                            @if ($kumterakhir)
+                                {{ $carbon::parse($kumterakhir->tmt)->locale('id_ID')->isoFormat('D MMMM Y') }}
+                                hingga
+                                {{ $carbon::parse($kumterakhir->tmt_available)->locale('id_ID')->isoFormat('D MMMM Y') }}
+                            @else
+                                -
+                            @endif
+                        </b>
+                    </p>
+                </td>
+            </tr>
+            
 
             
             </tbody>
