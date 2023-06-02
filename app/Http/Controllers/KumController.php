@@ -219,9 +219,15 @@ class KumController extends Controller
                 function ($attribute, $value, $fail) use ($request) {
                     $njs = $request->input('id_jabatan_sekarang');
                     $njd = $value;
-                    
+
+               
                     $nj1 = jabatan::find($njs);
                     $nj2 = jabatan::find($njd);
+                    
+                    if ($nj1 === null || $nj2 === null) {
+                        $fail('Jabatan tidak ditemukan.');
+                        return;
+                    }   
                     
                     $h1 = $nj1->angkaKreditKumulatif;
                     $h2 = $nj2->angkaKreditKumulatif;
@@ -242,6 +248,7 @@ class KumController extends Controller
 
         $kums = kum::findOrFail($id);
         $kums->update($input);
+        dd($input);
 
         return redirect()->back()->with('message', 'Data berhasil disimpan');
         
