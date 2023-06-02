@@ -32,45 +32,63 @@
             @csrf
             <div class="mx-auto">
 
-                <div class="form-group row ">
-                    <div class="col-md text-center">
-                      <label for="judul" style="display: inline-block; width: 150px;">Judul KUM:</label>
-                      <input type="text" class="form-control" id="judul" name="judul" style="display: inline-block; width: 200px;">
+              <div class="form-group row">
+                <div class="col-md text-center">
+                    <label for="judul" style="display: inline-block; width: 150px;">Judul KUM:</label>
+                    <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" style="display: inline-block; width: 200px;" required>
+                    @error('judul')
+                    <div class="invalid-feedback">
+                        {{ $message }}
                     </div>
+                    @enderror
                 </div>
-
-                <div class="form-group row ">
+              </div>
+        
+              <div class="form-group row">
                   <div class="col-md text-center">
-                    <label for="komponen" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
-                    <select class="form-control" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;">
-                      <option>Pilih Jabatan</option>
-                      @foreach ($jabatanpref as $js)
-                      <option class="" value="{{$js->id}}" data-kum-pref ="{{$js->angkaKreditKumulatif}}" title="{{$js->jabatanpref}}">{{Str::limit($js->jabatan,100)}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-                  
-                <div class="form-group row ">
-                    <div class="col-md text-center">
-                      <label for="komponen" style="display: inline-block;width: 150px;">Jabatan yang Usulan:</label>
-                      <select class="form-control" id="id_jabatan_dituju" name="id_jabatan_dituju" style="display: inline-block; width: 200px;">
-                        <option>Pilih Jabatan</option>
-                        @foreach ($jabatanafter as $px)
-                            <option class="" value="{{$px->id}}" data-kum-after ="{{$px->angkaKreditKumulatif}}" title="{{$px->jabatanafter}}">{{Str::limit($px->jabatan,100)}}</option>
-                        @endforeach
+                      <label for="id_jabatan_sekarang" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
+                      <select class="form-control @error('id_jabatan_sekarang') is-invalid @enderror" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;" required>
+                          <option value="">Pilih Jabatan</option>
+                          @foreach ($jabatanpref as $js)
+                          <option class="" value="{{ $js->id }}" data-kum-pref="{{ $js->angkaKreditKumulatif }}" title="{{ $js->jabatanpref }}">{{ Str::limit($js->jabatan, 100) }}</option>
+                          @endforeach
                       </select>
-                    </div>
-                </div>
-
-                <div class="form-group row ">
-                  <div class="col-md text-center">
-                    <label for="judul" style="display: inline-block; width: 150px;">TMT:</label>
-                    <input type="date" class="form-control" id="tmt" name="tmt" style="display: inline-block; width: 200px;">
+                      @error('id_jabatan_sekarang')
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                      @enderror
                   </div>
               </div>
-
-
+        
+              <div class="form-group row">
+                  <div class="col-md text-center">
+                      <label for="id_jabatan_dituju" style="display: inline-block;width: 150px;">Jabatan yang Usulan:</label>
+                      <select class="form-control @error('id_jabatan_dituju') is-invalid @enderror" id="id_jabatan_dituju" name="id_jabatan_dituju" style="display: inline-block; width: 200px;" required>
+                          <option value="">Pilih Jabatan</option>
+                          @foreach ($jabatanafter as $px)
+                          <option class="" value="{{ $px->id }}" data-kum-after="{{ $px->angkaKreditKumulatif }}" title="{{ $px->jabatanafter }}">{{ Str::limit($px->jabatan, 100) }}</option>
+                          @endforeach
+                      </select>
+                      @error('id_jabatan_dituju')
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                      @enderror
+                  </div>
+              </div>
+            
+              <div class="form-group row">
+                  <div class="col-md text-center">
+                      <label for="tmt" style="display: inline-block; width: 150px;">TMT:</label>
+                      <input type="date" class="form-control @error('tmt') is-invalid @enderror" id="tmt" name="tmt" style="display: inline-block; width: 200px;" required>
+                      @error('tmt')
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                      @enderror
+                  </div>
+              </div>  
                 
                 <div class="form-group row ">
                     <div class="col-md text-center">
@@ -170,41 +188,41 @@
                                             </div>
                                             @enderror
                                         </div>
-                                    </div>
+                                      </div>
                                 
-                                    <div class="form-group row">
-                                        <div class="col-md text-center">
-                                            <label for="id_jabatan_sekarang" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
-                                            <select class="form-control @error('id_jabatan_sekarang') is-invalid @enderror" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;" required>
-                                                <option value="">Pilih Jabatan</option>
-                                                @foreach ($jabatanpref as $js)
-                                                <option class="" value="{{ $js->id }}" data-kum-pref="{{ $js->angkaKreditKumulatif }}" title="{{ $js->jabatanpref }}">{{ Str::limit($js->jabatan, 100) }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('id_jabatan_sekarang')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
+                                      <div class="form-group row">
+                                          <div class="col-md text-center">
+                                              <label for="id_jabatan_sekarang" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
+                                              <select class="form-control @error('id_jabatan_sekarang') is-invalid @enderror" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;" required>
+                                                  <option value="">Pilih Jabatan</option>
+                                                  @foreach ($jabatanpref as $js)
+                                                  <option class="" value="{{ $js->id }}" data-kum-pref="{{ $js->angkaKreditKumulatif }}" title="{{ $js->jabatanpref }}">{{ Str::limit($js->jabatan, 100) }}</option>
+                                                  @endforeach
+                                              </select>
+                                              @error('id_jabatan_sekarang')
+                                              <div class="invalid-feedback">
+                                                  {{ $message }}
+                                              </div>
+                                              @enderror
+                                          </div>
+                                      </div>
                                 
-                                    <div class="form-group row">
-                                        <div class="col-md text-center">
-                                            <label for="id_jabatan_dituju" style="display: inline-block;width: 150px;">Jabatan yang Usulan:</label>
-                                            <select class="form-control @error('id_jabatan_dituju') is-invalid @enderror" id="id_jabatan_dituju" name="id_jabatan_dituju" style="display: inline-block; width: 200px;" required>
-                                                <option value="">Pilih Jabatan</option>
-                                                @foreach ($jabatanafter as $px)
-                                                <option class="" value="{{ $px->id }}" data-kum-after="{{ $px->angkaKreditKumulatif }}" title="{{ $px->jabatanafter }}">{{ Str::limit($px->jabatan, 100) }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('id_jabatan_dituju')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
+                                      <div class="form-group row">
+                                          <div class="col-md text-center">
+                                              <label for="id_jabatan_dituju" style="display: inline-block;width: 150px;">Jabatan yang Usulan:</label>
+                                              <select class="form-control @error('id_jabatan_dituju') is-invalid @enderror" id="id_jabatan_dituju" name="id_jabatan_dituju" style="display: inline-block; width: 200px;" required>
+                                                  <option value="">Pilih Jabatan</option>
+                                                  @foreach ($jabatanafter as $px)
+                                                  <option class="" value="{{ $px->id }}" data-kum-after="{{ $px->angkaKreditKumulatif }}" title="{{ $px->jabatanafter }}">{{ Str::limit($px->jabatan, 100) }}</option>
+                                                  @endforeach
+                                              </select>
+                                              @error('id_jabatan_dituju')
+                                              <div class="invalid-feedback">
+                                                  {{ $message }}
+                                              </div>
+                                              @enderror
+                                          </div>
+                                      </div>
                                     
                                       <div class="form-group row">
                                           <div class="col-md text-center">
@@ -216,11 +234,12 @@
                                               </div>
                                               @enderror
                                           </div>
-                                      </div>                                        
+                                      </div>  
+                                    </div>                                      
                                   </div>
                                     <div class="modal-footer">
                                       <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
-                                      <button class="btn btn-primary" type="submit" data-dismiss="modal">submit</button>
+                                      <button class="btn btn-primary" type="submit" >submit</button>
                                     </div>  
                                 </form>                    
                       </div>

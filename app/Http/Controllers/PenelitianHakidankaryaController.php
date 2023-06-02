@@ -66,6 +66,7 @@ class PenelitianHakidankaryaController extends Controller
                 $image->move($destinationPath, $profileImage);
                 $karya->bukti = $profileImage;
             }
+            // dd($karya);
             $karya->save();
         }
 

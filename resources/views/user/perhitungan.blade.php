@@ -173,7 +173,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Progres Pengerjaan KUM</h6>
           </div>
           <div class="card-body">
-              <h4 class="small font-weight">Pendidikan   <span
+              <h4 class="small font-weight">Pendidikan<span
                       class="float-right"></span></h4>
               <div class="progress mb-4">
                   <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $poin }}%"
@@ -186,7 +186,7 @@
                       aria-valuenow="{{ $persentasepelaksanaanpendidikan }} %" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <h4 class="small font-weight">Pelaksanaan Penelitian   <span
-                      class="float-right">{{ $sumpelaksanaanpenelitian }} / {{ $angkakreditpelaksanaanPenelitianmax }}</span></h4>
+                      class="float-right">{{ number_format($sumpelaksanaanpenelitian, 2) }} / {{ $angkakreditpelaksanaanPenelitianmax }}</span></h4>
               <div class="progress mb-4">
                   <div class="progress-bar" role="progressbar" style="width: {{ $persentasepelaksanaanpenelitian }}%"
                       aria-valuenow="{{ $persentasepelaksanaanpenelitian }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -251,7 +251,7 @@
                     <div class="col-lg-10 ">
                       <div class="d-flex">
                         <div class="flex-grow-1">
-                          <h3><b>Input Data Pelaksanaan Pendidikan</b></h3>
+                          <h3><b>Input Data Pendidikan</b></h3>
                           <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
                         </div>
 
@@ -985,7 +985,7 @@
                   <div class="col-lg-10 ">
                     <div class="d-flex">
                       <div class="flex-grow-1">
-                        <h3><b>Input Data Pelaksanaan Pendidikan</b></h3>
+                        <h3><b>Input Data Penunjang</b></h3>
                         <br>
                         <a href="{{ route('doumenpenunjang.show',$kum->id) }}" class="btn btn-info">lihat</a>    
 
@@ -1165,7 +1165,7 @@
                       <div class="d-flex">
                         <div class="flex-grow-1">
                           <h3><b>Input Data Karya dan Rancangan</b></h3>
-                          <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
+                          <a href="{{ route('pelaksanaanpenelitian.show',$kum->id) }}" class="btn btn-info">lihat</a>     
                         </div>
 
                       </div>
@@ -1394,7 +1394,7 @@
                         </div>
                     <div>
                       <input hidden type="text" value="{{ $kum->id }}" id="kum_id" name="kum_id">
-                      <input hidden type="text" value="" id="author_persentase" name="author_persentase">
+                      {{-- <input hidden type="text" value="" id="author_persentase" name="author_persentase"> --}}
                     </div>
     
                     <div class="col-md m-3 text-center">

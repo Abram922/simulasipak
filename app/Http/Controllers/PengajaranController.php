@@ -47,6 +47,9 @@ class PengajaranController extends Controller
         $idKum = $input['id_kum'];
         $sksPengajaran = $input['sks_pengajaran'];
 
+        $idKum = $input['id_kum'];
+        
+
         $totalSks = Pengajaran::where('id_semester', $idSemester)
         ->where('id_kum', $idKum)
         ->sum('sks_pengajaran');
@@ -71,18 +74,13 @@ class PengajaranController extends Controller
 
         if ($totalSks + $sksPengajaran > 12) {
             $validator->errors()->add('sks_pengajaran', 'Total SKS melebihi batas maksimum (12) untuk id_semester dan id_kum yang sama.');
-            
-            ?>
-            <script>
-                $(document).ready(function() {
-                    $('#alertModal').modal('show');
-                });
-            </script>
-            <?php
-
             continue;
-        }else{
-            $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sksPengajaran;            
+        }elseif ($volumeDosen <= 0 || $sksPengajaran <= 0) {
+            $validator->errors()->add('angka', 'tidak boleh nol');
+            continue;
+        }
+        else{
+            $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sksPengajaran;       
         }
 
         $pengajaran->save();

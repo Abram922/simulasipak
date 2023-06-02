@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('link');
             $table->integer('jumlah_penulis')->nullable();
             $table->integer('author_persentase')->nullable();
-            $table->integer('angkakredit');
+            $table->double('angkakredit');
             $table->date('tanggal');
             $table->foreign('kum_id')->references('id')->on('kums')->onDelete('cascade');
             $table->foreign('akreditasi_id')->references('id')->on('akreditasi_penelitians')->onDelete('cascade');

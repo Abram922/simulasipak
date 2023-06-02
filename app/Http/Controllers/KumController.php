@@ -15,6 +15,7 @@ use App\Models\pelaksanaan_pendidikan;
 use App\Models\pelaksanaan_pm;
 use App\Models\pelaksanan_penelitian;
 use App\Models\pendidikan;
+use App\Models\penelitian_hakidankarya;
 use App\Models\pengajaran;
 use App\Models\penulis;
 use App\Models\semester;
@@ -58,6 +59,10 @@ class KumController extends Controller
                     $nj1 = jabatan::find($njs);
                     $nj2 = jabatan::find($njd);
                     
+                    if ($nj1 === null || $nj2 === null) {
+                        $fail('Jabatan tidak ditemukan.');
+                        return;
+                    }   
                     $h1 = $nj1->angkaKreditKumulatif;
                     $h2 = $nj2->angkaKreditKumulatif;
     
@@ -168,10 +173,12 @@ class KumController extends Controller
 
         $sumpelaksanaanpendidikan = $sumpendidikan + $totalAngkaKredit;
 
-        $sumpelaksanaanpenelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->sum('angkakredit');
+        $sumpenelitianjurnal = pelaksanan_penelitian::where('kum_id', $kum->id)->sum('angkakredit');
+        $sumpeneltian = penelitian_hakidankarya::where('id_kum', $kum->id)->sum('jumlah_angka_kredit');
+
+        $sumpelaksanaanpenelitian = $sumpenelitianjurnal + $sumpeneltian;
         $sumpelaksanaanpm = pelaksanaan_pm::where('kum_id', $kum->id)->sum('angkakreditpm');
         $sumdp = dokumenpenunjang::where('kum_id', $kum->id)->sum('angkakredit_dp');
-
 
         return view('.user.perhitungan', 
                     ['kum' => $kum, 
@@ -223,7 +230,7 @@ class KumController extends Controller
                
                     $nj1 = jabatan::find($njs);
                     $nj2 = jabatan::find($njd);
-                    
+
                     if ($nj1 === null || $nj2 === null) {
                         $fail('Jabatan tidak ditemukan.');
                         return;
@@ -248,21 +255,10 @@ class KumController extends Controller
 
         $kums = kum::findOrFail($id);
         $kums->update($input);
-        dd($input);
 
         return redirect()->back()->with('message', 'Data berhasil disimpan');
         
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy($id)
-    // {
-    //     pendidikan::destroy($id);
-        
-    //     return redirect()->back()->with('message', 'Data Berhasi Dihapus');   
-    // }
 
     public function destroy($id)
     {

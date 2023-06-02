@@ -34,7 +34,6 @@ class PelaksananPenelitianController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-
             'kum_id' => '',
             'akreditasi_id'=> '',
             'jenispenulis_id'=> '',
@@ -45,22 +44,30 @@ class PelaksananPenelitianController extends Controller
             'tanggal'=> '',
             'author_persentase' => '',
             'jumlah_penulis'=> '',
-
         ]);
 
-        pelaksanan_penelitian::create($input);
+        $penelitian = new pelaksanan_penelitian;
+        $penelitian->kum_id = $input['kum_id'];
+        $penelitian->akreditasi_id = $input['akreditasi_id'];
+        $penelitian->jenispenulis_id = $input['jenispenulis_id'];
+        $penelitian->judul = $input['judul'];
+        $penelitian->jurnal = $input['jurnal'];
+        $penelitian->link = $input['link'];
+        $penelitian->angkakredit = $input['angkakredit'];
+        $penelitian->tanggal = $input['tanggal'];
+        $penelitian->author_persentase = $input['author_persentase'];
+        $penelitian->jumlah_penulis = $input['jumlah_penulis'];
 
-        return redirect()->back()->with('message', 'Data berhasil disimpan');
+        $penelitian->save();
+
+        $kumId = $input['kum_id'];
+        return redirect()->route('pelaksanaanpenelitian.show', $kumId)->with('message', 'Data berhasil disimpan'); 
     }
     
-
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $kum = kum::find($id);
-        $penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)                   ->groupBy('id_semester')->get();
+        $penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->get();
         $akreditasi = akreditasi_penelitian::all();
         $jenispenulis = penulis::all();
 

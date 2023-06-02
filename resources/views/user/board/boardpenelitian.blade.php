@@ -6,7 +6,7 @@
     <div class="jumbotron d-flex" > 
       <div class="">
           <h3>Hi,{{ Auth::user()->name }}</h3>
-          <p style="">Berikut Data Pendidikan Anda</p>
+          <p style="">Berikut Data Penelitian Anda</p>
       </div>
       <img src="url('{{ asset('aset_web/p1.png') }}'" alt="">
       </div>

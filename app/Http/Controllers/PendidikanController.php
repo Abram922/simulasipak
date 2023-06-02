@@ -61,11 +61,12 @@ class PendidikanController extends Controller
                 $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
                 $image->move($destinationPath, $profileImage);
                 $pelaksanaanPendidikan->bukti = $profileImage;
-            }    
+            }   
             $pelaksanaanPendidikan->save();
+            $kumId = $pelaksanaanPendidikan->kum_id;
         }
     
-        return back()->with('success', 'Data berhasil disimpan');   
+        return redirect()->route('pendidikan.show', $kumId)->with('message', 'Data berhasil disimpan'); 
     }
 
     /**
