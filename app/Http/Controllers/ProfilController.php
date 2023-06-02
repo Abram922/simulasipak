@@ -83,12 +83,11 @@ class ProfilController extends Controller
         $user->pangkat = $input['pangkat'] ?? $user->pangkat;
     
         if ($foto = $request->file('foto')) {
-            $destinationPath = 'bukti_unsur_utama/pendidikan/';
+            $destinationPath = 'profill/';
             $profileImage = date('YmdHis') . "." . $foto->getClientOriginalExtension();
             $foto->move($destinationPath, $profileImage);
             $user->foto = $profileImage;
         }
-        dd($user);
         $user->save();
         return back()->with('sukses', 'Data berhasil diubah');
     }

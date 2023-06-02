@@ -18,7 +18,8 @@ class pengajaran extends Model
         'sks_pengajaran',
         'jumlah_angka_kredit',
         'volume_dosen_pengajar',
-        'nama_kelas_pengajaran'
+        'nama_kelas_pengajaran',
+        'file'
     ];
 
     public function xsemester(){

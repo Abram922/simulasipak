@@ -96,7 +96,7 @@
 
     <div class="mb-3">
         <label for="pangkat">Pangkat</label>
-            <select class="form-control" id="jabatan_fungsional" name="jabatan_fungsional">
+            <select class="form-control" id="pangkat" name="pangkat">
                 <option>Pilih pangkat</option>
                 @foreach ($pangkat as $p)
                 <option  value="{{$p->id}}" title="{{$p->pangkat}}">{{Str::limit($p->pangkat,100)}}</option>
@@ -106,7 +106,7 @@
 
     <div class="mb-3">
         <label>Foto </label><br>
-        <img src="{{asset('profill')}}/{{ $user->foto }}" alt="Foto" style="max-width:100px; margin-top:20px;"><br><br>
+        <img src="{{ asset('profill/' . $user->foto) }}" alt="Foto" style="max-width:100px; margin-top:20px;"><br><br>
         <input type="file" name="foto"  value=" {{ $user->foto }}">
     </div>
     <br><button type="submit" class="btn btn-primary">Ubah</button>
