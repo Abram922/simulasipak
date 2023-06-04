@@ -31,7 +31,7 @@ class PengajaranController extends Controller
 {
     $inputs = $request->input('inputs');
 
-    foreach ($inputs as $input) {
+    foreach ($inputs as $i => $input) {
         $validator = Validator::make($input, [
             'instansi' => 'required',
             'id_semester' => 'required',
@@ -81,6 +81,13 @@ class PengajaranController extends Controller
         }
         else{
             $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sksPengajaran;       
+        }
+
+        if ($image = $request->file('inputs.'.$i.'.file')) {
+            $destinationPath = 'file/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $pengajaran->file = $profileImage;
         }
 
         $pengajaran->save();

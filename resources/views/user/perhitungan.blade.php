@@ -470,6 +470,18 @@
                                 </div>     
                                 
                             </div>
+                            <div class="form-group row">
+                              <div class="col-md ">
+                                <label for="file">File</label>
+                                <input class="form-control @error('file') is-invalid @enderror" type="file" name="inputs[0][file]" >
+                                @error('file')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
+                              </div>
+                            </div>
+
                             <div>
                               <input hidden type="text" value="{{ $kum->id }}"  name="inputs[0][id_kum]">
                             </div>
@@ -560,6 +572,18 @@
                               '<div>' +
                                 '<input hidden type="text" value="{{ $kum->id }}"  name="inputs['+i+'][id_kum]">' +
                               '</div>' +
+
+                              '<div class="form-group row">'+
+                                '<div class="col-md ">'+
+                                  '<label for="file">File</label>'+
+                                  '<input class="form-control @error('file') is-invalid @enderror" type="file" name="inputs[0][file]" >'+
+                                  '@error('file')'+
+                                      '<div class="invalid-feedback">'+
+                                          '{{$message}}'+
+                                      '</div>'+
+                                  '@enderror'+
+                                '</div>'+
+                              '</div>'+
 
 
                               '<hr>' +

@@ -109,7 +109,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('unsurpenelitian-admin', App\Http\Controllers\KomponenPenelitianController::class);
 
 
-        Route::get('/lampiran', [App\Http\Controllers\LampiranController::class,'index'])->name('lampiran');
+        Route::get('/lampiran-all', [App\Http\Controllers\LampiranController::class,'index'])->name('lampiran-all');
         Route::get('/lampiran-datapenelitian', [App\Http\Controllers\LampiranController::class,'datapenelitian'])->name('datapenelitian');
         Route::get('/lampiran-datapenunjang', [App\Http\Controllers\LampiranController::class,'datapenunjang'])->name('datapenunjang');
         Route::get('/lampiran-datapendidikan', [App\Http\Controllers\LampiranController::class,'datapendidikan'])->name('lampirandatapendidikan');
@@ -121,6 +121,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 
         Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');
+
+        //lampiran
+        Route::resource('lampirans', App\Http\Controllers\LampiranController::class)->except('index','update');
 
 
 

@@ -120,7 +120,7 @@
                 <td>
                     <div class="card" style="width: 4rem; height:2rem; ">
                     <center>
-                        {{ $sumpelaksanaanpenelitian }}
+                        <?php echo number_format($sumpelaksanaanpenelitian, 2, '.', ','); ?>
                     </center>
                     </div>
                 </td>

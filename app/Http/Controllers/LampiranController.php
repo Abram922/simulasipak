@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\pendidikan;
+use App\Models\Lampiran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +28,6 @@ class LampiranController extends Controller
             ->where('kums.id_user', $idUser)
             ->pluck('kums.id')
             ->toArray();
-
         
         $pendidikan = [];
         
@@ -40,15 +39,18 @@ class LampiranController extends Controller
         
             $pendidikan = array_merge($pendidikan, $pendidikanData->toArray());
         }
-        
+
+        $lampiran = Lampiran::where('id_user', $idUser)
+        ->where('jenislampiran', 'pendidikan')
+        ->get();
+
     
         return view('.lampiran.pendidikan', [
-             'pendidikan' => $pendidikan
+             'pendidikan' => $pendidikan,
+             'lampiran' => $lampiran
         ]);
     
     }
-
-
 
     public function datapendidikan(){
 
@@ -72,10 +74,15 @@ class LampiranController extends Controller
         
             $pendidikan = array_merge($pendidikan, $pendidikanData->toArray());
         }
+
+        $lampiran = Lampiran::where('id_user', $idUser)
+        ->where('jenislampiran', 'pelaksanaanpendidikan')
+        ->get();
         
     
         return view('.lampiran.pelaksanaanpendidikan', [
-             'pendidikan' => $pendidikan
+             'pendidikan' => $pendidikan,
+             'lampiran' => $lampiran
         ]);
     
     }
@@ -110,10 +117,15 @@ class LampiranController extends Controller
             $pelaksanan_penelitians = array_merge($pelaksanan_penelitians, $pelaksanan_penelitiansData->toArray());
         }
 
+        $lampiran = Lampiran::where('id_user', $idUser)
+        ->where('jenislampiran', 'penelitian')
+        ->get();
+
     
         return view('.lampiran.penelitian', [
              'pelaksanan_penelitians' => $pelaksanan_penelitians,
-             'haki' => $haki
+             'haki' => $haki,
+             'lampiran' => $lampiran,
         ]);
 
 
@@ -140,9 +152,14 @@ class LampiranController extends Controller
             $pelaksanan_pm = array_merge($pelaksanan_pm, $pelaksanan_pmData->toArray());
         }
 
+        $lampiran = Lampiran::where('id_user', $idUser)
+        ->where('jenislampiran', 'pengabdiankepadamasyarakat')
+        ->get();
+
     
         return view('.lampiran.pm', [
-             'pelaksanan_pm' => $pelaksanan_pm
+             'pelaksanan_pm' => $pelaksanan_pm,
+             'lampiran' => $lampiran,
         ]);
 
  
@@ -168,9 +185,15 @@ class LampiranController extends Controller
             $dokumenpenunjangs = array_merge($dokumenpenunjangs, $dokumenpenunjangsData->toArray());
         }
 
+        $lampiran = Lampiran::where('id_user', $idUser)
+        ->where('jenislampiran', 'penunjang')
+        ->get();
+
     
         return view('.lampiran.penunjang', [
-             'dokumenpenunjangs' => $dokumenpenunjangs
+             'dokumenpenunjangs' => $dokumenpenunjangs,
+             'lampiran' => $lampiran,
+
         ]);
     }
 
@@ -178,9 +201,10 @@ class LampiranController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
+       
     }
 
     /**
@@ -188,7 +212,23 @@ class LampiranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'jenislampiran' => 'required'
+        ]);
+
+        $input['id_user'] = auth()->user()->id;
+
+        if ($image = $request->file('file')) {
+            $destinationPath = 'lampiran/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['file'] = "$profileImage";
+        }
+
+        
+
+        Lampiran::create($input);
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 
     /**

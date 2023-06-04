@@ -9,6 +9,7 @@ use App\Models\komponendokumenpenunjang;
 use App\Models\KomponenPenelitian;
 use App\Models\komponenpm;
 use App\Models\kum;
+use App\Models\penelitian_hakidankarya;
 use App\Models\pengajaran;
 use App\Models\User;
 use App\Models\pelaksanaan_pendidikan;
@@ -56,7 +57,11 @@ class HomeController extends Controller
         $sumpendidikan = pelaksanaan_pendidikan::where('kum_id', $kumterakhirId)->sum('jumlah_angka_kredit');
         $sumpengajaran = pengajaran::where('id_kum', $kumterakhirId)->sum('jumlah_angka_kredit');   
         $sumpelaksanaanpendidikan = $sumpendidikan + $sumpengajaran;
-        $sumpelaksanaanpenelitian = pelaksanan_penelitian::where('kum_id', $kumterakhirId)->sum('angkakredit');
+
+        $sumpenelitianjurnal = pelaksanan_penelitian::where('kum_id', $kumterakhirId)->sum('angkakredit');
+        $sumpeneltian = penelitian_hakidankarya::where('id_kum', $kumterakhirId)->sum('jumlah_angka_kredit');
+
+        $sumpelaksanaanpenelitian = $sumpenelitianjurnal + $sumpeneltian;
         $sumpelaksanaanpm = pelaksanaan_pm::where('kum_id', $kumterakhirId)->sum('angkakreditpm');
         $sumdp = dokumenpenunjang::where('kum_id', $kumterakhirId)->sum('angkakredit_dp');
         return view('.user.home',[

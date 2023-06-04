@@ -64,4 +64,8 @@ class User extends Authenticatable
     public function pangkat(){
         return $this->belongsTo('App\Models\pangkat', 'pangkat', 'id');
     }
+
+    public function lampiran(){
+        return $this->belongsTo('App\Models\Lampiran', 'lampiran', 'id');
+    }
 }
