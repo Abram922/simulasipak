@@ -1,5 +1,10 @@
 @extends('.layouts.user')
 @section('content1')
+<br>
+<br>
+<br>
+<br>
+
 <div class="col-lg-10 mx-auto">
     <h1>Lampiran</h1>
 </div>

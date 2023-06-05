@@ -1,6 +1,10 @@
 @extends('.layouts.user')
 @section('content1')
 
+<br>
+<br>
+<br>
+<br>
 
 
 <div style="background-color: #F9F9FE">

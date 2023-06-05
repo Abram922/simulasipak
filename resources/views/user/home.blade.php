@@ -1,163 +1,170 @@
 @extends('.layouts.user')
 @section('content1')
 
-<!-- COBA -->
+<br>
+<br>
+<br>
+<br>
 
+<div class="col-md-10 " > 
 @foreach($user as $s)
-<div class="container">
-
     <div class="container">
-    <div class="row">
-        <div class="col-sm-2">
-            <img src="{{asset('profill')}}/{{ $s->foto }}" alt="..." class="img-thumbnail" width= "200">
-        </div>
-        <div class="col-sm-3">
-            <!-- Tabel -->
+
+        <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="{{asset('profill')}}/{{ $s->foto }}" alt="..." class="img-thumbnail" width= "200">
+            </div>
+            <div class="col-sm-3">
+                <!-- Tabel -->
+                <table class="table table-borderless">
+                <tbody>
+                <tr><td><p style="font-size:110%; margin-bottom: -20px;">Nama</p></td></tr>
+                <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $s->name}}</b></p></td></tr>
+
+                <tr><td><p style="font-size:110%; margin-bottom: -20px;">Judul KUM</p></td></tr>
+                <tr><td><p style="font-size:110%; margin-bottom: -5px;">
+                            <b>
+                                @if ($kumterakhir )
+                                    {{ $kumterakhir->judul }}
+                                @else
+                                    -
+                                @endif
+                            </b>
+                        </p>
+                    </td>
+                </tr>
+
+                <tr><td><p style="font-size:110%; margin-bottom: -20px;"> Jabatan  Sekarang</p></td></tr>
+                <tr>
+                    <td>
+                        <p style="font-size:110%; margin-bottom: -5px;">
+                            <b>
+                                @if ($kumterakhir )
+                                    {{ $kumterakhir->jabatanSekarang->jabatan }}
+                                @else
+                                    -
+                                @endif
+                            </b>
+                        </p>
+                    </td>
+                </tr>
+
+                <tr><td><p style="font-size:110%; margin-bottom: -20px;"> Jabatan  Usulan</p></td></tr>
+                <tr>
+                    <td>
+                        <p style="font-size:110%; margin-bottom: -20px;">
+                            <b>
+                                @if ( $kumterakhir)
+                                    {{ $kumterakhir->jabatanDituju->jabatan }}
+                                @else
+                                    -
+                                @endif
+                            </b>  
+                        </p>
+                    </td>
+                </tr>
+                @php
+                    $carbon = new \Carbon\Carbon;
+                @endphp
+
+
+                <tr><td><p style="font-size:110%; margin-bottom: -20px;">TMT</p></td></tr>
+                <tr>
+                    <td>
+                        <p style="font-size:110%; margin-bottom: -5px;">
+                            <b>
+                                @if ($kumterakhir)
+                                    {{ $carbon::parse($kumterakhir->tmt)->locale('id_ID')->isoFormat('D MMMM Y') }}
+                                    hingga
+                                    {{ $carbon::parse($kumterakhir->tmt_available)->locale('id_ID')->isoFormat('D MMMM Y') }}
+                                @else
+                                    -
+                                @endif
+                            </b>
+                        </p>
+                    </td>
+                </tr>
+                
+
+                
+                </tbody>
+                </table>
+                <!-- Tutup Tabel -->          
+            </div>
+
+            <div class="col-sm-4">
+            
             <table class="table table-borderless">
-            <tbody>
-            <tr><td><p style="font-size:110%; margin-bottom: -20px;">Nama</p></td></tr>
-            <tr><td><p style="font-size:110%; margin-bottom: -5px;"><b>{{ $s->name}}</b></p></td></tr>
+                <tbody>
+                    <tr>
+                    <td>Pendidikan</td>
+                    <td>
+                        <div class="card" style="width: 4rem; height:2rem; ">
+                        <center>
+                        {{ $sumx }}
+                        </center>
+                        </div>
+                    </td>
+                    </tr>
 
-            <tr><td><p style="font-size:110%; margin-bottom: -20px;">Judul KUM</p></td></tr>
-            <tr><td><p style="font-size:110%; margin-bottom: -5px;">
-                        <b>
-                            @if ($kumterakhir )
-                                {{ $kumterakhir->judul }}
-                            @else
-                                -
-                            @endif
-                        </b>
-                    </p>
-                </td>
-            </tr>
+                    <tr>
+                    <td>Pelaksanaan Pendidikan</td>
+                    <td>
+                        <div class="card" style="width: 4rem; height:2rem; ">
+                        <center>
+                            {{ $sumpelaksanaanpendidikan }}
+                        </center>
+                        </div>
+                    </td>
+                    </tr>
 
-            <tr><td><p style="font-size:110%; margin-bottom: -20px;"> Jabatan  Sekarang</p></td></tr>
-            <tr>
-                <td>
-                    <p style="font-size:110%; margin-bottom: -5px;">
-                        <b>
-                            @if ($kumterakhir )
-                                {{ $kumterakhir->jabatanSekarang->jabatan }}
-                            @else
-                                -
-                            @endif
-                        </b>
-                    </p>
-                </td>
-            </tr>
+                    <tr>
+                    <td>Penelitian</td>
+                    <td>
+                        <div class="card" style="width: 4rem; height:2rem; ">
+                        <center>
+                            <?php echo number_format($sumpelaksanaanpenelitian, 2, '.', ','); ?>
+                        </center>
+                        </div>
+                    </td>
+                    </tr>
 
-            <tr><td><p style="font-size:110%; margin-bottom: -20px;"> Jabatan  Usulan</p></td></tr>
-            <tr>
-                <td>
-                    <p style="font-size:110%; margin-bottom: -20px;">
-                        <b>
-                            @if ( $kumterakhir)
-                                {{ $kumterakhir->jabatanDituju->jabatan }}
-                            @else
-                                -
-                            @endif
-                        </b>  
-                    </p>
-                </td>
-            </tr>
-            @php
-                $carbon = new \Carbon\Carbon;
-            @endphp
+                    <tr>
+                    <td>Pengabdian Kepada Masyarakat</td>
+                    <td>
+                        <div class="card" style="width: 4rem; height:2rem; ">
+                        <center>
+                            {{ $sumpelaksanaanpm }}
+                        </center>
+                        </div>
+                    </td>
+                    </tr>
 
+                    <tr>
+                    <td>Unsur Penunjang</td>
+                    <td>
+                        <div class="card" style="width: 4rem; height:2rem; ">
+                        <center>
+                            {{ $sumdp }}
+                        </center>
+                        </div>
+                    </td>
+                    </tr>
 
-            <tr><td><p style="font-size:110%; margin-bottom: -20px;">TMT</p></td></tr>
-            <tr>
-                <td>
-                    <p style="font-size:110%; margin-bottom: -5px;">
-                        <b>
-                            @if ($kumterakhir)
-                                {{ $carbon::parse($kumterakhir->tmt)->locale('id_ID')->isoFormat('D MMMM Y') }}
-                                hingga
-                                {{ $carbon::parse($kumterakhir->tmt_available)->locale('id_ID')->isoFormat('D MMMM Y') }}
-                            @else
-                                -
-                            @endif
-                        </b>
-                    </p>
-                </td>
-            </tr>
-            
-
-            
-            </tbody>
+                </tbody>
             </table>
-            <!-- Tutup Tabel -->          
+
+            </div>
+        </div>
         </div>
 
-        <div class="col-sm-4">
-        
-        <table class="table table-borderless">
-            <tbody>
-                <tr>
-                <td>Pendidikan</td>
-                <td>
-                    <div class="card" style="width: 4rem; height:2rem; ">
-                    <center>
-                    {{ $sumx }}
-                    </center>
-                    </div>
-                </td>
-                </tr>
-
-                <tr>
-                <td>Pelaksanaan Pendidikan</td>
-                <td>
-                    <div class="card" style="width: 4rem; height:2rem; ">
-                    <center>
-                        {{ $sumpelaksanaanpendidikan }}
-                    </center>
-                    </div>
-                </td>
-                </tr>
-
-                <tr>
-                <td>Penelitian</td>
-                <td>
-                    <div class="card" style="width: 4rem; height:2rem; ">
-                    <center>
-                        <?php echo number_format($sumpelaksanaanpenelitian, 2, '.', ','); ?>
-                    </center>
-                    </div>
-                </td>
-                </tr>
-
-                <tr>
-                <td>Pengabdian Kepada Masyarakat</td>
-                <td>
-                    <div class="card" style="width: 4rem; height:2rem; ">
-                    <center>
-                        {{ $sumpelaksanaanpm }}
-                    </center>
-                    </div>
-                </td>
-                </tr>
-
-                <tr>
-                <td>Unsur Penunjang</td>
-                <td>
-                    <div class="card" style="width: 4rem; height:2rem; ">
-                    <center>
-                        {{ $sumdp }}
-                    </center>
-                    </div>
-                </td>
-                </tr>
-
-            </tbody>
-        </table>
-
-        </div>
     </div>
-    </div>
-
+@endforeach
 </div>
 
-@endforeach
+
+
 <!-- Coba -->
 
 

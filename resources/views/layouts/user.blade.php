@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('css/universal.css') }}">
 
+    <style>
+      .sticky-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+    </style>
     
     <title>
         @yield('title')
@@ -23,118 +30,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   </head>
   <body>
-      <div class="col-md-10 mx-auto">
-        <nav class="navbar navbar-expand-lg navbar-light" style="font-size: 20px">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="font-size:24px"> <b>Simulasi</b>  PAK</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                  <a class="nav-link"  href="{{ route('userhome') }}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('boardpak') }}">Perhitungan </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('lampiran-all') }}">Lampiran </a>
-                </li>
-              </ul>
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown no-arrow">
-                  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                      {{-- <img class="img-profile rounded-circle" src="img/undraw_profile.svg"> --}}
-                  </a>
-                  <!-- Dropdown - User Information -->
-                  <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                      aria-labelledby="userDropdown">
-                      <a class="dropdown-item" href="{{ route('profil') }}">
-                          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                          Profill
-                      </a>
-
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                          Logout
-                          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                              @csrf
-                            </form>
-                      </a>
-                  </div>
-                </li>
-              </ul>
-
-              <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">×</span>
-                          </button>
-                      </div>
-                      <div class="modal-body">Tekan Button Logout jika anda yakin </div>
-                      <div class="modal-footer">
-                          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                          <a class="btn btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                      </div>
-                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                          @csrf
-                        </form>
-                  </div>
-              </div>
-          </div>
-            </div>
-          </div>
-        </nav>
-      </div >        
+    @include('.layouts.navbar', ['containerClass' => 'col-md-10 mx-auto'])
+  
+       
         @yield('content1')
         <br>
         <div class="container" style="background-color: #F9F9FE">
         @yield('content2')
         </div>
         <br>
-        <div class="" style="background-color: #F9F9FE">
-            <footer class="text-center text-lg-start  text-muted">
-              <!-- Section: Social media -->
-              <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-                <!-- Left -->
-                <div class="me-5 d-none d-lg-block">
-                  <span>Get connected with us on social networks:</span>
-                </div>
-                <!-- Left -->
-      
-                <!-- Right -->
-                <div>
-                  <a href="" class="me-4 text-reset">
-                    <i class="fab fa-facebook-f"></i>
-                  </a>
-                  <a href="" class="me-4 text-reset">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a href="" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                  </a>
-                  <a href="" class="me-4 text-reset">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                  <a href="" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                  </a>
-                  <a href="" class="me-4 text-reset">
-                    <i class="fab fa-github"></i>
-                  </a>
-                </div>
-                <!-- Right -->
-              </section>
-              <!-- Section: Social media -->
-      
-              <!-- Section: Links  -->
+        <div class="" style="background-color: #3C8DBC">
+
+            <footer class="text-center text-lg-start  text-muted " style="background-color:#3C8DBC ; margin-top:4pt">
+
               <section class="">
                 <div class="container text-center text-md-start mt-5">
                   <!-- Grid row -->

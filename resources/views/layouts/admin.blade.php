@@ -17,7 +17,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 
-    <!-- Custom styles for this template-->
     <link href="{{URL::asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
 

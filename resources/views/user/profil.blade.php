@@ -1,5 +1,9 @@
 @extends('.layouts.user')
 @section('content1')
+<br>
+<br>
+<br>
+<br>
 
 
 @foreach($user as $s)

@@ -1,7 +1,11 @@
 @extends('.layouts.user')
 @section('content1')
 
-  <br>
+<br>
+<br>
+<br>
+<br>
+
 
   <div class="col-lg-10 mx-auto">
     <div class="row">
@@ -224,16 +228,16 @@
             <button class="nav-link active" id="pendidikan-tab" data-bs-toggle="tab" data-bs-target="#pendidikan-tab-pane" type="button" role="tab" aria-controls="pendidikan-tab-pane" aria-selected="true">Pendidikan</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pelaksanaanpendidikan-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpendidikan-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpendidikan-tab-pane" aria-selected="false">Pelaksanaan Pendidikan || {{ $sumpelaksanaanpendidikan }}</button>
+            <button class="nav-link" id="pelaksanaanpendidikan-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpendidikan-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpendidikan-tab-pane" aria-selected="false">Pelaksanaan Pendidikan</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pelaksanaanpenelitian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpenelitian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpenelitian-tab-pane" aria-selected="false">Pelaksanaan Penelitian || {{ $sumpelaksanaanpenelitian }}</button>
+            <button class="nav-link" id="pelaksanaanpenelitian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpenelitian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpenelitian-tab-pane" aria-selected="false">Pelaksanaan Penelitian</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pelaksanaanpengabdian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpengabdian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpengabdian-tab-pane" aria-selected="false">Pengabdian Kepada Masyarakat || {{ $sumpelaksanaanpm }}</button>
+            <button class="nav-link" id="pelaksanaanpengabdian-tab" data-bs-toggle="tab" data-bs-target="#pelaksanaanpengabdian-tab-pane" type="button" role="tab" aria-controls="pelaksanaanpengabdian-tab-pane" aria-selected="false">Pengabdian Kepada Masyarakat</button>
           </li> 
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="unsur-tab" data-bs-toggle="tab" data-bs-target="#unsur-tab-pane" type="button" role="tab" aria-controls="unsur-tab-pane" aria-selected="false">Unsur Penunjang || {{ $sumdp }}</button>
+            <button class="nav-link" id="unsur-tab" data-bs-toggle="tab" data-bs-target="#unsur-tab-pane" type="button" role="tab" aria-controls="unsur-tab-pane" aria-selected="false">Unsur Penunjang</button>
           </li>
     </ul>
   </div>
@@ -252,7 +256,7 @@
                       <div class="d-flex">
                         <div class="flex-grow-1">
                           <h3><b>Input Data Pendidikan</b></h3>
-                          <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
+                          <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">Lihat</a>     
                         </div>
 
                       </div>
@@ -269,6 +273,7 @@
                                 <input type="text" class="form-control"  name="inputs[0][institusi]">
                             </div>
                         </div>
+
                         <div class="form-group ">
                           <div class="col-md m-3">
                             <label for="stratapendidikan">Strata Pendidikan</label>
@@ -281,6 +286,7 @@
                           </div>
         
                         </div>
+
                         <div>
                           <input hidden type="text" value="{{ $kum->id }}"  name="inputs[0][kum_id]">
                         </div>
@@ -304,13 +310,13 @@
                         
                         
                           <hr>
-                          Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan
+                          Pengumpulan informasi tentang tingkat pendidikan individu dalam format yang terstruktur, untuk keperluan analisis
                       </div>
                     </div>                    
                   </div>
                 </div>
-                <button id="addButton-pendidikan" class="btn btn-primary" type="button">Add Field</button>
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button id="addButton-pendidikan" class="btn btn-primary" type="button">Tambah</button>
+                <button class="btn btn-success" type="submit">Kirim</button>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
                 <script>
@@ -379,7 +385,7 @@
 
                                         '</div>'+
                                           '<hr>'+
-                                          'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan'+
+                                          'Pengumpulan informasi tentang tingkat pendidikan individu dalam format yang terstruktur, untuk keperluan analisis'+
                                       '</div>'+
     
 
@@ -412,7 +418,7 @@
                         <div class="d-flex">
                           <div class="flex-grow-1">
                             <h3><b>Input Data Pengajaran</b></h3>
-                            <a href="{{ route('unsurpelaksanaan.show',$kum->id) }}" class="btn btn-info">lihat</a> 
+                            <a href="{{ route('unsurpelaksanaan.show',$kum->id) }}" class="btn btn-info">Lihat</a> 
                           </div>
                         </div>
                         <br>
@@ -443,7 +449,7 @@
                             </div>
                             <div class="form-group row">
                               <div class="col-md m-3">
-                                  <label for="kode_matakuliah">kode_matakuliah</label>
+                                  <label for="kode_matakuliah">Kode Matakuliah</label>
                                   <input type="text" class="form-control" name="inputs[0][kode_matakuliah]">
                               </div>
 
@@ -470,8 +476,9 @@
                                 </div>     
                                 
                             </div>
+
                             <div class="form-group row">
-                              <div class="col-md ">
+                              <div class="col-md m-3 ">
                                 <label for="file">File</label>
                                 <input class="form-control @error('file') is-invalid @enderror" type="file" name="inputs[0][file]" >
                                 @error('file')
@@ -487,13 +494,13 @@
                             </div>
 
                             <hr>
-                            Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan
-                        </div>
+                            Input Data Pengajaran adalah kumpulan informasi yang diberikan atau dimasukkan ke dalam suatu sistem atau proses untuk keperluan perhitungan angka kredit aktifitas pengajaran. Data ini berisi instansi,semester, kode mataa kuliah, nama mata kuliah, nama kelas, volume dosen, sks dan file yang digunakan sebagai acuan dalam mengelola angka kredit dosen.
+                          </div>
                       </div>                    
                     </div>
                 </div>
-                <button id="addButton" class="btn btn-primary" type="button">Add Field</button>
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button id="addButton" class="btn btn-primary" type="button">Tambah</button>
+                <button class="btn btn-success" type="submit">Kirim</button>
             </form>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
@@ -587,8 +594,7 @@
 
 
                               '<hr>' +
-                              'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan'
-
+                              'Input Data Pengajaran adalah kumpulan informasi yang diberikan atau dimasukkan ke dalam suatu sistem atau proses untuk keperluan perhitungan angka kredit aktifitas pengajaran. Data ini berisi instansi,semester, kode mataa kuliah, nama mata kuliah, nama kelas, volume dosen, sks dan file yang digunakan sebagai acuan dalam mengelola angka kredit dosen'+
                             '</div>'+
                           '</div>'+           
                         '</div>'+
@@ -690,8 +696,8 @@
                         </div>                    
                       </div>
                     </div>
-                    <button id="addButton-pelaksanaan" class="btn btn-primary" type="button">Add Field</button>
-                    <button class="btn btn-success" type="submit">Submit</button>
+                    <button id="addButton-pelaksanaan" class="btn btn-primary" type="button">Tambah</button>
+                    <button class="btn btn-success" type="submit">Kirim</button>
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       
                     <script>
@@ -814,7 +820,7 @@
                       <div class="flex-grow-1">
                         <h3><b>Input Data Pengabdian Kepada Masyarakat</b></h3>
                         <br>
-                        <a href="{{ route('pelaksanaan_pm.show',$kum->id) }}" class="btn btn-info">lihat</a>    
+                        <a href="{{ route('pelaksanaan_pm.show',$kum->id) }}" class="btn btn-info">Lihat</a>    
 
                       </div>
                     </div>
@@ -886,14 +892,16 @@
                         <div>
                           <input hidden type="text" value="{{ $kum->id }}"  name="inputs[0][kum_id]">
                         </div>
+                        <hr>
+                          "Input Data Pengabdian Kepada Masyarakat" adalah proses pengumpulan informasi oleh seorang dosen dengan tujuan merekam dan menghitung angka kredit. Melalui pengumpulan data ini, dosen dapat mencatat dan mengukur kontribusinya dalam pengabdian kepada masyarakat. Informasi yang terkumpul digunakan untuk menghitung nilai kredit dosen berdasarkan partisipasi dan kontribusi yang dilakukan dalam kegiatan pengabdian kepada masyarakat.
         
                       </div>
                     </div>  
                   </div>                  
                 </div>
               </div>
-              <button id="addButton-pm" class="btn btn-primary" type="button">Add Field</button>
-              <button class="btn btn-success" type="submit">Submit</button>
+              <button id="addButton-pm" class="btn btn-primary" type="button">Tambah</button>
+              <button class="btn btn-success" type="submit">Kirim</button>
               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
               <script>
@@ -913,7 +921,7 @@
                                     '<div class="card-header py-3">'+
                                         '<div class="d-flex">'+
                                           '<div class="card-header flex-grow-1 py-3 ">'+
-                                            '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>'+
+                                            '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Pengabdian Kepada Masyarakat</h6>'+
                                           '</div>'+
                                           '<div class="input-group-append">'+
                                             '<button class="btn btn-outline-secondary remove-field" type="button">&times;</button>'+
@@ -975,7 +983,8 @@
                                        ' <div>'+
                                           '<input hidden type="text" value="{{ $kum->id }}"  name="inputs['+i+'][kum_id]">'+
                                         '</div>'+
-                        
+                                        '<hr>'+
+                          '"Input Data Pengabdian Kepada Masyarakat" adalah proses pengumpulan informasi oleh seorang dosen dengan tujuan merekam dan menghitung angka kredit. Melalui pengumpulan data ini, dosen dapat mencatat dan mengukur kontribusinya dalam pengabdian kepada masyarakat. Informasi yang terkumpul digunakan untuk menghitung nilai kredit dosen berdasarkan partisipasi dan kontribusi yang dilakukan dalam kegiatan pengabdian kepada masyarakat.+'                        
                                       '</div>'+
                                     '</div>'+  
                               '</div>'+           
@@ -1011,7 +1020,7 @@
                       <div class="flex-grow-1">
                         <h3><b>Input Data Penunjang</b></h3>
                         <br>
-                        <a href="{{ route('doumenpenunjang.show',$kum->id) }}" class="btn btn-info">lihat</a>    
+                        <a href="{{ route('doumenpenunjang.show',$kum->id) }}" class="btn btn-info">Lihat</a>    
 
                       </div>
                     </div>
@@ -1019,7 +1028,7 @@
                   </div>
                   <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                      <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Pengabdian Kepada Masyarakat </h6>
+                      <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Kegiatan Penunjang</h6>
                     </div>
                     <div class="card-body">
                       <div class="form-group row">
@@ -1073,13 +1082,16 @@
                         <input hidden type="text" value="{{ $kum->id }}"  name="inputs[0][kum_id]">
                       </div>
 
+                      <hr>
+                      "Input Data Penunjang" adalah proses di mana seorang dosen mencatat dan mengumpulkan informasi yang relevan untuk menghitung angka kreditnya. Dalam hal ini, tujuannya adalah merekam dan menghitung jumlah angka kredit yang diperoleh oleh seorang dosen berdasarkan data yang dikumpulkan. Dalam proses ini, dosen mengumpulkan berbagai jenis data penunjang, seperti bukti kegiatan mengajar, penelitian, pengabdian kepada masyarakat, dan pengembangan diri. Data ini kemudian digunakan untuk menghitung jumlah angka kredit yang diperoleh oleh dosen, yang merupakan salah satu faktor penentu dalam penilaian kinerja dan penghargaan bagi seorang dosen.
+
                     </div>
 
                   </div>                  
                 </div>
               </div>
-              <button id="addButton-penunjang" class="btn btn-primary" type="button">Add Field</button>
-              <button class="btn btn-success" type="submit">Submit</button>
+              <button id="addButton-penunjang" class="btn btn-primary" type="button">Tambah</button>
+              <button class="btn btn-success" type="submit">Kirim</button>
               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
               <script>
@@ -1099,7 +1111,7 @@
                                     '<div class="card-header py-3">'+
                                         '<div class="d-flex">'+
                                           '<div class="card-header flex-grow-1 py-3 ">'+
-                                            '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>'+
+                                            '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Kegiatan Penunjang</h6>'+
                                           '</div>'+
                                           '<div class="input-group-append">'+
                                             '<button class="btn btn-outline-secondary remove-field" type="button">&times;</button>'+
@@ -1157,7 +1169,8 @@
                                       '<div>'+
                                         '<input hidden type="text" value="{{ $kum->id }}"  name="inputs['+i+'][kum_id]">'+
                                       '</div>'+
-
+                                      '<hr>'+
+                      '"Input Data Penunjang" adalah proses di mana seorang dosen mencatat dan mengumpulkan informasi yang relevan untuk menghitung angka kreditnya. Dalam hal ini, tujuannya adalah merekam dan menghitung jumlah angka kredit yang diperoleh oleh seorang dosen berdasarkan data yang dikumpulkan. Dalam proses ini, dosen mengumpulkan berbagai jenis data penunjang, seperti bukti kegiatan mengajar, penelitian, pengabdian kepada masyarakat, dan pengembangan diri. Data ini kemudian digunakan untuk menghitung jumlah angka kredit yang diperoleh oleh dosen, yang merupakan salah satu faktor penentu dalam penilaian kinerja dan penghargaan bagi seorang dosen.'+
                                     '</div>'+
                               '</div>'+           
                             '</div>'+
@@ -1189,7 +1202,7 @@
                       <div class="d-flex">
                         <div class="flex-grow-1">
                           <h3><b>Input Data Karya dan Rancangan</b></h3>
-                          <a href="{{ route('pelaksanaanpenelitian.show',$kum->id) }}" class="btn btn-info">lihat</a>     
+                          <a href="{{ route('pelaksanaanpenelitian.show',$kum->id) }}" class="btn btn-info">Lihat</a>     
                         </div>
 
                       </div>
@@ -1197,18 +1210,16 @@
                     <br>
                     <div class="card shadow mb-4">
                       <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Melaksanakan Kegiatan dengan Output Karya </h6>
                       </div>
                       <div class="card-body">
-                        <div class="form-group row">
-                            <div class="col-md m-3">
-                                <label for="judul">Judul Karya atau Rancangan</label>
-                                <input type="text" class="form-control"  name="inputs[0][judul]">
-                            </div>
-                        </div>
+                          <div class="form-group row">
+                              <div class="col-md m-3">
+                                  <label for="judul">Judul Karya atau Rancangan</label>
+                                  <input type="text" class="form-control"  name="inputs[0][judul]">
+                              </div>
+                          </div>
 
-
-      
                         <div class="form-group row">
                           <div class="col-md m-3">
                             <label for="semester">Jenis Karya atau Rancangan</label>
@@ -1239,15 +1250,15 @@
                             @enderror
                           </div>               
                         </div>
+
                           <input hidden type="text" value="{{ $kum->id }}"  name="inputs[0][id_kum]">
-                        </div>
                           <hr>
-                          Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan
+                          "Input Data Karya dan Rancangan" adalah proses yang dilakukan oleh seorang dosen untuk merekam dan mengumpulkan data terkait karya dan rancangan yang telah mereka hasilkan. Tujuannya adalah untuk menghitung angka kredit dosen berdasarkan data tersebut. Dalam proses ini, dosen mengumpulkan informasi mengenai karya ilmiah, publikasi, proyek, serta aktivitas pengembangan kurikulum yang telah mereka lakukan. Data-data ini kemudian diinput ke dalam sistem untuk dilakukan perhitungan angka kredit dosen.
                       </div>                 
                   </div>
                 </div>
-                <button id="addButton-karya" class="btn btn-primary" type="button">Add Field</button>
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button id="addButton-karya" class="btn btn-primary" type="button">Tambah</button>
+                <button class="btn btn-success" type="submit">Kirim</button>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
                 <script>
@@ -1262,7 +1273,7 @@
                                         '<div class="card-header py-3">'+
                                           '<div class="d-flex">'+
                                             '<div class="card-header flex-grow-1 py-3 ">'+
-                                              '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Perkuliahan dan Membimbing </h6>'+
+                                              '<h6 class="m-0 font-weight-bold text-primary">Melaksanakan Kegiatan dengan Output Karya </h6>'+
                                             '</div>'+
                                             '<div class="input-group-append">'+
                                               '<button class="btn btn-outline-secondary remove-field" type="button">&times;</button>'+
@@ -1275,47 +1286,42 @@
                                                   '<label for="judul">Judul Karya atau Rancangan</label>'+
                                                   '<input type="text" class="form-control"  name="inputs['+i+'][judul]">'+
                                               '</div>'+
-                                          '</div>'+    
+                                          '</div>'+
                                           '<div class="form-group row">'+
-                                            '<div class="col-md m-3">'+
-                                              '<label for="semester">Jenis Karya atau Rancangan</label>'+
-                                              '<select class="form-control" name="inputs['+i+'][id_jeniskarya]">'+
-                                                  '<option>Pilih Komponen</option>'+
-                                                  '@foreach ($komponenpenelitian as $s)'+
-                                                      '<option class="" value="{{$s->id}}" angka-kredit="{{ $s->angkakredit }}" title="{{$s->komponenkegiatan}}">{{Str::limit($s->komponenkegiatan,100)}}</option>'+
-                                                  '@endforeach'+
-                                              '</select>'+
-                                            '</div>'+  
-                                            '<div class="col-md m-3">'+
-                                              '<label for="semester">Semester</label>'+
-                                              '<select class="form-control" name="inputs['+i+'][id_semester]">'+
-                                                  '<option>Pilih Semester</option>'+
-                                                  '@foreach ($semester as $s)'+
-                                                      '<option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>'+
-                                                  '@endforeach'+
-                                              '</select>'+
-                                            '</div>'+     
-                                            '<div class="col-md m-3">'+
-                                              '<label for="bukti">Bukti</label>'+
-                                              '<input class="form-control @error('bukti') is-invalid @enderror" type="file"  name="inputs['+i+'][bukti]">'+
-                                              '@error('bukti')'+
-                                                  '<div class="invalid-feedback">'+
-                                                      '{{$message}}'+
-                                                  '</div>'+
-                                              '@enderror'+
-                                            '</div>'+               
+                                              '<div class="col-md m-3">'+
+                                                '<label for="semester">Jenis Karya atau Rancangan</label>'+
+                                                '<select class="form-control" name="inputs['+i+'][id_jeniskarya]">'+
+                                                    '<option>Pilih Komponen</option>'+
+                                                    '@foreach ($komponenpenelitian as $s)'+
+                                                        '<option class="" value="{{$s->id}}" angka-kredit="{{ $s->angkakredit }}" title="{{$s->komponenkegiatan}}">{{Str::limit($s->komponenkegiatan,100)}}</option>'+
+                                                    '@endforeach'+
+                                                '</select>'+
+                                              '</div>'+
+                                              '<div class="col-md m-3">'+
+                                                '<label for="semester">Semester</label>'+
+                                                '<select class="form-control" name="inputs['+i+'][id_semester]">'+
+                                                    '<option>Pilih Semester</option>'+
+                                                    '@foreach ($semester as $s)'+
+                                                        '<option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>'+
+                                                    '@endforeach'+
+                                                '</select>'+
+                                              '</div>'+     
+                                              '<div class="col-md m-3">'+
+                                                '<label for="bukti">Bukti</label>'+
+                                                '<input class="form-control @error('bukti') is-invalid @enderror" type="file"  name="inputs['+i+'][bukti]">'+
+                                                '@error('bukti')'+
+                                                    '<div class="invalid-feedback">'+
+                                                        '{{$message}}'+
+                                                    '</div>'+
+                                                '@enderror'+
+                                              '</div>'+         
                                           '</div>'+
                                             '<input hidden type="text" value="{{ $kum->id }}"  name="inputs['+i+'][id_kum]">'+
-   
-
                                           '<hr>'+
-                                          'Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan'+
+                                          '"Input Data Karya dan Rancangan" adalah proses yang dilakukan oleh seorang dosen untuk merekam dan mengumpulkan data terkait karya dan rancangan yang telah mereka hasilkan. Tujuannya adalah untuk menghitung angka kredit dosen berdasarkan data tersebut. Dalam proses ini, dosen mengumpulkan informasi mengenai karya ilmiah, publikasi, proyek, serta aktivitas pengembangan kurikulum yang telah mereka lakukan. Data-data ini kemudian diinput ke dalam sistem untuk dilakukan perhitungan angka kredit dosen.'+
                                         '</div>'+                 
                               '</div>'+
                             '</div>'
-
-    
-    
                           $('#inputFieldkarya').append(fieldHTML);
     
                         });
@@ -1338,7 +1344,7 @@
                       <div class="flex-grow-1">
                         <h3><b>Input Data Pelaksanaan Penelitian</b></h3>
                         <br>
-                        <a href="{{ route('pelaksanaanpenelitian.show',$kum->id) }}" class="btn btn-info">lihat</a>    
+                        <a href="{{ route('pelaksanaanpenelitian.show',$kum->id) }}" class="btn btn-info">Lihat</a>    
 
                       </div>
                     </div>
@@ -1422,7 +1428,7 @@
                     </div>
     
                     <div class="col-md m-3 text-center">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary">Kirim</button>
                     </div>
 
                     </div>
