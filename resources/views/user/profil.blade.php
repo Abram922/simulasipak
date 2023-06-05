@@ -3,7 +3,7 @@
 <br>
 <br>
 <br>
-<br>
+
 
 
 @foreach($user as $s)

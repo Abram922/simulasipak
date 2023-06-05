@@ -35,7 +35,7 @@
        
         @yield('content1')
         <br>
-        <div class="container" style="background-color: #F9F9FE">
+        <div class="container " style="background-color: #F9F9FE">
         @yield('content2')
         </div>
         <br>
@@ -45,6 +45,7 @@
 
               <section class="">
                 <div class="container text-center text-md-start mt-5">
+                  <br><br>
                   <!-- Grid row -->
                   <div class="row mt-3">
                     <!-- Grid column -->

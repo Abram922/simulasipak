@@ -9,7 +9,7 @@
   <body>
 
             <header>
-                <div class="col-md-10 mx-auto">
+                <div class="col-md-10 mx-auto mb-4">
                     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #0984E3; font-size: 20px;">
                         <div class="container-fluid">
                         <a class="navbar-brand" href="#" style="font-size:24px"> <b>Simulasi</b>  PAK</a>
@@ -28,11 +28,11 @@
                                 <a class="nav-link" href="{{ route('lampiran-all') }}">Lampiran </a>
                             </li>
                             </ul>
-                            <ul class="navbar-nav ms-auto">
+                            <ul class="navbar-nav ms-auto ">
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                    <span class="mr-2 d-none d-lg-inline text-white small">{{ Auth::user()->name }} &nabla;</span>
                                     {{-- <img class="img-profile rounded-circle" src="img/undraw_profile.svg"> --}}
                                 </a>
                                 <!-- Dropdown - User Information -->
@@ -63,6 +63,7 @@
                     </nav>
                 </div >                    
             </header>
+            
 
 
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
