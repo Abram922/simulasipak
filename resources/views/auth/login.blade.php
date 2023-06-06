@@ -49,7 +49,7 @@
 
                     
                     <div class="text-center" >
-                        <a class="text-muted" href="#!">Lupa Password?</a>
+                        {{-- <a class="text-muted" href="#!">Lupa Password?</a> --}}
                     </div>
                     
   

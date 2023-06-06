@@ -1,6 +1,6 @@
             <header>
                 <div class="col-md-10 mx-auto mb-4">
-                    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #0984E3; font-size: 20px;">
+                    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #3C8DBC; font-size: 20px; opacity: 0.8;">
                         <div class="container-fluid">
                         <a class="navbar-brand" href="#" style="font-size:24px"> <b>Simulasi</b>  PAK</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

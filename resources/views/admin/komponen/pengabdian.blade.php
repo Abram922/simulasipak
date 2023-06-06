@@ -6,7 +6,7 @@
 <div class="row">
 
 
-    <div class="col-xl-5 col-lg-5">
+    <div class="col-xl-3 col-lg-3">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Komponen Pengabdian Kepada Masyarakat</h6>
@@ -32,10 +32,14 @@
                             <label for="institusi">Keterangan Batas Pengakuan</label>
                             <input required type="text" class="form-control"  id="batas_maksimal_diakui" name="batas_maksimal_diakui">
                         </div>
+
+                    </div>
+
+                    <div class="form-group row">
                         <div class="col-md m-3">
                             <label for="institusi">Keterangan Bukti Kegiatan</label>
                             <input required type="text" class="form-control"  id="bukti_kegiatan" name="bukti_kegiatan">
-                        </div>
+                        </div>                        
                     </div>
 
                     <div class="form-group row">
@@ -53,7 +57,7 @@
         </div>
     </div>
 
-    <div class="col-xl-7 col-lg-7">
+    <div class="col-xl-9 col-lg-9">
         <div class="card shadow mb-4">
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">

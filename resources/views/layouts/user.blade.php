@@ -42,7 +42,7 @@
         <br>
   
 
-  <footer class="text-center text-lg-start  text-muted " style="background-color:#3C8DBC ; margin-top:4pt">
+  <footer class="text-center text-lg-start  text-muted " style="background-color:#3C8DBC ; margin-top:4pt; opacity: 0.8;">
 
               <section class="">
                 <div class="container text-center text-md-start mt-5">
