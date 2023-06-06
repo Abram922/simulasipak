@@ -73,11 +73,12 @@ class PelaksanaanPendidikanController extends Controller
 
     
             $pelaksanaanPendidikan->save();
+            $kumId = $pelaksanaanPendidikan->kum_id;
         }
         
        
 
-        return back()->with('success', 'Data berhasil disimpan');
+        return redirect()->route('pelaksanaanpendidikan.show', $kumId)->with('message', 'Data berhasil disimpan'); 
     }
     
     
@@ -114,9 +115,6 @@ class PelaksanaanPendidikanController extends Controller
                 
             $pengajaranBySemester[$semester] = $pengajaran;
         }
-
-        // dd($pengajaranBySemester);
-        // dd($pengajaran);
 
 
     

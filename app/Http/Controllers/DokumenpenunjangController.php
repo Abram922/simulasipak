@@ -72,10 +72,10 @@ class DokumenpenunjangController extends Controller
 
             $penunjang->save();
         }
+        $kumId = $input['kum_id'];
+        return redirect()->route('doumenpenunjang.show', $kumId)->with('message', 'Data berhasil disimpan'); 
         
-       
 
-        return back()->with('success', 'Data berhasil disimpan');
     }
     /**
      * Store a newly created resource in storage.

@@ -76,10 +76,12 @@ class PelaksanaanPmController extends Controller
              $pelaksanaanpm->save();
 
          }
+
+         $kumId = $input['kum_id'];
+         return redirect()->route('pelaksanaan_pm.show', $kumId)->with('message', 'Data berhasil disimpan'); 
          
         
  
-         return back()->with('success', 'Data berhasil disimpan');
      }
 
 

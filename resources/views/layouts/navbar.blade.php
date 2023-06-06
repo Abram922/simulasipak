@@ -9,7 +9,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="nav-link"  href="{{ route('userhome') }}">Dashboard</a>
+                                <a class="nav-link"  href="{{ route('userhome') }}">Beranda</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('boardpak') }}">Perhitungan </a>

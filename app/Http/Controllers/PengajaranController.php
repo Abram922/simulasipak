@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\jenis_pelaksanan_pendidikan;
+use App\Models\kum;
+use App\Models\pelaksanaan_pendidikan;
 use App\Models\pengajaran;
 use App\Http\Controllers\Controller;
+use App\Models\semester;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -96,17 +100,59 @@ class PengajaranController extends Controller
         }
 
         $pengajaran->save();
+        $kumId = $pengajaran->id_kum;
+
     }
 
-    return back()->with('success', 'Data berhasil disimpan');
+    return redirect()->route('pengajaran.show', $kumId)->with('message', 'Data berhasil disimpan'); 
 }
 
     /**
      * Display the specified resource.
      */
-    public function show(pengajaran $pengajaran)
+    public function show($id)
     {
-        //
+        $kum = kum::find($id);
+        $p = pengajaran::join('kums', 'pengajarans.id_kum', '=', 'kums.id')
+        ->select('pengajarans.id_semester')
+        ->where('kums.id', $kum->id)
+        ->groupBy('pengajarans.id_semester')
+        ->get();
+        
+
+        $pengajarangroupbysemester = [];
+
+        foreach($p as $pgbs){
+            $p = $pgbs->id_semester;
+
+            $pengajarangroupbysemester[] = $p;
+            $pp = $pengajarangroupbysemester;
+        }
+
+        $pengajaranBySemester = [];
+    
+        foreach ($pengajarangroupbysemester as $semester) {
+            $pengajaran = pengajaran::where('id_kum', $kum->id)
+                ->where('id_semester', $semester)
+                ->get();
+                
+            $pengajaranBySemester[$semester] = $pengajaran;
+        }
+
+
+    
+        $pelaksanaan_pendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->get();
+        $pengajaran = pengajaran::where('id_kum', $kum->id)->get();
+        $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
+        $semester = semester::all();
+        return view('.user.board.boardpengajaran',[
+            'kum' =>$kum,
+            'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan,
+            'pelaksanaan_pendidikan' => $pelaksanaan_pendidikan,
+            'semester' => $semester,
+            'pengajaran' => $pengajaran,
+            'pengajaranBySemester' => $pengajaranBySemester
+        ]);
     }
 
     /**

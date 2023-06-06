@@ -68,8 +68,8 @@ class PenelitianHakidankaryaController extends Controller
             // dd($karya);
             $karya->save();
         }
-
-        return back()->with('success', 'Data berhasil disimpan');
+        $kumId = $input['id_kum'];
+        return redirect()->route('pelaksanaanpenelitian.show', $kumId)->with('message', 'Data berhasil disimpan'); 
     }
 
     /**
