@@ -648,6 +648,11 @@
             <br>     
             <br>
           </div>
+
+          <hr class="sidebar-divider">
+          <hr class="sidebar-divider">
+
+
             {{-- pengajaran --}}
             <div class="col-md-12" style="background-color: #F9F9FE">
               <div class="col-lg-10 mx-auto" style="margin-top: 30px">
@@ -1369,6 +1374,12 @@
             </div>          
           </div>
           <div class="col-lg-10 mx-auto" style="margin-top: 30px">
+
+
+
+            <hr class="sidebar-divider">
+            <hr class="sidebar-divider">
+            
             <form method="POST" action="{{route('pelaksanaanpenelitian.store')}}" enctype="multipart/form-data" >
                 @csrf
 
