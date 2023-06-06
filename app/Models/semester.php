@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\pelaksanaan_pm;
+use App\Models\penelitian_hakidankarya;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

@@ -44,13 +44,12 @@
                     </div>
   
                     <div class="text-center mb-5 pt-1  pb-1">
-                      <button class="btn btn-primary btn-block fa-lg  mb-3" type="submit">Log
-                        in</button>
+                      <button class="btn btn-primary btn-block fa-lg  mb-3" type="submit">Masuk</button>
                     </div>
 
                     
                     <div class="text-center" >
-                        <a class="text-muted" href="#!">Forgot password?</a>
+                        <a class="text-muted" href="#!">Lupa Password?</a>
                     </div>
                     
   

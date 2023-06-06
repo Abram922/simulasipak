@@ -6,7 +6,10 @@ use App\Models\kum;
 use App\Models\pelaksanan_penelitian;
 use App\Http\Controllers\Controller;
 use App\Models\akreditasi_penelitian;
+use App\Models\KomponenPenelitian ;
+use App\Models\penelitian_hakidankarya;
 use App\Models\penulis;
+use App\Models\semester;
 use Database\Seeders\akreditasi_penulis;
 use Illuminate\Http\Request;
 
@@ -71,11 +74,21 @@ class PelaksananPenelitianController extends Controller
         $akreditasi = akreditasi_penelitian::all();
         $jenispenulis = penulis::all();
 
+        $hakikarya = penelitian_hakidankarya::where('id_kum', $kum->id)->get();
+        $komponenpenelitian = komponenpenelitian::all();
+        $semester = semester::all();
+
+
+
+
         return view('.user.board.boardpenelitian',[
             'kum' =>$kum,
             'penelitian' => $penelitian,
             'akreditasi' => $akreditasi,
-            'jenispenulis' => $jenispenulis
+            'jenispenulis' => $jenispenulis,
+            'hakikarya' => $hakikarya,
+            'komponenpenelitian' => $komponenpenelitian,
+            'semester' => $semester,
         ]);
     }
 

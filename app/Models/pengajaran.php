@@ -19,7 +19,8 @@ class pengajaran extends Model
         'jumlah_angka_kredit',
         'volume_dosen_pengajar',
         'nama_kelas_pengajaran',
-        'file'
+        'file',
+        'status'
     ];
 
     public function xsemester(){

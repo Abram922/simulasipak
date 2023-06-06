@@ -115,6 +115,9 @@ class PelaksanaanPendidikanController extends Controller
             $pengajaranBySemester[$semester] = $pengajaran;
         }
 
+        // dd($pengajaranBySemester);
+        // dd($pengajaran);
+
 
     
         $pelaksanaan_pendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->get();
@@ -146,8 +149,8 @@ class PelaksanaanPendidikanController extends Controller
     {
         $input = $request->validate([
             'tempat_instansi' => '',
-            'semester_id' => '',
-            'idjenispelaksanaan' => '',
+            'semester_id' => 'integer',
+            'idjenispelaksanaan' => 'integer',
             'nama_kegiatan' => '',
         ]);
 

@@ -75,14 +75,31 @@
                         <p style="font-size:110%; margin-bottom: -5px;">
                             <b>
                                 @if ($kumterakhir)
-                                    {{ $carbon::parse($kumterakhir->tmt)->locale('id_ID')->isoFormat('D MMMM Y') }}
-                                    hingga
+                                {{ $carbon::parse($kumterakhir->tmt)->locale('id_ID')->isoFormat('D MMMM Y') }}
+                                @else
+                                    -
+                                @endif
+
+                            </b>
+                        </p>
+                        
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p style="font-size:110%; margin-bottom: -5px; color:rgb(112, 172, 112);">
+                            <b>
+
+                                Pengajuan kenaikan jabatan eligible 
+                                @if ($kumterakhir)
                                     {{ $carbon::parse($kumterakhir->tmt_available)->locale('id_ID')->isoFormat('D MMMM Y') }}
                                 @else
                                     -
                                 @endif
                             </b>
                         </p>
+                        
                     </td>
                 </tr>
                 

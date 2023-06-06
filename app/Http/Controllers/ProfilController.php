@@ -70,7 +70,7 @@ class ProfilController extends Controller
             'fakultas' => '',
             'pangkat' => ''
         ]);
-    
+
         $user = User::find($id);
         $user->name = $input['name'] ?? $user->name; // Menggunakan null coalescing operator untuk mengatasi ketika 'name' tidak ada dalam $input array
         $user->tanggal_lahir = $input['tanggal_lahir'] ?? $user->tanggal_lahir;
@@ -89,7 +89,7 @@ class ProfilController extends Controller
             $user->foto = $profileImage;
         }
         $user->save();
-        return back()->with('sukses', 'Data berhasil diubah');
+        return redirect()->route('profil');
     }
     
 

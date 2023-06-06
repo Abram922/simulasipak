@@ -14,6 +14,9 @@ class pangkat extends Model
     ];
 
 
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 
     public function kum(){
         return $this->hasMany(kum::class);

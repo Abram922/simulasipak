@@ -33,7 +33,6 @@ class PenelitianHakidankaryaController extends Controller
     {
 
 
-
         $inputs = $request->input('inputs');
 
         foreach ($inputs as $i => $input) {
@@ -92,16 +91,41 @@ class PenelitianHakidankaryaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, penelitian_hakidankarya $penelitian_hakidankarya)
+    public function update(Request $request, $id)
     {
-        //
+
+        $input = $request->validate([
+            'id_semester' => 'required|integer',
+            'id_jeniskarya' => 'required|integer',
+            'judul' => ''
+        ]);
+
+        if ($image = $request->file('bukti')) {
+            $destinationPath = 'bukti_unsur_utama/pelaksanaan_penelitian/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['bukti'] = "$profileImage";
+        }else{
+            unset($input['bukti']);
+        }
+
+        $haki = penelitian_hakidankarya::findOrFail($id);
+
+
+        $haki->update($input);
+
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
+
+    
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(penelitian_hakidankarya $penelitian_hakidankarya)
+    public function destroy($id)
     {
-        //
+        penelitian_hakidankarya::destroy($id);
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 }

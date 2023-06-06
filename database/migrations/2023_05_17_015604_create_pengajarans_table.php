@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('nama_kelas_pengajaran')->nullable();
             $table->integer('volume_dosen_pengajar')->nullable();
             $table->string('file')->nullable();
+            $table->boolean('status');
             $table->timestamps();
             $table->foreign('id_kum')->references('id')->on('kums')->onDelete('cascade');
             $table->foreign('id_semester')->references('id')->on('semesters')->onDelete('cascade');

@@ -31,8 +31,6 @@ class pangkat extends Seeder
             ],            [
                 'pangkat' => 'IV/e',
             ],
-            
-
         ]);
     }
 }

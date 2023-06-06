@@ -120,6 +120,7 @@ class KumController extends Controller
         $sumpendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->sum('jumlah_angka_kredit');
         $sumpengajaran = pengajaran::select('id_semester',DB::raw('SUM(jumlah_angka_kredit) as total_angka_kredit'))
         ->where('id_kum', $kum->id)
+        ->where('status', 1)
         ->groupBy('id_semester')
         ->get();
 

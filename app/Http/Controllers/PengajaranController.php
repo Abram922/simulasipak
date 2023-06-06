@@ -51,7 +51,8 @@ class PengajaranController extends Controller
         
 
         $totalSks = Pengajaran::where('id_semester', $idSemester)
-        ->where('id_kum', $idKum)
+        ->where('id_kum', $idKum )
+        ->where('status', 1)
         ->sum('sks_pengajaran');
 
 
@@ -73,15 +74,19 @@ class PengajaranController extends Controller
         $volumeDosen = floatval($input['volume_dosen_pengajar']);
 
         if ($totalSks + $sksPengajaran > 12) {
-            $validator->errors()->add('sks_pengajaran', 'Total SKS melebihi batas maksimum (12) untuk id_semester dan id_kum yang sama.');
-            continue;
-        }elseif ($volumeDosen <= 0 || $sksPengajaran <= 0) {
+            // $validator->errors()->add('sks_pengajaran', 'Total SKS melebihi batas maksimum (12) untuk id_semester dan id_kum yang sama.');
+            // continue;
+            $pengajaran->status = 0;
+        }elseif ($totalSks + $sksPengajaran <= 12) {
+            $pengajaran->status = 1;
+        }
+        elseif ($volumeDosen <= 0 || $sksPengajaran <= 0) {
             $validator->errors()->add('angka', 'tidak boleh nol');
             continue;
         }
-        else{
-            $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sksPengajaran;       
-        }
+
+        $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sksPengajaran;       
+        
 
         if ($image = $request->file('inputs.'.$i.'.file')) {
             $destinationPath = 'file/';
@@ -119,7 +124,7 @@ class PengajaranController extends Controller
     {
         $input = $request->validate([
             'instansi' => 'required',
-            'id_semester' => 'required',
+            'id_semester' => 'required|integer',
             'kode_matakuliah' => 'required|max:255',
             'matakuliah' => 'required|string',
             'nama_kelas_pengajaran' => 'required',
@@ -132,9 +137,6 @@ class PengajaranController extends Controller
 
         $hasil = (1 / $volumeDosen) * $sks;
         $input['jumlah_angka_kredit'] = floatval($hasil);
-
-
-
         $pengajaran = pengajaran::findOrFail($id);
 
         $pengajaran->update($input);

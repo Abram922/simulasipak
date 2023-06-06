@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+  @livewireStyles
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,9 +40,9 @@
         @yield('content2')
         </div>
         <br>
-        <div class="" style="background-color: #3C8DBC">
+  
 
-            <footer class="text-center text-lg-start  text-muted " style="background-color:#3C8DBC ; margin-top:4pt">
+  <footer class="text-center text-lg-start  text-muted " style="background-color:#3C8DBC ; margin-top:4pt">
 
               <section class="">
                 <div class="container text-center text-md-start mt-5">
@@ -113,14 +114,12 @@
                   <!-- Grid row -->
                 </div>
               </section>
-              <!-- Section: Links  -->
-      
-              <!-- Copyright -->
+
               <div class="text-center p-4" >
               </div>
               <!-- Copyright -->
-            </footer>
-        </div>
+  </footer>
+    
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -143,5 +142,6 @@
       <!-- Page level custom scripts -->
       <script src="{{URL::asset('admin/js/demo/chart-area-demo.js')}}"></script>
       <script src="{{URL::asset('admin/js/demo/chart-pie-demo.js')}}"></script>
-  </body>
+      @livewireScripts
+    </body>
 </html>

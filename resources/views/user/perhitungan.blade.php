@@ -180,33 +180,67 @@
               <h4 class="small font-weight">Pendidikan<span
                       class="float-right"></span></h4>
               <div class="progress mb-4">
-                  <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $poin }}%"
+                  <div class="progress-bar bg-success" role="progressbar" style="width: {{ $poin }}%"
                       aria-valuenow="{{ $poin }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <h4 class="small font-weight">Pelaksanaan Pendidikan<span
-                      class="float-right">{{ $sumpelaksanaanpendidikan }} / {{ $angkakreditpelaksanaanPendidikannmax }}</span></h4>
+                class="float-right">{{ $sumpelaksanaanpendidikan }} / {{ $angkakreditpelaksanaanPendidikannmax }}</span>
+              </h4>
               <div class="progress mb-4">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $persentasepelaksanaanpendidikan }}%"
-                      aria-valuenow="{{ $persentasepelaksanaanpendidikan }} %" aria-valuemin="0" aria-valuemax="100"></div>
+                  @if ($persentasepelaksanaanpendidikan >= 100)
+                      <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasepelaksanaanpendidikan }}%"
+                          aria-valuenow="{{ $persentasepelaksanaanpendidikan }} %" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                  @else
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $persentasepelaksanaanpendidikan }}%"
+                          aria-valuenow="{{ $persentasepelaksanaanpendidikan }} %" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                  @endif
               </div>
+        
               <h4 class="small font-weight">Pelaksanaan Penelitian   <span
                       class="float-right">{{ number_format($sumpelaksanaanpenelitian, 2) }} / {{ $angkakreditpelaksanaanPenelitianmax }}</span></h4>
-              <div class="progress mb-4">
-                  <div class="progress-bar" role="progressbar" style="width: {{ $persentasepelaksanaanpenelitian }}%"
-                      aria-valuenow="{{ $persentasepelaksanaanpenelitian }}" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
+              @if($persentasepelaksanaanpenelitian >= 100)
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasepelaksanaanpenelitian }}%"
+                        aria-valuenow="{{ $persentasepelaksanaanpenelitian }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              @else
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $persentasepelaksanaanpenelitian }}%"
+                        aria-valuenow="{{ $persentasepelaksanaanpenelitian }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              @endif
+
+
               <h4 class="small font-weight">Pengabdian Kepada Masyarakat   <span
                       class="float-right">{{ $sumpelaksanaanpm }} / {{ $angkakreditpelaksanaanPengabdianMasyarakatmax }}</span></h4>
+              @if($persentasepm >= 100)
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasepm }}%"
+                        aria-valuenow="{{ $persentasepm }} %" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              @else
               <div class="progress mb-4">
-                  <div class="progress-bar bg-info" role="progressbar" style="width: {{ $persentasepm }}%"
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $persentasepm }}%"
                       aria-valuenow="{{ $persentasepm }} %" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
+              @endif
+              
+
               <h4 class="small font-weight">Dokumen Penunjang   <span
                       class="float-right">{{ $sumdp }} / {{ $angkakreditpenunjangmax }}</span></h4>
+              @if($persentasedp >= 100)
               <div class="progress">  
                   <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasedp }}%"
                       aria-valuenow="{{ $persentasedp }} %" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
+              @else
+              <div class="progress">  
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $persentasedp }}%"
+                    aria-valuenow="{{ $persentasedp }} %" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>    
+              @endif          
           </div>
         </div>
       </div>
@@ -471,7 +505,7 @@
                                 </div>
 
                                 <div class="col-md m-3">
-                                        <label for="sks_pengajaran">sks pengajaran</label>
+                                        <label for="sks_pengajaran">SKS</label>
                                         <input  type="number" class="form-control x"  name="inputs[0][sks_pengajaran]" onkeyup="perkalian()">
                                 </div>     
                                 
@@ -479,7 +513,7 @@
 
                             <div class="form-group row">
                               <div class="col-md m-3 ">
-                                <label for="file">File</label>
+                                <label for="file">Bukti</label>
                                 <input class="form-control @error('file') is-invalid @enderror" type="file" name="inputs[0][file]" >
                                 @error('file')
                                     <div class="invalid-feedback">
@@ -582,7 +616,7 @@
 
                               '<div class="form-group row">'+
                                 '<div class="col-md ">'+
-                                  '<label for="file">File</label>'+
+                                  '<label for="file">Bukti</label>'+
                                   '<input class="form-control @error('file') is-invalid @enderror" type="file" name="inputs[0][file]" >'+
                                   '@error('file')'+
                                       '<div class="invalid-feedback">'+

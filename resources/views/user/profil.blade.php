@@ -76,7 +76,7 @@
         <td>Pangkat/Golongan</td>
         </tr>
         <tr>
-        <td><p><b>{{ $s->pangkat }}</b></p></td>
+        <td><p><b>{{ $s->pangkat}}</b></p></td>
         </tr>
 
     </tbody>

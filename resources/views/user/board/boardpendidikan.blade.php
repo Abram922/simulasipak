@@ -102,7 +102,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">hapus</button>
-                </form>
+                  </form>
 
               </td>
       </tbody>
