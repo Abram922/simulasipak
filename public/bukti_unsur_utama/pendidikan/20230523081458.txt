@@ -225,7 +225,7 @@
         <div class="tab-pane fade show active" id="pendidikan-tab-pane" role="tabpanel" aria-labelledby="pendidikan-tab" tabindex="0">
           <div class="col-lg-10" style="margin-top: 30px">
               <h3><b>Input Data Pendidikan</b> </h3>
-              <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">lihat</a>     
+              <a href="{{ route('pendidikan-tampilan',$kum->id) }}" class="btn btn-info">lihat</a>     
               <form method="POST" action="{{ route('pendidikan.store', $kum->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div id="inputFieldpendidikan" class = "inputFieldpendidikan" >

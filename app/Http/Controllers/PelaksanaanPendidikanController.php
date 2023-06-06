@@ -78,7 +78,7 @@ class PelaksanaanPendidikanController extends Controller
         
        
 
-        return redirect()->route('pelaksanaanpendidikan.show', $kumId)->with('message', 'Data berhasil disimpan'); 
+        return redirect()->route('pelaksanaanpendidikan-tampilan', $kumId)->with('message', 'Data berhasil disimpan'); 
     }
     
     

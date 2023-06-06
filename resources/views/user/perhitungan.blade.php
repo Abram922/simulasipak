@@ -290,7 +290,7 @@
                       <div class="d-flex">
                         <div class="flex-grow-1">
                           <h3><b>Input Data Pendidikan</b></h3>
-                          <a href="{{ route('pendidikan.show',$kum->id) }}" class="btn btn-info">Lihat</a>     
+                          <a href="{{ route('pendidikan-tampilan',$kum->id) }}" class="btn btn-info">Lihat</a>     
                         </div>
 
                       </div>
@@ -1379,7 +1379,7 @@
 
             <hr class="sidebar-divider">
             <hr class="sidebar-divider">
-            
+
             <form method="POST" action="{{route('pelaksanaanpenelitian.store')}}" enctype="multipart/form-data" >
                 @csrf
 

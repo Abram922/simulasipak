@@ -9,14 +9,26 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="nav-link"  href="{{ route('userhome') }}">Beranda</a>
+                                <a class="nav-link"  href="{{ route('userhome') }}"> Beranda</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('boardpak') }}">Perhitungan </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('lampiran-all') }}">Lampiran </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Lampiran
+                                </a>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{ route('lampiranpendidikan') }}">Pendidikan</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('lampirandatapendidikan') }}">Pelaksanaan Pendidikan</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('datapenelitian') }}">Penelitian</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('datapm') }}">Pengabdian Masyarakat</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('datapenunjang') }}">Penunjang</a></li>
+                                </ul>
                             </li>
+                            {{-- <li class="nav-item">
+                                <a class="nav-link" href="{{ route('lampiran-all') }}">Lampiran </a>
+                            </li> --}}
                             </ul>
                             <ul class="navbar-nav ms-auto ">
                             <li class="nav-item dropdown no-arrow">

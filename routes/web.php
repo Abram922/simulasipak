@@ -60,8 +60,7 @@ Route::get('/lampiran-datapenunjang', [App\Http\Controllers\LampiranController::
 Route::get('/lampiran-datapendidikan', [App\Http\Controllers\LampiranController::class,'datapendidikan'])->name('lampirandatapendidikan');
 Route::get('/lampiran-datapm', [App\Http\Controllers\LampiranController::class,'datapm'])->name('datapm');
 
-Route::get('/pendidikan/{id}', [App\Http\Controllers\PendidikanController::class, 'show'])->name('pendidikan.show');
-Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendidikanController::class, 'show'])->name('pelaksanaanpendidikan.show');
+
 
 
 Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');
@@ -96,7 +95,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/ubahprofil/update/{id}', [App\Http\Controllers\ProfilController::class, 'update'])->name('profilll');
 
         Route::resource('kum', App\Http\Controllers\KumController::class);
-        Route::resource('pendidikan', App\Http\Controllers\PendidikanController::class);
+        Route::resource('pendidikan', App\Http\Controllers\PendidikanController::class)->except(['show']);
         Route::resource('pelaksanaanpendidikan', App\Http\Controllers\PelaksanaanPendidikanController::class);
         Route::resource('pelaksanaanpenelitian', App\Http\Controllers\PelaksananPenelitianController::class);
         Route::resource('pelaksanaan_pm', App\Http\Controllers\PelaksanaanPmController::class);
@@ -116,8 +115,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/lampiran-datapm', [App\Http\Controllers\LampiranController::class,'datapm'])->name('datapm');
         Route::get('/lampiran-pendidikan', [App\Http\Controllers\LampiranController::class,'pendidikan'])->name('lampiranpendidikan');
 
-        Route::get('/pendidikan/{id}', [App\Http\Controllers\PendidikanController::class, 'show'])->name('pendidikan.show');
-        Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendidikanController::class, 'show'])->name('pelaksanaanpendidikan.show');
+        Route::get('/pendidikan/{id}', [App\Http\Controllers\PendidikanController::class, 'show'])->name('pendidikan-tampilan');
+
+        Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendidikanController::class, 'show'])->name('pelaksanaanpendidikan-tampilan');
 
 
         Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');
