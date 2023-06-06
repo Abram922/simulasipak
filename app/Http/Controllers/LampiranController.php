@@ -258,8 +258,9 @@ class LampiranController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        Lampiran::destroy($id);
+        return redirect()->back()->with('message', 'Data berhasil dihapus');
     }
 }

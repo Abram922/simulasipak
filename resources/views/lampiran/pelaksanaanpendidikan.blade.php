@@ -28,6 +28,7 @@
                                             <a href="/pelaksanaanpendidikan/{{ $p->bukti_pendidikan }}" download target="_blank" class="btn btn-info">
                                                 <span class="logo">&#128229;</span>
                                             </a>
+                                              
                                         </div>                                             
                                                 
 
@@ -62,10 +63,34 @@
                                     <a href="/lampiran/{{ $p->bukti }}" download target="_blank" class="btn btn-info">
                                         <span class="logo">&#128229;</span>
                                     </a>
+
+                                    <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#modalhapus{{ $p->id }}"><i class="fas fa-trash"></i></a>
+
                                 </div>                                             
                                         
 
                             </div>
+                    </div>
+                    <div class="modal fade" id="modalhapus{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin menghapus KUM ini?</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Peringatan: Data ini akan hilang ketika menekan tombol hapus</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
+                                    <button onclick="event.preventDefault(); document.getElementById('hapus{{ $p->id }}').submit();">hapus</button>
+                                </div>
+                                <form id="hapus{{ $p->id }}" action="{{ route('lampirans.destroy', $p->id) }}" method="POST" class="d-none">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 @endforeach                   
             </div>
