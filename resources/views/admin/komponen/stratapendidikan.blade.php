@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button class="btn btn-primary" type="submit">submit</button>
+                        <button class="btn btn-primary" type="submit">Kirim</button>
                     </div>
 
                 </div>
@@ -84,8 +84,8 @@
                         <td>{{ $pd->batas_maksimal_diakui }}</td>
                         <td><center>{{ $pd->nilai }}</center> </td>      
                         <td>
-                            <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editpendidikan_{{ $pd->id }}">edit</a>
-                            <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapuspendidikan_{{ $pd->id }}">hapus</a>
+                            <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editpendidikan_{{ $pd->id }}">Edit</a>
+                            <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapuspendidikan_{{ $pd->id }}">Hapus</a>
                         </td>
 
                         
@@ -158,7 +158,7 @@
                                         </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
-                                                        <button class="btn btn-primary" type="submit">submit</button>
+                                                        <button class="btn btn-primary" type="submit">Kirim</button>
                                                     </div>
                                                     
                                             </form>

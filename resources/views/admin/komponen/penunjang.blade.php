@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-primary" type="submit">submit</button>
+                        <button class="btn btn-primary" type="submit">Kirim</button>
                     </div>
 
                 </div>
@@ -86,8 +86,8 @@
                         <td>{{ $pd->bukti_kegiatan }}</td>
                         <td>{{ $pd->angkakreditmax }}</td>  
                         <td>
-                            <a id="editpenelitian" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editpenelitian_{{ $pd->id }}">edit</a>
-                            <a id="hapuspenelitian" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapuspenelitian_{{ $pd->id }}">hapus</a>
+                            <a id="editpenelitian" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editpenelitian_{{ $pd->id }}">Edit</a>
+                            <a id="hapuspenelitian" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapuspenelitian_{{ $pd->id }}">Hapus</a>
                         </td>
 
                         
@@ -155,7 +155,7 @@
                                                     
                                                     <div class="modal-footer">
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
-                                                        <button class="btn btn-primary" type="submit" >submit</button>
+                                                        <button class="btn btn-primary" type="submit" >Kirim</button>
                                                     </div>
                                                     
                                             </form>

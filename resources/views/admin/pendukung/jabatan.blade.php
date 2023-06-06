@@ -61,7 +61,7 @@
                                                 </div>
 
                     <div class="text-center">
-                        <button class="btn btn-primary" type="submit">submit</button>
+                        <button class="btn btn-primary" type="submit">Kirim</button>
                     </div>
 
                 </div>
@@ -108,8 +108,8 @@
                         <td>{{ $gose->pelaksanaanPengabdianMasyarakat}}</td>
                         <td>{{ $gose->penunjang}}</td>
                         <td>
-                            <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editjabatan_{{ $gose->id }}">edit</a>
-                            <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapusjabatan_{{ $gose->id }}">hapus</a>
+                            <a id="editpendidikan" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editjabatan_{{ $gose->id }}">Edit</a>
+                            <a id="hapuspendidikan" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapusjabatan_{{ $gose->id }}">Hapus</a>
                         </td>
 
                         
@@ -194,7 +194,7 @@
                                         </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
-                                                        <button class="btn btn-primary" type="submit">submit</button>
+                                                        <button class="btn btn-primary" type="submit">Kirim</button>
                                                     </div>
                                                     
                                             </form>
