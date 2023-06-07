@@ -220,7 +220,8 @@ class LampiranController extends Controller
 
         if ($image = $request->file('file')) {
             $destinationPath = 'lampiran/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $originalName = $image->getClientOriginalName();
+            $profileImage = date('YmdHis') . '_' . $originalName;
             $image->move($destinationPath, $profileImage);
             $input['file'] = "$profileImage";
         }

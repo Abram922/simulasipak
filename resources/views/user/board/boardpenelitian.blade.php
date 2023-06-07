@@ -272,6 +272,7 @@
           <th>Semester</th>
           <th>Akreditasi</th>
           <th>Angka Kredit</th>
+          <th>File</th>
           <th>Aksi</th>
       </thead>
 
@@ -281,6 +282,10 @@
               <td>{{ $pn->judul }}</td>
               <td> {{ $pn->karya->komponenkegiatan }}</td>
               <td>{{ number_format($pn->jumlah_angka_kredit,2) }}</td>  
+              <td>
+                <a href="/bukti_unsur_utama/pelaksanaan_penelitian/{{ $pn->bukti }}" target="_blank" class="btn btn-warning">Lihat File</a>
+                <a href="/bukti_unsur_utama/pelaksanaan_penelitian/{{ $pn->bukti }}" download target="_blank" class="btn btn-info">Download File</a>
+              </td>
               <td> {{ $pn->semester->semester }}</td>           
               <td>
                   <a href="{{ route('karya.edit', $pn->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_haki_Modal">ubah</a>

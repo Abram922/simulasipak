@@ -61,7 +61,8 @@ class PenelitianHakidankaryaController extends Controller
     
             if ($image = $request->file('inputs.'.$i.'.bukti')) {
                 $destinationPath = 'bukti_unsur_utama/pelaksanaan_penelitian/';
-                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $originalName = $image->getClientOriginalName();
+                $profileImage = date('YmdHis') . '_' . $originalName;
                 $image->move($destinationPath, $profileImage);
                 $karya->bukti = $profileImage;
             }
@@ -102,7 +103,8 @@ class PenelitianHakidankaryaController extends Controller
 
         if ($image = $request->file('bukti')) {
             $destinationPath = 'bukti_unsur_utama/pelaksanaan_penelitian/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $originalName = $image->getClientOriginalName();
+            $profileImage = date('YmdHis') . '_' . $originalName;
             $image->move($destinationPath, $profileImage);
             $input['bukti'] = "$profileImage";
         }else{

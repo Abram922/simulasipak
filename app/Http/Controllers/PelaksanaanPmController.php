@@ -69,7 +69,8 @@ class PelaksanaanPmController extends Controller
      
              if ($image = $request->file('inputs.'.$i.'.buktifisik')) {
                  $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
-                 $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                 $originalName = $image->getClientOriginalName();
+                 $profileImage = date('YmdHis') . '_' . $originalName;
                  $image->move($destinationPath, $profileImage);
                  $pelaksanaanpm->buktifisik = $profileImage;
              }
@@ -132,7 +133,8 @@ class PelaksanaanPmController extends Controller
         if ($request->hasFile('buktifisik')) {
             $buktiunsurpdp = $request->file('buktifisik');
             $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
-            $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
+            $originalName = $buktiunsurpdp->getClientOriginalName();
+            $profileImage = date('YmdHis') . '_' . $originalName;
             $buktiunsurpdp->move($destinationPath, $profileImage);
             $input['buktifisik'] = $profileImage;
         } else {

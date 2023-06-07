@@ -1391,7 +1391,7 @@
                         <br>
                         <a href="{{ route('pelaksanaanpenelitian.show',$kum->id) }}" class="btn btn-info">Lihat</a>    
 
-                      </div>
+                    </div>
                     </div>
                     <br>
                   </div>

@@ -65,7 +65,8 @@ class PelaksanaanPendidikanController extends Controller
     
             if ($image = $request->file('inputs.'.$i.'.bukti_pendidikan')) {
                 $destinationPath = 'pelaksanaanpendidikan/';
-                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $originalName = $image->getClientOriginalName();
+                $profileImage = date('YmdHis') . '_' . $originalName;
                 $image->move($destinationPath, $profileImage);
                 $pelaksanaanPendidikan->bukti_pendidikan = $profileImage;
             }

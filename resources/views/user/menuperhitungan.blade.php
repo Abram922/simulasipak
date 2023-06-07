@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="col-md text-center">
-                    <button class="btn btn-primary btn-block fa-lg " type="submit">submit</button>
+                    <button class="btn btn-primary btn-block fa-lg " type="submit">Kirim</button>
                 </div>
 
 
@@ -205,6 +205,112 @@
                                     </div>
                                 </div>
                                 <br>
+                                <div class="modal fade" id="editkummodal_{{ $k->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit KUM</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                                <div class="modal-body">
+                                                            <form method="POST" action="{{ route('kum.update', $k->id) }}" >
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="mx-auto">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md text-center">
+                                                                        <label for="judul" style="display: inline-block; width: 150px;">Judul KUM:</label>
+                                                                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ $k->judul }}" style="display: inline-block; width: 200px;" required>
+                                                                        @error('judul')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                                <div class="form-group row">
+                                                                    <div class="col-md text-center">
+                                                                        <label for="id_jabatan_sekarang" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
+                                                                        <select class="form-control @error('id_jabatan_sekarang') is-invalid @enderror" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;" required>
+                                                                            <option value="">Pilih Jabatan</option>
+                                                                            @foreach ($jabatanpref as $js)
+                                                                            <option class="" value="{{ $js->id }}" data-kum-pref="{{ $js->angkaKreditKumulatif }}" title="{{ $js->jabatanpref }}">{{ Str::limit($js->jabatan, 100) }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('id_jabatan_sekarang')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                                <div class="form-group row">
+                                                                    <div class="col-md text-center">
+                                                                        <label for="id_jabatan_dituju" style="display: inline-block;width: 150px;">Jabatan yang Usulan:</label>
+                                                                        <select class="form-control @error('id_jabatan_dituju') is-invalid @enderror" id="id_jabatan_dituju" name="id_jabatan_dituju" style="display: inline-block; width: 200px;" required>
+                                                                            <option value="">Pilih Jabatan</option>
+                                                                            @foreach ($jabatanafter as $px)
+                                                                            <option class="" value="{{ $px->id }}" data-kum-after="{{ $px->angkaKreditKumulatif }}" title="{{ $px->jabatanafter }}">{{ Str::limit($px->jabatan, 100) }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('id_jabatan_dituju')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group row">
+                                                                    <div class="col-md text-center">
+                                                                        <label for="tmt" style="display: inline-block; width: 150px;">TMT:</label>
+                                                                        <input type="date" class="form-control @error('tmt') is-invalid @enderror" id="tmt" name="tmt" value="{{ $k->tmt }}" style="display: inline-block; width: 200px;" required>
+                                                                        @error('tmt')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>  
+                                                                </div>                                      
+                                                            
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
+                                                                    <button class="btn btn-primary" type="submit" >Kirim</button>
+                                                                </div>  
+                                                            
+                                                            </form>  
+                                                </div>                  
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                    <div class="modal fade" id="hapuskummodal_{{ $k->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin menghapus KUM ini?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">Peringatan: Data perhitungan anda akan hilang ketika menghapus KUM ini</div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
+                                                    <a class="btn btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('hapus-kum-{{ $k->id }}').submit();">hapus</a>
+                                                </div>
+                                                <form id="hapus-kum-{{ $k->id }}" action="{{ route('kum.destroy', $k->id) }}" method="POST" class="d-none">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
                         @endif
                     @endforeach
@@ -213,6 +319,92 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="editkummodal_{{ $k->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit KUM</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                        <form method="POST" action="{{ route('kum.update', $k->id) }}" >
+                            @csrf
+                            @method('PUT')
+                            <div class="mx-auto">
+                            <div class="form-group row">
+                                <div class="col-md text-center">
+                                    <label for="judul" style="display: inline-block; width: 150px;">Judul KUM:</label>
+                                    <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" style="display: inline-block; width: 200px;" required>
+                                    @error('judul')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        
+                            <div class="form-group row">
+                                <div class="col-md text-center">
+                                    <label for="id_jabatan_sekarang" style="display: inline-block;width: 150px;">Jabatan Saat Ini:</label>
+                                    <select class="form-control @error('id_jabatan_sekarang') is-invalid @enderror" id="id_jabatan_sekarang" name="id_jabatan_sekarang" style="display: inline-block; width: 200px;" required>
+                                        <option value="">Pilih Jabatan</option>
+                                        @foreach ($jabatanpref as $js)
+                                        <option class="" value="{{ $js->id }}" data-kum-pref="{{ $js->angkaKreditKumulatif }}" title="{{ $js->jabatanpref }}">{{ Str::limit($js->jabatan, 100) }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('id_jabatan_sekarang')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        
+                            <div class="form-group row">
+                                <div class="col-md text-center">
+                                    <label for="id_jabatan_dituju" style="display: inline-block;width: 150px;">Jabatan yang Usulan:</label>
+                                    <select class="form-control @error('id_jabatan_dituju') is-invalid @enderror" id="id_jabatan_dituju" name="id_jabatan_dituju" style="display: inline-block; width: 200px;" required>
+                                        <option value="">Pilih Jabatan</option>
+                                        @foreach ($jabatanafter as $px)
+                                        <option class="" value="{{ $px->id }}" data-kum-after="{{ $px->angkaKreditKumulatif }}" title="{{ $px->jabatanafter }}">{{ Str::limit($px->jabatan, 100) }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('id_jabatan_dituju')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <div class="col-md text-center">
+                                    <label for="tmt" style="display: inline-block; width: 150px;">TMT:</label>
+                                    <input type="date" class="form-control @error('tmt') is-invalid @enderror" id="tmt" name="tmt" style="display: inline-block; width: 200px;" required>
+                                    @error('tmt')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>  
+                            </div>                                      
+                        </div>
+                            <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
+                            <button class="btn btn-primary" type="submit" >submit</button>
+                            </div>  
+                        </form>                    
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
 
 
 

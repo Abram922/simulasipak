@@ -92,13 +92,21 @@ class PengajaranController extends Controller
         $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sksPengajaran;       
         
 
+        // if ($image = $request->file('inputs.'.$i.'.file')) {
+        //     $destinationPath = 'file/';
+        //     $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        //     $image->move($destinationPath, $profileImage);
+        //     $pengajaran->file = $profileImage;
+        // }
+
         if ($image = $request->file('inputs.'.$i.'.file')) {
             $destinationPath = 'file/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $originalName = $image->getClientOriginalName();
+            $profileImage = date('YmdHis') . '_' . $originalName;
             $image->move($destinationPath, $profileImage);
             $pengajaran->file = $profileImage;
         }
-
+        
         $pengajaran->save();
         $kumId = $pengajaran->id_kum;
 

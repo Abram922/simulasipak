@@ -58,7 +58,8 @@ class PendidikanController extends Controller
     
             if ($image = $request->file('inputs.'.$i.'.bukti')) {
                 $destinationPath = 'bukti_unsur_utama/pendidikan/';
-                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $originalName = $image->getClientOriginalName();
+                $profileImage = date('YmdHis') . '_' . $originalName;
                 $image->move($destinationPath, $profileImage);
                 $pelaksanaanPendidikan->bukti = $profileImage;
             }   
@@ -117,7 +118,8 @@ class PendidikanController extends Controller
 
         if ($image = $request->file('bukti')) {
             $destinationPath = 'bukti_unsur_utama/pendidikan/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $originalName = $image->getClientOriginalName();
+            $profileImage = date('YmdHis') . '_' . $originalName;
             $image->move($destinationPath, $profileImage);
             $input['bukti'] = "$profileImage";
         }else{

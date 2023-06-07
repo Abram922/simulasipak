@@ -20,7 +20,7 @@
                                         </span>
                                         <img src="{{asset('aset_web/logopdf.png')}}" class="card-img-top" alt="...">
                                         <div class="text-center">
-                                                <a style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">{{ $p->bukti }}</a>
+                                                <a style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">{{ substr($p->bukti, 15, 100) }}</a>
                                         </div>   
                                         <div class="text-center">
                                             <a href="/bukti_unsur_utama/pendidikan/{{ $p->bukti }}" target="_blank" class="btn btn-warning">
@@ -53,7 +53,7 @@
                                 </span>
                                 <img src="{{asset('aset_web/logopdf.png')}}" class="card-img-top" alt="...">
                                 <div class="text-center">
-                                        <a style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">{{ $p->file }}</a>
+                                        <a style="width: 174px; height:48px; margin-top: -70px;border-radius:10px  ">{{ substr($p->file, 15, 100) }}</a>
                                 </div>   
                                 <div class="text-center">
                                     <a href="/lampiran/{{ $p->file }}" target="_blank" class="btn btn-warning">

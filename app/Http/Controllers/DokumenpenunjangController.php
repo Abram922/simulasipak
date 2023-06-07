@@ -65,7 +65,8 @@ class DokumenpenunjangController extends Controller
     
             if ($image = $request->file('inputs.'.$i.'.buktidp')) {
                 $destinationPath = 'bukti_unsur_penunjang/';
-                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $originalName = $image->getClientOriginalName();
+                $profileImage = date('YmdHis') . '_' . $originalName;
                 $image->move($destinationPath, $profileImage);
                 $penunjang->buktidp = $profileImage;
             }
@@ -123,7 +124,8 @@ class DokumenpenunjangController extends Controller
 
         if ($buktiunsurpdp = $request->file('bukti')) {
             $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
-            $profileImage = date('YmdHis') . "." . $buktiunsurpdp->getClientOriginalExtension();
+            $originalName = $buktiunsurpdp->getClientOriginalName();
+            $profileImage = date('YmdHis') . '_' . $originalName;
             $buktiunsurpdp->move($destinationPath, $profileImage);
         }
 
