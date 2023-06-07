@@ -130,7 +130,95 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<style>
+    .btn-lengkapi {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+    }
+
+    .card:hover .btn-lengkapi {
+        opacity: 0;
+    }
+
+    .card:hover .card-img {
+        opacity: 0.8;
+    }
+
+    .card-img {
+        transition: opacity 0.3s ease;
+    }
+</style>
+
+<script>
+    // Mengaktifkan efek hover pada gambar
+    $(document).ready(function () {
+        $('.card-hover .card-img').hover(
+            function () {
+                $(this).parent().find('.btn-lengkapi').css('opacity', '1');
+            },
+            function () {
+                $(this).parent().find('.btn-lengkapi').css('opacity', '0');
+            }
+        );
+    });
+</script>
+
 <div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            <h3>Kredit Kumulatif</h3>
+            <h3>Terakhir</h3>
+        </div>
+        <div class="col-lg-8">
+            <div class="container">
+                <div class="row">
+                    @foreach ($kum as $index => $k)
+                        @if ($index !== 0)
+                            <div class="col-md-10 mb-4">
+                                <div class="card card-hover border-0" style="max-width: 500px;">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-5">
+                                            <div class="position-relative">
+                                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img" alt="..." width="100%">
+                                                <div class="position-absolute top-50 start-50 translate-middle btn-lengkapi">
+                                                    <a href="{{ route('kum.show', $k->id) }}" class="btn btn-info">Lengkapi</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="card-body">
+                                                <h4></h4>
+                                                <h3 class="card-title"><b>{{ $k->judul }}</b></h3>
+                                                <p>Jabatan Saat Ini: {{ $k->jabatanSekarang->jabatan }}</p>
+                                                <p>Jabatan Saat Usulan: {{ $k->jabatanDituju->jabatan }}</p>
+                                                <div class="d-flex justify-content-end">
+                                                    <div class="ml-auto">
+                                                        <a id="editx" href="#" class="btn btn-warning ml-2" data-toggle="modal" data-target="#editkummodal_{{ $k->id }}">edit</a>
+                                                        <a id="hapusx" href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#hapuskummodal_{{ $k->id }}">hapus</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{{-- <div class="container">
   <div class="row">
       <div class="col-lg-2">
           <h3>Kredit Kumulatif</h3>
@@ -277,7 +365,7 @@
 
         </div>
     </div>
-</div>
+</div> --}}
 
 
 @endsection
