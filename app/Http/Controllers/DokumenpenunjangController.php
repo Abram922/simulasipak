@@ -122,12 +122,22 @@ class DokumenpenunjangController extends Controller
             'kedudukan_dp' =>'',
         ]);
 
-        if ($buktiunsurpdp = $request->file('bukti')) {
+        // if ($buktiunsurpdp = $request->file('bukti')) {
+        //     $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
+        //     $originalName = $buktiunsurpdp->getClientOriginalName();
+        //     $profileImage = date('YmdHis') . '_' . $originalName;
+        //     $buktiunsurpdp->move($destinationPath, $profileImage);
+        // }
+
+
+        if ($image = $request->file('bukti')) {
             $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
-            $originalName = $buktiunsurpdp->getClientOriginalName();
+            $originalName = $image->getClientOriginalName();
             $profileImage = date('YmdHis') . '_' . $originalName;
-            $buktiunsurpdp->move($destinationPath, $profileImage);
+            $image->move($destinationPath, $profileImage);
         }
+
+        dd($profileImage);
 
         $dokumenpenunjang = dokumenpenunjang::findOrFail($id);
         $dokumenpenunjang->komponenpenunjang_id = $input['komponenpenunjang_id'];
@@ -139,9 +149,6 @@ class DokumenpenunjangController extends Controller
         $dokumenpenunjang->save();
     
         return redirect()->back()->with('message', 'Data berhasil disimpan');
-
-
-
     }
 
     /**
