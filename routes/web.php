@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DokumenpenunjangController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -120,7 +121,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/pelaksanaanpendidikan/{id}', [App\Http\Controllers\PelaksanaanPendidikanController::class, 'show'])->name('pelaksanaanpendidikan-tampilan');
 
 
-        Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');
+        Route::delete('/dokumenpenunjang/{id}', [DokumenpenunjangController::class, 'destroy'])->name('dokumenpenunjang.destroy');
 
         //lampiran
         Route::resource('lampirans', App\Http\Controllers\LampiranController::class)->except('index','update');
