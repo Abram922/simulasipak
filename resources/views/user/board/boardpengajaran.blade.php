@@ -88,6 +88,8 @@
                 <form method="POST" action="{{ route('pengajaran.update', $gose->id) }}" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
+
+                  <input type="text" hidden class="form-control" id="id_kum" name="id_kum" value="{{ $gose->id_kum }}">
                   <div class="form-group row">
                     <div class="col-md m-3">
                       <label for="instansi">Instansi</label>
