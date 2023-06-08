@@ -12,9 +12,16 @@
 
         <div class="container">
         <div class="row">
+            @if ($s->foto == null)
             <div class="col-sm-2">
-                <img src="{{asset('profill')}}/{{ $s->foto }}" alt="..." class="img-thumbnail" width= "200">
+                <img src="{{asset('/aset_web/pengguna.png')}}" alt="..." class="img-thumbnail" width="200">
             </div>
+            @else
+                <div class="col-sm-2">
+                    <img src="{{asset('profill')}}/{{ $s->foto }}" alt="..." class="img-thumbnail" width="200">
+                </div>
+            @endif
+            
             <div class="col-sm-3">
                 <!-- Tabel -->
                 <table class="table table-borderless">
