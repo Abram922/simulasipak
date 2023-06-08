@@ -64,7 +64,7 @@ Auth::routes();
 
 
 
-Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');
+// Route::delete('/dokumenpenunjang/{id}', 'DokumenpenunjangController@destroy')->name('dokumenpenunjang.destroy');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['AuthPort:1']], function () {
