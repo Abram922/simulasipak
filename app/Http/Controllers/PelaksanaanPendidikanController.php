@@ -148,7 +148,7 @@ class PelaksanaanPendidikanController extends Controller
     {
         $input = $request->validate([
             'tempat_instansi' => '',
-            'semester_id' => 'integer',
+            'semester_id' => 'required|integer',
             'idjenispelaksanaan' => 'integer',
             'nama_kegiatan' => '',
         ]);

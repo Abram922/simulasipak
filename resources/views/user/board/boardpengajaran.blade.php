@@ -238,12 +238,16 @@
                             
                             <div class="col-md m-3">
                               <label for="semester">Semester</label>
-                              <select class="form-control" id="semester_id" name="semester_id" required>
-                                  <option>Pilih Semester</option>
-                                  @foreach ($semester as $s)
-                                      <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
-                                  @endforeach
+                              <select class="form-control" id="id_semester" name="id_semester" required>
+                                <option value="">Pilih Semester</option>
+                                @php
+                                  $semester = App\Models\semester::all();
+                                @endphp
+                                @foreach ($semester as $s)
+                                  <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                                @endforeach
                               </select>
+                              <div id="semesterAlert" class="alert alert-danger mt-2 d-none">Pilih salah satu semester.</div>
                             </div>
 
                           </div>

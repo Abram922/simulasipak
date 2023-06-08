@@ -32,7 +32,7 @@
     <tr><td>{{ $s->email}}</td></tr>
 
         <tr>
-        <td><p style="font-size:160%; margin-top: 20px;"><b>{{ $s->jabatan_fungsional}}</b></p></td>
+        <td><p style="font-size:160%; margin-top: 20px;"><b>{{ $s->jabatan_sekarang->jabatan}}</b></p></td>
         </tr>
 
         <tr>
@@ -76,7 +76,7 @@
         <td>Pangkat/Golongan</td>
         </tr>
         <tr>
-        <td><p><b>{{ $s->pangkat}}</b></p></td>
+        <td><p><b>{{ $s->pangkat_sekarang->pangkat}}</b></p></td>
         </tr>
 
     </tbody>

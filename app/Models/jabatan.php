@@ -22,4 +22,8 @@ class jabatan extends Model
         return $this->hasMany(kum::class);
     }
 
+    public function user(){
+        return $this->hasMany(User::class);
+    }
+
 }

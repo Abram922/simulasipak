@@ -18,14 +18,14 @@
   </div>
 
   
-  <div class="col-lg-10 mx-auto" style="margin-top: 30px">          
+  <div class="col-lg-10 mx-auto" style="margin-top: 30px"> 
+    <h1>Jurnal</h1>              
     <table class="table">
         <thead>
             <th>No</th>
             <th>Judul</th>
             <th>Akreditasi</th>
             <th>jenis Penulis</th>
-            
             <th>Angka Kredit</th>
             <th>Aksi</th>
         </thead>
@@ -38,7 +38,7 @@
                 <td> {{ $pn->penulis->jenispenulis }}</td>               
                 <td> {{ $pn->angkakredit }}</td>
 
-                <td>{{ $pn->jumlah_angka_kredit }}</td>            
+           
                 <td>
                   <div class="modal fade" id="pelaksanaan_penelitian_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered  ">
@@ -263,14 +263,14 @@
 
 
 <div class="col-lg-10 mx-auto" style="margin-top: 30px"> 
-<h1>HakI dan Karya</h1>      
+<h1>HaKI dan Karya</h1>      
 <br><br>     
   <table class="table">
       <thead>
           <th>No</th>
           <th>Judul</th>
           <th>Semester</th>
-          <th>Akreditasi</th>
+          <th>komponen HaKI dan Karya</th>
           <th>Angka Kredit</th>
           <th>File</th>
           <th>Aksi</th>
@@ -280,13 +280,14 @@
       <tbody>
               <td>{{ $loop->iteration }}</td>
               <td>{{ $pn->judul }}</td>
-              <td> {{ $pn->karya->komponenkegiatan }}</td>
+              <td>{{ $pn->semester->semester }} </td>
+              <td> {{ $pn->karya->komponenkegiatan }}</td>                 
               <td>{{ number_format($pn->jumlah_angka_kredit,2) }}</td>  
               <td>
                 <a href="/bukti_unsur_utama/pelaksanaan_penelitian/{{ $pn->bukti }}" target="_blank" class="btn btn-warning">Lihat File</a>
                 <a href="/bukti_unsur_utama/pelaksanaan_penelitian/{{ $pn->bukti }}" download target="_blank" class="btn btn-info">Download File</a>
               </td>
-              <td> {{ $pn->semester->semester }}</td>           
+                      
               <td>
                   <a href="{{ route('karya.edit', $pn->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelaksanaan_haki_Modal">ubah</a>
                   <form action="{{ route('karya.destroy', $pn->id) }}" method="POST">
@@ -330,13 +331,17 @@
           
                                     <div class="col-md m-3">
                                       <label for="semester">Semester</label>
-                                      <select class="form-control" name="id_semester" id="id_semester" value="{{ $pn->id_semester }}"">
-                                          <option>Pilih Semester</option>
-                                          @foreach ($semester as $s)
-                                              <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
-                                          @endforeach
+                                      <select class="form-control" id="id_semester" name="id_semester" required>
+                                        <option value="">Pilih Semester</option>
+                                        @php
+                                          $semester = App\Models\semester::all();
+                                        @endphp
+                                        @foreach ($semester as $s)
+                                          <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                                        @endforeach
                                       </select>
-                                    </div>     
+                                      <div id="semesterAlert" class="alert alert-danger mt-2 d-none">Pilih salah satu semester.</div>
+                                    </div>
                
                                   </div>
 
