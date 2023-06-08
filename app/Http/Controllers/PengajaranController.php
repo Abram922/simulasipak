@@ -188,10 +188,22 @@ class PengajaranController extends Controller
 
         $volumeDosen = floatval($input['volume_dosen_pengajar']);
         $sks = floatval($input['sks_pengajaran']);
+        
+        $status = null ;
+        if($status == "on"){
+            $status = 1;
+        }else{
+            $status = 0;
+        }
 
         $hasil = (1 / $volumeDosen) * $sks;
         $input['jumlah_angka_kredit'] = floatval($hasil);
+        $input['status'] =$status;
         $pengajaran = pengajaran::findOrFail($id);
+
+        dd($pengajaran);
+
+
 
         $pengajaran->update($input);
 

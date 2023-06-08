@@ -112,41 +112,88 @@ class PelaksanaanPmController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-    {
-        $input = $request->validate([
-            'komponenpm_id' => 'required',
-            'nama' => 'required',
-            'bentuk' => 'required|max:255',
-            'tempat_instansi' => 'required|string',
-            'semester_id' => 'required',
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $input = $request->validate([
+    //         'komponenpm_id' => 'required',
+    //         'nama' => 'required',
+    //         'bentuk' => 'required|max:255',
+    //         'tempat_instansi' => 'required|string',
+    //         'semester_id' => 'required',
+    //     ]);
 
-        $komponenpm_id = $input['komponenpm_id'];
+    //     $komponenpm_id = $input['komponenpm_id'];
     
-        $komponen = komponenpm::find($komponenpm_id);
+    //     $komponen = komponenpm::find($komponenpm_id);
 
-        $input['angkakreditpm'] = $komponen->angkakredit;
+    //     $input['angkakreditpm'] = $komponen->angkakredit;
 
 
+    //     if ($image = $request->file('buktifisik')) {
+    //         $destinationPath = 'bukti_unsur_penunjang/';
+    //         $originalName = $image->getClientOriginalName();
+    //         $profileImage = date('YmdHis') . '_' . $originalName;
+    //         $image->move($destinationPath, $profileImage);
+    //     }
 
-        if ($request->hasFile('buktifisik')) {
-            $buktiunsurpdp = $request->file('buktifisik');
-            $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
-            $originalName = $buktiunsurpdp->getClientOriginalName();
-            $profileImage = date('YmdHis') . '_' . $originalName;
-            $buktiunsurpdp->move($destinationPath, $profileImage);
-            $input['buktifisik'] = $profileImage;
-        } else {
-            unset($input['buktifisik']);
-        }
+    //     $pm = pelaksanaan_pm::findOrFail($id);
+    //     $pm->komponenpm_id = $input['komponenpm_id'];
+    //     $pm->nama = $input['nama'];
+    //     $pm->bentuk = $input['bentuk'];
+    //     $pm->tempat_instansi = $input['tempat_instansi'];
+    //     $pm->semester_id = $input['semester_id'];
+    //     $pm->angkakreditpm = $input['angkakreditpm'];
+    //     $pm->buktifisik = $profileImage;
 
-        $pelaksanaan_pm = pelaksanaan_pm::findOrFail($id);
+    //     dd($pm);
 
-        $pelaksanaan_pm->update($input);
+    //     $pm->save();
 
-        return redirect()->back()->with('message', 'Data berhasil disimpan');
+    //     return redirect()->back()->with('message', 'Data berhasil disimpan');
+    // }
+
+
+    public function update(Request $request, $id)
+{
+    $input = $request->validate([
+        'komponenpm_id' => 'required',
+        'nama' => 'required',
+        'bentuk' => 'required|max:255',
+        'tempat_instansi' => 'required|string',
+        'semester_id' => 'required',
+    ]);
+
+    $komponenpm_id = $input['komponenpm_id'];
+
+    $komponen = komponenpm::find($komponenpm_id);
+
+    $input['angkakreditpm'] = $komponen->angkakredit;
+
+    $pm = pelaksanaan_pm::findOrFail($id);
+
+    if ($image = $request->file('buktifisik')) {
+        $destinationPath = 'bukti_unsur_utama/pelaksanaan_pm/';
+        $originalName = $image->getClientOriginalName();
+        $profileImage = date('YmdHis') . '_' . $originalName;
+        $image->move($destinationPath, $profileImage);
+        $pm->buktifisik = $profileImage;
     }
+
+    
+    $pm->komponenpm_id = $input['komponenpm_id'];
+    $pm->nama = $input['nama'];
+    $pm->bentuk = $input['bentuk'];
+    $pm->tempat_instansi = $input['tempat_instansi'];
+    $pm->semester_id = $input['semester_id'];
+    $pm->angkakreditpm = $input['angkakreditpm'];
+   
+
+
+    dd($pm);
+    $pm->save();
+
+    return redirect()->back()->with('message', 'Data berhasil disimpan');
+}
 
     /**
      * Remove the specified resource from storage.

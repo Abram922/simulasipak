@@ -47,7 +47,7 @@
               <td>
 
 
-                  <a href="{{ route('pelaksanaan_pm.edit', $pd->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpm{{ $pd->id }}">ubah</a>
+                  <a href="{{ route('pelaksanaan_pm.edit', $pd->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpm">ubah</a>
                   <form action="{{ route('pelaksanaan_pm.destroy', $pd->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -56,7 +56,7 @@
 
               </td>
       </tbody>
-      <div class="modal fade" id="modalpm{{ $pd->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modalpm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -111,7 +111,7 @@
                 <div class="form-group ">
                   <div class="col-md m-3">
                     <label for="bukti">Bukti</label>
-                    <input class="form-control @error('buktifisik') is-invalid @enderror" id="buktifisik" type="file"  name="buktifisik">
+                    <input class="form-control @error('buktifisik') is-invalid @enderror" id="buktifisik" type="file"  name="buktifisik" value="{{ $pd->buktifisik }}">
                     @error('buktifisik')
                         <div class="invalid-feedback">
                             {{$message}}

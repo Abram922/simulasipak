@@ -97,8 +97,8 @@
                   <div class="form-group row">
                     <div class="col-md m-3">
                       <label for="semester">Semester</label>
-                      <select class="form-control" id="id_semester" name="id_semester" required >
-                        <option>Pilih Semester</option>
+                      <select class="form-control" id="id_semester" name="id_semester" required>
+                        <option value="">Pilih Semester</option>
                         @php
                           $semester = App\Models\semester::all();
                         @endphp
@@ -106,6 +106,7 @@
                           <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
                         @endforeach
                       </select>
+                      <div id="semesterAlert" class="alert alert-danger mt-2 d-none">Pilih salah satu semester.</div>
                     </div>
                     <div class="col-md m-3">
                       <label for="kode_matakuliah">Kode Mata Kuliah</label>
@@ -138,7 +139,7 @@
 
                     <div class="col-md m-3">
                       <label for="nama_kelas_pengajaran">Beban Terhitung </label>
-                      <input type="checkbox" {{ $gose->status ? 'checked' : '' }}>
+                      <input name="status" id="status" type="checkbox" {{ $gose->status ? 'checked' : '' }}>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -149,7 +150,23 @@
               </div>
             </div>
           </div>
-        </div>        
+        </div>
+        <script>
+          document.getElementById('updateForm').addEventListener('submit', function(event) {
+            // Mendapatkan nilai yang dipilih pada dropdown semester
+            var semester = document.getElementById('id_semester').value;
+            // Mengecek apakah nilai semester kosong atau tidak
+            if (!semester) {
+              // Menampilkan alert jika semester tidak dipilih
+              document.getElementById('semesterAlert').classList.remove('d-none');
+              // Mencegah pengiriman formulir
+              event.preventDefault();
+            } else {
+              // Semua isian telah diisi, formulir bisa dikirim
+              document.getElementById('semesterAlert').classList.add('d-none');
+            }
+          });
+        </script>        
       @endforeach
     </table>
 

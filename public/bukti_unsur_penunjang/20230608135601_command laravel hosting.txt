@@ -1,0 +1,1036 @@
+[u586962203@id-dci-web850 simulasipak]$ git pull origin main
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 4 (delta 3), reused 4 (delta 3), pack-reused 0
+Unpacking objects: 100% (4/4), 324 bytes | 162.00 KiB/s, done.
+From https://github.com/Abram922/simulasipak
+ * branch            main       -> FETCH_HEAD
+   321d817..04e1d32  main       -> origin/main
+hint: Pulling without specifying how to reconcile divergent branches is
+hint: discouraged. You can squelch this message by running one of the following
+hint: commands sometime before your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+Auto-merging routes/web.php
+Merge made by the 'recursive' strategy.
+ routes/web.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[u586962203@id-dci-web850 simulasipak]$ php artisan route:list
+
+   ReflectionException 
+
+  Class "DokumenpenunjangController" does not exist
+
+  at vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php:223
+    219▕             if ($this->isFrameworkController($route)) {
+    220▕                 return false;
+    221▕             }
+    222▕ 
+  ➜ 223▕             $path = (new ReflectionClass($route->getControllerClass()))
+    224▕                                 ->getFileName();
+    225▕         } else {
+    226▕             return false;
+    227▕         }
+
+      +3 vendor frames 
+
+  4   [internal]:0
+      Illuminate\Foundation\Console\RouteListCommand::Illuminate\Foundation\Console\{closure}()
+      +16 vendor frames 
+
+  21  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan optimize
+
+   INFO  Caching the framework bootstrap files.  
+
+  config ................................................................................................................................. 32ms DONE
+  routes ................................................................................................................................. 37ms DONE
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan route:list
+
+  GET|HEAD        / ................................................................................................................................. /halaman_login
+  POST            _ignition/execute-solution ......................................... ignition.executeSolution › Spatie\LaravelIgnition › ExecuteSolutionController
+  GET|HEAD        _ignition/health-check ..................................................... ignition.healthCheck › Spatie\LaravelIgnition › HealthCheckController
+  POST            _ignition/update-config .................................................. ignition.updateConfig › Spatie\LaravelIgnition › UpdateConfigController
+  GET|HEAD        admin-home .................................................................................................. adminhome › HomeController@adminhome
+  GET|HEAD        admin-pendidikan ............................................................................... admin-pendidikan › HomeController@adminpendidikan
+  GET|HEAD        admin-penelitian ........................................................................... admin-penelitian › KomponenPenelitianController@index
+  GET|HEAD        admin-pengabdian ................................................................................... admin-pengabdian › KomponenpmController@index
+  GET|HEAD        admin-penunjang ....................................................................... admin-penunjang › KomponendokumenpenunjangController@index
+  GET|HEAD        api/user ............................................................................................................. generated::pyniba7zAlyONgJd
+  GET|HEAD        board-pak ..................................................................................................... boardpak › HomeController@boardpak
+  DELETE          dokumenpenunjang/{id} .............................................................. dokumenpenunjang.destroy › DokumenpenunjangController@destroy
+  GET|HEAD        doumenpenunjang ......................................................................... doumenpenunjang.index › DokumenpenunjangController@index
+  POST            doumenpenunjang ......................................................................... doumenpenunjang.store › DokumenpenunjangController@store
+  GET|HEAD        doumenpenunjang/create ................................................................ doumenpenunjang.create › DokumenpenunjangController@create
+  GET|HEAD        doumenpenunjang/{doumenpenunjang} ......................................................... doumenpenunjang.show › DokumenpenunjangController@show
+  PUT|PATCH       doumenpenunjang/{doumenpenunjang} ..................................................... doumenpenunjang.update › DokumenpenunjangController@update
+  DELETE          doumenpenunjang/{doumenpenunjang} ................................................... doumenpenunjang.destroy › DokumenpenunjangController@destroy
+  GET|HEAD        doumenpenunjang/{doumenpenunjang}/edit .................................................... doumenpenunjang.edit › DokumenpenunjangController@edit
+  GET|HEAD        home ................................................................................................................. home › HomeController@index
+  GET|HEAD        karya ....................................................................................... karya.index › PenelitianHakidankaryaController@index
+  POST            karya ....................................................................................... karya.store › PenelitianHakidankaryaController@store
+  GET|HEAD        karya/create .............................................................................. karya.create › PenelitianHakidankaryaController@create
+  GET|HEAD        karya/{karya} ................................................................................. karya.show › PenelitianHakidankaryaController@show
+  PUT|PATCH       karya/{karya} ............................................................................. karya.update › PenelitianHakidankaryaController@update
+  DELETE          karya/{karya} ........................................................................... karya.destroy › PenelitianHakidankaryaController@destroy
+  GET|HEAD        karya/{karya}/edit ............................................................................ karya.edit › PenelitianHakidankaryaController@edit
+  GET|HEAD        komponenpendidikan .......................................................... komponenpendidikan.index › JenisPelaksananPendidikanController@index
+  POST            komponenpendidikan .......................................................... komponenpendidikan.store › JenisPelaksananPendidikanController@store
+  GET|HEAD        komponenpendidikan/create ................................................. komponenpendidikan.create › JenisPelaksananPendidikanController@create
+  GET|HEAD        komponenpendidikan/{komponenpendidikan} ....................................... komponenpendidikan.show › JenisPelaksananPendidikanController@show
+  PUT|PATCH       komponenpendidikan/{komponenpendidikan} ................................... komponenpendidikan.update › JenisPelaksananPendidikanController@update
+  DELETE          komponenpendidikan/{komponenpendidikan} ................................. komponenpendidikan.destroy › JenisPelaksananPendidikanController@destroy
+  GET|HEAD        komponenpendidikan/{komponenpendidikan}/edit .................................. komponenpendidikan.edit › JenisPelaksananPendidikanController@edit
+  GET|HEAD        komponenpenelitian ................................................................. komponenpenelitian.index › KomponenPenelitianController@index
+  POST            komponenpenelitian ................................................................. komponenpenelitian.store › KomponenPenelitianController@store
+  GET|HEAD        komponenpenelitian/create ........................................................ komponenpenelitian.create › KomponenPenelitianController@create
+  GET|HEAD        komponenpenelitian/{komponenpenelitian} .............................................. komponenpenelitian.show › KomponenPenelitianController@show
+  PUT|PATCH       komponenpenelitian/{komponenpenelitian} .......................................... komponenpenelitian.update › KomponenPenelitianController@update
+  DELETE          komponenpenelitian/{komponenpenelitian} ........................................ komponenpenelitian.destroy › KomponenPenelitianController@destroy
+  GET|HEAD        komponenpenelitian/{komponenpenelitian}/edit ......................................... komponenpenelitian.edit › KomponenPenelitianController@edit
+  GET|HEAD        komponenpenunjang ............................................................. komponenpenunjang.index › KomponendokumenpenunjangController@index
+  POST            komponenpenunjang ............................................................. komponenpenunjang.store › KomponendokumenpenunjangController@store
+  GET|HEAD        komponenpenunjang/create .................................................... komponenpenunjang.create › KomponendokumenpenunjangController@create
+  GET|HEAD        komponenpenunjang/{komponenpenunjang} ........................................... komponenpenunjang.show › KomponendokumenpenunjangController@show
+  PUT|PATCH       komponenpenunjang/{komponenpenunjang} ....................................... komponenpenunjang.update › KomponendokumenpenunjangController@update
+  DELETE          komponenpenunjang/{komponenpenunjang} ..................................... komponenpenunjang.destroy › KomponendokumenpenunjangController@destroy
+  GET|HEAD        komponenpenunjang/{komponenpenunjang}/edit ...................................... komponenpenunjang.edit › KomponendokumenpenunjangController@edit
+  GET|HEAD        komponenpm ......................................................................................... komponenpm.index › KomponenpmController@index
+  POST            komponenpm ......................................................................................... komponenpm.store › KomponenpmController@store
+  GET|HEAD        komponenpm/create ................................................................................ komponenpm.create › KomponenpmController@create
+  GET|HEAD        komponenpm/{komponenpm} .............................................................................. komponenpm.show › KomponenpmController@show
+  PUT|PATCH       komponenpm/{komponenpm} .......................................................................... komponenpm.update › KomponenpmController@update
+  DELETE          komponenpm/{komponenpm} ........................................................................ komponenpm.destroy › KomponenpmController@destroy
+  GET|HEAD        komponenpm/{komponenpm}/edit ......................................................................... komponenpm.edit › KomponenpmController@edit
+  GET|HEAD        kum .............................................................................................................. kum.index › KumController@index
+  POST            kum .............................................................................................................. kum.store › KumController@store
+  GET|HEAD        kum/create ..................................................................................................... kum.create › KumController@create
+  GET|HEAD        kum/{kum} .......................................................................................................... kum.show › KumController@show
+  PUT|PATCH       kum/{kum} ...................................................................................................... kum.update › KumController@update
+  DELETE          kum/{kum} .................................................................................................... kum.destroy › KumController@destroy
+  GET|HEAD        kum/{kum}/edit ..................................................................................................... kum.edit › KumController@edit
+  GET|HEAD        lampiran-all ............................................................................................. lampiran-all › LampiranController@index
+  GET|HEAD        lampiran-datapendidikan ............................................................... lampirandatapendidikan › LampiranController@datapendidikan
+  GET|HEAD        lampiran-datapenelitian ....................................................................... datapenelitian › LampiranController@datapenelitian
+  GET|HEAD        lampiran-datapenunjang .......................................................................... datapenunjang › LampiranController@datapenunjang
+  GET|HEAD        lampiran-datapm ............................................................................................... datapm › LampiranController@datapm
+  GET|HEAD        lampiran-pendidikan ........................................................................... lampiranpendidikan › LampiranController@pendidikan
+  POST            lampirans ............................................................................................. lampirans.store › LampiranController@store
+  GET|HEAD        lampirans/create .................................................................................... lampirans.create › LampiranController@create
+  GET|HEAD        lampirans/{lampiran} .................................................................................... lampirans.show › LampiranController@show
+  DELETE          lampirans/{lampiran} .............................................................................. lampirans.destroy › LampiranController@destroy
+  GET|HEAD        lampirans/{lampiran}/edit ............................................................................... lampirans.edit › LampiranController@edit
+  GET|HEAD        livewire/livewire.js ........................................ generated::yr7MRxoe3Cqhw68i › Livewire\Controllers › LivewireJavaScriptAssets@source
+  GET|HEAD        livewire/livewire.js.map ...................................... generated::97G02Qdo3yCcc9OK › Livewire\Controllers › LivewireJavaScriptAssets@maps
+  POST            livewire/message/{name} .......................................................... livewire.message › Livewire\Controllers › HttpConnectionHandler
+  GET|HEAD        livewire/preview-file/{filename} ........................................ livewire.preview-file › Livewire\Controllers › FilePreviewHandler@handle
+  POST            livewire/upload-file ...................................................... livewire.upload-file › Livewire\Controllers › FileUploadHandler@handle
+  GET|HEAD        login ................................................................................................. login › Auth\LoginController@showLoginForm
+  POST            login ................................................................................... generated::BJFS97zBlTW1ifTm › Auth\LoginController@login
+  POST            logout ...................................................................................................... logout › Auth\LoginController@logout
+  GET|HEAD        password/confirm ............................................................... password.confirm › Auth\ConfirmPasswordController@showConfirmForm
+  POST            password/confirm ............................................................ generated::3rmpZTYgwN5OIOdW › Auth\ConfirmPasswordController@confirm
+  POST            password/email ................................................................. password.email › Auth\ForgotPasswordController@sendResetLinkEmail
+  GET|HEAD        password/reset .............................................................. password.request › Auth\ForgotPasswordController@showLinkRequestForm
+  POST            password/reset .............................................................................. password.update › Auth\ResetPasswordController@reset
+  GET|HEAD        password/reset/{token} ............................................................... password.reset › Auth\ResetPasswordController@showResetForm
+  GET|HEAD        pelaksanaan_pm .............................................................................. pelaksanaan_pm.index › PelaksanaanPmController@index
+  POST            pelaksanaan_pm .............................................................................. pelaksanaan_pm.store › PelaksanaanPmController@store
+  GET|HEAD        pelaksanaan_pm/create ..................................................................... pelaksanaan_pm.create › PelaksanaanPmController@create
+  GET|HEAD        pelaksanaan_pm/{pelaksanaan_pm} ............................................................... pelaksanaan_pm.show › PelaksanaanPmController@show
+  PUT|PATCH       pelaksanaan_pm/{pelaksanaan_pm} ........................................................... pelaksanaan_pm.update › PelaksanaanPmController@update
+  DELETE          pelaksanaan_pm/{pelaksanaan_pm} ......................................................... pelaksanaan_pm.destroy › PelaksanaanPmController@destroy
+  GET|HEAD        pelaksanaan_pm/{pelaksanaan_pm}/edit .......................................................... pelaksanaan_pm.edit › PelaksanaanPmController@edit
+  GET|HEAD        pelaksanaanpendidikan ........................................................ pelaksanaanpendidikan.index › PelaksanaanPendidikanController@index
+  POST            pelaksanaanpendidikan ........................................................ pelaksanaanpendidikan.store › PelaksanaanPendidikanController@store
+  GET|HEAD        pelaksanaanpendidikan/create ............................................... pelaksanaanpendidikan.create › PelaksanaanPendidikanController@create
+  GET|HEAD        pelaksanaanpendidikan/{id} ................................................. pelaksanaanpendidikan-tampilan › PelaksanaanPendidikanController@show
+  GET|HEAD        pelaksanaanpendidikan/{pelaksanaanpendidikan} .................................. pelaksanaanpendidikan.show › PelaksanaanPendidikanController@show
+  PUT|PATCH       pelaksanaanpendidikan/{pelaksanaanpendidikan} .............................. pelaksanaanpendidikan.update › PelaksanaanPendidikanController@update
+  DELETE          pelaksanaanpendidikan/{pelaksanaanpendidikan} ............................ pelaksanaanpendidikan.destroy › PelaksanaanPendidikanController@destroy
+  GET|HEAD        pelaksanaanpendidikan/{pelaksanaanpendidikan}/edit ............................. pelaksanaanpendidikan.edit › PelaksanaanPendidikanController@edit
+  GET|HEAD        pelaksanaanpenelitian ......................................................... pelaksanaanpenelitian.index › PelaksananPenelitianController@index
+  POST            pelaksanaanpenelitian ......................................................... pelaksanaanpenelitian.store › PelaksananPenelitianController@store
+  GET|HEAD        pelaksanaanpenelitian/create ................................................ pelaksanaanpenelitian.create › PelaksananPenelitianController@create
+  GET|HEAD        pelaksanaanpenelitian/{pelaksanaanpenelitian} ................................... pelaksanaanpenelitian.show › PelaksananPenelitianController@show
+  PUT|PATCH       pelaksanaanpenelitian/{pelaksanaanpenelitian} ............................... pelaksanaanpenelitian.update › PelaksananPenelitianController@update
+  DELETE          pelaksanaanpenelitian/{pelaksanaanpenelitian} ............................. pelaksanaanpenelitian.destroy › PelaksananPenelitianController@destroy
+  GET|HEAD        pelaksanaanpenelitian/{pelaksanaanpenelitian}/edit .............................. pelaksanaanpenelitian.edit › PelaksananPenelitianController@edit
+  GET|HEAD        pendidikan ......................................................................................... pendidikan.index › PendidikanController@index
+  POST            pendidikan ......................................................................................... pendidikan.store › PendidikanController@store
+  GET|HEAD        pendidikan-admin ..................................................................................... pendidikan › AdminPageController@pendidikan
+  GET|HEAD        pendidikan/create ................................................................................ pendidikan.create › PendidikanController@create
+  GET|HEAD        pendidikan/{id} .................................................................................. pendidikan-tampilan › PendidikanController@show
+  PUT|PATCH       pendidikan/{pendidikan} .......................................................................... pendidikan.update › PendidikanController@update
+  DELETE          pendidikan/{pendidikan} ........................................................................ pendidikan.destroy › PendidikanController@destroy
+  GET|HEAD        pendidikan/{pendidikan}/edit ......................................................................... pendidikan.edit › PendidikanController@edit
+  GET|HEAD        pengajaran ......................................................................................... pengajaran.index › PengajaranController@index
+  POST            pengajaran ......................................................................................... pengajaran.store › PengajaranController@store
+  GET|HEAD        pengajaran/create ................................................................................ pengajaran.create › PengajaranController@create
+  GET|HEAD        pengajaran/{pengajaran} .............................................................................. pengajaran.show › PengajaranController@show
+  PUT|PATCH       pengajaran/{pengajaran} .......................................................................... pengajaran.update › PengajaranController@update
+  DELETE          pengajaran/{pengajaran} ........................................................................ pengajaran.destroy › PengajaranController@destroy
+  GET|HEAD        pengajaran/{pengajaran}/edit ......................................................................... pengajaran.edit › PengajaranController@edit
+  GET|HEAD        profil ........................................................................................................... profil › ProfilController@index
+  GET|HEAD        register ................................................................................. register › Auth\RegisterController@showRegistrationForm
+  POST            register .......................................................................... generated::Ul7fqgs2uP6tbwhP › Auth\RegisterController@register
+  GET|HEAD        sanctum/csrf-cookie ............................................................ sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show
+  GET|HEAD        staratapendidikan-admin ..................................................................... strata-pendidikan › StratapendidikanController@index
+  GET|HEAD        stratapendidikan ....................................................................... stratapendidikan.index › StratapendidikanController@index
+  POST            stratapendidikan ....................................................................... stratapendidikan.store › StratapendidikanController@store
+  GET|HEAD        stratapendidikan/create .............................................................. stratapendidikan.create › StratapendidikanController@create
+  GET|HEAD        stratapendidikan/{stratapendidikan} ...................................................... stratapendidikan.show › StratapendidikanController@show
+  PUT|PATCH       stratapendidikan/{stratapendidikan} .................................................. stratapendidikan.update › StratapendidikanController@update
+  DELETE          stratapendidikan/{stratapendidikan} ................................................ stratapendidikan.destroy › StratapendidikanController@destroy
+  GET|HEAD        stratapendidikan/{stratapendidikan}/edit ................................................. stratapendidikan.edit › StratapendidikanController@edit
+  PUT             ubahprofil/update/{id} ........................................................................................ profilll › ProfilController@update
+  GET|HEAD        ubahprofil/{id} .................................................................................................. profill › ProfilController@edit
+  GET|HEAD        unsurdp ......................................................................................... unsurdp.index › DokumenpenunjangController@index
+  POST            unsurdp ......................................................................................... unsurdp.store › DokumenpenunjangController@store
+  GET|HEAD        unsurdp/create ................................................................................ unsurdp.create › DokumenpenunjangController@create
+  GET|HEAD        unsurdp/{unsurdp} ................................................................................. unsurdp.show › DokumenpenunjangController@show
+  PUT|PATCH       unsurdp/{unsurdp} ............................................................................. unsurdp.update › DokumenpenunjangController@update
+  DELETE          unsurdp/{unsurdp} ........................................................................... unsurdp.destroy › DokumenpenunjangController@destroy
+  GET|HEAD        unsurdp/{unsurdp}/edit ............................................................................ unsurdp.edit › DokumenpenunjangController@edit
+  GET|HEAD        unsurpelaksanaan .................................................................. unsurpelaksanaan.index › PelaksanaanPendidikanController@index
+  POST            unsurpelaksanaan .................................................................. unsurpelaksanaan.store › PelaksanaanPendidikanController@store
+  GET|HEAD        unsurpelaksanaan/create ......................................................... unsurpelaksanaan.create › PelaksanaanPendidikanController@create
+  GET|HEAD        unsurpelaksanaan/{unsurpelaksanaan} ................................................. unsurpelaksanaan.show › PelaksanaanPendidikanController@show
+  PUT|PATCH       unsurpelaksanaan/{unsurpelaksanaan} ............................................. unsurpelaksanaan.update › PelaksanaanPendidikanController@update
+  DELETE          unsurpelaksanaan/{unsurpelaksanaan} ........................................... unsurpelaksanaan.destroy › PelaksanaanPendidikanController@destroy
+  GET|HEAD        unsurpelaksanaan/{unsurpelaksanaan}/edit ............................................ unsurpelaksanaan.edit › PelaksanaanPendidikanController@edit
+  GET|HEAD        unsurpenelitian-admin ........................................................... unsurpenelitian-admin.index › KomponenPenelitianController@index
+  POST            unsurpenelitian-admin ........................................................... unsurpenelitian-admin.store › KomponenPenelitianController@store
+  GET|HEAD        unsurpenelitian-admin/create .................................................. unsurpenelitian-admin.create › KomponenPenelitianController@create
+  GET|HEAD        unsurpenelitian-admin/{unsurpenelitian_admin} ..................................... unsurpenelitian-admin.show › KomponenPenelitianController@show
+  PUT|PATCH       unsurpenelitian-admin/{unsurpenelitian_admin} ................................. unsurpenelitian-admin.update › KomponenPenelitianController@update
+  DELETE          unsurpenelitian-admin/{unsurpenelitian_admin} ............................... unsurpenelitian-admin.destroy › KomponenPenelitianController@destroy
+  GET|HEAD        unsurpenelitian-admin/{unsurpenelitian_admin}/edit ................................ unsurpenelitian-admin.edit › KomponenPenelitianController@edit
+  GET|HEAD        user-home ..................................................................................................... userhome › HomeController@userhome
+  GET|HEAD        user-home/{id} ............................................................................................. user.homex › HomeController@userhomex
+  POST            {locale}/livewire/message/{name} ....................................... livewire.message-localized › Livewire\Controllers › HttpConnectionHandler
+
+                                                                                                                                                Showing [162] routes
+
+[u586962203@id-dci-web850 simulasipak]$ git pull origin main
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 4 (delta 3), reused 4 (delta 3), pack-reused 0
+Unpacking objects: 100% (4/4), 522 bytes | 522.00 KiB/s, done.
+From https://github.com/Abram922/simulasipak
+ * branch            main       -> FETCH_HEAD
+   04e1d32..fce0ad8  main       -> origin/main
+hint: Pulling without specifying how to reconcile divergent branches is
+hint: discouraged. You can squelch this message by running one of the following
+hint: commands sometime before your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+Auto-merging routes/web.php
+Merge made by the 'recursive' strategy.
+ routes/web.php | 82 +++++++++++++++++++++++++++++++++++++++++-----------------------------------------
+ 1 file changed, 41 insertions(+), 41 deletions(-)
+[u586962203@id-dci-web850 simulasipak]$ php artisan optimize
+
+   INFO  Caching the framework bootstrap files.  
+
+  config ............................................................................................................ 18ms DONE
+  routes ............................................................................................................ 26ms DONE
+
+[u586962203@id-dci-web850 simulasipak]$ cd ..
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ cd simulasipak/
+[u586962203@id-dci-web850 simulasipak]$ ls
+app        CHANGELOG.md   composer.phar  package.json       phpunit.xml  resources  tests
+artisan    composer.json  config         package-lock.json  public       routes     vendor
+bootstrap  composer.lock  database       php                README.md    storage    vite.config.js
+[u586962203@id-dci-web850 simulasipak]$ cd public/
+[u586962203@id-dci-web850 public]$ nano index.php
+[u586962203@id-dci-web850 public]$ cd ..
+[u586962203@id-dci-web850 simulasipak]$ php artisan optimize
+
+   INFO  Caching the framework bootstrap files.  
+
+  config ............................................................................................................ 18ms DONE
+  routes ............................................................................................................ 25ms DONE
+
+[u586962203@id-dci-web850 simulasipak]$ cat .env
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:+7j2LV18C8oZLif3jKQ1u52fTaMHeDGPtwX6j72l6Fw=
+APP_DEBUG=false
+APP_URL=https://simulasipak.vokasihub.com/
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=u586962203_simulasi_pak
+DB_USERNAME=u586962203_simulasipak
+DB_PASSWORD=Tri@pmkami8
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME=https
+PUSHER_APP_CLUSTER=mt1
+
+VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+VITE_PUSHER_HOST="${PUSHER_HOST}"
+VITE_PUSHER_PORT="${PUSHER_PORT}"
+VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+[u586962203@id-dci-web850 simulasipak]$ n
+Session was closed
+
+   HHHH               HHHH
+   HHHHHHHH           HHHHHHHH
+   HHHHHHHH           HHHHHHHH
+   HHHHHHHH           HHHHHHHH
+   HHHHHHHHHHHHHHHHHHHH  HHHHH
+   HHHHHHHHHHHHHHHHHHHHHHHHH
+     HHHHHHHHHHHHHHHHHHHHHHHHH
+   HHHH  HHHHHHHHHHHHHHHHHHHHH
+   HHHHHHHH           HHHHHHHH
+   HHHHHHHH           HHHHHHHH
+   HHHHHHHH           HHHHHHHH
+       HHHH               HHHH
+
+Welcome back! The time now is 08:10 UTC
+Server load: 9.61, 8.98, 8.94
+
+Link to hPanel: 
+https://hpanel.hostinger.com/ 
+
+[u586962203@id-dci-web850 ~]$ php artisan route:List
+Could not open input file: artisan
+[u586962203@id-dci-web850 ~]$ cd domains/
+[u586962203@id-dci-web850 domains]$ ls
+vokasihub.com
+[u586962203@id-dci-web850 domains]$ cd vokasihub.com/
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ cd simulasipak/
+[u586962203@id-dci-web850 simulasipak]$ php artisan route:List
+
+  GET|HEAD        / ............................................................................................ /halaman_login
+  POST            _ignition/execute-solution .... ignition.executeSolution › Spatie\LaravelIgnition › ExecuteSolutionController
+  GET|HEAD        _ignition/health-check ................ ignition.healthCheck › Spatie\LaravelIgnition › HealthCheckController
+  POST            _ignition/update-config ............. ignition.updateConfig › Spatie\LaravelIgnition › UpdateConfigController
+  GET|HEAD        admin-home ............................................................. adminhome › HomeController@adminhome
+  GET|HEAD        admin-pendidikan .......................................... admin-pendidikan › HomeController@adminpendidikan
+  GET|HEAD        admin-penelitian ...................................... admin-penelitian › KomponenPenelitianController@index
+  GET|HEAD        admin-pengabdian .............................................. admin-pengabdian › KomponenpmController@index
+  GET|HEAD        admin-penunjang .................................. admin-penunjang › KomponendokumenpenunjangController@index
+  GET|HEAD        api/user ........................................................................ generated::ZmXHC1ip24DHFjw4
+  GET|HEAD        board-pak ................................................................ boardpak › HomeController@boardpak
+  DELETE          dokumenpenunjang/{id} ......................... dokumenpenunjang.destroy › DokumenpenunjangController@destroy
+  GET|HEAD        doumenpenunjang .................................... doumenpenunjang.index › DokumenpenunjangController@index
+  POST            doumenpenunjang .................................... doumenpenunjang.store › DokumenpenunjangController@store
+  GET|HEAD        doumenpenunjang/create ........................... doumenpenunjang.create › DokumenpenunjangController@create
+  GET|HEAD        doumenpenunjang/{doumenpenunjang} .................... doumenpenunjang.show › DokumenpenunjangController@show
+  PUT|PATCH       doumenpenunjang/{doumenpenunjang} ................ doumenpenunjang.update › DokumenpenunjangController@update
+  DELETE          doumenpenunjang/{doumenpenunjang} .............. doumenpenunjang.destroy › DokumenpenunjangController@destroy
+  GET|HEAD        doumenpenunjang/{doumenpenunjang}/edit ............... doumenpenunjang.edit › DokumenpenunjangController@edit
+  GET|HEAD        home ............................................................................ home › HomeController@index
+  GET|HEAD        karya .................................................. karya.index › PenelitianHakidankaryaController@index
+  POST            karya .................................................. karya.store › PenelitianHakidankaryaController@store
+  GET|HEAD        karya/create ......................................... karya.create › PenelitianHakidankaryaController@create
+  GET|HEAD        karya/{karya} ............................................ karya.show › PenelitianHakidankaryaController@show
+  PUT|PATCH       karya/{karya} ........................................ karya.update › PenelitianHakidankaryaController@update
+  DELETE          karya/{karya} ...................................... karya.destroy › PenelitianHakidankaryaController@destroy
+  GET|HEAD        karya/{karya}/edit ....................................... karya.edit › PenelitianHakidankaryaController@edit
+  GET|HEAD        komponenpendidikan ..................... komponenpendidikan.index › JenisPelaksananPendidikanController@index
+  POST            komponenpendidikan ..................... komponenpendidikan.store › JenisPelaksananPendidikanController@store
+  GET|HEAD        komponenpendidikan/create ............ komponenpendidikan.create › JenisPelaksananPendidikanController@create
+  GET|HEAD        komponenpendidikan/{komponenpendidikan} .. komponenpendidikan.show › JenisPelaksananPendidikanController@show
+  PUT|PATCH       komponenpendidikan/{komponenpendidikan} komponenpendidikan.update › JenisPelaksananPendidikanController@upda…
+  DELETE          komponenpendidikan/{komponenpendidikan} komponenpendidikan.destroy › JenisPelaksananPendidikanController@des…
+  GET|HEAD        komponenpendidikan/{komponenpendidikan}/edit komponenpendidikan.edit › JenisPelaksananPendidikanController@e…
+  GET|HEAD        komponenpenelitian ............................ komponenpenelitian.index › KomponenPenelitianController@index
+  POST            komponenpenelitian ............................ komponenpenelitian.store › KomponenPenelitianController@store
+  GET|HEAD        komponenpenelitian/create ................... komponenpenelitian.create › KomponenPenelitianController@create
+  GET|HEAD        komponenpenelitian/{komponenpenelitian} ......... komponenpenelitian.show › KomponenPenelitianController@show
+  PUT|PATCH       komponenpenelitian/{komponenpenelitian} ..... komponenpenelitian.update › KomponenPenelitianController@update
+  DELETE          komponenpenelitian/{komponenpenelitian} ... komponenpenelitian.destroy › KomponenPenelitianController@destroy
+  GET|HEAD        komponenpenelitian/{komponenpenelitian}/edit .... komponenpenelitian.edit › KomponenPenelitianController@edit
+  GET|HEAD        komponenpenunjang ........................ komponenpenunjang.index › KomponendokumenpenunjangController@index
+  POST            komponenpenunjang ........................ komponenpenunjang.store › KomponendokumenpenunjangController@store
+  GET|HEAD        komponenpenunjang/create ............... komponenpenunjang.create › KomponendokumenpenunjangController@create
+  GET|HEAD        komponenpenunjang/{komponenpenunjang} ...... komponenpenunjang.show › KomponendokumenpenunjangController@show
+  PUT|PATCH       komponenpenunjang/{komponenpenunjang} .. komponenpenunjang.update › KomponendokumenpenunjangController@update
+  DELETE          komponenpenunjang/{komponenpenunjang} komponenpenunjang.destroy › KomponendokumenpenunjangController@destroy
+  GET|HEAD        komponenpenunjang/{komponenpenunjang}/edit . komponenpenunjang.edit › KomponendokumenpenunjangController@edit
+  GET|HEAD        komponenpm .................................................... komponenpm.index › KomponenpmController@index
+  POST            komponenpm .................................................... komponenpm.store › KomponenpmController@store
+  GET|HEAD        komponenpm/create ........................................... komponenpm.create › KomponenpmController@create
+  GET|HEAD        komponenpm/{komponenpm} ......................................... komponenpm.show › KomponenpmController@show
+  PUT|PATCH       komponenpm/{komponenpm} ..................................... komponenpm.update › KomponenpmController@update
+  DELETE          komponenpm/{komponenpm} ................................... komponenpm.destroy › KomponenpmController@destroy
+  GET|HEAD        komponenpm/{komponenpm}/edit .................................... komponenpm.edit › KomponenpmController@edit
+  GET|HEAD        kum ......................................................................... kum.index › KumController@index
+  POST            kum ......................................................................... kum.store › KumController@store
+  GET|HEAD        kum/create ................................................................ kum.create › KumController@create
+  GET|HEAD        kum/{kum} ..................................................................... kum.show › KumController@show
+  PUT|PATCH       kum/{kum} ................................................................. kum.update › KumController@update
+  DELETE          kum/{kum} ............................................................... kum.destroy › KumController@destroy
+  GET|HEAD        kum/{kum}/edit ................................................................ kum.edit › KumController@edit
+  GET|HEAD        lampiran-all ........................................................ lampiran-all › LampiranController@index
+  GET|HEAD        lampiran-datapendidikan .......................... lampirandatapendidikan › LampiranController@datapendidikan
+  GET|HEAD        lampiran-datapenelitian .................................. datapenelitian › LampiranController@datapenelitian
+  GET|HEAD        lampiran-datapenunjang ..................................... datapenunjang › LampiranController@datapenunjang
+  GET|HEAD        lampiran-datapm .......................................................... datapm › LampiranController@datapm
+  GET|HEAD        lampiran-pendidikan ...................................... lampiranpendidikan › LampiranController@pendidikan
+  POST            lampirans ........................................................ lampirans.store › LampiranController@store
+  GET|HEAD        lampirans/create ............................................... lampirans.create › LampiranController@create
+  GET|HEAD        lampirans/{lampiran} ............................................... lampirans.show › LampiranController@show
+  DELETE          lampirans/{lampiran} ......................................... lampirans.destroy › LampiranController@destroy
+  GET|HEAD        lampirans/{lampiran}/edit .......................................... lampirans.edit › LampiranController@edit
+  GET|HEAD        livewire/livewire.js ... generated::ut2aVbLDMg9ljv4K › Livewire\Controllers › LivewireJavaScriptAssets@source
+  GET|HEAD        livewire/livewire.js.map . generated::FIpSwfCuwNOb73k1 › Livewire\Controllers › LivewireJavaScriptAssets@maps
+  POST            livewire/message/{name} ..................... livewire.message › Livewire\Controllers › HttpConnectionHandler
+  GET|HEAD        livewire/preview-file/{filename} ... livewire.preview-file › Livewire\Controllers › FilePreviewHandler@handle
+  POST            livewire/upload-file ................. livewire.upload-file › Livewire\Controllers › FileUploadHandler@handle
+  GET|HEAD        login ............................................................ login › Auth\LoginController@showLoginForm
+  POST            login .............................................. generated::eALtSAJuQHagU617 › Auth\LoginController@login
+  POST            logout ................................................................. logout › Auth\LoginController@logout
+  GET|HEAD        password/confirm .......................... password.confirm › Auth\ConfirmPasswordController@showConfirmForm
+  POST            password/confirm ....................... generated::3cqJzhdPZeV1JLJX › Auth\ConfirmPasswordController@confirm
+  POST            password/email ............................ password.email › Auth\ForgotPasswordController@sendResetLinkEmail
+  GET|HEAD        password/reset ......................... password.request › Auth\ForgotPasswordController@showLinkRequestForm
+  POST            password/reset ......................................... password.update › Auth\ResetPasswordController@reset
+  GET|HEAD        password/reset/{token} .......................... password.reset › Auth\ResetPasswordController@showResetForm
+  GET|HEAD        pelaksanaan_pm ......................................... pelaksanaan_pm.index › PelaksanaanPmController@index
+  POST            pelaksanaan_pm ......................................... pelaksanaan_pm.store › PelaksanaanPmController@store
+  GET|HEAD        pelaksanaan_pm/create ................................ pelaksanaan_pm.create › PelaksanaanPmController@create
+  GET|HEAD        pelaksanaan_pm/{pelaksanaan_pm} .......................... pelaksanaan_pm.show › PelaksanaanPmController@show
+  PUT|PATCH       pelaksanaan_pm/{pelaksanaan_pm} ...................... pelaksanaan_pm.update › PelaksanaanPmController@update
+  DELETE          pelaksanaan_pm/{pelaksanaan_pm} .................... pelaksanaan_pm.destroy › PelaksanaanPmController@destroy
+  GET|HEAD        pelaksanaan_pm/{pelaksanaan_pm}/edit ..................... pelaksanaan_pm.edit › PelaksanaanPmController@edit
+  GET|HEAD        pelaksanaanpendidikan ................... pelaksanaanpendidikan.index › PelaksanaanPendidikanController@index
+  POST            pelaksanaanpendidikan ................... pelaksanaanpendidikan.store › PelaksanaanPendidikanController@store
+  GET|HEAD        pelaksanaanpendidikan/create .......... pelaksanaanpendidikan.create › PelaksanaanPendidikanController@create
+  GET|HEAD        pelaksanaanpendidikan/{id} ............ pelaksanaanpendidikan-tampilan › PelaksanaanPendidikanController@show
+  GET|HEAD        pelaksanaanpendidikan/{pelaksanaanpendidikan} pelaksanaanpendidikan.show › PelaksanaanPendidikanController@s…
+  PUT|PATCH       pelaksanaanpendidikan/{pelaksanaanpendidikan} pelaksanaanpendidikan.update › PelaksanaanPendidikanController…
+  DELETE          pelaksanaanpendidikan/{pelaksanaanpendidikan} pelaksanaanpendidikan.destroy › PelaksanaanPendidikanControlle…
+  GET|HEAD        pelaksanaanpendidikan/{pelaksanaanpendidikan}/edit pelaksanaanpendidikan.edit › PelaksanaanPendidikanControl…
+  GET|HEAD        pelaksanaanpenelitian .................... pelaksanaanpenelitian.index › PelaksananPenelitianController@index
+  POST            pelaksanaanpenelitian .................... pelaksanaanpenelitian.store › PelaksananPenelitianController@store
+  GET|HEAD        pelaksanaanpenelitian/create ........... pelaksanaanpenelitian.create › PelaksananPenelitianController@create
+  GET|HEAD        pelaksanaanpenelitian/{pelaksanaanpenelitian} pelaksanaanpenelitian.show › PelaksananPenelitianController@sh…
+  PUT|PATCH       pelaksanaanpenelitian/{pelaksanaanpenelitian} pelaksanaanpenelitian.update › PelaksananPenelitianController@…
+  DELETE          pelaksanaanpenelitian/{pelaksanaanpenelitian} pelaksanaanpenelitian.destroy › PelaksananPenelitianController…
+  GET|HEAD        pelaksanaanpenelitian/{pelaksanaanpenelitian}/edit pelaksanaanpenelitian.edit › PelaksananPenelitianControll…
+  GET|HEAD        pendidikan .................................................... pendidikan.index › PendidikanController@index
+  POST            pendidikan .................................................... pendidikan.store › PendidikanController@store
+  GET|HEAD        pendidikan-admin ................................................ pendidikan › AdminPageController@pendidikan
+  GET|HEAD        pendidikan/create ........................................... pendidikan.create › PendidikanController@create
+  GET|HEAD        pendidikan/{id} ............................................. pendidikan-tampilan › PendidikanController@show
+  PUT|PATCH       pendidikan/{pendidikan} ..................................... pendidikan.update › PendidikanController@update
+  DELETE          pendidikan/{pendidikan} ................................... pendidikan.destroy › PendidikanController@destroy
+  GET|HEAD        pendidikan/{pendidikan}/edit .................................... pendidikan.edit › PendidikanController@edit
+  GET|HEAD        pengajaran .................................................... pengajaran.index › PengajaranController@index
+  POST            pengajaran .................................................... pengajaran.store › PengajaranController@store
+  GET|HEAD        pengajaran/create ........................................... pengajaran.create › PengajaranController@create
+  GET|HEAD        pengajaran/{pengajaran} ......................................... pengajaran.show › PengajaranController@show
+  PUT|PATCH       pengajaran/{pengajaran} ..................................... pengajaran.update › PengajaranController@update
+  DELETE          pengajaran/{pengajaran} ................................... pengajaran.destroy › PengajaranController@destroy
+  GET|HEAD        pengajaran/{pengajaran}/edit .................................... pengajaran.edit › PengajaranController@edit
+  GET|HEAD        profil ...................................................................... profil › ProfilController@index
+  GET|HEAD        register ............................................ register › Auth\RegisterController@showRegistrationForm
+  POST            register ..................................... generated::vm7vBOXK0mZtlKUN › Auth\RegisterController@register
+  GET|HEAD        sanctum/csrf-cookie ....................... sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show
+  GET|HEAD        staratapendidikan-admin ................................ strata-pendidikan › StratapendidikanController@index
+  GET|HEAD        stratapendidikan .................................. stratapendidikan.index › StratapendidikanController@index
+  POST            stratapendidikan .................................. stratapendidikan.store › StratapendidikanController@store
+  GET|HEAD        stratapendidikan/create ......................... stratapendidikan.create › StratapendidikanController@create
+  GET|HEAD        stratapendidikan/{stratapendidikan} ................. stratapendidikan.show › StratapendidikanController@show
+  PUT|PATCH       stratapendidikan/{stratapendidikan} ............. stratapendidikan.update › StratapendidikanController@update
+  DELETE          stratapendidikan/{stratapendidikan} ........... stratapendidikan.destroy › StratapendidikanController@destroy
+  GET|HEAD        stratapendidikan/{stratapendidikan}/edit ............ stratapendidikan.edit › StratapendidikanController@edit
+  PUT             ubahprofil/update/{id} ................................................... profilll › ProfilController@update
+  GET|HEAD        ubahprofil/{id} ............................................................. profill › ProfilController@edit
+  GET|HEAD        unsurdp .................................................... unsurdp.index › DokumenpenunjangController@index
+  POST            unsurdp .................................................... unsurdp.store › DokumenpenunjangController@store
+  GET|HEAD        unsurdp/create ........................................... unsurdp.create › DokumenpenunjangController@create
+  GET|HEAD        unsurdp/{unsurdp} ............................................ unsurdp.show › DokumenpenunjangController@show
+  PUT|PATCH       unsurdp/{unsurdp} ........................................ unsurdp.update › DokumenpenunjangController@update
+  DELETE          unsurdp/{unsurdp} ...................................... unsurdp.destroy › DokumenpenunjangController@destroy
+  GET|HEAD        unsurdp/{unsurdp}/edit ....................................... unsurdp.edit › DokumenpenunjangController@edit
+  GET|HEAD        unsurpelaksanaan ............................. unsurpelaksanaan.index › PelaksanaanPendidikanController@index
+  POST            unsurpelaksanaan ............................. unsurpelaksanaan.store › PelaksanaanPendidikanController@store
+  GET|HEAD        unsurpelaksanaan/create .................... unsurpelaksanaan.create › PelaksanaanPendidikanController@create
+  GET|HEAD        unsurpelaksanaan/{unsurpelaksanaan} ............ unsurpelaksanaan.show › PelaksanaanPendidikanController@show
+  PUT|PATCH       unsurpelaksanaan/{unsurpelaksanaan} ........ unsurpelaksanaan.update › PelaksanaanPendidikanController@update
+  DELETE          unsurpelaksanaan/{unsurpelaksanaan} ...... unsurpelaksanaan.destroy › PelaksanaanPendidikanController@destroy
+  GET|HEAD        unsurpelaksanaan/{unsurpelaksanaan}/edit ....... unsurpelaksanaan.edit › PelaksanaanPendidikanController@edit
+  GET|HEAD        unsurpenelitian-admin ...................... unsurpenelitian-admin.index › KomponenPenelitianController@index
+  POST            unsurpenelitian-admin ...................... unsurpenelitian-admin.store › KomponenPenelitianController@store
+  GET|HEAD        unsurpenelitian-admin/create ............. unsurpenelitian-admin.create › KomponenPenelitianController@create
+  GET|HEAD        unsurpenelitian-admin/{unsurpenelitian_admin} unsurpenelitian-admin.show › KomponenPenelitianController@show
+  PUT|PATCH       unsurpenelitian-admin/{unsurpenelitian_admin} unsurpenelitian-admin.update › KomponenPenelitianController@up…
+  DELETE          unsurpenelitian-admin/{unsurpenelitian_admin} unsurpenelitian-admin.destroy › KomponenPenelitianController@d…
+  GET|HEAD        unsurpenelitian-admin/{unsurpenelitian_admin}/edit unsurpenelitian-admin.edit › KomponenPenelitianController…
+  GET|HEAD        user-home ................................................................ userhome › HomeController@userhome
+  GET|HEAD        user-home/{id} ........................................................ user.homex › HomeController@userhomex
+  POST            {locale}/livewire/message/{name} .. livewire.message-localized › Livewire\Controllers › HttpConnectionHandler
+
+                                                                                                           Showing [162] routes
+
+[u586962203@id-dci-web850 simulasipak]$ ls
+app        CHANGELOG.md   composer.phar  package.json       phpunit.xml  resources  tests
+artisan    composer.json  config         package-lock.json  public       routes     vendor
+bootstrap  composer.lock  database       php                README.md    storage    vite.config.js
+[u586962203@id-dci-web850 simulasipak]$ cd ..
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ rm -rf simulasipak/
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html
+[u586962203@id-dci-web850 vokasihub.com]$ cd public_html/
+[u586962203@id-dci-web850 public_html]$ ls
+index.php  pak-it-del  simulasipak  simulasipak-itdel
+[u586962203@id-dci-web850 public_html]$ rm -rf pak-it-del/
+[u586962203@id-dci-web850 public_html]$ rm -rf simulasipak
+[u586962203@id-dci-web850 public_html]$ rm -rf simulasipak-itdel/
+[u586962203@id-dci-web850 public_html]$ ls
+index.php
+[u586962203@id-dci-web850 public_html]$ pwd
+/home/u586962203/domains/vokasihub.com/public_html
+[u586962203@id-dci-web850 public_html]$ cd ..
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html
+[u586962203@id-dci-web850 vokasihub.com]$ cd ..
+[u586962203@id-dci-web850 domains]$ ls
+vokasihub.com
+[u586962203@id-dci-web850 domains]$ cd vokasihub.com/
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html
+[u586962203@id-dci-web850 vokasihub.com]$ git clone https://github.com/Abram922/simulasipak.git
+Cloning into 'simulasipak'...
+remote: Enumerating objects: 3861, done.
+remote: Counting objects: 100% (954/954), done.
+remote: Compressing objects: 100% (565/565), done.
+remote: Total 3861 (delta 707), reused 620 (delta 388), pack-reused 2907
+Receiving objects: 100% (3861/3861), 22.14 MiB | 11.36 MiB/s, done.
+Resolving deltas: 100% (1558/1558), done.
+Updating files: 100% (2333/2333), done.
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ pwd
+/home/u586962203/domains/vokasihub.com
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ cd public_html/
+[u586962203@id-dci-web850 public_html]$ ls
+index.php  simulasipak
+[u586962203@id-dci-web850 public_html]$ rm -rf simulasipak/
+[u586962203@id-dci-web850 public_html]$ ls
+index.php
+[u586962203@id-dci-web850 public_html]$ cd ..
+[u586962203@id-dci-web850 vokasihub.com]$ pwd
+/home/u586962203/domains/vokasihub.com
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ cd public_html/
+[u586962203@id-dci-web850 public_html]$ ls
+index.php
+[u586962203@id-dci-web850 public_html]$ cd ..
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ cd ..
+[u586962203@id-dci-web850 domains]$ pwd
+/home/u586962203/domains
+[u586962203@id-dci-web850 domains]$ cd dom
+-bash: cd: dom: No such file or directory
+[u586962203@id-dci-web850 domains]$ cd vokasihub.com/
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ ln -s /home/u586962203/domains/vokasihub.com/simulasipak/public /home/u586962203/domains/vokasihub.com/public_html/simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ cd public_html/
+[u586962203@id-dci-web850 public_html]$ ls
+index.php  simulasipak
+[u586962203@id-dci-web850 public_html]$ cd ..
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ ls
+public_html  simulasipak
+[u586962203@id-dci-web850 vokasihub.com]$ cd simulasipak/
+[u586962203@id-dci-web850 simulasipak]$ composer install
+You are using Composer 1 which is deprecated. You should upgrade to Composer 2, see https://blog.packagist.com/deprecating-composer-1-support/
+Loading composer repositories with package information
+Installing dependencies (including require-dev) from lock file
+Your requirements could not be resolved to an installable set of packages.
+
+  Problem 1
+    - Installation request for laravel/framework v10.13.1 -> satisfiable by laravel/framework[v10.13.1].
+    - laravel/framework v10.13.1 requires composer-runtime-api ^2.2 -> no matching package found.
+  Problem 2
+    - laravel/framework v10.13.1 requires composer-runtime-api ^2.2 -> no matching package found.
+    - spatie/laravel-ignition 2.1.3 requires illuminate/support ^10.0 -> satisfiable by laravel/framework[v10.13.1].
+    - Installation request for spatie/laravel-ignition 2.1.3 -> satisfiable by spatie/laravel-ignition[2.1.3].
+
+Potential causes:
+ - This package is not installable via Composer 1.x, see <https://blog.packagist.com/deprecating-composer-1-support/>
+ - A typo in the package name
+ - The package is not available in a stable-enough version according to your minimum-stability setting
+   see <https://getcomposer.org/doc/04-schema.md#minimum-stability> for more details.
+ - It's a private package and you forgot to add a custom repository to find it
+
+Read <https://getcomposer.org/doc/articles/troubleshooting.md> for further common problems.
+[u586962203@id-dci-web850 simulasipak]$ ls
+app      bootstrap     composer.json  config    package.json       php          public     resources  storage  vite.config.js
+artisan  CHANGELOG.md  composer.lock  database  package-lock.json  phpunit.xml  README.md  routes     tests
+[u586962203@id-dci-web850 simulasipak]$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+[u586962203@id-dci-web850 simulasipak]$ php composer-setup.php
+All settings correct for using Composer
+Downloading...
+
+Composer (version 2.5.7) successfully installed to: /home/u586962203/domains/vokasihub.com/simulasipak/composer.phar
+Use it: php composer.phar
+
+[u586962203@id-dci-web850 simulasipak]$ php composer.phar
+   ______
+  / ____/___  ____ ___  ____  ____  ________  _____
+ / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
+\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
+                    /_/
+Composer version 2.5.7 2023-05-24 15:00:39
+
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help                     Display help for the given command. When no command is given display help for the list command
+  -q, --quiet                    Do not output any message
+  -V, --version                  Display this application version
+      --ansi|--no-ansi           Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction           Do not ask any interactive question
+      --profile                  Display timing and memory usage information
+      --no-plugins               Whether to disable plugins.
+      --no-scripts               Skips the execution of all scripts defined in composer.json file.
+  -d, --working-dir=WORKING-DIR  If specified, use the given directory as working directory.
+      --no-cache                 Prevent use of the cache
+  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  about                Shows a short information about Composer
+  archive              Creates an archive of this composer package
+  audit                Checks for security vulnerability advisories for installed packages
+  browse               [home] Opens the package's repository URL or homepage in your browser
+  bump                 Increases the lower limit of your composer.json requirements to the currently installed versions
+  check-platform-reqs  Check that platform requirements are satisfied
+  clear-cache          [clearcache|cc] Clears composer's internal package cache
+  completion           Dump the shell completion script
+  config               Sets config options
+  create-project       Creates new project from a package into given directory
+  depends              [why] Shows which packages cause the given package to be installed
+  diagnose             Diagnoses the system to identify common errors
+  dump-autoload        [dumpautoload] Dumps the autoloader
+  exec                 Executes a vendored binary/script
+  fund                 Discover how to help fund the maintenance of your dependencies
+  global               Allows running commands in the global composer dir ($COMPOSER_HOME)
+  help                 Display help for a command
+  init                 Creates a basic composer.json file in current directory
+  install              [i] Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json
+  licenses             Shows information about licenses of dependencies
+  list                 List commands
+  outdated             Shows a list of installed packages that have updates available, including their latest version
+  prohibits            [why-not] Shows which packages prevent the given package from being installed
+  reinstall            Uninstalls and reinstalls the given package names
+  remove               Removes a package from the require or require-dev
+  require              [r] Adds required packages to your composer.json and installs them
+  run-script           [run] Runs the scripts defined in composer.json
+  search               Searches for packages
+  self-update          [selfupdate] Updates composer.phar to the latest version
+  show                 [info] Shows information about packages
+  status               Shows a list of locally modified packages
+  suggests             Shows package suggestions
+  update               [u|upgrade] Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file
+  validate             Validates a composer.json and composer.lock
+[u586962203@id-dci-web850 simulasipak]$ php composer.phar install
+Installing dependencies from lock file (including require-dev)
+Verifying lock file contents can be installed on current platform.
+Package operations: 110 installs, 0 updates, 0 removals
+  - Installing doctrine/inflector (2.0.6): Extracting archive
+  - Installing doctrine/lexer (3.0.0): Extracting archive
+  - Installing symfony/polyfill-ctype (v1.27.0): Extracting archive
+  - Installing webmozart/assert (1.11.0): Extracting archive
+  - Installing dragonmantank/cron-expression (v3.3.2): Extracting archive
+  - Installing symfony/deprecation-contracts (v3.3.0): Extracting archive
+  - Installing psr/container (2.0.2): Extracting archive
+  - Installing fakerphp/faker (v1.22.0): Extracting archive
+  - Installing symfony/polyfill-php80 (v1.27.0): Extracting archive
+  - Installing symfony/polyfill-php83 (v1.27.0): Extracting archive
+  - Installing symfony/polyfill-mbstring (v1.27.0): Extracting archive
+  - Installing symfony/http-foundation (v6.3.0): Extracting archive
+  - Installing fruitcake/php-cors (v1.2.0): Extracting archive
+  - Installing psr/http-message (2.0): Extracting archive
+  - Installing psr/http-client (1.0.2): Extracting archive
+  - Installing ralouphie/getallheaders (3.0.3): Extracting archive
+  - Installing psr/http-factory (1.0.2): Extracting archive
+  - Installing guzzlehttp/psr7 (2.5.0): Extracting archive
+  - Installing guzzlehttp/promises (2.0.0): Extracting archive
+  - Installing guzzlehttp/guzzle (7.7.0): Extracting archive
+  - Installing guzzlehttp/uri-template (v1.0.1): Extracting archive
+  - Installing laravel/pint (v1.10.0): Extracting archive
+  - Installing symfony/yaml (v6.3.0): Extracting archive
+  - Installing voku/portable-ascii (2.0.1): Extracting archive
+  - Installing phpoption/phpoption (1.9.1): Extracting archive
+  - Installing graham-campbell/result-type (v1.1.1): Extracting archive
+  - Installing vlucas/phpdotenv (v5.5.0): Extracting archive
+  - Installing symfony/css-selector (v6.3.0): Extracting archive
+  - Installing tijsverkoyen/css-to-inline-styles (2.2.6): Extracting archive
+  - Installing symfony/var-dumper (v6.3.0): Extracting archive
+  - Installing symfony/polyfill-uuid (v1.27.0): Extracting archive
+  - Installing symfony/uid (v6.3.0): Extracting archive
+  - Installing symfony/routing (v6.3.0): Extracting archive
+  - Installing symfony/process (v6.3.0): Extracting archive
+  - Installing symfony/polyfill-php72 (v1.27.0): Extracting archive
+  - Installing symfony/polyfill-intl-normalizer (v1.27.0): Extracting archive
+  - Installing symfony/polyfill-intl-idn (v1.27.0): Extracting archive
+  - Installing symfony/mime (v6.3.0): Extracting archive
+  - Installing symfony/service-contracts (v3.3.0): Extracting archive
+  - Installing psr/event-dispatcher (1.0.0): Extracting archive
+  - Installing symfony/event-dispatcher-contracts (v3.3.0): Extracting archive
+  - Installing symfony/event-dispatcher (v6.3.0): Extracting archive
+  - Installing psr/log (3.0.0): Extracting archive
+  - Installing egulias/email-validator (4.0.1): Extracting archive
+  - Installing symfony/mailer (v6.3.0): Extracting archive
+  - Installing symfony/error-handler (v6.3.0): Extracting archive
+  - Installing symfony/http-kernel (v6.3.0): Extracting archive
+  - Installing symfony/finder (v6.3.0): Extracting archive
+  - Installing symfony/polyfill-intl-grapheme (v1.27.0): Extracting archive
+  - Installing symfony/string (v6.3.0): Extracting archive
+  - Installing symfony/console (v6.3.0): Extracting archive
+  - Installing ramsey/collection (2.0.0): Extracting archive
+  - Installing brick/math (0.11.0): Extracting archive
+  - Installing ramsey/uuid (4.7.4): Extracting archive
+  - Installing psr/simple-cache (3.0.0): Extracting archive
+  - Installing nunomaduro/termwind (v1.15.1): Extracting archive
+  - Installing symfony/translation-contracts (v3.3.0): Extracting archive
+  - Installing symfony/translation (v6.3.0): Extracting archive
+  - Installing nesbot/carbon (2.67.0): Extracting archive
+  - Installing monolog/monolog (3.3.1): Extracting archive
+  - Installing league/mime-type-detection (1.11.0): Extracting archive
+  - Installing league/flysystem (3.15.1): Extracting archive
+  - Installing league/flysystem-local (3.15.0): Extracting archive
+  - Installing nette/utils (v4.0.0): Extracting archive
+  - Installing nette/schema (v1.2.3): Extracting archive
+  - Installing dflydev/dot-access-data (v3.0.2): Extracting archive
+  - Installing league/config (v1.2.0): Extracting archive
+  - Installing league/commonmark (2.4.0): Extracting archive
+  - Installing laravel/serializable-closure (v1.3.0): Extracting archive
+  - Installing laravel/framework (v10.13.1): Extracting archive
+  - Installing laravel/sail (v1.22.0): Extracting archive
+  - Installing laravel/sanctum (v3.2.5): Extracting archive
+  - Installing nikic/php-parser (v4.15.5): Extracting archive
+  - Installing psy/psysh (v0.11.18): Extracting archive
+  - Installing laravel/tinker (v2.8.1): Extracting archive
+  - Installing laravel/ui (v4.2.2): Extracting archive
+  - Installing livewire/livewire (v2.12.3): Extracting archive
+  - Installing hamcrest/hamcrest-php (v2.0.1): Extracting archive
+  - Installing mockery/mockery (1.5.1): Extracting archive
+  - Installing filp/whoops (2.15.2): Extracting archive
+  - Installing nunomaduro/collision (v7.5.2): Extracting archive
+  - Installing sebastian/version (4.0.1): Extracting archive
+  - Installing sebastian/type (4.0.0): Extracting archive
+  - Installing sebastian/recursion-context (5.0.0): Extracting archive
+  - Installing sebastian/object-reflector (3.0.0): Extracting archive
+  - Installing sebastian/object-enumerator (5.0.0): Extracting archive
+  - Installing sebastian/global-state (6.0.0): Extracting archive
+  - Installing sebastian/exporter (5.0.0): Extracting archive
+  - Installing sebastian/environment (6.0.1): Extracting archive
+  - Installing sebastian/diff (5.0.3): Extracting archive
+  - Installing sebastian/comparator (5.0.0): Extracting archive
+  - Installing sebastian/code-unit (2.0.0): Extracting archive
+  - Installing sebastian/cli-parser (2.0.0): Extracting archive
+  - Installing phpunit/php-timer (6.0.0): Extracting archive
+  - Installing phpunit/php-text-template (3.0.0): Extracting archive
+  - Installing phpunit/php-invoker (4.0.0): Extracting archive
+  - Installing phpunit/php-file-iterator (4.0.2): Extracting archive
+  - Installing theseer/tokenizer (1.2.1): Extracting archive
+  - Installing sebastian/lines-of-code (2.0.0): Extracting archive
+  - Installing sebastian/complexity (3.0.0): Extracting archive
+  - Installing sebastian/code-unit-reverse-lookup (3.0.0): Extracting archive
+  - Installing phpunit/php-code-coverage (10.1.2): Extracting archive
+  - Installing phar-io/version (3.2.1): Extracting archive
+  - Installing phar-io/manifest (2.0.3): Extracting archive
+  - Installing myclabs/deep-copy (1.11.1): Extracting archive
+  - Installing phpunit/phpunit (10.2.1): Extracting archive
+  - Installing spatie/backtrace (1.4.0): Extracting archive
+  - Installing spatie/flare-client-php (1.3.6): Extracting archive
+  - Installing spatie/ignition (1.8.0): Extracting archive
+  - Installing spatie/laravel-ignition (2.1.3): Extracting archive
+Generating optimized autoload files
+> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+> @php artisan package:discover --ansi
+
+   INFO  Discovering packages.  
+
+  laravel/sail ........................................................................................................... DONE
+  laravel/sanctum ........................................................................................................ DONE
+  laravel/tinker ......................................................................................................... DONE
+  laravel/ui ............................................................................................................. DONE
+  livewire/livewire ...................................................................................................... DONE
+  nesbot/carbon .......................................................................................................... DONE
+  nunomaduro/collision ................................................................................................... DONE
+  nunomaduro/termwind .................................................................................................... DONE
+  spatie/laravel-ignition ................................................................................................ DONE
+
+83 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+[u586962203@id-dci-web850 simulasipak]$ php composer.phar update
+Loading composer repositories with package information
+Info from https://repo.packagist.org: #StandWithUkraine
+Updating dependencies
+Lock file operations: 0 installs, 4 updates, 0 removals
+  - Upgrading laravel/framework (v10.13.1 => v10.13.2)
+  - Upgrading laravel/pint (v1.10.0 => v1.10.1)
+  - Upgrading mockery/mockery (1.5.1 => 1.6.2)
+  - Upgrading spatie/ignition (1.8.0 => 1.8.1)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 0 installs, 4 updates, 0 removals
+  - Downloading laravel/pint (v1.10.1)
+  - Downloading laravel/framework (v10.13.2)
+  - Downloading mockery/mockery (1.6.2)
+  - Downloading spatie/ignition (1.8.1)
+  - Upgrading laravel/pint (v1.10.0 => v1.10.1): Extracting archive
+  - Upgrading laravel/framework (v10.13.1 => v10.13.2): Extracting archive
+  - Upgrading mockery/mockery (1.5.1 => 1.6.2): Extracting archive
+  - Upgrading spatie/ignition (1.8.0 => 1.8.1): Extracting archive
+Generating optimized autoload files
+> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+> @php artisan package:discover --ansi
+
+   INFO  Discovering packages.  
+
+  laravel/sail ........................................................................................................... DONE
+  laravel/sanctum ........................................................................................................ DONE
+  laravel/tinker ......................................................................................................... DONE
+  laravel/ui ............................................................................................................. DONE
+  livewire/livewire ...................................................................................................... DONE
+  nesbot/carbon .......................................................................................................... DONE
+  nunomaduro/collision ................................................................................................... DONE
+  nunomaduro/termwind .................................................................................................... DONE
+  spatie/laravel-ignition ................................................................................................ DONE
+
+83 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+> @php artisan vendor:publish --tag=laravel-assets --ansi --force
+
+   INFO  No publishable resources for tag [laravel-assets].  
+
+No security vulnerability advisories found
+[u586962203@id-dci-web850 simulasipak]$ php composer.phar install
+Installing dependencies from lock file (including require-dev)
+Verifying lock file contents can be installed on current platform.
+Nothing to install, update or remove
+Generating optimized autoload files
+> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+> @php artisan package:discover --ansi
+
+   INFO  Discovering packages.  
+
+  laravel/sail ........................................................................................................... DONE
+  laravel/sanctum ........................................................................................................ DONE
+  laravel/tinker ......................................................................................................... DONE
+  laravel/ui ............................................................................................................. DONE
+  livewire/livewire ...................................................................................................... DONE
+  nesbot/carbon .......................................................................................................... DONE
+  nunomaduro/collision ................................................................................................... DONE
+  nunomaduro/termwind .................................................................................................... DONE
+  spatie/laravel-ignition ................................................................................................ DONE
+
+83 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+[u586962203@id-dci-web850 simulasipak]$ php composer.phar update
+Loading composer repositories with package information
+Updating dependencies
+Nothing to modify in lock file
+Installing dependencies from lock file (including require-dev)
+Nothing to install, update or remove
+Generating optimized autoload files
+> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+> @php artisan package:discover --ansi
+
+   INFO  Discovering packages.  
+
+  laravel/sail ........................................................................................................... DONE
+  laravel/sanctum ........................................................................................................ DONE
+  laravel/tinker ......................................................................................................... DONE
+  laravel/ui ............................................................................................................. DONE
+  livewire/livewire ...................................................................................................... DONE
+  nesbot/carbon .......................................................................................................... DONE
+  nunomaduro/collision ................................................................................................... DONE
+  nunomaduro/termwind .................................................................................................... DONE
+  spatie/laravel-ignition ................................................................................................ DONE
+
+83 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+> @php artisan vendor:publish --tag=laravel-assets --ansi --force
+
+   INFO  No publishable resources for tag [laravel-assets].  
+
+No security vulnerability advisories found
+[u586962203@id-dci-web850 simulasipak]$ cp .env.example .env
+[u586962203@id-dci-web850 simulasipak]$ ls -a
+.        bootstrap      composer.phar       .editorconfig  .gitattributes  package-lock.json  README.md  .styleci.yml
+..       CHANGELOG.md   composer-setup.php  .env           .github         php                resources  tests
+app      composer.json  config              .env.example   .gitignore      phpunit.xml        routes     vendor
+artisan  composer.lock  database            .git           package.json    public             storage    vite.config.js
+[u586962203@id-dci-web850 simulasipak]$ ls
+app        CHANGELOG.md   composer.phar       database           php          README.md  storage  vite.config.js
+artisan    composer.json  composer-setup.php  package.json       phpunit.xml  resources  tests
+bootstrap  composer.lock  config              package-lock.json  public       routes     vendor
+[u586962203@id-dci-web850 simulasipak]$ php artisan cache:clear
+
+   INFO  Application cache cleared successfully.  
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan config:clear
+
+   INFO  Configuration cache cleared successfully.  
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan event:clear
+
+   INFO  Cached events cleared successfully.  
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan optimize:clear
+
+   INFO  Clearing cached bootstrap files.  
+
+  events ............................................................................................................. 1ms DONE
+  views .............................................................................................................. 1ms DONE
+  cache .............................................................................................................. 1ms DONE
+  route .............................................................................................................. 1ms DONE
+  config ............................................................................................................. 0ms DONE
+  compiled ........................................................................................................... 1ms DONE
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan route:clear
+
+   INFO  Route cache cleared successfully.  
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan view:clear
+
+   INFO  Compiled views cleared successfully.  
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan key:generate
+
+   INFO  Application key set successfully.  
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan migrate --seed
+
+                                                                                                                                 
+                                                   APPLICATION IN PRODUCTION.                                                    
+                                                                                                                                 
+
+  Do you really wish to run this command? (yes/no) [no]
+❯ yes
+
+   INFO  Preparing database.  
+
+  Creating migration table .......................................................................................... 19ms DONE
+
+   INFO  Running migrations.  
+
+  2014_10_10_132957_create_roles_table .............................................................................. 15ms DONE
+  2014_10_10_132958_create_pangkats_table ........................................................................... 13ms DONE
+  2014_10_10_132959_create_jabatans_table ........................................................................... 13ms DONE
+  2014_10_12_000000_create_users_table .............................................................................. 62ms DONE
+  2014_10_12_100000_create_password_reset_tokens_table .............................................................. 20ms DONE
+  2014_10_12_100000_create_password_resets_table ..................................................................... 3ms DONE
+  2019_08_19_000000_create_failed_jobs_table ........................................................................ 14ms DONE
+  2019_12_14_000001_create_personal_access_tokens_table ............................................................. 15ms DONE
+  2023_04_24_142852_create_kums_table ............................................................................... 48ms DONE
+  2023_04_24_144355_create_stratapendidikans_table ................................................................... 2ms DONE
+  2023_04_24_144430_create_pendidikans_table ........................................................................ 40ms DONE
+  2023_04_27_091324_create_semesters_table ........................................................................... 2ms DONE
+  2023_04_27_091430_create_jenis_pelaksanan_pendidikans_table ....................................................... 13ms DONE
+  2023_04_27_092340_create_pelaksanaan_pendidikans_table ............................................................ 49ms DONE
+  2023_04_28_030355_create_penulis_table ............................................................................. 2ms DONE
+  2023_04_28_030435_create_akreditasi_penelitians_table ............................................................. 13ms DONE
+  2023_04_28_030625_create_pelaksanan_penelitians_table ............................................................. 48ms DONE
+  2023_04_28_065104_create_komponenpms_table ......................................................................... 2ms DONE
+  2023_04_28_065140_create_pelaksanaan_pms_table .................................................................... 49ms DONE
+  2023_04_30_181227_create_komponendokumenpenunjangs_table ........................................................... 2ms DONE
+  2023_04_30_181250_create_dokumenpenunjangs_table .................................................................. 41ms DONE
+  2023_05_17_015604_create_pengajarans_table ........................................................................ 30ms DONE
+  2023_05_22_133644_create_komponen_penelitians_table ................................................................ 2ms DONE
+  2023_05_22_143330_create_penelitian_hakidankaryas_table ........................................................... 49ms DONE
+  2023_06_04_161651_create_lampirans_table .......................................................................... 20ms DONE
+
+   INFO  Seeding database.  
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan storage:link
+
+   INFO  The [public/storage] link has been connected to [storage/app/public].  
+
+[u586962203@id-dci-web850 simulasipak]$ php artisan db:seed --class=role
+
+                                                                                                                                 
+                                                   APPLICATION IN PRODUCTION.                                                    
+                                                                                                                                 
+
+  Do you really wish to run this command? (yes/no) [no]
+❯ y
+
+   INFO  Seeding database.  
+
+[u586962203@id-dci-web850 simulasipak]$ 
