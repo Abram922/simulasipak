@@ -103,7 +103,8 @@
             <div class="sidebar-heading">
                 Pendukung
             </div>
-
+            {{-- //{{ route('semester.index')}} --}}
+{{-- 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('semester.index')}}">
                     <i class="fas fa-fw fa-table"></i>
@@ -126,7 +127,7 @@
                 <a class="nav-link" href="{{ route('jabatan.index')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Jabatan</span></a>
-            </li>
+            </li> --}}
 
 
             <div class="text-center d-none d-md-inline">
