@@ -176,7 +176,6 @@
             <div class="container">
                 <div class="row">
                     @foreach ($kum as $index => $k)
-                        @if ($index !== 0)
                             <div class="col-md-10 mb-4">
                                 <div class="card card-hover border-0" style="max-width: 500px;">
                                     <div class="row no-gutters">
@@ -312,9 +311,15 @@
                                         </div>
                                     </div>
                             </div>
-                        @endif
-                        {{-- 
-<div class="modal fade" id="editkummodal_{{ $k->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- <div class="modal fade" id="editkummodal_{{ $k->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -395,14 +400,7 @@
             </div>
         </div>
     </div>
-    </div> --}}
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+</div> --}}
 
 
 
