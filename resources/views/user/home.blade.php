@@ -97,9 +97,8 @@
                     <td>
                         <p style="font-size:110%; margin-bottom: -5px; color:rgb(112, 172, 112);">
                             <b>
-
-                                Pengajuan kenaikan jabatan eligible 
                                 @if ($kumterakhir)
+                                Pengajuan kenaikan jabatan eligible
                                     {{ $carbon::parse($kumterakhir->tmt_available)->locale('id_ID')->isoFormat('D MMMM Y') }}
                                 @else
                                     -
