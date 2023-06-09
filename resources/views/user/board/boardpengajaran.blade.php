@@ -7,11 +7,17 @@
 <br>
 <br>
 
+<?php
+$px = $pelaksanaan_pendidikan[0]; // Take the first value from the $pendidikan array
+?>
+<input type="hidden" value="{{ $px->id_kum }}">
+<a href="{{ route('kum.show', $px->kum_id) }}" target="_blank" class="btn btn-warning">Kembali</a>
 
 
 
 <div style="background-color: #F9F9FE">
   <div class="col-lg-10 mx-auto">
+    
     <p>Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan</p>
     <br>
     <br>

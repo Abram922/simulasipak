@@ -18,6 +18,7 @@ class PendidikanController extends Controller
      */
     public function index()
     {
+        
 
     }
 
@@ -141,4 +142,7 @@ class PendidikanController extends Controller
         pendidikan::destroy($id);
         return redirect()->back()->with('message', 'Data berhasil dihapus');
     }
+
+
+
 }
