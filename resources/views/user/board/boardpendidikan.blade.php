@@ -7,13 +7,7 @@
 
 
 <div class="row">
-  <div class="col-lg-12 mx-auto">
-    <?php
-    $px = $pendidikan[0]; // Take the first value from the $pendidikan array
-  ?>
-  <input type="hidden" value="{{ $px->kum_id }}">
-  <a href="{{ route('kum.show', $px->kum_id) }}" target="_blank" class="btn btn-warning m-4" style="width: 5%; height:45% " >Kembali</a>
-  
+
   </div>
 
 

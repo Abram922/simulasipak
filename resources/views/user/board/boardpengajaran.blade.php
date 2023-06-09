@@ -7,11 +7,6 @@
 <br>
 <br>
 
-<?php
-$px = $pelaksanaan_pendidikan[0]; // Take the first value from the $pendidikan array
-?>
-<input type="hidden" value="{{ $px->id_kum }}">
-<a href="{{ route('kum.show', $px->kum_id) }}" target="_blank" class="btn btn-warning">Kembali</a>
 
 
 
