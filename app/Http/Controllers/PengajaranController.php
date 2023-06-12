@@ -8,6 +8,7 @@ use App\Models\pelaksanaan_pendidikan;
 use App\Models\pengajaran;
 use App\Http\Controllers\Controller;
 use App\Models\semester;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -274,6 +275,103 @@ class PengajaranController extends Controller
         $pengajaran->delete();
         return redirect()->back()->with('message', 'Data berhasil dihapus');
     }
+
+    /**
+     * BAA
+     */
+
+     public function baa_pelaksanaan_pendidikan(){
+        $semester = semester::all();
+        $user = User::where('role', 2)->get();
+        return view('.baa.pelaksanaan_pendidikan.index',[
+            'semester' => $semester,
+            'user' => $user,
+        ]);
+     }
+
+
+
+        public function store_baa(Request $request)
+        {
+            $inputs = $request->input('inputs');
+
+            foreach ($inputs as $i => $input) {
+                $validator = Validator::make($input, [
+                    'instansi' => 'required',
+                    'id_semester' => 'required',
+                    'kode_matakuliah' => 'required',
+                    'matakuliah' => 'required',
+                    'nama_kelas_pengajaran' => 'required',
+                    'volume_dosen_pengajar' => 'required|numeric',
+                    'sks_pengajaran' => 'required|numeric',
+                    'dosen1' => 'required|numeric',
+                    'dosen2' => 'required|numeric',
+                    'dosen3' => 'required|numeric',
+                    
+                ]);
+
+                if ($validator->fails()) {
+                    return back()->withErrors($validator)->withInput();
+                }
+
+                $idSemester = $input['id_semester'];
+                $sksPengajaran = $input['sks_pengajaran'];
+
+                $idKum = 1;
+                
+
+                $totalSks = Pengajaran::where('id_semester', $idSemester)
+                ->where('id_kum', $idKum )
+                ->where('status', 1)
+                ->sum('sks_pengajaran');
+
+                if ($image = $request->file('inputs.'.$i.'.sk')) {
+                    $destinationPath = 'file/';
+                    $originalName = $image->getClientOriginalName();
+                    $profileImage = date('YmdHis') . '_' . $originalName;
+                    $image->move($destinationPath, $profileImage);
+                }
+
+                $pengajaran = new Pengajaran();
+                $pengajaran->instansi = $input['instansi'];
+                $pengajaran->id_semester = $input['id_semester'];
+                $pengajaran->dosen1 = $input['dosen1'];
+                $pengajaran->dosen2 = $input['dosen2'];
+                $pengajaran->dosen3 = $input['dosen3'];
+                $pengajaran->kode_matakuliah = $input['kode_matakuliah'];
+                $pengajaran->matakuliah = $input['matakuliah'];
+                $pengajaran->nama_kelas_pengajaran = $input['nama_kelas_pengajaran'];
+                $pengajaran->volume_dosen_pengajar = $input['volume_dosen_pengajar'];
+                $pengajaran->sks_pengajaran = $input['sks_pengajaran'];
+                $pengajaran->id_kum = $idKum;
+                $pengajaran->sk = $profileImage;
+                $volumeDosen = floatval($input['volume_dosen_pengajar']);
+
+                if ($totalSks + $sksPengajaran > 12) {
+                    $pengajaran->status = 0;
+                }elseif ($totalSks + $sksPengajaran <= 12) {
+                    $pengajaran->status = 1;
+                }
+                elseif ($volumeDosen <= 0 || $sksPengajaran <= 0) {
+                    $validator->errors()->add('angka', 'tidak boleh nol');
+                    return back()->withErrors(['angka' => 'Tidak boleh nol'])->withInput();
+                }
+
+                $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sksPengajaran;       
+                
+
+
+                // dd($pengajaran);
+                $pengajaran->save();
+
+                
+
+            }
+
+            
+
+            return redirect()->back(); 
+        }
 }
 
 

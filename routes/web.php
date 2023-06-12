@@ -134,4 +134,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     });
+    Route::group(['middleware' => ['AuthPortBAA:3']], function () {
+        
+        Route::get('/baa-home', [App\Http\Controllers\HomeController::class, 'baahome'])->name('baahome');
+        Route::get('/baa-pengajaran', [App\Http\Controllers\PengajaranController::class, 'baa_pelaksanaan_pendidikan'])->name('baa_pelaksanaan_pendidikan');
+        Route::post('/baa-store-pengajaran', [App\Http\Controllers\PengajaranController::class, 'store_baa'])->name('store_baa');
+    });
 });

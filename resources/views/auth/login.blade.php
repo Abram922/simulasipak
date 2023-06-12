@@ -49,7 +49,13 @@
 
                     
                     <div class="text-center" >
-                        {{-- <a class="text-muted" href="#!">Lupa Password?</a> --}}
+                        @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                        @endif
+                        
+                        {{-- <a class="" href="#!"></a> --}}
                     </div>
                     
   

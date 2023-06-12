@@ -52,6 +52,8 @@ class LoginController extends Controller
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))){
             if(auth()->user()->role == 1){
                 return redirect()-> route('adminhome');
+            }elseif(auth()->user()->role == 3){  
+                return redirect()->route('baahome');
             }
             else{  
                 return redirect()->route('userhome');

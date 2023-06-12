@@ -10,7 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+    {   
         Schema::create('pengajarans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_kum')->unsigned();
@@ -24,7 +24,14 @@ return new class extends Migration
             $table->integer('volume_dosen_pengajar')->nullable();
             $table->string('file')->nullable();
             $table->boolean('status');
+            $table->integer('dosen1')->unsigned()->nullable();
+            $table->integer('dosen2')->unsigned()->nullable();
+            $table->integer('dosen3')->unsigned()->nullable();
+            $table->string('sk')->nullable();
             $table->timestamps();
+            $table->foreign('dosen1')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('dosen2')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('dosen3')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_kum')->references('id')->on('kums')->onDelete('cascade');
             $table->foreign('id_semester')->references('id')->on('semesters')->onDelete('cascade');
         });

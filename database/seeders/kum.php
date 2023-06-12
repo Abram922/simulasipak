@@ -6,14 +6,14 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class role extends Seeder
+class kum extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('roles')->insert([
+        DB::table('kums')->insert([
             [
                 'id' =>1,
                 'role' => 'admin'
@@ -27,6 +27,5 @@ class role extends Seeder
                 'role' => 'baa'
             ],
         ]);
-        
     }
 }

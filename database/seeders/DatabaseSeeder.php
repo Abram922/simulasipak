@@ -102,5 +102,18 @@ class DatabaseSeeder extends Seeder
             'pelaksanaanPengabdianMasyarakat' => 10 ,
             'penunjang'=> 10 
         ]);
+
+
+        // kums
+        \App\Models\kum::create([
+
+            'id' => '1',
+            'judul' => 'universal kum'  ,
+            'id_user' => 3 ,
+            'id_jabatan_sekarang' => 2 ,
+            'id_jabatan_dituju'=> 3,
+            'tmt' => null ,
+            'tmt_available'=> null 
+        ]);
     }
 }

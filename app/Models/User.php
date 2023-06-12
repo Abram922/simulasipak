@@ -32,7 +32,8 @@ class User extends Authenticatable
         'institusi',
         'fakultas',
         'jabatan_fungsional',
-        'pangkat'
+        'pangkat',
+
     ];
 
     /**
@@ -68,4 +69,10 @@ class User extends Authenticatable
     public function lampiran(){
         return $this->belongsTo('App\Models\Lampiran', 'lampiran', 'id');
     }
+    public function pengajaran(){
+        return $this->hasMany(pengajaran::class);
+    }
+    
+
+
 }

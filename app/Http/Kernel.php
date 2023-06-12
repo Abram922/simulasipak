@@ -56,6 +56,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'AuthPort' => \App\Http\Middleware\AuthPort::class,
         'AuthPortUser' => \App\Http\Middleware\AuthPortUser::class,
+        'AuthPortBAA' => \App\Http\Middleware\AuthPortBAA::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

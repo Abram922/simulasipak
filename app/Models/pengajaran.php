@@ -20,7 +20,11 @@ class pengajaran extends Model
         'volume_dosen_pengajar',
         'nama_kelas_pengajaran',
         'file',
-        'status'
+        'status',
+        'dosen1',
+        'dosen2',
+        'dosen3',
+        'sk',
     ];
 
     public function xsemester(){
@@ -29,6 +33,16 @@ class pengajaran extends Model
 
     public function kum(){
         return $this->belongsTo('App\Models\kum', 'kum_id', 'id');
+    }
+
+    public function dosen1(){
+        return $this->belongsTo('App\Models\User', 'dosen1', 'id');
+    }
+    public function dosen2(){
+        return $this->belongsTo('App\Models\User', 'dosen2', 'id');
+    }
+    public function dosen3(){
+        return $this->belongsTo('App\Models\User', 'dosen3', 'id');
     }
 
 }

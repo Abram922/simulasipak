@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('id_user')->unsigned();
             $table->integer('id_jabatan_sekarang')->unsigned();
             $table->integer('id_jabatan_dituju')->unsigned()->nullable();
-            $table->date('tmt');
-            $table->date('tmt_available');
+            $table->date('tmt')->nullable();
+            $table->date('tmt_available')->nullable();
             $table->timestamps();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_jabatan_sekarang')->references('id')->on('jabatans')->onDelete('cascade');

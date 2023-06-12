@@ -153,7 +153,6 @@ class HomeController extends Controller
         return view('.user.menuperhitungan', compact('jabatanpref', 'jabatanafter', 'kum', 'result'));
     }
 
-
     /////////////////////////////////////////////////////////ADMIN/////////////////////////////////////////
 
     public function adminhome(){
@@ -167,5 +166,13 @@ class HomeController extends Controller
         ]);
     }
 
+
+    //////////////////////////////////////////////////// BAA ////////////////////////////////////////////////////
+
+    public function baahome(){
+        return view('.baa.index');
+    }
     
 }
+
+    
