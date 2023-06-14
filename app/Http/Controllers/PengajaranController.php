@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PengajaranImport;
 use App\Models\jenis_pelaksanan_pendidikan;
 use App\Models\kum;
 use App\Models\pelaksanaan_pendidikan;
@@ -11,6 +12,7 @@ use App\Models\semester;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PengajaranController extends Controller
 {
@@ -417,6 +419,14 @@ class PengajaranController extends Controller
                 'pengajaranBySemester' => $pengajaranBySemester,
                 'user' => $user
             ]);
+        }
+
+
+        public function import(Request $request){
+
+
+            Excel::import(new PengajaranImport, request()->file('data'));
+            return redirect()->back()->with('success', 'import data berhasil');            
         }
 
 }

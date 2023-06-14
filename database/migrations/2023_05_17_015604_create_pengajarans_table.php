@@ -13,17 +13,17 @@ return new class extends Migration
     {   
         Schema::create('pengajarans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_kum')->unsigned();
-            $table->integer('id_semester')->unsigned();
+            $table->integer('id_kum')->unsigned()->nullable();
+            $table->integer('id_semester')->unsigned()->nullable();
             $table->string('kode_matakuliah')->nullable();
             $table->string('matakuliah')->nullable();
             $table->string('instansi')->nullable();
             $table->string('sks_pengajaran')->nullable();
-            $table->double('jumlah_angka_kredit');
+            $table->double('jumlah_angka_kredit')->nullable();
             $table->string('nama_kelas_pengajaran')->nullable();
             $table->integer('volume_dosen_pengajar')->nullable();
             $table->string('file')->nullable();
-            $table->boolean('status');
+            $table->boolean('status')->nullable();
             $table->integer('dosen1')->unsigned()->nullable();
             $table->integer('dosen2')->unsigned()->nullable();
             $table->integer('dosen3')->unsigned()->nullable();

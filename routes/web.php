@@ -140,6 +140,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/daftar-pengajaran/{id}', [App\Http\Controllers\PengajaranController::class, 'show_baa'])->name('pengajaran');
         Route::get('/baa-pengajaran', [App\Http\Controllers\PengajaranController::class, 'baa_pelaksanaan_pendidikan'])->name('baa_pelaksanaan_pendidikan');
         Route::post('/baa-store-pengajaran', [App\Http\Controllers\PengajaranController::class, 'store_baa'])->name('store_baa');
-        //Route::post('/import-pengajaran', [App\Http\Controllers\PengajaranController::class, 'import'])->name('import_baa');
+        Route::post('/import-pengajaran', [App\Http\Controllers\PengajaranController::class, 'import'])->name('import_baa');
     });
 });

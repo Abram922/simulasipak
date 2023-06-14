@@ -21,7 +21,7 @@
                 </div>
                 <div class="modal-body">
                   <div class="col-md m-3">
-                    <form method="POST" action=""  enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('import_baa') }}"  enctype="multipart/form-data">
                       @csrf
                       <label for="data">Data</label>
                       <input class="form-control @error('data') is-invalid @enderror" type="file"  name="data">
