@@ -56,9 +56,12 @@
             <div class="sidebar-heading">
                 KOMPONEN
             </div>
+            @php
+                $id = 1;
+            @endphp
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('baa_pelaksanaan_pendidikan') }}">
+                    <a class="nav-link" href="{{ route('pengajaran', ['id' => $id])}}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Pelaksanaan Pendidikan</span></a>
                 </li>
