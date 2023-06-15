@@ -23,10 +23,14 @@ return new class extends Migration
             $table->string('nama_kelas_pengajaran')->nullable();
             $table->integer('volume_dosen_pengajar')->nullable();
             $table->string('file')->nullable();
+            $table->string('inisial_dosen')->nullable();
             $table->boolean('status')->nullable();
             $table->integer('dosen1')->unsigned()->nullable();
             $table->integer('dosen2')->unsigned()->nullable();
             $table->integer('dosen3')->unsigned()->nullable();
+            $table->string('dosen_1')->nullable();
+            $table->string('dosen_2')->nullable();
+            $table->string('dosen_3')->nullable();
             $table->string('sk')->nullable();
             $table->timestamps();
             $table->foreign('dosen1')->references('id')->on('users')->onDelete('cascade');

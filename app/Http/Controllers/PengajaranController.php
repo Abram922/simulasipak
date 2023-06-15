@@ -263,6 +263,7 @@ class PengajaranController extends Controller
     $input['jumlah_angka_kredit'] = floatval($hasil);
     $pengajaran = Pengajaran::findOrFail($id);
 
+
     $pengajaran->update($input);
 
     return redirect()->back()->with('message', 'Data berhasil disimpan');
@@ -410,6 +411,11 @@ class PengajaranController extends Controller
             $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
             $semester = semester::all();
             $user = User::all();
+
+
+            $pengajaran_baa = pengajaran::where('id_kum', null)->get();
+
+
             return view('.BAA.pelaksanaan_pendidikan.index',[
                 'kum' =>$id,
                 'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan,
@@ -417,16 +423,59 @@ class PengajaranController extends Controller
                 'semester' => $semester,
                 'pengajaran' => $pengajaran,
                 'pengajaranBySemester' => $pengajaranBySemester,
-                'user' => $user
+                'user' => $user,
+                'pengajaran_baa' => $pengajaran_baa,
             ]);
         }
 
 
         public function import(Request $request){
-
-
             Excel::import(new PengajaranImport, request()->file('data'));
             return redirect()->back()->with('success', 'import data berhasil');            
+        }
+
+        public function update_pengajaran_baa(Request $request, $id)
+        {
+            $input = $request->validate([
+                'instansi' => 'required',
+                'id_semester' => 'required|integer',
+                'kode_matakuliah' => 'required|max:255',
+                'matakuliah' => 'required|string',
+                'nama_kelas_pengajaran' => 'required',
+                'volume_dosen_pengajar' => 'required',
+                'sks_pengajaran' => 'required'
+            ]);
+        
+            $volumeDosen = floatval($input['volume_dosen_pengajar']);
+            $sks = floatval($input['sks_pengajaran']);
+            $idSemester = $input['id_semester'];
+            $idKum = $input['id_kum'];
+        
+            $sksPengajaran = $input['sks_pengajaran'];
+            $totalSks = Pengajaran::where('id_semester', $idSemester)
+                ->where('id_kum', $idKum)
+                ->where('status', 1)
+                ->sum('sks_pengajaran');
+        
+                if ($totalSks + $sksPengajaran > 12) {
+                    $status = 0;
+                } elseif ($totalSks + $sksPengajaran <= 12) {
+                    if ($request->has('status') && $request->status == "on") {
+                        $status = 1;
+                    } else {
+                        $status = 0;
+                    }
+                }
+        
+            $hasil = (1 / $volumeDosen) * $sks;
+            
+            $input['status'] = $status;
+            $input['jumlah_angka_kredit'] = floatval($hasil);
+            $pengajaran = Pengajaran::findOrFail($id);
+        
+            $pengajaran->update($input);
+        
+            return redirect()->back()->with('message', 'Data berhasil disimpan');
         }
 
 }

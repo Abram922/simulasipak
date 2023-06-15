@@ -24,6 +24,10 @@ class pengajaran extends Model
         'dosen1',
         'dosen2',
         'dosen3',
+        'dosen_1',
+        'dosen_2',
+        'dosen_3',
+        'inisial_dosen',
         'sk',
     ];
 
