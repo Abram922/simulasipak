@@ -39,13 +39,13 @@ class pengajaran extends Model
         return $this->belongsTo('App\Models\kum', 'kum_id', 'id');
     }
 
-    public function dosen1(){
+    public function userdosen1(){
         return $this->belongsTo('App\Models\User', 'dosen1', 'id');
     }
-    public function dosen2(){
+    public function userdosen2(){
         return $this->belongsTo('App\Models\User', 'dosen2', 'id');
     }
-    public function dosen3(){
+    public function userdosen3(){
         return $this->belongsTo('App\Models\User', 'dosen3', 'id');
     }
 

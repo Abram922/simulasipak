@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\pengajaran;
 use App\Models\semester;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PelaksanaanPendidikanController extends Controller
@@ -90,7 +91,16 @@ class PelaksanaanPendidikanController extends Controller
      */
     public function show($id)
     {
+        $nama = Auth::user()->name ;
         $kum = kum::find($id);
+
+        $pengajaranbaak = Pengajaran::with('userdosen1')
+        ->where('dosen_1', $nama)
+        ->orWhere('dosen_2', $nama)
+        ->orWhere('dosen_3', $nama)
+        ->get();
+
+
         $p = pengajaran::join('kums', 'pengajarans.id_kum', '=', 'kums.id')
         ->select('pengajarans.id_semester')
         ->where('kums.id', $kum->id)
@@ -118,18 +128,27 @@ class PelaksanaanPendidikanController extends Controller
         }
 
 
+
+        $datapengajaran = pengajaran::where('dosen_1', $nama)
+        ->orWhere('dosen_2', $nama)
+        ->orWhere('dosen_3', $nama)
+        ->get();
+
     
         $pelaksanaan_pendidikan = pelaksanaan_pendidikan::where('kum_id', $kum->id)->get();
         $pengajaran = pengajaran::where('id_kum', $kum->id)->get();
         $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
         $semester = semester::all();
+        
         return view('.user.board.boardpengajaran',[
             'kum' =>$kum,
             'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan,
             'pelaksanaan_pendidikan' => $pelaksanaan_pendidikan,
             'semester' => $semester,
             'pengajaran' => $pengajaran,
-            'pengajaranBySemester' => $pengajaranBySemester
+            'pengajaranBySemester' => $pengajaranBySemester,
+            'datapengajaran' => $datapengajaran,
+            'pengajaranbaak' => $pengajaranbaak,
         ]);
     }
 
@@ -137,7 +156,7 @@ class PelaksanaanPendidikanController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(pelaksanaan_pendidikan $pelaksanaan_pendidikan)
-    {
+    { 
         //
     }
 

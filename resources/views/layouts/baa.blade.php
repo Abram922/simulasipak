@@ -71,11 +71,7 @@
             <div class="sidebar-heading">
                 Pendukung
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('semester.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Mata Kuliah</span></a>
-            </li>
+
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>

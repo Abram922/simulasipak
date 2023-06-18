@@ -444,7 +444,7 @@
         {{-- . Unsur Pelaksanaan Pendidikan  --}}
         <div class="tab-pane fade" id="pelaksanaanpendidikan-tab-pane" role="tabpanel" aria-labelledby="pelaksanaanpendidikan-tab" tabindex="0">
           <div class="col-lg-10 mx-auto" style="margin-top: 30px">
-            <form action="{{ route('pengajaran.store') }}" method="POST"  enctype="multipart/form-data"id="myForm" >
+            <form action="{{ route('pengajaranuser.store') }}" method="POST"  enctype="multipart/form-data"id="myForm" >
               @csrf
                 <div id="inputFields" class = "inputFields" >
                     <div class="input-group ">

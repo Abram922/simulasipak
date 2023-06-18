@@ -70,7 +70,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Lampiran', 'lampiran', 'id');
     }
     public function pengajaran(){
-        return $this->hasMany(pengajaran::class);
+        return $this->hasMany(User::class);
     }
     
 

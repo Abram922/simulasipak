@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\semester;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -115,7 +116,7 @@ class PengajaranController extends Controller
 
     }
 
-    return redirect()->route('pengajaran.show', $kumId)->with('message', 'Data berhasil disimpan'); 
+    return redirect()->route('pengajaranuser.show', $kumId)->with('message', 'Data berhasil disimpan'); 
 }
 
     /**
@@ -123,12 +124,16 @@ class PengajaranController extends Controller
      */
     public function show($id)
     {
+
         $kum = kum::find($id);
+        $nama = Auth::user()->name ;
         $p = pengajaran::join('kums', 'pengajarans.id_kum', '=', 'kums.id')
         ->select('pengajarans.id_semester')
         ->where('kums.id', $kum->id)
         ->groupBy('pengajarans.id_semester')
         ->get();
+        
+
         
 
         $pengajarangroupbysemester = [];
@@ -156,13 +161,16 @@ class PengajaranController extends Controller
         $pengajaran = pengajaran::where('id_kum', $kum->id)->get();
         $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
         $semester = semester::all();
+        $datapengajaran = pengajaran::where('dosen1 , dosen2, dosen3,dosen_1 , dosen_2, dosen_3', $nama)->get();
+
         return view('.user.board.boardpengajaran',[
             'kum' =>$kum,
             'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan,
             'pelaksanaan_pendidikan' => $pelaksanaan_pendidikan,
             'semester' => $semester,
             'pengajaran' => $pengajaran,
-            'pengajaranBySemester' => $pengajaranBySemester
+            'pengajaranBySemester' => $pengajaranBySemester,
+            'datapengajaran' => $datapengajaran,
         ]);
     }
 
