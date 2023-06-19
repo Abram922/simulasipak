@@ -46,7 +46,7 @@
     <div class="col-lg-10 mx-auto"  style="margin-top:110px">
 
         <div class="col-md-12"  style="margin-top:110px">
-        <h1>Data Tambahan</h1>            
+        <h1>Data Tambahan dan SK</h1>            
             <div class="row">
                 @foreach ($lampiran as $p)                
                     <div class="col">

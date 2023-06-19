@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\akreditasi_penelitian;
 use App\Models\KomponenPenelitian ;
 use App\Models\penelitian_hakidankarya;
+use App\Models\pengajaran;
 use App\Models\penulis;
 use App\Models\semester;
 use Database\Seeders\akreditasi_penulis;
@@ -73,14 +74,10 @@ class PelaksananPenelitianController extends Controller
         $penelitian = pelaksanan_penelitian::where('kum_id', $kum->id)->get();
         $akreditasi = akreditasi_penelitian::all();
         $jenispenulis = penulis::all();
-
         $hakikarya = penelitian_hakidankarya::where('id_kum', $kum->id)->get();
         $komponenpenelitian = komponenpenelitian::all();
         $semester = semester::all();
-
-
-
-
+        $pengajaran_baa = pengajaran::where('id_kum', 1)->get();
         return view('.user.board.boardpenelitian',[
             'kum' =>$kum,
             'penelitian' => $penelitian,
@@ -89,6 +86,7 @@ class PelaksananPenelitianController extends Controller
             'hakikarya' => $hakikarya,
             'komponenpenelitian' => $komponenpenelitian,
             'semester' => $semester,
+            'pengajaran_baa' => $pengajaran_baa
         ]);
     }
 

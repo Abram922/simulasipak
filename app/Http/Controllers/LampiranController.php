@@ -76,7 +76,9 @@ class LampiranController extends Controller
         }
 
         $lampiran = Lampiran::where('id_user', $idUser)
+        ->orWhere('id_user', 1)
         ->where('jenislampiran', 'pelaksanaanpendidikan')
+        ->orWhere('jenislampiran', 'sk')
         ->get();
         
     

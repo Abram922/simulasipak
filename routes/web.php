@@ -99,6 +99,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('profil');
         Route::get('/ubahprofil/{id}', [App\Http\Controllers\ProfilController::class, 'edit'])->name('profill');
         Route::put('/ubahprofil/update/{id}', [App\Http\Controllers\ProfilController::class, 'update'])->name('profilll');
+        //clone
+        Route::get('pengajaran-clone/{id}', [App\Http\Controllers\PengajaranController::class, 'clone_'])->name('clone-pengajaran');
+        Route::post('/clone/{id}', [App\Http\Controllers\PengajaranController::class, 'clone'])->name('clone-data');
 
         Route::resource('kum', App\Http\Controllers\KumController::class);
         Route::resource('pendidikan', App\Http\Controllers\PendidikanController::class)->except(['show']);

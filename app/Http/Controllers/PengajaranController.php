@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imports\PengajaranImport;
 use App\Models\jenis_pelaksanan_pendidikan;
 use App\Models\kum;
+use App\Models\Lampiran;
 use App\Models\pelaksanaan_pendidikan;
 use App\Models\pengajaran;
 use App\Http\Controllers\Controller;
@@ -113,6 +114,7 @@ class PengajaranController extends Controller
         
         $pengajaran->save();
         $kumId = $pengajaran->id_kum;
+        
 
     }
 
@@ -124,17 +126,15 @@ class PengajaranController extends Controller
      */
     public function show($id)
     {
-
+        $baa_id_kum = 1;
         $kum = kum::find($id);
-        $nama = Auth::user()->name ;
+        $nama = Auth::user()->name;
         $p = pengajaran::join('kums', 'pengajarans.id_kum', '=', 'kums.id')
         ->select('pengajarans.id_semester')
         ->where('kums.id', $kum->id)
+        ->orWhere('pengajarans.id_kum', $baa_id_kum)
         ->groupBy('pengajarans.id_semester')
         ->get();
-        
-
-        
 
         $pengajarangroupbysemester = [];
 
@@ -148,11 +148,54 @@ class PengajaranController extends Controller
         $pengajaranBySemester = [];
     
         foreach ($pengajarangroupbysemester as $semester) {
-            $pengajaran = pengajaran::where('id_kum', $kum->id)
-                ->where('id_semester', $semester)
+            $pengajaran = pengajaran::where(function ($query) use ($semester, $kum) {
+                $query->where('id_semester', $semester)
+                      ->where('id_kum', $kum->id);
+            })
+            // ->orWhere(function ($query) use ($semester) {
+            //     $name = Auth::user()->name;
+            //     $query->where('id_semester', $semester)
+            //           ->where('id_kum', 1)
+            //           ->where('dosen_1', $name)
+            //           ->orWhere('dosen_2', $name)
+            //           ->orWhere('dosen_3', $name);
+            // })
+            ->get();
+        
+            $pengajaranBySemester[$semester] = $pengajaran;
+        }
+        
+
+
+        // pengajaran where id_kum == 1
+
+        $pz = pengajaran::join('kums', 'pengajarans.id_kum', '=', 'kums.id')
+        ->select('pengajarans.id_semester')
+        ->where('kums.id', 1)
+        ->groupBy('pengajarans.id_semester')
+        ->get();
+        
+
+        $pengajarangroupbysemester_baa = [];
+
+        foreach($pz as $pgbs_baa){
+            $pz = $pgbs_baa->id_semester;
+
+            $pengajarangroupbysemester_baa[] = $pz;
+            $pp = $pengajarangroupbysemester_baa;
+        }
+
+        $pengajaranBySemester_baa = [];
+    
+        foreach ($pengajarangroupbysemester_baa as $semester) {
+            $pengajaran = pengajaran::where('id_semester', $semester)
+                ->where('id_kum', 1)
+                ->where('dosen_1', $nama)
+                ->orWhere('dosen_2', $nama)
+                ->orWhere('dosen_3', $nama)
                 ->get();
                 
-            $pengajaranBySemester[$semester] = $pengajaran;
+            $pengajaranBySemester_baa[$semester] = $pengajaran;
         }
 
 
@@ -161,7 +204,14 @@ class PengajaranController extends Controller
         $pengajaran = pengajaran::where('id_kum', $kum->id)->get();
         $jenis_pelaksanaan_pendidikan = jenis_pelaksanan_pendidikan::all();
         $semester = semester::all();
-        $datapengajaran = pengajaran::where('dosen1 , dosen2, dosen3,dosen_1 , dosen_2, dosen_3', $nama)->get();
+        $datapengajaran = pengajaran::where('dosen_1', $nama)
+        ->orWhere('dosen_2', $nama)
+        ->orWhere('dosen_3', $nama)
+        ->get();
+        $pengajaran_baa = pengajaran::where('id_kum', 1)->where('dosen_1', $nama)
+        ->orWhere('dosen_2', $nama)
+        ->orWhere('dosen_3', $nama)
+        ->get();
 
         return view('.user.board.boardpengajaran',[
             'kum' =>$kum,
@@ -170,7 +220,9 @@ class PengajaranController extends Controller
             'semester' => $semester,
             'pengajaran' => $pengajaran,
             'pengajaranBySemester' => $pengajaranBySemester,
+            'pengajaranBySemester_baa' => $pengajaranBySemester_baa,
             'datapengajaran' => $datapengajaran,
+            'pengajaran_baa' => $pengajaran_baa
         ]);
     }
 
@@ -392,7 +444,6 @@ class PengajaranController extends Controller
             ->groupBy('pengajarans.id_semester')
             ->get();
             
-    
             $pengajarangroupbysemester = [];
     
             foreach($p as $pgbs){
@@ -405,12 +456,13 @@ class PengajaranController extends Controller
             $pengajaranBySemester = [];
         
             foreach ($pengajarangroupbysemester as $semester) {
-                $pengajaran = pengajaran::where('id_kum', $id)
+                $pengajaran = pengajaran::where('id_kum', $id )
                     ->where('id_semester', $semester)
                     ->get();
                     
                 $pengajaranBySemester[$semester] = $pengajaran;
             }
+
     
     
         
@@ -420,10 +472,7 @@ class PengajaranController extends Controller
             $semester = semester::all();
             $user = User::all();
 
-
-            $pengajaran_baa = pengajaran::where('id_kum', null)->get();
-
-
+            $pengajaran_baa = pengajaran::where('id_kum', 1)->get();
             return view('.BAA.pelaksanaan_pendidikan.index',[
                 'kum' =>$id,
                 'jenis_pelaksanaan_pendidikan' => $jenis_pelaksanaan_pendidikan,
@@ -438,7 +487,29 @@ class PengajaranController extends Controller
 
 
         public function import(Request $request){
-            Excel::import(new PengajaranImport, request()->file('data'));
+
+            $id_semester = $request->input('id_semester');
+            $id_kum = $request->input('id_kum');
+
+            Excel::import(new PengajaranImport($id_semester,$id_kum), request()->file('data'));
+
+
+            $input = $request->validate([
+                'jenislampiran' => 'required'
+            ]);
+    
+            $input['id_user'] = auth()->user()->id;
+    
+            if ($image = $request->file('file')) {
+                $destinationPath = 'lampiran/';
+                $originalName = $image->getClientOriginalName();
+                $profileImage = date('YmdHis') . '_' . $originalName;
+                $image->move($destinationPath, $profileImage);
+                $input['file'] = "$profileImage";
+            }
+
+            Lampiran::create($input);
+
             return redirect()->back()->with('success', 'import data berhasil');            
         }
 
@@ -485,6 +556,91 @@ class PengajaranController extends Controller
         
             return redirect()->back()->with('message', 'Data berhasil disimpan');
         }
+
+        // public function clone($id){
+            
+        //     $pengajaran = pengajaran::findOrFail($id);
+        //     $clone_data = $pengajaran->replicate();
+        //     $clone_data->save();
+            
+
+        //     return redirect()->back();
+        // }
+        public function clone($id,Request $request){
+            
+            $pengajaran = pengajaran::findOrFail($id);
+            $clone_data = $pengajaran->replicate();
+            $clone_data->id_kum = $request->input('id_kum');
+            $clone_data->save();
+            return redirect()->back();
+        }
+
+        public function clone_($id){
+            
+            $pengajaran = pengajaran::findOrFail($id);
+            $clone_data = $pengajaran->replicate();
+            $clone_data->save();
+
+            return redirect()->back();
+        }
+
+        public function store_clone(Request $request)
+        {
+            $input = $request->validate([
+                'instansi' => 'required',
+                'id_semester' => 'required',
+                'kode_matakuliah' => 'required',
+                'matakuliah' => 'required',
+                'nama_kelas_pengajaran' => 'required',
+                'volume_dosen_pengajar' => 'required|numeric',
+                'sks_pengajaran' => 'required|numeric',
+                'id_kum' => 'required',
+            ]);
+ 
+                $idSemester = $input['id_semester'];
+                $idKum = $input['id_kum'];
+                $sksPengajaran = $input['sks_pengajaran'];
+        
+                $totalSks = Pengajaran::where('id_semester', $idSemester)
+                    ->where('id_kum', $idKum)
+                    ->where('status', 1)
+                    ->sum('sks_pengajaran');
+        
+                $pengajaran = new Pengajaran();
+                $pengajaran->instansi = $input['instansi'];
+                $pengajaran->id_semester = $input['id_semester'];
+                $pengajaran->kode_matakuliah = $input['kode_matakuliah'];
+                $pengajaran->matakuliah = $input['matakuliah'];
+                $pengajaran->nama_kelas_pengajaran = $input['nama_kelas_pengajaran'];
+                $pengajaran->volume_dosen_pengajar = $input['volume_dosen_pengajar'];
+                $pengajaran->sks_pengajaran = $input['sks_pengajaran'];
+                $pengajaran->id_kum = $input['id_kum'];
+                $volumeDosen = floatval($input['volume_dosen_pengajar']);
+        
+                if ($totalSks + $sksPengajaran > 12) {
+                    $pengajaran->status = 0;
+                } elseif ($totalSks + $sksPengajaran <= 12) {
+                    $pengajaran->status = 1;
+                }
+        
+                if ($volumeDosen <= 0 || $sksPengajaran <= 0) {
+
+                }
+        
+                $pengajaran->jumlah_angka_kredit = (1 / $volumeDosen) * $sksPengajaran;
+                if ($image = $input['file']) {
+                    $destinationPath = 'file/';
+                    $originalName = $image->getClientOriginalName();
+                    $profileImage = date('YmdHis') . '_' . $originalName;
+                    $image->move($destinationPath, $profileImage);
+                    $pengajaran->file = $profileImage;
+                }
+                $pengajaran->save();
+
+                $kumId = $pengajaran->id_kum;
+            return redirect()->route('pengajaranuser.show', $kumId)->with('message', 'Data berhasil disimpan');
+        }
+        
 
 }
 

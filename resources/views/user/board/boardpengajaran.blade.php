@@ -1,14 +1,14 @@
 @extends('.layouts.user')
 @section('content1')
 
+@php
+    $kum_id = $kum->id;
+@endphp
 
 <br>
 <br>
 <br>
 <br>
-
-
-
 
 <div style="background-color: #F9F9FE">
   <div class="col-lg-10 mx-auto">
@@ -22,309 +22,346 @@
     @endphp
   
     @foreach ($pengajaranBySemester as $semester => $pengajarans)
-  
-    <table class="table">
-      <thead>
-        <th>No</th>
-        <th>Semester</th>
-        <th>Status</th>
-        <th>Instansi</th>
-        <th>Kode-Mata Kuliah</th>
-        <th>Kelas</th>
-        <th>SKS</th>
-        <th>Volume Dosen</th>
-        <th>Angka Kredit</th>
-        <th>File</th>
-        <th>Aksi</th>
-      </thead>
-      @foreach ($pengajarans as $gose)
-        @if ($previousSemester !== $gose->xsemester->semester)
-          @php
-            $previousSemester = $gose->xsemester->semester;
-          @endphp
-          <h2>{{ $gose->xsemester->semester }}</h2>
-        @endif
-        <tbody>
-          <td>{{ $loop->iteration }}</td>
-          <td>{{ $gose->xsemester->semester }}</td>
+      <table class="table">
+        <thead>
+          <th>No</th>
+          <th>Semester</th>
+          <th>Status</th>
+          <th>Instansi</th>
+          <th>Kode-Mata Kuliah</th>
+          <th>Kelas</th>
+          <th>SKS</th>
+          <th>Volume Dosen</th>
+          <th>Angka Kredit</th>
+          <th>File</th>
+          <th>Aksi</th>
+        </thead>
+        @foreach ($pengajarans as $gose)
+          @if ($previousSemester !== $gose->xsemester->semester)
+            @php
+              $previousSemester = $gose->xsemester->semester;
+            @endphp
+            <h2>{{ $gose->xsemester->semester }}</h2>
+          @endif
+          <tbody>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $gose->xsemester->semester }}</td>
 
-          <td>
-            <b id="status{{ $gose->id }}" style="color: {{ $gose->status == 1 ? 'green' : 'red' }}">
-              {{ $gose->status == 1 ? 'Beban Terhitung' : 'Beban Tidak Terhitung' }}
-            </b>
-            
-          </td>
+            <td>
+              <b id="status{{ $gose->id }}" style="color: {{ $gose->status == 1 ? 'green' : 'red' }}">
+                {{ $gose->status == 1 ? 'Beban Terhitung' : 'Beban Tidak Terhitung' }}
+              </b>
+              
+            </td>
 
-          <td>{{ $gose->instansi }}</td>
-          <td>{{ $gose->kode_matakuliah }} - {{ $gose->matakuliah }}</td>
-          <td>{{ $gose->nama_kelas_pengajaran }}</td>
-          <td>{{ $gose->sks_pengajaran }}</td>
-          <td>{{ $gose->volume_dosen_pengajar }}</td>
-          <td>{{ $gose->jumlah_angka_kredit }}</td>
-          <td>
-            <a href="/file/{{ $gose->file }}" target="_blank" class="btn btn-warning">Lihat</a>
-            <a href="/file/{{ $gose->file }}" target="_blank" download class="btn btn-info">Download</a>
-          </td>
-          <td>
+            <td>{{ $gose->instansi }}</td>
+            <td>{{ $gose->kode_matakuliah }} - {{ $gose->matakuliah }}</td>
+            <td>{{ $gose->nama_kelas_pengajaran }}</td>
+            <td>{{ $gose->sks_pengajaran }}</td>
+            <td>{{ $gose->volume_dosen_pengajar }}</td>
+            @php
+              $v_dosen = $gose->volume_dosen_pengajar;
+              $sks = $gose->sks_pengajaran;
+              $angkakredit_baa = (1 / $v_dosen) * $sks;
+            @endphp
+            <td>{{ $gose->jumlah_angka_kredit ?? $angkakredit_baa }}</td>
+            <td>
+              @if ($gose->file == null)
+              @else
+                <a href="/file/{{ $gose->file }}" target="_blank" class="btn btn-warning">Lihat</a>
+                <a href="/file/{{ $gose->file }}" target="_blank" download class="btn btn-info">Download</a>                  
+              @endif
 
-            <a href="{{ route('pengajaranuser.edit', $gose->id) }}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-pengajaran-{{ $gose->id }}">Ubah</a>
-            <form action="{{ route('pengajaranuser.destroy', $gose->id) }}" method="POST">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
-            </form>
-          </td>
-        </tbody>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            </td>
+            <td>
 
 
-        <div class="modal fade" id="modal-pengajaran-{{ $gose->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form method="POST" action="{{ route('pengajaranuser.update', $gose->id) }}" enctype="multipart/form-data">
-                  @csrf
-                  @method('PUT')
 
-                  <input type="text" hidden class="form-control" id="id_kum" name="id_kum" value="{{ $gose->id_kum }}">
-                  <div class="form-group row">
-                    <div class="col-md m-3">
-                      <label for="instansi">Instansi</label>
-                      <input type="text" class="form-control" id="instansi" name="instansi" value="{{ $gose->instansi }}">
+              <a href="{{ route('pengajaranuser.edit', $gose->id) }}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-pengajaran-{{ $gose->id }}">Ubah</a>
+              <form action="{{ route('pengajaranuser.destroy', $gose->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
+              </form>
+            </td>
+          </tbody>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+          <div class="modal fade" id="modal-pengajaran-{{ $gose->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" action="{{ route('pengajaranuser.update', $gose->id) }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="text" hidden class="form-control" id="id_kum" name="id_kum" value="{{ $gose->id_kum }}">
+                    <div class="form-group row">
+                      <div class="col-md m-3">
+                        <label for="instansi">Instansi</label>
+                        <input type="text" class="form-control" id="instansi" name="instansi" value="{{ $gose->instansi }}">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-md m-3">
-                      <label for="semester">Semester</label>
-                      <select class="form-control" id="id_semester" name="id_semester" required>
-                        <option value="">Pilih Semester</option>
-                        @php
-                          $semester = App\Models\semester::all();
-                        @endphp
-                        @foreach ($semester as $s)
-                          <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
-                        @endforeach
-                      </select>
-                      <div id="semesterAlert" class="alert alert-danger mt-2 d-none">Pilih salah satu semester.</div>
+                    <div class="form-group row">
+                      <div class="col-md m-3">
+                        <label for="semester">Semester</label>
+                        <select class="form-control" id="id_semester" name="id_semester" required>
+                          <option value="">Pilih Semester</option>
+                          @php
+                            $semester = App\Models\semester::all();
+                          @endphp
+                          @foreach ($semester as $s)
+                            <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                          @endforeach
+                        </select>
+                        <div id="semesterAlert" class="alert alert-danger mt-2 d-none">Pilih salah satu semester.</div>
+                      </div>
+                      <div class="col-md m-3">
+                        <label for="kode_matakuliah">Kode Mata Kuliah</label>
+                        <input type="text" class="form-control" id="kode_matakuliah" name="kode_matakuliah" value="{{ $gose->kode_matakuliah }}" >
+                      </div>                    
                     </div>
-                    <div class="col-md m-3">
-                      <label for="kode_matakuliah">Kode Mata Kuliah</label>
-                      <input type="text" class="form-control" id="kode_matakuliah" name="kode_matakuliah" value="{{ $gose->kode_matakuliah }}" >
-                    </div>                    
-                  </div>
-                  <div class="form-group row">
+                    <div class="form-group row">
 
-                    <div class="col-md m-3">
-                      <label for="matakuliah">Nama Mata Kuliah</label>
-                      <input type="text" class="form-control" id="matakuliah" name="matakuliah" value="{{ $gose->matakuliah }}">
+                      <div class="col-md m-3">
+                        <label for="matakuliah">Nama Mata Kuliah</label>
+                        <input type="text" class="form-control" id="matakuliah" name="matakuliah" value="{{ $gose->matakuliah }}">
+                      </div>
+                      <div class="col-md m-3">
+                        <label for="nama_kelas_pengajaran">Nama Kelas</label>
+                        <input type="text" class="form-control" id="nama_kelas_pengajaran" name="nama_kelas_pengajaran" value="{{ $gose->nama_kelas_pengajaran }}">
+                      </div>                    
                     </div>
-                    <div class="col-md m-3">
-                      <label for="nama_kelas_pengajaran">Nama Kelas</label>
-                      <input type="text" class="form-control" id="nama_kelas_pengajaran" name="nama_kelas_pengajaran" value="{{ $gose->nama_kelas_pengajaran }}">
-                    </div>                    
-                  </div>
-                  <div class="form-group row">
+                    <div class="form-group row">
 
-                    <div class="col-md m-3">
-                      <label for="volume_dosen_pengajar">Volume Dosen</label>
-                      <input type="number" class="form-control x" id="volume_dosen_pengajar" name="volume_dosen_pengajar" onkeyup="sum1()" value="{{ $gose->volume_dosen_pengajar }}">
+                      <div class="col-md m-3">
+                        <label for="volume_dosen_pengajar">Volume Dosen</label>
+                        <input type="number" class="form-control x" id="volume_dosen_pengajar" name="volume_dosen_pengajar" onkeyup="sum1()" value="{{ $gose->volume_dosen_pengajar }}">
+                      </div>
+                      <div class="col-md m-3">
+                        <label for="sks_pengajaran">SKS Pengajaran</label>
+                        <input type="number" class="form-control x" id="sks_pengajaran" name="sks_pengajaran" onkeyup="perkalian()" value="{{ $gose->sks_pengajaran }}">
+                      </div>                    
                     </div>
-                    <div class="col-md m-3">
-                      <label for="sks_pengajaran">SKS Pengajaran</label>
-                      <input type="number" class="form-control x" id="sks_pengajaran" name="sks_pengajaran" onkeyup="perkalian()" value="{{ $gose->sks_pengajaran }}">
-                    </div>                    
-                  </div>
-                  <div class="form-group row">
+                    <div class="form-group row">
 
-                    <div class="col-md m-3">
-                      <label for="nama_kelas_pengajaran">Beban Terhitung </label>
-                      <input name="status" id="status" type="checkbox" {{ $gose->status ? 'checked' : '' }}>
+                      <div class="col-md m-3">
+                        <label for="nama_kelas_pengajaran">Beban Terhitung </label>
+                        <input name="status" id="status" type="checkbox" {{ $gose->status ? 'checked' : '' }}>
+                      </div>
                     </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                  </div>
-                </form>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                      <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <script>
-          document.getElementById('updateForm').addEventListener('submit', function(event) {
-            // Mendapatkan nilai yang dipilih pada dropdown semester
-            var semester = document.getElementById('id_semester').value;
-            // Mengecek apakah nilai semester kosong atau tidak
-            if (!semester) {
-              // Menampilkan alert jika semester tidak dipilih
-              document.getElementById('semesterAlert').classList.remove('d-none');
-              // Mencegah pengiriman formulir
-              event.preventDefault();
-            } else {
-              // Semua isian telah diisi, formulir bisa dikirim
-              document.getElementById('semesterAlert').classList.add('d-none');
-            }
-          });
-        </script>        
-      @endforeach
-    </table>
-
-
+          <script>
+            document.getElementById('updateForm').addEventListener('submit', function(event) {
+              // Mendapatkan nilai yang dipilih pada dropdown semester
+              var semester = document.getElementById('id_semester').value;
+              // Mengecek apakah nilai semester kosong atau tidak
+              if (!semester) {
+                // Menampilkan alert jika semester tidak dipilih
+                document.getElementById('semesterAlert').classList.remove('d-none');
+                // Mencegah pengiriman formulir
+                event.preventDefault();
+              } else {
+                // Semua isian telah diisi, formulir bisa dikirim
+                document.getElementById('semesterAlert').classList.add('d-none');
+              }
+            });
+          </script>        
+        @endforeach
+      </table>
     @endforeach
   </div>
 </div>
 
 
+
 <br>
 <br>
 
 
-    <div class="col-lg-10 mx-auto" style="margin-top: 30px">
-          <table class="table m-3" >
-            <thead>
-              <th>No</th>
-              <th>Instansi</th>
-              <th>Kode-Mata Kuliah</th>
-              <th>Kelas</th>
-              <th>SKS</th>
-              <th>Volume Dosen</th>
-              <th>Angka Kredit</th>
-              <th>Aksi</th>
-            </thead>
-            @foreach ($datapengajaran as $gose)
 
-              <tbody>
-                <td>{{ $loop->iteration }}</td>    
-                <td>{{ $gose->instansi }}</td>
-                <td>{{ $gose->kode_matakuliah }} - {{ $gose->matakuliah }}</td>
-                <td>{{ $gose->nama_kelas_pengajaran }}</td>
-                <td>{{ $gose->sks_pengajaran }}</td>
-                <td>{{ $gose->volume_dosen_pengajar }}</td>
-                @php
-                  $v_dosen = $gose->volume_dosen_pengajar;
-                  $sks = $gose->sks_pengajaran;
+<div class="col-lg-10 mx-auto">
+  <h1>Data Yang Mungkin Anda Perlukan</h1>
+  <table class="table">
+    <thead>
+      <th>No</th>
+      <th>Semester</th>
+      <th>Status</th>
+      <th>Instansi</th>
+      <th>Kode-Mata Kuliah</th>
+      <th>Kelas</th>
+      <th>SKS</th>
+      <th>Volume Dosen</th>
+      <th>Angka Kredit</th>
+      <th>Aksi</th>
+    </thead>
+    @foreach ($pengajaran_baa as $gose)
 
-                  $angkakredit_baa = (1 / $v_dosen) * $sks;
-                @endphp
-                <td>{{ $angkakredit_baa }}</td>
+      <tbody>
+        <td>{{ $loop->iteration }}</td>
+        <td>{{ $gose->xsemester->semester }}</td>
+        <td>
+          <b id="status{{ $gose->id }}" style="color: {{ $gose->status == 1 ? 'green' : 'red' }}">
+            {{ $gose->status == 1 ? 'Beban Terhitung' : 'Beban Tidak Terhitung' }}
+          </b>
+        </td>
+        <td>{{ $gose->instansi }}</td>
+        <td>{{ $gose->kode_matakuliah }} - {{ $gose->matakuliah }}</td>
+        <td>{{ $gose->nama_kelas_pengajaran }}</td>
+        <td>{{ $gose->sks_pengajaran }}</td>
+        <td>{{ $gose->volume_dosen_pengajar }}</td>
+        @php
+          $v_dosen = $gose->volume_dosen_pengajar;
+          $sks = $gose->sks_pengajaran;
+          $angkakredit_baa = (1 / $v_dosen) * $sks;
+        @endphp
+        <td>{{ $gose->jumlah_angka_kredit ?? $angkakredit_baa }}</td>
 
-                <td>
-                  <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-pengajaran-baa-{{ $gose->id }}">Ubah</a>
-                  <form action="{{ route('pengajaran.destroy', $gose->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
-                  </form>
-                </td>
-    
-                <div class="m-3">
+        <td>
+          
+      <div class="modal fade" id="modal-clone-{{ $gose->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <form action="{{ route('clone-data', ['id' => $gose->id]) }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="id_kum">ID Kum</label>
+                    <input type="number" class="form-control" id="id_kum" name="id_kum" value="{{ $kum_id }}">
                 </div>
-              </tbody>
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Clone</button>
+                </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+          {{-- <a href="{{ route('clone-pengajaran', ['id' => $gose->id]) }}" class="btn btn-warning">Clone</a> --}}
+          <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-clone-{{ $gose->id }}">Clone</a>
+
+        </td>
+      </tbody>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
       
-      
-              <div class="modal fade" id="modal-pengajaran-baa-{{ $gose->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form method="POST" action="{{ route('pengajaran.update', $gose->id) }}" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-      
-                        <input type="text" hidden class="form-control" id="id_kum" name="id_kum" value="{{ $gose->id_kum }}">
-                        
-                        <div class="form-group row">
-                          <div class="col-md m-3">
-                            <label for="instansi">Instansi</label>
-                            <input type="text" class="form-control" id="instansi" name="instansi" value="{{ $gose->instansi }}">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <div class="col-md m-3">
-                            <label for="semester">Semester</label>
-                            <select class="form-control" id="id_semester" name="id_semester" required>
-                              <option value="">Pilih Semester</option>
-                              @php
-                                $semester = App\Models\semester::all();
-                              @endphp
-                              @foreach ($semester as $s)
-                                <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
-                              @endforeach
-                            </select>
-                            <div id="semesterAlert" class="alert alert-danger mt-2 d-none">Pilih salah satu semester.</div>
-                          </div>
-                          <div class="col-md m-3">
-                            <label for="kode_matakuliah">Kode Mata Kuliah</label>
-                            <input type="text" class="form-control" id="kode_matakuliah" name="kode_matakuliah" value="{{ $gose->kode_matakuliah }}" >
-                          </div>                    
-                        </div>
-                        <div class="form-group row">
-      
-                          <div class="col-md m-3">
-                            <label for="matakuliah">Nama Mata Kuliah</label>
-                            <input type="text" class="form-control" id="matakuliah" name="matakuliah" value="{{ $gose->matakuliah }}">
-                          </div>
-                          <div class="col-md m-3">
-                            <label for="nama_kelas_pengajaran">Nama Kelas</label>
-                            <input type="text" class="form-control" id="nama_kelas_pengajaran" name="nama_kelas_pengajaran" value="{{ $gose->nama_kelas_pengajaran }}">
-                          </div>                    
-                        </div>
-                        <div class="form-group row">
-      
-                          <div class="col-md m-3">
-                            <label for="volume_dosen_pengajar">Volume Dosen</label>
-                            <input type="number" class="form-control x" id="volume_dosen_pengajar" name="volume_dosen_pengajar" onkeyup="sum1()" value="{{ $gose->volume_dosen_pengajar }}">
-                          </div>
-                          <div class="col-md m-3">
-                            <label for="sks_pengajaran">SKS Pengajaran</label>
-                            <input type="number" class="form-control x" id="sks_pengajaran" name="sks_pengajaran" onkeyup="perkalian()" value="{{ $gose->sks_pengajaran }}">
-                          </div>                    
-                        </div>
-                        <div class="form-group row">
-      
-                          <div class="col-md m-3">
-                            <label for="nama_kelas_pengajaran">Beban Terhitung </label>
-                            <input name="status" id="status" type="checkbox" {{ $gose->status ? 'checked' : '' }}>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                          <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                        </div>
-                      </form>
-                    </div>
+
+      <div class="modal fade" id="modal-pengajaran-{{ $gose->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="{{ route('pengajaranuser.update', $gose->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <input type="text" hidden class="form-control" id="id_kum" name="id_kum" value="{{ $gose->id_kum }}">
+                <div class="form-group row">
+                  <div class="col-md m-3">
+                    <label for="instansi">Instansi</label>
+                    <input type="text" class="form-control" id="instansi" name="instansi" value="{{ $gose->instansi }}">
                   </div>
                 </div>
-              </div>
-              <script>
-                document.getElementById('updateForm').addEventListener('submit', function(event) {
-                  // Mendapatkan nilai yang dipilih pada dropdown semester
-                  var semester = document.getElementById('id_semester').value;
-                  // Mengecek apakah nilai semester kosong atau tidak
-                  if (!semester) {
-                    // Menampilkan alert jika semester tidak dipilih
-                    document.getElementById('semesterAlert').classList.remove('d-none');
-                    // Mencegah pengiriman formulir
-                    event.preventDefault();
-                  } else {
-                    // Semua isian telah diisi, formulir bisa dikirim
-                    document.getElementById('semesterAlert').classList.add('d-none');
-                  }
-                });
-              </script>        
-            @endforeach
-          </table>
-    </div>
-<br>
-<br>
+                <div class="form-group row">
+                  <div class="col-md m-3">
+                    <label for="semester">Semester</label>
+                    <select class="form-control" id="id_semester" name="id_semester" required>
+                      <option value="">Pilih Semester</option>
+                      @php
+                        $semester = App\Models\semester::all();
+                      @endphp
+                      @foreach ($semester as $s)
+                        <option class="" value="{{$s->id}}" title="{{$s->semester}}">{{Str::limit($s->semester,100)}}</option>
+                      @endforeach
+                    </select>
+                    <div id="semesterAlert" class="alert alert-danger mt-2 d-none">Pilih salah satu semester.</div>
+                  </div>
+                  <div class="col-md m-3">
+                    <label for="kode_matakuliah">Kode Mata Kuliah</label>
+                    <input type="text" class="form-control" id="kode_matakuliah" name="kode_matakuliah" value="{{ $gose->kode_matakuliah }}" >
+                  </div>                    
+                </div>
+                <div class="form-group row">
+
+                  <div class="col-md m-3">
+                    <label for="matakuliah">Nama Mata Kuliah</label>
+                    <input type="text" class="form-control" id="matakuliah" name="matakuliah" value="{{ $gose->matakuliah }}">
+                  </div>
+                  <div class="col-md m-3">
+                    <label for="nama_kelas_pengajaran">Nama Kelas</label>
+                    <input type="text" class="form-control" id="nama_kelas_pengajaran" name="nama_kelas_pengajaran" value="{{ $gose->nama_kelas_pengajaran }}">
+                  </div>                    
+                </div>
+                <div class="form-group row">
+
+                  <div class="col-md m-3">
+                    <label for="volume_dosen_pengajar">Volume Dosen</label>
+                    <input type="number" class="form-control x" id="volume_dosen_pengajar" name="volume_dosen_pengajar" onkeyup="sum1()" value="{{ $gose->volume_dosen_pengajar }}">
+                  </div>
+                  <div class="col-md m-3">
+                    <label for="sks_pengajaran">SKS Pengajaran</label>
+                    <input type="number" class="form-control x" id="sks_pengajaran" name="sks_pengajaran" onkeyup="perkalian()" value="{{ $gose->sks_pengajaran }}">
+                  </div>                    
+                </div>
+                <div class="form-group row">
+
+                  <div class="col-md m-3">
+                    <label for="nama_kelas_pengajaran">Beban Terhitung </label>
+                    <input name="status" id="status" type="checkbox" {{ $gose->status ? 'checked' : '' }}>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                  <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+          // Mendapatkan nilai yang dipilih pada dropdown semester
+          var semester = document.getElementById('id_semester').value;
+          // Mengecek apakah nilai semester kosong atau tidak
+          if (!semester) {
+            // Menampilkan alert jika semester tidak dipilih
+            document.getElementById('semesterAlert').classList.remove('d-none');
+            // Mencegah pengiriman formulir
+            event.preventDefault();
+          } else {
+            // Semua isian telah diisi, formulir bisa dikirim
+            document.getElementById('semesterAlert').classList.add('d-none');
+          }
+        });
+      </script>        
+    @endforeach
+  </table>
+</div>
+
 
 
 
@@ -447,6 +484,8 @@
                     </div>
                   </div>
                 </div>
+                
+                
                   <a href="{{ route('pelaksanaanpendidikan.edit', $pk->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_pelaksanaan_pendidikan">ubah</a>
                   <form action="{{ route('pelaksanaanpendidikan.destroy', $pk->id) }}" method="POST">
                     @csrf

@@ -6,7 +6,6 @@
 <br>
 <br>
 
-
   <div class="col-lg-10 mx-auto">
     <div class="row">
       <div class="col-md">
@@ -452,7 +451,7 @@
                         <div class="d-flex">
                           <div class="flex-grow-1">
                             <h3><b>Input Data Pengajaran</b></h3>
-                            <a href="{{ route('unsurpelaksanaan.show',$kum->id) }}" class="btn btn-info">Lihat</a> 
+                            <a href="{{ route('pengajaranuser.show',$kum->id) }}" class="btn btn-info">Lihat</a> 
                           </div>
                         </div>
                         <br>

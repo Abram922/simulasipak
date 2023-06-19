@@ -12,8 +12,20 @@ class PengajaranImport implements ToModel,WithStartRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+
+    protected $id_semester;
+    protected $id_kum;
+
+    public function __construct($id_semester,$id_kum)
+    {
+        $this->id_semester = $id_semester;
+        $this->id_kum = $id_kum;
+    }
+
+
     public function model(array $row)
     {
+        
         return new pengajaran([
             
             'kode_matakuliah'  => $row[2],            
@@ -24,6 +36,8 @@ class PengajaranImport implements ToModel,WithStartRow
             'dosen_2' => $row[12],
             'dosen_3' => $row[13],
             'volume_dosen_pengajar' => $row[14],
+            'id_semester' => $this->id_semester,
+            'id_kum' => $this->id_kum
         ]);
     }
 
