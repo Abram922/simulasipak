@@ -123,6 +123,13 @@ class KumController extends Controller
         ->where('status', 1)
         ->groupBy('id_semester')
         ->get();
+        
+        //
+        $sumpengajaransks = pengajaran::select('id_semester',DB::raw('SUM(sks_pengajaran) as sks'))
+        ->where('id_kum', $kum->id)
+        ->where('status', 1)
+        ->groupBy('id_semester')
+        ->get();
 
         $jabatanbeban = pengajaran::join('kums', 'pengajarans.id_kum', '=', 'kums.id')
         ->join('jabatans', 'kums.id_jabatan_sekarang', '=', 'jabatans.id')
@@ -134,8 +141,6 @@ class KumController extends Controller
             if (count($jabatanbeban) > 0) {
                 $angkaKreditKumulatif = $jabatanbeban[0]->angkaKreditKumulatif;
             }
-
-        // dd($angkaKreditKumulatif);
     
     $totalAngkaKreditArray = [];
     $totalAngkaKredit = 0;
@@ -143,7 +148,6 @@ class KumController extends Controller
     foreach ($sumpengajaran as $data) {
         $idSemester = $data->id_semester;
         $idkum = $data->id_kum;
-
         $totalAngkaKredit = $data->total_angka_kredit;
 
         if($angkaKreditKumulatif < 200){
@@ -170,9 +174,48 @@ class KumController extends Controller
 
 
     }
+    $totalAngkaKreditArraysks = [];
+    $totalAngkaKreditsks = 0;
+
+    foreach ($sumpengajaransks as $datasks) {
+        $idSemester = $datasks->id_semester;
+        $idkum = $datasks->id_kum;
+        $totalAngkaKreditsks = $datasks->sks;
+
+
+        if($angkaKreditKumulatif < 200){
+            if ($totalAngkaKreditsks <= 10) {
+                $x = $totalAngkaKreditsks * 0.5;
+            } elseif ($totalAngkaKreditsks > 10 && $totalAngkaKreditsks <= 12) {
+                $x = (10 * 0.5) + (($totalAngkaKreditsks - 10) * 0.25);
+            } else {
+                $x = (10 * 0.5) + (2 * 0.25) + (($totalAngkaKreditsks - 12) * 0);
+            }    
+
+        }else{
+            if ($totalAngkaKreditsks <= 10) {
+                $x = $totalAngkaKreditsks *1;
+            } elseif ($totalAngkaKreditsks > 10 && $totalAngkaKreditsks <= 12) {
+                $x = (10 *1) + (($totalAngkaKreditsks - 10) * 0.5);
+            } else {
+                $x = (10 *1) + (2 * 0.5) + (($totalAngkaKreditsks - 12) * 0);
+            }            
+        }
+
+        $totalAngkaKreditArraysks[] = $x;
+        $totalAngkaKreditsks = array_sum($totalAngkaKreditArraysks);
+
+
+
+
+    }
+
+    //
+
+
         // dd($totalAngkaKredit);
 
-        $sumpelaksanaanpendidikan = $sumpendidikan + $totalAngkaKredit;
+        $sumpelaksanaanpendidikan = $sumpendidikan + $totalAngkaKreditsks;
 
         $sumpenelitianjurnal = pelaksanan_penelitian::where('kum_id', $kum->id)->sum('angkakredit');
         $sumpeneltian = penelitian_hakidankarya::where('id_kum', $kum->id)->sum('jumlah_angka_kredit');

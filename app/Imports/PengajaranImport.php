@@ -15,11 +15,13 @@ class PengajaranImport implements ToModel,WithStartRow
 
     protected $id_semester;
     protected $id_kum;
+    protected $instansi;
 
-    public function __construct($id_semester,$id_kum)
+    public function __construct($id_semester,$id_kum,$instansi)
     {
         $this->id_semester = $id_semester;
         $this->id_kum = $id_kum;
+        $this->instansi = $instansi;
     }
 
 
@@ -37,7 +39,8 @@ class PengajaranImport implements ToModel,WithStartRow
             'dosen_3' => $row[13],
             'volume_dosen_pengajar' => $row[14],
             'id_semester' => $this->id_semester,
-            'id_kum' => $this->id_kum
+            'id_kum' => $this->id_kum,
+            'instansi' => $this->instansi,
         ]);
     }
 

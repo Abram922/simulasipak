@@ -32,7 +32,9 @@ return new class extends Migration
             $table->string('dosen_2')->nullable();
             $table->string('dosen_3')->nullable();
             $table->string('sk')->nullable();
+            $table->integer('clone')->nullable();
             $table->timestamps();
+            
             $table->foreign('dosen1')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('dosen2')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('dosen3')->references('id')->on('users')->onDelete('cascade');

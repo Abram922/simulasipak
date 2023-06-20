@@ -29,6 +29,7 @@ class pengajaran extends Model
         'dosen_3',
         'inisial_dosen',
         'sk',
+        'clone'
     ];
 
     public function xsemester(){

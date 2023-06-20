@@ -13,6 +13,7 @@ use App\Models\semester;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -128,11 +129,11 @@ class PengajaranController extends Controller
     {
         $baa_id_kum = 1;
         $kum = kum::find($id);
+        $all_pengajaran = pengajaran::pluck('clone')->toArray();
         $nama = Auth::user()->name;
         $p = pengajaran::join('kums', 'pengajarans.id_kum', '=', 'kums.id')
         ->select('pengajarans.id_semester')
         ->where('kums.id', $kum->id)
-        ->orWhere('pengajarans.id_kum', $baa_id_kum)
         ->groupBy('pengajarans.id_semester')
         ->get();
 
@@ -157,7 +158,7 @@ class PengajaranController extends Controller
             //     $query->where('id_semester', $semester)
             //           ->where('id_kum', 1)
             //           ->where('dosen_1', $name)
-            //           ->orWhere('dosen_2', $name)
+            //           ->here('dosen_2', $name)
             //           ->orWhere('dosen_3', $name);
             // })
             ->get();
@@ -191,8 +192,8 @@ class PengajaranController extends Controller
             $pengajaran = pengajaran::where('id_semester', $semester)
                 ->where('id_kum', 1)
                 ->where('dosen_1', $nama)
-                ->orWhere('dosen_2', $nama)
-                ->orWhere('dosen_3', $nama)
+                ->where('dosen_2', $nama)
+                ->where('dosen_3', $nama)
                 ->get();
                 
             $pengajaranBySemester_baa[$semester] = $pengajaran;
@@ -208,10 +209,19 @@ class PengajaranController extends Controller
         ->orWhere('dosen_2', $nama)
         ->orWhere('dosen_3', $nama)
         ->get();
-        $pengajaran_baa = pengajaran::where('id_kum', 1)->where('dosen_1', $nama)
-        ->orWhere('dosen_2', $nama)
-        ->orWhere('dosen_3', $nama)
+
+        $pengajaran_baa = pengajaran::where('id_kum', 1)
+        ->where(function ($query) use ($nama, $all_pengajaran) {
+            $query->where('dosen_1', $nama)
+                ->orWhere('dosen_2', $nama)
+                ->orWhere('dosen_3', $nama) 
+                ->whereNotIn('id', $all_pengajaran)
+                ->whereColumn('id', '!=', 'clone');
+        })
         ->get();
+    
+        // ketika field clone != id_kum
+    
 
         return view('.user.board.boardpengajaran',[
             'kum' =>$kum,
@@ -222,7 +232,8 @@ class PengajaranController extends Controller
             'pengajaranBySemester' => $pengajaranBySemester,
             'pengajaranBySemester_baa' => $pengajaranBySemester_baa,
             'datapengajaran' => $datapengajaran,
-            'pengajaran_baa' => $pengajaran_baa
+            'pengajaran_baa' => $pengajaran_baa,
+            'all_pengajaran' => $all_pengajaran,
         ]);
     }
 
@@ -234,54 +245,6 @@ class PengajaranController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    // public function update(Request $request, $id)
-    // {
-    //     $input = $request->validate([
-    //         'instansi' => 'required',
-    //         'id_semester' => 'required|integer',
-    //         'kode_matakuliah' => 'required|max:255',
-    //         'matakuliah' => 'required|string',
-    //         'nama_kelas_pengajaran' => 'required',
-    //         'volume_dosen_pengajar' => 'required',
-    //         'sks_pengajaran' => 'required',
-    //         'id_kum' => ''
-    //     ]);
-
-    //     $volumeDosen = floatval($input['volume_dosen_pengajar']);
-    //     $sks = floatval($input['sks_pengajaran']);
-    //     $idSemester = $input['id_semester'];
-    //     $idKum = $input['id_kum'];
-
-    //     $sksPengajaran = $input['sks_pengajaran'];
-    //     $totalSks = Pengajaran::where('id_semester', $idSemester)
-    //     ->where('id_kum', $idKum )
-    //     ->where('status', 1)
-    //     ->sum('sks_pengajaran');
-
-    //     $volumeDosen = floatval($input['volume_dosen_pengajar']);
-    //     $sks = floatval($input['sks_pengajaran']);
-
-    //     $status = null ;
-    //     if($totalSks + $sksPengajaran > 12){
-    //             $status = 0;
-    //     }elseif ($totalSks + $sksPengajaran <= 12) {
-    //         if($status == "on"){
-    //             $status = 1;
-    //         }else{
-    //             $status = 0;
-    //         }    
-    //     }
-    //     $hasil = (1 / $volumeDosen) * $sks;
-    //     $input['jumlah_angka_kredit'] = floatval($hasil);
-    //     $pengajaran = pengajaran::findOrFail($id);
-
-    //     $pengajaran->update($input);
-
-    //     return redirect()->back()->with('message', 'Data berhasil disimpan');
-    // }
 
     public function update(Request $request, $id)
 {
@@ -328,6 +291,28 @@ class PengajaranController extends Controller
 
     return redirect()->back()->with('message', 'Data berhasil disimpan');
 }
+
+public function update_file(Request $request, $id)
+{
+    $input = $request->validate([
+        'file' => ''
+    ]);
+    if ($image = $request->file('file')) {
+        $destinationPath = 'file/';
+        $originalName = $image->getClientOriginalName();
+        $profileImage = date('YmdHis') . '_' . $originalName;
+        $image->move($destinationPath, $profileImage);
+        $input['file'] = "$profileImage";
+    } else {
+        unset($input['file']);
+    }
+    $pengajaran = Pengajaran::findOrFail($id);
+
+    $pengajaran->update($input); // Melakukan pembaruan data pada model Pengajaran
+
+    return redirect()->back()->with('message', 'Data berhasil disimpan');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -435,8 +420,6 @@ class PengajaranController extends Controller
 
         public function show_baa($id)
         {
-
-
             $id = 1;
             $p = pengajaran::join('kums', 'pengajarans.id_kum', '=', 'kums.id')
             ->select('pengajarans.id_semester')
@@ -489,10 +472,22 @@ class PengajaranController extends Controller
         public function import(Request $request){
 
             $id_semester = $request->input('id_semester');
+
+            $namasemester = DB::table('semesters')
+            ->where('id', $id_semester)
+            ->select('semester')
+            ->first();
+
             $id_kum = $request->input('id_kum');
+            $instansi = $request->input('instansi');
 
-            Excel::import(new PengajaranImport($id_semester,$id_kum), request()->file('data'));
 
+            if ($id_kum == 1 && pengajaran::where('id_semester', $id_semester)->exists()) {
+
+                return redirect()->back()->with('error', 'Hapus semua data untuk semester '. $namasemester->semester .' untuk mengimport data pada semester yang sama');
+            }
+
+            Excel::import(new PengajaranImport($id_semester,$id_kum,$instansi), request()->file('data'));
 
             $input = $request->validate([
                 'jenislampiran' => 'required'
@@ -571,6 +566,7 @@ class PengajaranController extends Controller
             $pengajaran = pengajaran::findOrFail($id);
             $clone_data = $pengajaran->replicate();
             $clone_data->id_kum = $request->input('id_kum');
+            $clone_data->clone = $request->input('idpengajaran');
             $clone_data->save();
             return redirect()->back();
         }

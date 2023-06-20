@@ -1414,9 +1414,9 @@
                     </div>
                     <div class="form-group row ">
                       <div class="col-md m-3">
-                        <label for="akreditasi">Akreditasi Karya Ilmiah</label>
+                        <label for="akreditasi">Index Artikel Ilmiah</label>
                         <select class="form-control" id="akreditasi_id" name="akreditasi_id">
-                            <option>Pilih Akreditasi</option>
+                            <option>Pilih Index</option>
                             @foreach ($akreditasi as $p)
                                 <option class="" value="{{$p->id}}" data-kum-akreditasi ="{{$p->nilai}}" title="{{$p->akreditasi}}">{{Str::limit($p->akreditasi,100)}}</option>
                             @endforeach

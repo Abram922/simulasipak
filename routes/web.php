@@ -111,6 +111,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('unsurdp', App\Http\Controllers\DokumenpenunjangController::class);
         Route::resource('doumenpenunjang', App\Http\Controllers\DokumenpenunjangController::class);
         Route::resource('pengajaranuser', App\Http\Controllers\PengajaranController::class);
+        Route::put('/pengajaranuser-lengkapi-gambar/{id}', [App\Http\Controllers\PengajaranController::class, 'update_file'])->name('pengajaranuser.lengkapigambar');
         Route::resource('karya', App\Http\Controllers\PenelitianHakidankaryaController::class);
 
         Route::resource('unsurpelaksanaan', App\Http\Controllers\PelaksanaanPendidikanController::class);

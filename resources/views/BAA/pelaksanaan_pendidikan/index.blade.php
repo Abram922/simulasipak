@@ -1,12 +1,14 @@
   @extends('layouts.baa')
   @section('content1')
 
-
-
-
-  <a href="{{ route('baa_pelaksanaan_pendidikan') }}" class="btn btn-primary">Tambah</a>
+  @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+  @endif
 
   <div class="col-xl-12 col-lg-12" style="margin-top: 30px">
+    <p>klik disini untuk <a href="{{ asset('aset_web/Template Simulasi PAK EXCEL.xlsx') }}" target="_blank" download>download template</a></p>
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">PENGAJARAN</h6>
@@ -25,6 +27,7 @@
                         @csrf
                         <input hidden type="text" class="form-control"  id="jenislampiran" name="jenislampiran" value="sk" >     
                         <input hidden type="text" value="1" name="id_kum">
+                        <input hidden type="text" value="IT DEL" name="instansi">
                         <div class="col-md m-3">
                           <label for="semester">Semester</label>
                           <select class="form-control"  name="id_semester">
@@ -65,8 +68,9 @@
             </div>
 
             <div class="dropdown no-arrow">
+              <a href="{{ route('baa_pelaksanaan_pendidikan') }}" class="btn btn-primary">Tambah</a>
                 <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
-                  import
+                  Import
                 </a>
                 <div class="btn-group">
                   <ul class="dropdown-menu">
@@ -99,13 +103,11 @@
             </div>
         </div>
         @php
-        $previousSemester = null;
+          $previousSemester = null;
         @endphp
       
           @foreach ($pengajaranBySemester as $semester => $pengajarans)
 
-        
-      
         <table class="table m-3" >
           <thead>
             <th>No</th>

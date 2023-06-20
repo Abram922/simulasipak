@@ -13,26 +13,26 @@
 <div style="background-color: #F9F9FE">
   <div class="col-lg-10 mx-auto">
     
-    <p>Melaksanakan perkuliahan Tutorial dan membimbing, Menguji serta menyelenggarakan pendidikan di laboratorium, praktek perguruan bengkel/studio, kebun percobaan, teknologi pengajaran dan praktek lapangan</p>
+    
     <br>
     <br>
   
     @php
     $previousSemester = null;
     @endphp
-  
+  <h1>Data Anda</h1>
     @foreach ($pengajaranBySemester as $semester => $pengajarans)
       <table class="table">
         <thead>
           <th>No</th>
-          <th>Semester</th>
-          <th>Status</th>
+
           <th>Instansi</th>
           <th>Kode-Mata Kuliah</th>
           <th>Kelas</th>
           <th>SKS</th>
           <th>Volume Dosen</th>
           <th>Angka Kredit</th>
+          <th>Status</th>
           <th>File</th>
           <th>Aksi</th>
         </thead>
@@ -45,15 +45,6 @@
           @endif
           <tbody>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $gose->xsemester->semester }}</td>
-
-            <td>
-              <b id="status{{ $gose->id }}" style="color: {{ $gose->status == 1 ? 'green' : 'red' }}">
-                {{ $gose->status == 1 ? 'Beban Terhitung' : 'Beban Tidak Terhitung' }}
-              </b>
-              
-            </td>
-
             <td>{{ $gose->instansi }}</td>
             <td>{{ $gose->kode_matakuliah }} - {{ $gose->matakuliah }}</td>
             <td>{{ $gose->nama_kelas_pengajaran }}</td>
@@ -66,6 +57,11 @@
             @endphp
             <td>{{ $gose->jumlah_angka_kredit ?? $angkakredit_baa }}</td>
             <td>
+              <b id="status{{ $gose->id }}" style="color: {{ $gose->status == 1 ? 'green' : 'red' }}">
+                {{ $gose->status == 1 ? 'Beban Terhitung' : 'Beban Tidak Terhitung' }}
+              </b>
+            </td>
+            <td>
               @if ($gose->file == null)
               @else
                 <a href="/file/{{ $gose->file }}" target="_blank" class="btn btn-warning">Lihat</a>
@@ -74,18 +70,55 @@
 
             </td>
             <td>
-
-
-
-              <a href="{{ route('pengajaranuser.edit', $gose->id) }}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-pengajaran-{{ $gose->id }}">Ubah</a>
+              <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-upload-file-{{ $gose->id }}">
+                <i class="fas fa-upload"></i>
+              </a>
+            
+              <a href="{{ route('pengajaranuser.edit', $gose->id) }}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-pengajaran-{{ $gose->id }}">
+                <i class="fas fa-edit"></i>
+              </a>
+            
               <form action="{{ route('pengajaranuser.destroy', $gose->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
+                <a type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">
+                  <i class="fas fa-trash"></i>
+                </a>
               </form>
             </td>
           </tbody>
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+          <div class="modal fade" id="modal-upload-file-{{ $gose->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" action="{{ route('pengajaranuser.lengkapigambar', $gose->id) }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <input type="text" hidden class="form-control" id="id_kum" name="id_kum" value="{{ $gose->id_kum }}">
+                    <div class="col-md m-3 ">
+                      <label for="file">Bukti</label>
+                      <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" >
+                      @error('file')
+                          <div class="invalid-feedback">
+                              {{$message}}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                      <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
           <div class="modal fade" id="modal-pengajaran-{{ $gose->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -199,7 +232,6 @@
     <thead>
       <th>No</th>
       <th>Semester</th>
-      <th>Status</th>
       <th>Instansi</th>
       <th>Kode-Mata Kuliah</th>
       <th>Kelas</th>
@@ -213,11 +245,6 @@
       <tbody>
         <td>{{ $loop->iteration }}</td>
         <td>{{ $gose->xsemester->semester }}</td>
-        <td>
-          <b id="status{{ $gose->id }}" style="color: {{ $gose->status == 1 ? 'green' : 'red' }}">
-            {{ $gose->status == 1 ? 'Beban Terhitung' : 'Beban Tidak Terhitung' }}
-          </b>
-        </td>
         <td>{{ $gose->instansi }}</td>
         <td>{{ $gose->kode_matakuliah }} - {{ $gose->matakuliah }}</td>
         <td>{{ $gose->nama_kelas_pengajaran }}</td>
@@ -236,16 +263,20 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaksanaan Pendidikan</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Clone </h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
+              Tekan tombol clone jika ingin menggunakan data ini 
+
+
+
               <form action="{{ route('clone-data', ['id' => $gose->id]) }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="id_kum">ID Kum</label>
-                    <input type="number" class="form-control" id="id_kum" name="id_kum" value="{{ $kum_id }}">
+                    <input hidden type="number" class="form-control" id="id_kum" name="id_kum" value="{{ $kum_id }}">
+                    <input hidden type="number" class="form-control" id="idpengajaran" name="idpengajaran" value="{{ $gose->id }}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -257,7 +288,10 @@
         </div>
       </div>
           {{-- <a href="{{ route('clone-pengajaran', ['id' => $gose->id]) }}" class="btn btn-warning">Clone</a> --}}
-          <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-clone-{{ $gose->id }}">Clone</a>
+          <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-clone-{{ $gose->id }}">
+            <i class="fas fa-clone"></i>
+        </a>
+        
 
         </td>
       </tbody>
@@ -519,6 +553,11 @@
     </table>
   </div>
 </div>
+
+<center>
+<p>Jump To <a class="btn btn-info" href="{{ route('lampirandatapendidikan') }}">Lampiran Pendidikan</a></p>  
+</center>
+
 
 
 @endsection
